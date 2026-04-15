@@ -68,7 +68,7 @@
     <main class="panel-main">
       <div class="panel-topbar">
         <div>
-          <div class="panel-topbar-title">Welcome <em>Admin</em></div>
+          <div class="panel-topbar-title">Welcome, Raunit <em>Admin</em></div>
           <div style="font-family:var(--font-body);font-size:14px;color:var(--text-muted);margin-top:2px;">Saturday, 11 April 2026 · All Locations</div>
         </div>
         <div class="topbar-right">
