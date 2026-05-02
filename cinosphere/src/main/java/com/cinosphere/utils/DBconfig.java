@@ -7,7 +7,7 @@ import java.sql.DriverManager;
  */
 public class DBconfig {
 	//Attributes for COnnection to DB
-	private static final String DBNAME = ""; //Add DBname after database is finalized
+	private static final String DBNAME = "cinosphere"; //Add DBname after database is finalized
 	private static final String URL = "jdbc:mysql://localhost:3306/"+DBNAME;
 	private static final String USER= "root";
 	private static final String PASSWORD ="";
