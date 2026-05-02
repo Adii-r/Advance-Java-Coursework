@@ -16,7 +16,7 @@ public class BookingModel {
     private int loyaltyPointsEarned;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getBookingId() { 
     	return bookingId; 
@@ -29,7 +29,7 @@ public class BookingModel {
     	this.bookingId = bookingId; }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getCustomerId() { 
     	return customerId; 
@@ -43,7 +43,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getBookingDate() { 
     	return bookingDate; 
@@ -57,7 +57,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return LocalTime
      */
     public LocalTime getBookingTime() { 
     	return bookingTime; 
@@ -71,7 +71,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getBookingStatus() { 
     	return bookingStatus; }
@@ -84,7 +84,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
     public double getTotalAmount() { 
     	return totalAmount; 
@@ -98,7 +98,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
     public String getBookingChannel() { 
     	return bookingChannel; 
@@ -112,7 +112,7 @@ public class BookingModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getLoyaltyPointsEarned() { 
     	return loyaltyPointsEarned; 

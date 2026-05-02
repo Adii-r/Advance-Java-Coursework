@@ -7,8 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.cinosphere.service.LoginService;
+
+
+
 /**
  * Servlet implementation class LoginServlet
+ * 
+ * This servlet handles the login functionality.
+ * It displays the login page on GET requests and processes user credentials 
+ * on POST requests. If the login is successful, it redirects the user to 
+ * the user panel, otherwise, it displays an error message on the login page.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -34,8 +45,20 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//Extracting and using details from request to authenticate and log user
+		String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        LoginService service= new LoginService();
+        String status = service.authenticate(username, password,request); // logs user if credentials match and creates session
+        if ("Success".equals(status)) {
+        	response.sendRedirect(request.getContextPath() + "/userpanel");
+        	
+        }else {
+        	//forwarding error message
+        	request.setAttribute("error", status);
+            request.setAttribute("typedUser", username); 
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+        }
 	}
 
 }

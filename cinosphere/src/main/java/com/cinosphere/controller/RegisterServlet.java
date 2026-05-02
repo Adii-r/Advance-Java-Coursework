@@ -6,9 +6,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+
+import com.cinosphere.service.RegisterService;
 
 /**
  * Servlet implementation class RegisterServlet
+ * 
+ * This servlet handles the registration functionality.
+ * It displays the register page on GET requests and processes user details 
+ * on POST requests. if registration, it redirects the user to login servlet
+ * otherwise, it displays an error message on the register page.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
@@ -34,8 +44,58 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+		String status = null;
+		String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        LocalDate dob = LocalDate.parse(request.getParameter("dob"));
+        String gender = request.getParameter("gender");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String passwordAgain = request.getParameter("confirmPassword");
+        String username= request.getParameter("username");
+        
+        RegisterService register = new RegisterService();
+        
+        if (firstName == null || firstName.trim().isEmpty()) {
+            status = "Invalid first name";
+        } 
+        else if (!firstName.matches("[a-zA-Z]+")) {
+            status = "First name must contain only letters";
+        }
+        else if (lastName == null || lastName.trim().isEmpty()) {
+            status = "Invalid last name";
+        }
+        else if (!firstName.matches("[a-zA-Z]+")) {
+            status = "First name must contain only letters";
+        } 
+        else if (dob.isAfter(LocalDate.now())) {
+            status = "Invalid date of birth";
+        }else if (password == null || password.length() < 8) {
+            status = "Password must be at least 8 characters";
+        }
+        else if (!password.equals(passwordAgain)) {
+            status = "Passwords do not match";
+        } 
+        else if (register.EmailCheck(email)) {
+          
+        	status = "Email already exists";
+        } 
+        else if (register.UsernameCheck(username)) {
+            status = "Username already exists";
+        }
+        if (status != null) {
+            request.setAttribute("error", status);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+            return;
+        }
+        
+        register.addCustomer(firstName, lastName, username, email, dob, gender,password);
+        response.sendRedirect(request.getContextPath()+"/login");
+		} catch (Exception e) {
+	            e.printStackTrace();
+	            response.getWriter().println("Error: " + e.getMessage());
+	    }
 	}
 
 }

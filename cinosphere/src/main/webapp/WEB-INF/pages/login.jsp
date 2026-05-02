@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,9 +54,12 @@
 		      <form action="${pageContext.request.contextPath}/login" method="POST" class="form_standard">
 		        
 		        <div class="form_group">
+		        <c:if test="${error != null}">
+		    	<p class="panel_subtitle" style="color:red;">${error}</p>
+		    	</c:if>
 		          <label class="field_label">Username</label>
 		          <div class="input_field_wrapper">
-		            <input type="username" name="username" class="input_control" placeholder="Emilio" required />
+		            <input type="username" name="username" class="input_control" placeholder="Emilio" value="${typedUser}" required />
 		            <span class="input_icon"> 
 		              <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="User" />
 		            </span>

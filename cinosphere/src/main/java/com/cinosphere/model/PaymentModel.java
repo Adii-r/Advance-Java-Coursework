@@ -15,7 +15,7 @@ public class PaymentModel {
     private String paymentStatus;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getPaymentId() { 
     	return paymentId; 
@@ -29,7 +29,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getBookingId() { 
     	return bookingId; 
@@ -43,7 +43,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getPaymentMethod() { 
     	return paymentMethod; 
@@ -57,7 +57,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
 
     public double getPaymentAmount() { 
@@ -72,7 +72,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getPaymentDate() { 
     	return paymentDate; 
@@ -86,7 +86,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return LocalTime
      */
     public LocalTime getPaymentTime() { 
     	return paymentTime; 
@@ -100,7 +100,7 @@ public class PaymentModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getPaymentStatus() { 
     	return paymentStatus; 

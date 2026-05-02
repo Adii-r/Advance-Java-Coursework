@@ -16,7 +16,7 @@ public class FeedbackModel {
     private String feedbackStatus;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getFeedbackId() { 
     	return feedbackId; 
@@ -30,7 +30,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getCustomerId() { 
     	return customerId; 
@@ -44,7 +44,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getMovieId() { 
     	return movieId; 
@@ -58,7 +58,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getRating() { 
     	return rating; 
@@ -72,7 +72,7 @@ public class FeedbackModel {
     	}
     /**
      * 
-     * @return
+     * @return String
      */
     public String getDescription() { 
     	return description; 
@@ -86,7 +86,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getFeedbackDate() { 
     	return feedbackDate;
@@ -100,7 +100,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return LocalTime
      */
     public LocalTime getFeedbackTime() { 
     	return feedbackTime; 
@@ -114,7 +114,7 @@ public class FeedbackModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getFeedbackStatus() { 
     	return feedbackStatus; 
