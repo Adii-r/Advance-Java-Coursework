@@ -10,7 +10,6 @@ public class CustomerModel {
     private String lastName;
     private String username;
     private String email;
-    private String contactNumber;
     private LocalDate dateOfBirth;
     private String gender;
     private String hashPassword;
@@ -19,7 +18,7 @@ public class CustomerModel {
     private String customerRole;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getCustomerId() { 
     	return customerId; 
@@ -33,7 +32,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getFirstName() {
     	return firstName;
@@ -47,7 +46,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getLastName() { 
     	return lastName; 
@@ -61,7 +60,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getUsername() { 
     	return username; 
@@ -75,7 +74,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getEmail() { 
     	return email; 
@@ -89,21 +88,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
-     */
-    public String getContactNumber() { 
-    	return contactNumber; 
-    }
-    /**
-     * 
-     * @param contactNumber
-     */
-    public void setContactNumber(String contactNumber) { 
-    	this.contactNumber = contactNumber; 
-    }
-    /**
-     * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getDateOfBirth() { 
     	return dateOfBirth; 
@@ -117,7 +102,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getGender() { 
     	return gender; 
@@ -131,7 +116,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getHashPassword() { 
     	return hashPassword; 
@@ -145,7 +130,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getRegistrationDate() { 
     	return registrationDate; 
@@ -159,7 +144,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return boolean
      */
     public boolean getisActive() { 
     	return isActive;
@@ -173,7 +158,7 @@ public class CustomerModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getCustomerRole() { 
     	return customerRole;

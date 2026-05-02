@@ -17,7 +17,7 @@ public class MovieModel {
     private String ageRating;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getMovieId() { 
     	return movieId; 
@@ -31,7 +31,7 @@ public class MovieModel {
     	}
     /**
      * 
-     * @return
+     * @return String
      */
     public String getMovieName() { 
     	return movieName; 
@@ -45,7 +45,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getDuration() { 
     	return duration; 
@@ -59,7 +59,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
 
     public String getDirector() { 
@@ -74,7 +74,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getGenre() { 
     	return genre; 
@@ -88,7 +88,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getMovieLanguage() { 
     	return movieLanguage; 
@@ -102,7 +102,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getDescription() { 
     	return description; 
@@ -116,7 +116,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public LocalDate getReleaseDate() { 
     	return releaseDate; 
@@ -130,7 +130,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getMovieStatus() { 
     	return movieStatus;
@@ -144,7 +144,7 @@ public class MovieModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getAgeRating() {
     	return ageRating; 
