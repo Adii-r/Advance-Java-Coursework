@@ -149,7 +149,7 @@ main, .page_content {
   letter-spacing: 0.02em;
 }
 
-.btn_hero_p {
+.hero_button {
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 700;
@@ -168,7 +168,7 @@ main, .page_content {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn_icon {
+.hero_button_icon {
 	width: 18px;
 	height: 18px;
 	object-fit: contain;
@@ -177,17 +177,17 @@ main, .page_content {
 	flex-shrink: 0;
 }
 
-.btn_hero_p:hover { 
+.hero_button:hover { 
 	transform: translateY(-4px); 
 	filter: brightness(1.1); 
 	box-shadow: 0 15px 40px rgba(201, 168, 76, 0.35); 
 }
 
-.btn_hero_p:hover .btn_icon {
+.hero_button:hover .hero_button_icon {
 	transform: rotate(-12deg) scale(1.1);
 }
 
-.btn_text {
+.hero_button_text {
 	white-space: nowrap;
 }
 
@@ -195,7 +195,6 @@ main, .page_content {
   width: 100%;
   background: rgba(17, 20, 25, 0.85);
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid var(--glass-border);
   border-bottom: 1px solid var(--glass-border);
 }
@@ -398,14 +397,14 @@ main, .page_content {
   color: var(--gold);
 }
 
-.details_desc {
+.details_description {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 16px;
   font-weight: 300;
   line-height: 1.8;
   color: var(--text-dim);
-  margin: 1.5rem 0 2rem;
+  margin: 1.2rem 0 2rem;
   max-width: 480px;
 }
 
@@ -436,7 +435,7 @@ main, .page_content {
 
 .details_visual {
   background: #000;
-  border: 1px solid rgba(201, 168, 76, 0.35); /* Subtle gold border */
+  border: 1px solid rgba(201, 168, 76, 0.35); 
   border-radius: 8px;
   aspect-ratio: 16 / 9;
   position: relative;
@@ -456,12 +455,7 @@ main, .page_content {
 .visual_screen_overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 50% 45%, 
-    rgba(201, 168, 76, 0.08) 0%, 
-    transparent 70%, 
-    rgba(0, 0, 0, 0.45) 100%
-  );
+  background: radial-gradient(circle at 50% 45%,  rgba(201, 168, 76, 0.08) 0%, transparent 70%, rgba(0, 0, 0, 0.45) 100%);
   pointer-events: none;
 }
 

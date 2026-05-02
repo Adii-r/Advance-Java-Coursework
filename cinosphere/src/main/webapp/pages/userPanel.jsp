@@ -1,69 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CinoSphere — Full Wireframe Suite</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css"  href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/userPanel.css">
-<link rel="stylesheet" href="../css/variables.css">
-<link rel="stylesheet" href="../css/header.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User | CinoSphere</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userPanel.css">
 </head>
 <body>
-<div class="screen active" id="s-user">
-<header class="nav_header" id="mainHeader">
-  <nav class="nav_container">
+
+<jsp:include page="../components/header.jsp" />
+
     
-    <a href="/#" class="nav_brand">
-      <img src="../assets/images/image.png" alt="Logo" class="nav_logo" />
-    </a>
-
-    <ul class="nav_menu">
-      <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'movies' ? 'active' : ''}">
-          Movies
-        </a>
-      </li>
-
-      <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'schedules' ? 'active' : ''}">
-          Schedules
-        </a>
-      </li>
-
-      <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'about' ? 'active' : ''}">
-          About Us
-        </a>
-      </li>
-
-      <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'experience' ? 'active' : ''}">
-          Experience
-        </a>
-      </li>
-
-    </ul>
-    
-    <div class="nav_actions">
-	<div class="user-avatar-sm" style="background:linear-gradient(135deg,var(--gold-dim),var(--gold));">RG</div>
-          <div>
-            <div class="user-mini-name">Raunit Giri</div>
-            <div class="user-mini-tier" style="color:var(--crimson-bright);">Member</div>
-          </div>
-      <a href="${pageContext.request.contextPath}/#" class="btn btn_outline"  style="width:130px;">
-        <img src="../assets/icons/user.svg" alt="" class="nav_icon" />
-        <span class="btn_text">Sign Out</span>
-      </a>
-    </div>
-
-  </nav>
-</header>
   <div class="panel-layout">
 <!-- Main Content -->
     <main class="panel-main">
@@ -169,7 +118,7 @@
             <!-- Membership Card -->
             <div class="membership-card">
               <span class="mem-card-tier">Sphere Plus · Member</span>
-              <div class="mem-card-name">Priya Sharma</div>
+              <div class="mem-card-name">Raunit Giri</div>
               <div class="mem-card-pts">1,240</div>
               <span class="mem-card-pts-label">Points Available</span>
               <div class="mem-progress" style="margin-top:1.25rem;">

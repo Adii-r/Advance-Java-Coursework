@@ -29,9 +29,9 @@
       </p>
 
       <div class="hero_actions">
-        <a href="${pageContext.request.contextPath}/#" class="btn_hero_p">
-          <img src="${pageContext.request.contextPath}/assets/icons/ticket.svg" alt="ticket" class="btn_icon" />
-          <span class="btn_text">Reserve Now</span>   
+        <a href="${pageContext.request.contextPath}/#" class="hero_button">
+          <img src="${pageContext.request.contextPath}/assets/icons/ticket.svg" alt="ticket" class="hero_button_icon" />
+          <span class="hero_button_text">Reserve Now</span>   
         </a>
       </div>
     </div>
@@ -82,7 +82,7 @@
           Every Screen<em>Built for Stories.</em>
         </h2>
 
-        <p class="details_desc">
+        <p class="details_description">
           A geometry that dissolves cinematic reality. Built for Detail. Emotion. Impact.
         </p>
             

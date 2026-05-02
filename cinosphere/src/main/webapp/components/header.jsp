@@ -6,53 +6,40 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
 </head>
 
-<header class="nav_header" id="mainHeader">
-  <nav class="nav_container">
+<header class="navigation_header" id="mainHeader">
+  <nav class="navigation_container">
     
-    <a href="${pageContext.request.contextPath}/#" class="nav_brand">
-      <img src="${pageContext.request.contextPath}/assets/images/image.png" alt="Logo" class="nav_logo" />
+    <a href="${pageContext.request.contextPath}/#" class="navigation_brand">
+      <img src="${pageContext.request.contextPath}/assets/images/image.png" alt="Logo" class="navigation_logo"/>
     </a>
 
-    <ul class="nav_menu">
+    <ul class="navigation_menu">
       <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'movies' ? 'active' : ''}">
-          Movies
-        </a>
+        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'movies' ? 'active' : ''}">Movies</a>
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'schedules' ? 'active' : ''}">
-          Schedules
-        </a>
+      	<a href="${pageContext.request.contextPath}/#" class="${activePage == 'schedules' ? 'active' : ''}">Schedules</a>
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'about' ? 'active' : ''}">
-          About Us
-        </a>
+        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'about' ? 'active' : ''}">About Us</a>
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/#"
-           class="${activePage == 'experience' ? 'active' : ''}">
-          Experience
-        </a>
+        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'experience' ? 'active' : ''}">Experience</a>
       </li>
-
     </ul>
     
-    <div class="nav_actions">
-      <a href="${pageContext.request.contextPath}/#" class="btn btn_outline">
-        <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="" class="nav_icon" />
-        <span class="btn_text">Sign In</span>
+    <div class="navigation_actions">
+      <a href="${pageContext.request.contextPath}/#" class="button outline_button">
+        <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="" class="navigation_icon" />
+        <span class="button_text">Sign In</span>
       </a>
 
-      <a href="${pageContext.request.contextPath}/#" class="btn btn_primary">
-        <span class="btn_text">Get Started</span>
-        <img src="${pageContext.request.contextPath}/assets/icons/rightarrow.svg" alt="" class="nav_icon" />
+      <a href="${pageContext.request.contextPath}/#" class="button primary_button">
+        <span class="button_text">Get Started</span>
+        <img src="${pageContext.request.contextPath}/assets/icons/rightarrow.svg" alt="" class="navigation_icon" />
       </a>
     </div>
 
