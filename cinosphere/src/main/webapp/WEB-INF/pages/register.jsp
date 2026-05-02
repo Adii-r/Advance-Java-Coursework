@@ -67,23 +67,42 @@
                 </div>
               </div>
 
-              <div class="form_group_wrapper">
-                <label class="form_label_text">Email Address</label>
-                <div class="form_input_wrapper">
-                  <input type="email" name="email" class="form_input_field" placeholder="aditya@gmail.com" required>
-                  <span class="form_input_icon"> 
-		              <img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail" />
-		            </span>
-                </div>
-              </div>
+              <div class="form_row_double">
+			    <div class="form_group_wrapper">
+			        <label class="form_label_text">Username</label>
+			        <div class="form_input_wrapper">
+			            <input type="text" name="username" class="form_input_field" placeholder="adir" required>
+			            <span class="form_input_icon"> 
+			                <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="User" />
+			            </span>
+			        </div>
+			    </div>
+			
+			    <div class="form_group_wrapper">
+			        <label class="form_label_text">Email Address</label>
+			        <div class="form_input_wrapper">
+			            <input type="email" name="email" class="form_input_field" placeholder="aditya@gmail.com" required>
+			            <span class="form_input_icon"> 
+			                <img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail" />
+			            </span>
+			        </div>
+			    </div>
+			 </div>
 
-              <div class="form_group_wrapper">
-                <label class="form_label_text">Preferred Location</label>
-                <select name="location" class="form_select_field">
-                  <option value="ktm">Kathmandu</option>
-                  <option value="pkr">Pokhara</option>
-                  <option value="brt">Biratnagar</option>
-                </select>
+              <div class="form_row_double">
+                <div class="form_group_wrapper">
+                  <label class="form_label_text">Gender</label>
+                  <select name="gender" class="form_select_field" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form_group_wrapper">
+                  <label class="form_label_text">Date of Birth</label>
+                  <input type="date" name="dob" class="form_input_field" placeholder="DD/MM/YYYY" required>
+                </div>
               </div>
 
               <div class="form_group_wrapper">
@@ -95,12 +114,12 @@
                     <span class="membership_price_label">Free</span>
                   </label>
                   <label class="membership_option_card">
-                  	<input type="radio" name="membership" value="plus" checked hidden>
+                  	<input type="radio" name="membership" value="plus" hidden>
                     <span class="membership_tier_name">Plus</span>
                     <span class="membership_price_label">Rs 499</span>
                   </label>
                   <label class="membership_option_card">
-                  	<input type="radio" name="membership" value="elite" checked hidden>
+                  	<input type="radio" name="membership" value="elite" hidden>
                     <span class="membership_tier_name">Elite</span>
                     <span class="membership_price_label">Rs 999</span>
                   </label>

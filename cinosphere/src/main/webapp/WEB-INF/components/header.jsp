@@ -9,7 +9,7 @@
 <header class="navigation_header" id="mainHeader">
   <nav class="navigation_container">
     
-    <a href="${pageContext.request.contextPath}/#" class="navigation_brand">
+    <a href="${pageContext.request.contextPath}/home" class="navigation_brand">
       <img src="${pageContext.request.contextPath}/assets/images/image.png" alt="Logo" class="navigation_logo"/>
     </a>
 
@@ -32,12 +32,12 @@
     </ul>
     
     <div class="navigation_actions">
-      <a href="${pageContext.request.contextPath}/#" class="button outline_button">
+      <a href="${pageContext.request.contextPath}/login" class="button outline_button">
         <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="" class="navigation_icon" />
         <span class="button_text">Sign In</span>
       </a>
 
-      <a href="${pageContext.request.contextPath}/#" class="button primary_button">
+      <a href="${pageContext.request.contextPath}/register" class="button primary_button">
         <span class="button_text">Get Started</span>
         <img src="${pageContext.request.contextPath}/assets/icons/rightarrow.svg" alt="" class="navigation_icon" />
       </a>

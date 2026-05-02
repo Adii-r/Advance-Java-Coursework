@@ -213,6 +213,14 @@
   filter: brightness(0) invert(1);
 }
 
+.form_input_wrapper .form_input_field {
+    padding-right: 40px;
+}
+
+.form_input_wrapper:focus-within .form_input_icon img {
+    opacity: 1;
+}
+
 .membership_selector_row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
