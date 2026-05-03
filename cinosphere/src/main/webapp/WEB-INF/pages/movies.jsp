@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false" %>
-
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,22 +32,21 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 	    </section>
 	    
 	    <section class="movie_filter_section">
+	    <form method="get" action="${pageContext.request.contextPath}/movies">
 		    <div class="movie_filter_container">
-		        
 		        <div class="movie_search_wrapper">
 		            <span class="movie_search_icon_container">
 		                <img src="${pageContext.request.contextPath}/assets/icons/search.svg" alt="Search" />
 		            </span>
-		            <input type="text" placeholder="Search movies, genres, languages..." id="movieSearch" class="movie_search_input">
+		            <input type="text" placeholder="Search movies, genres, languages..." name="movieSearch" class="movie_search_input" value="${searchKeyword}">
 		        </div>
-		
 		        <div class="movie_filter_dropdown_group">
 		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="langFilter">
+		                <select class="movie_filter_select" name="langFilter">
 		                    <option value="">All Languages</option>
-		                    <option value="english">English</option>
-		                    <option value="hindi">Hindi</option>
-		                    <option value="nepali">Nepali</option>
+		                    <option value="english" ${selectedLanguage=="english"?"selected":""}>English</option>
+		                    <option value="hindi" ${selectedLanguage=="english"?"selected":""}>Hindi</option>
+		                    <option value="nepali" ${selectedLanguage=="english"?"selected":""}>Nepali</option>
 		                </select>
 		                <span class="movie_select_arrow">
 		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
@@ -55,26 +54,14 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            </div>
 		
 		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="genreFilter">
+		                <select class="movie_filter_select" name="genreFilter">
 		                    <option value="">All Genres</option>
-		                    <option value="action">Action</option>
-		                    <option value="drama">Drama</option>
-		                    <option value="comedy">Comedy</option>
-			                <option value="sci-fi">Sci-Fi</option>
-			                <option value="horror">Horror</option>
-			                <option value="biography">Biography</option>
-		                </select>
-		                <span class="movie_select_arrow">
-		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
-		                </span>
-		            </div>
-		
-		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="formatFilter">
-		                    <option value="">All Formats</option>
-		                    <option value="imax">IMAX</option>
-		                    <option value="standard">Standard</option>
-			                <option value="imax 3d">IMAX 3D</option>
+		                    <option value="action" ${selectedGenre=="english"?"selected":""}>Action</option>
+		                    <option value="drama" ${selectedGenre=="english"?"selected":""}>Drama</option>
+		                    <option value="comedy" ${selectedGenre=="english"?"selected":""}>Comedy</option>
+			                <option value="sci-fi" ${selectedGenre=="english"?"selected":""}>Sci-Fi</option>
+			                <option value="horror" ${selectedGenre=="english"?"selected":""}>Horror</option>
+			                <option value="biography" ${selectedGenre=="english"?"selected":""}>Biography</option>
 		                </select>
 		                <span class="movie_select_arrow">
 		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
@@ -83,17 +70,23 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		        </div>
 		
 		        <div class="movie_status_pill_group">
-				    <input type="radio" name="status" id="all" class="pill_radio" checked>
+				    <input type="radio" name="status" id="all" value="all" class="pill_radio" ${selectedStatus=="english" || empty selectedStatus ?"selected":""}>
 				    <label for="all" class="movie_filter_pill">All</label>
 				
-				    <input type="radio" name="status" id="showing" class="pill_radio">
+				    <input type="radio" name="status" id="showing" value="now_showing" class="pill_radio" ${selectedStatus=="english"?"selected":""}>
 				    <label for="showing" class="movie_filter_pill">Now Showing</label>
 				
-				    <input type="radio" name="status" id="soon" class="pill_radio">
+				    <input type="radio" name="status" id="soon" value="comming_soon"class="pill_radio" ${selectedStatus=="english"?"selected":""}>
 				    <label for="soon" class="movie_filter_pill">Coming Soon</label>
 				</div>
-		
+				<c:if test="${not empty error}">
+            			<div class="error_banner">
+                		<p>${errorMessage}</p>
+            			</div>
+        		</c:if>
 		    </div>
+		    <button type="submit" class="movie_filter_button">Filter</button>
+		  </form>
 		</section>
 		
 		<section class="movie_section">

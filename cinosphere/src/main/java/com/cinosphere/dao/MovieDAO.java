@@ -99,10 +99,12 @@ public class MovieDAO {
 	 * @throws Exception
 	 */
 	public List<MovieModel> findByMovieName(String movieName)throws Exception {
+		
 		List<MovieModel> movies = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
 
-		String sql = "SELECT * FROM movie WHERE movie_name = ?";
+		String sql = "SELECT * FROM movie WHERE movie_name LIKE ? ORDER BY release_date";
+		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, movieName);
 		ResultSet rs = ps.executeQuery();
@@ -116,19 +118,59 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	public List<MovieModel> findByAgeRating(String ageRating)throws Exception {
+		
+		List<MovieModel> movies = new ArrayList<>();
+		Connection con = DBconfig.getConnection();
+
+		String sql = "SELECT * FROM movie WHERE age_rating = ? ORDER BY release_date";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, ageRating);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			movies.add(createMovieModel(rs));
+		}
+		
+		rs.close();
+	    ps.close();
+	    con.close();
+	    return movies;
+	}
+	public List<MovieModel> findByMovieLanguage(String movieLanguage)throws Exception {
+			
+			List<MovieModel> movies = new ArrayList<>();
+			Connection con = DBconfig.getConnection();
+	
+			String sql = "SELECT * FROM movie WHERE movie_language = ? ORDER BY release_date";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, movieLanguage);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				movies.add(createMovieModel(rs));
+			}
+			
+			rs.close();
+		    ps.close();
+		    con.close();
+		    return movies;
+		}
 	/**
 	 * find movie data using movie language
 	 * @param movieLanguage
 	 * @return list of MovieModel Object
 	 * @throws Exception
 	 */
-	public List<MovieModel> findByMovieLanguage(String movieLanguage)throws Exception{
+	public List<MovieModel> findByMovieStatus(String status)throws Exception{
 		List<MovieModel> movies = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
 
-		String sql = "SELECT * FROM movie WHERE movie_language = ?";
+		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, movieLanguage);
+		ps.setString(1, status);
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
@@ -147,9 +189,12 @@ public class MovieDAO {
 	 */
 	public List<MovieModel> getAllMovie() throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
-		String sql = "SELECT * FROM movie";
+		String sql = "SELECT * FROM movie WHERE movie_status = ? OR movie_status = ?";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, "NOW_SHOWING");
+		ps.setString(2, "COMING_SOON");
+		
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
@@ -160,6 +205,33 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	
+	public List<MovieModel> findByFilters(String language, String genre,  String status, String keyword) throws Exception {
+		List<MovieModel> movies = new ArrayList<>();
+		StringBuilder sql = new StringBuilder("SELECT * FROM movie WHERE 1=1 ");
+		List<String> params = new ArrayList<>();
+		
+		if (valueCheck(language)) { sql.append("AND movie_language = ? "); params.add(language); }
+		if (valueCheck(genre))    { sql.append("AND genre = ? ");          params.add(genre);    }
+		if (valueCheck(status))   { sql.append("AND movie_status = ? ");   params.add(status);   }
+		if (valueCheck(keyword))  { sql.append("AND movie_name LIKE ? ");  params.add("%" + keyword + "%"); }
+		
+		sql.append("ORDER BY release_date");
+		
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql.toString());
+		
+		for (int i = 1; i <= params.size(); i++) {
+			ps.setString(i, params.get(i));
+		}
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) movies.add(createMovieModel(rs));
+		
+		rs.close(); ps.close(); con.close();
+		return movies;
+	}
 	/**
 	 * Helper method to create Movie Object
 	 * @param rs ResultSet
@@ -169,15 +241,18 @@ public class MovieDAO {
 	public MovieModel createMovieModel(ResultSet rs) throws SQLException  {
 		MovieModel movie = new MovieModel();
 		movie.setMovieId(rs.getInt("movie_id"));
-		movie.setMovieName(rs.getString(""));
-		movie.setDuration(rs.getInt(""));
-		movie.setDirector(rs.getString(""));
-		movie.setGenre(rs.getString(""));
-		movie.setMovieLanguage(rs.getString(""));
-		movie.setDescription(rs.getString(""));
-		movie.setReleaseDate(rs.getDate(0).toLocalDate());
-		movie.setMovieStatus(rs.getString(""));
-		movie.setAgeRating(rs.getString(""));
+		movie.setMovieName(rs.getString("movie_name"));
+		movie.setDuration(rs.getInt("duration"));
+		movie.setDirector(rs.getString("director"));
+		movie.setGenre(rs.getString("genre"));
+		movie.setMovieLanguage(rs.getString("movie_language"));
+		movie.setDescription(rs.getString("description"));
+		movie.setReleaseDate(rs.getDate("release_date").toLocalDate());
+		movie.setMovieStatus(rs.getString("movie_status"));
+		movie.setAgeRating(rs.getString("age_rating"));
 		return movie;
+	}
+	private boolean valueCheck(String value) {
+		return value!=null && value.trim().isEmpty();
 	}
 }
