@@ -19,6 +19,6 @@ public MovieModel getMovieById(int movieId) throws Exception {
 return moviedao.findById(movieId);
 }
 public List<MovieModel> getAllActiveMovies() throws Exception {
-return moviedao.getAllMovie();
+return moviedao.getAllActiveMovie();
 }
 }

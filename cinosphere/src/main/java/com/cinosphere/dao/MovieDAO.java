@@ -187,13 +187,12 @@ public class MovieDAO {
 	 * @return list of MovieModel Object
 	 * @throws Exception
 	 */
-	public List<MovieModel> getAllMovie() throws Exception {
+	public List<MovieModel> getAllActiveMovie() throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
-		String sql = "SELECT * FROM movie WHERE movie_status = ? OR movie_status = ?";
+		String sql = "SELECT * FROM movie WHERE movie_status = ?";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, "NOW_SHOWING");
-		ps.setString(2, "COMING_SOON");
 		
 		ResultSet rs = ps.executeQuery();
 		

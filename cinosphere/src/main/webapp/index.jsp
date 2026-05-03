@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,12 +78,6 @@
                     Now Showing
                 </button>
                 <div class="movie_tab_vertical_divider"></div>
-                <button class="movie_category_tab_button">
-                    <span class="movie_tab_icon_container">
-                        <img src="${pageContext.request.contextPath}/assets/icons/clock.svg" alt="Coming Soon Icon" />
-                    </span>
-                    Coming Soon
-                </button>
             </div>
 
             <a href="${pageContext.request.contextPath}/movies" class="movie_navigation_link_all">
@@ -94,107 +89,49 @@
         </div>
 
         <div class="movie_cards_presentation_grid">
+            	<c:if test="${not empty activeMovies}">
+   		<c:forEach var="movie" items="${activeMovies}">
+	    <c:choose>
+		<c:when test="${movie.movieStatus == 'NOW_SHOWING'}">
             <div class="movie_feature_film_card">
-                <div class="movie_poster_visual_wrapper">
-                    <div class="movie_status_badge_group">
-                        <span class="movie_certification_badge">PG</span>
-                    </div>
-
-                    <img src="${pageContext.request.contextPath}/assets/posters/poster_1.jpeg" 
-                         alt="The Devil Wears Prada 2" class="movie_poster_image_element"/>
-                    <div class="movie_poster_gradient_overlay"></div>
+             <div class="movie_poster_visual_wrapper">
+             <div class="movie_status_badge_group">
+               <span class="movie_certification_badge">${movie.ageRating}</span>
                 </div>
-
-                <div class="movie_information_panel">
-                    <div class="movie_metadata_text_group">
-                        <h3 class="movie_title">The Devil Wears Prada 2</h3>
-                        <p class="movie_description">English | Comedy</p>
-                    </div>
-                    <div class="movie_action_button_bar">
-                        <button class="movie_booking_primary_button">Book Now</button>
-                        <div class="movie_quick_view_icon_wrapper">
-                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="movie_feature_film_card">
-                <div class="movie_poster_visual_wrapper">
-                    <div class="movie_status_badge_group">
-                        <span class="movie_certification_badge">PG</span>
-                    </div>
-
-                    <img src="${pageContext.request.contextPath}/assets/posters/poster_2.jpg" 
-                         alt="Michael" class="movie_poster_image_element"/>
-                    <div class="movie_poster_gradient_overlay"></div>
-                </div>
-
-                <div class="movie_information_panel">
-                    <div class="movie_metadata_text_group">
-                        <h3 class="movie_title">Michael</h3>
-                        <p class="movie_description">English | Biography</p>
-                    </div>
-                    <div class="movie_action_button_bar">
-                        <button class="movie_booking_primary_button">Book Now</button>
-                        <div class="movie_quick_view_icon_wrapper">
-                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="movie_feature_film_card">
-                <div class="movie_poster_visual_wrapper">
-                    <div class="movie_status_badge_group">
-                        <span class="movie_certification_badge">PG</span>
-                    </div>
-
-                    <img src="${pageContext.request.contextPath}/assets/posters/poster_3.jpg" 
-                         alt="Bhoot Bangla" class="movie_poster_image_element"/>
-                    <div class="movie_poster_gradient_overlay"></div>
-                </div>
-
-                <div class="movie_information_panel">
-                    <div class="movie_metadata_text_group">
-                        <h3 class="movie_title">Bhoot Bangla</h3>
-                        <p class="movie_description">Hindi | Horror</p>
-                    </div>
-                    <div class="movie_action_button_bar">
-                        <button class="movie_booking_primary_button">Book Now</button>
-                        <div class="movie_quick_view_icon_wrapper">
-                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="movie_feature_film_card">
-                <div class="movie_poster_visual_wrapper">
-                    <div class="movie_status_badge_group">
-                        <span class="movie_certification_badge">PG</span>
-                    </div>
-
-                    <img src="${pageContext.request.contextPath}/assets/posters/poster_4.jpg" 
-                         alt="Project Hail Mary" class="movie_poster_image_element"/>
-                    <div class="movie_poster_gradient_overlay"></div>
-                </div>
-
-                <div class="movie_information_panel">
-                    <div class="movie_metadata_text_group">
-                        <h3 class="movie_title">Project Hail Mary</h3>
-                        <p class="movie_description">English | Sci Fi</p>
-                    </div>
-                    <div class="movie_action_button_bar">
-                        <button class="movie_booking_primary_button">Book Now</button>
-                        <div class="movie_quick_view_icon_wrapper">
-                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                        </div>
-                    </div>
-                </div>
-            </div>   
-          </div>
+                 <img src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg" alt="${movie.movieName} poster" class="movie_poster_image_element"/>
+                  <div class="movie_poster_gradient_overlay"></div>
+                  </div>
+                                        <div class="movie_information_panel">
+                                        <div class="movie_metadata_text_group">
+                                            <h3 class="movie_title">${movie.movieName}</h3>
+                                            <p class="movie_description">
+                                                ${movie.movieLanguage} | ${movie.genre}
+                                                <span>${movie.duration} min</span>
+                                            </p>
+                                            <div class="movie_action_button_bar">
+                                            <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/booking">
+                                                    Book Now
+                                                </button>
+                                                <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
+                                                <div class="movie_quick_view_icon_wrapper">
+                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                             </div>
+            				</c:when>
+           			 </c:choose>
+            </c:forEach>
+            </c:if>  
+         </div>
     </div>
+    <c:if test="${error}">
+                <div class="movie_main_content_container">
+                    <p class="movie_description" style="color:red;font-size:1rem;">${error}</p>
+                </div>
+        </c:if>    
   </section>
    
   <section class="features_strip">

@@ -6,6 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import com.cinosphere.model.MovieModel;
+import com.cinosphere.service.MovieService;
 
 /**
  * Servlet implementation class LandingServlet
@@ -32,6 +36,16 @@ public class LandingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		MovieService service = new MovieService();
+		List<MovieModel> activeMovies = null;
+		try {
+			activeMovies = service.getAllActiveMovies();
+			request.setAttribute("activeMovies",activeMovies);
+		} catch (Exception e) {
+			request.setAttribute("error", "Could not load movies Please try again later.");
+			e.printStackTrace();
+		}
+		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
