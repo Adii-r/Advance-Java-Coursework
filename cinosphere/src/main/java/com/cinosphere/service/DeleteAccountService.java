@@ -1,11 +1,11 @@
 package com.cinosphere.service;
 
-import com.cinosphere.dao.CustomerDAO;
+import com.cinosphere.dao.UsersDAO;
 
 public class DeleteAccountService {
 
-	CustomerDAO customerdao = new CustomerDAO();
-	public void DeleteAccount(String username) throws Exception {
-		customerdao.deleteCustomer(username);
+	UsersDAO customerdao = new UsersDAO();
+	public void DeleteAccount(int userId) throws Exception {
+		customerdao.deleteUser(userId);
 	}
 }

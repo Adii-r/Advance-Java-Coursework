@@ -7,7 +7,7 @@ import java.time.LocalTime;
  */
 public class BookingModel {
 	private int bookingId;
-    private int customerId;
+    private int userId;
     private LocalDate bookingDate;
     private LocalTime bookingTime;
     private String bookingStatus;
@@ -31,15 +31,15 @@ public class BookingModel {
      * 
      * @return int
      */
-    public int getCustomerId() { 
-    	return customerId; 
+    public int getUserId() { 
+    	return userId; 
     }
     /**
      * 
      * @param customerId
      */
-    public void setCustomerId(int customerId) { 
-    	this.customerId = customerId; 
+    public void setUserId(int customerId) { 
+    	this.userId = customerId; 
     }
     /**
      * 
