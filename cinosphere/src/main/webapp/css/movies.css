@@ -299,9 +299,11 @@
 }
 
 .movie_description span {
-    color: var(--crimson);
+    color: var(--crimson-bright);
     margin-left: 6px;
     font-weight: 1200;
+    font-size: 11px;
+    
 }
 
 .movie_action_button_bar {
@@ -312,7 +314,7 @@
 
 .movie_release_header {
     width: 100%;
-    background: var(--gold);
+    background: var(--crimson-bright);
     padding: 8px 0;
     text-align: center;
     border-top-left-radius: var(--radius-md);
@@ -320,7 +322,7 @@
 }
 
 .release_date_text {
-    color: var(--crimson-bright);
+    color: var(--text);
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 1000;

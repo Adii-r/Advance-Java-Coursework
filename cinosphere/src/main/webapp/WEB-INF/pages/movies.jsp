@@ -192,7 +192,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            
 		            <div class="movie_feature_film_card coming_soon_card">
 		                <div class="movie_release_header">
-		                    <span class="release_date_text">15 May 2026</span>
+		                    <span class="release_date_text">17 July 2026</span>
 		                </div>
 		
 		                <div class="movie_poster_visual_wrapper">
@@ -203,8 +203,8 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		                </div>
 		
 		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Avatar 3</h3>
-		                    <p class="movie_description">English | Sci-Fi | <span>3h 10m</span></p>
+		                    <h3 class="movie_title">The Odyssey</h3>
+		                    <p class="movie_description">English | Action <span>3h</span></p>
 		                    <div class="movie_action_button_bar">
 		                        <button class="movie_booking_primary_button">Notify Me</button>
 		                        <div class="movie_quick_view_icon_wrapper">
@@ -216,19 +216,19 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            
 		            <div class="movie_feature_film_card coming_soon_card">
 		                <div class="movie_release_header">
-		                    <span class="release_date_text">15 May 2026</span>
+		                    <span class="release_date_text">31 July 2026</span>
 		                </div>
 		
 		                <div class="movie_poster_visual_wrapper">
 		                   	<div class="movie_status_badge_group">
 		                        <span class="movie_certification_badge">PG</span>
 		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_5.jpg" alt="Poster" class="movie_poster_image_element"/>
+		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_6.jpg" alt="Poster" class="movie_poster_image_element"/>
 		                </div>
 		
 		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Avatar 3</h3>
-		                    <p class="movie_description">English | Sci-Fi | <span>3h 10m</span></p>
+		                    <h3 class="movie_title">Spider Man: Brand New Day</h3>
+		                    <p class="movie_description">English | Action  <span>3h 10m</span></p>
 		                    <div class="movie_action_button_bar">
 		                        <button class="movie_booking_primary_button">Notify Me</button>
 		                        <div class="movie_quick_view_icon_wrapper">
@@ -240,19 +240,19 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            
 		            <div class="movie_feature_film_card coming_soon_card">
 		                <div class="movie_release_header">
-		                    <span class="release_date_text">15 May 2026</span>
+		                    <span class="release_date_text">21 Aug 2026</span>
 		                </div>
 		
 		                <div class="movie_poster_visual_wrapper">
 		                   	<div class="movie_status_badge_group">
-		                        <span class="movie_certification_badge">PG</span>
+		                        <span class="movie_certification_badge">ADULT</span>
 		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_5.jpg" alt="Poster" class="movie_poster_image_element"/>
+		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_7.jpg" alt="Poster" class="movie_poster_image_element"/>
 		                </div>
 		
 		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Avatar 3</h3>
-		                    <p class="movie_description">English | Sci-Fi | <span>3h 10m</span></p>
+		                    <h3 class="movie_title">Insidious: Out of the Further</h3>
+		                    <p class="movie_description">English | Horror  <span>2h 35m</span></p>
 		                    <div class="movie_action_button_bar">
 		                        <button class="movie_booking_primary_button">Notify Me</button>
 		                        <div class="movie_quick_view_icon_wrapper">
@@ -264,19 +264,19 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            
 		            <div class="movie_feature_film_card coming_soon_card">
 		                <div class="movie_release_header">
-		                    <span class="release_date_text">15 May 2026</span>
+		                    <span class="release_date_text">02 Oct 2026</span>
 		                </div>
 		
 		                <div class="movie_poster_visual_wrapper">
 		                   	<div class="movie_status_badge_group">
 		                        <span class="movie_certification_badge">PG</span>
 		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_5.jpg" alt="Poster" class="movie_poster_image_element"/>
+		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_8.jpg" alt="Poster" class="movie_poster_image_element"/>
 		                </div>
 		
 		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Avatar 3</h3>
-		                    <p class="movie_description">English | Sci-Fi | <span>3h 10m</span></p>
+		                    <h3 class="movie_title">Drishyam 3</h3>
+		                    <p class="movie_description">Hindi | Thriller <span>2h 55m</span></p>
 		                    <div class="movie_action_button_bar">
 		                        <button class="movie_booking_primary_button">Notify Me</button>
 		                        <div class="movie_quick_view_icon_wrapper">
