@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2026 at 05:07 AM
+-- Generation Time: May 03, 2026 at 01:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `booking` (
   `booking_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `booking_date` date NOT NULL,
   `booking_time` time NOT NULL,
   `booking_status` varchar(20) NOT NULL,
@@ -41,40 +41,12 @@ CREATE TABLE `booking` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
---
-
-CREATE TABLE `customer` (
-  `customer_id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `date_of_birth` date NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `hash_password` varchar(255) NOT NULL,
-  `registration_date` date NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `customer_role` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `username`, `email`, `date_of_birth`, `gender`, `hash_password`, `registration_date`, `is_active`, `customer_role`) VALUES
-(7, 'Raunit', 'Giri', 'RAWunit', 'raunit06@gmail.com', '2026-05-02', 'male', '$2a$10$fIaKRolhPHQMKyEbq1Y5P.DHzTd.41Fb6JtPTsNRX8SEhulHGrHUm', '2026-05-02', 1, 'CUSTOMER'),
-(8, 'Admin', 'Admin', 'Admin', 'Admin@gmail.com', '2026-05-02', 'other', '$2a$10$nOk/9qchdS9FSWxGm.m0relnFoArZVF8xytfTlaZOg0TULZp6FDO2', '2026-05-02', 1, 'ADMIN');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `feedback`
 --
 
 CREATE TABLE `feedback` (
   `feedback_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL CHECK (`rating` between 1 and 5),
   `description` text NOT NULL,
@@ -91,7 +63,7 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `membership` (
   `membership_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `membership_type` varchar(30) NOT NULL,
   `membership_status` varchar(20) NOT NULL,
   `total_loyalty_points` int(11) NOT NULL,
@@ -102,9 +74,9 @@ CREATE TABLE `membership` (
 -- Dumping data for table `membership`
 --
 
-INSERT INTO `membership` (`membership_id`, `customer_id`, `membership_type`, `membership_status`, `total_loyalty_points`, `discount_percentage`) VALUES
-(1, 7, 'Normal person', 'Active', 0, 0.00),
-(2, 8, 'Normal person', 'Active', 0, 0.00);
+INSERT INTO `membership` (`membership_id`, `user_id`, `membership_type`, `membership_status`, `total_loyalty_points`, `discount_percentage`) VALUES
+(1, 2, 'Normal person', 'Active', 0, 0.00),
+(2, 3, 'Normal person', 'Active', 0, 0.00);
 
 -- --------------------------------------------------------
 
@@ -222,6 +194,34 @@ CREATE TABLE `ticket` (
   `ticket_price` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `hash_password` varchar(255) NOT NULL,
+  `registration_date` date NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `user_role` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `username`, `email`, `date_of_birth`, `gender`, `hash_password`, `registration_date`, `is_active`, `user_role`) VALUES
+(2, 'user', 'user', 'user', 'user@gmail.com', '2026-05-02', 'other', '$2a$10$OmWUL.hm5LSLWCzkqq/l.e5PTpWIePpdt179gyxsXFQPcqHgJ43ci', '2026-05-03', 1, 'CUSTOMER'),
+(3, 'admin', 'admin', 'admin', 'admin@gmail.com', '2026-05-02', 'other', '$2a$10$jQL7T18UfniO7u.ww89tveroj6aErLvP.6Gd.lYIQe5C7Enye8hN6', '2026-05-03', 1, 'ADMIN');
+
 --
 -- Indexes for dumped tables
 --
@@ -231,22 +231,14 @@ CREATE TABLE `ticket` (
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `fk_booking_user` (`customer_id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customer_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD KEY `fk_booking_user` (`user_id`);
 
 --
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD PRIMARY KEY (`feedback_id`),
-  ADD KEY `fk_feedback_user` (`customer_id`),
+  ADD KEY `fk_feedback_user` (`user_id`),
   ADD KEY `fk_feedback_movie` (`movie_id`);
 
 --
@@ -254,7 +246,7 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `membership`
   ADD PRIMARY KEY (`membership_id`),
-  ADD UNIQUE KEY `customer_id` (`customer_id`);
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `movie`
@@ -308,6 +300,14 @@ ALTER TABLE `ticket`
   ADD KEY `fk_ticket_seat` (`seat_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -316,12 +316,6 @@ ALTER TABLE `ticket`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -378,6 +372,12 @@ ALTER TABLE `ticket`
   MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -385,20 +385,20 @@ ALTER TABLE `ticket`
 -- Constraints for table `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `fk_booking_user` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_booking_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD CONSTRAINT `fk_feedback_movie` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_feedback_user` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_feedback_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `membership`
 --
 ALTER TABLE `membership`
-  ADD CONSTRAINT `fk_membership_user` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_membership_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment`
