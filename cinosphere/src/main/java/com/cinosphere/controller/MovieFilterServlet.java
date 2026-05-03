@@ -12,21 +12,16 @@ import com.cinosphere.model.MovieModel;
 import com.cinosphere.service.MovieService;
 
 /**
- * Servlet implementation class LandingServlet
+ * Servlet implementation class MovieFilterServlet
  */
-@WebServlet(
-		asyncSupported = true, 
-		urlPatterns = { 
-				"/landing", 
-				"/"
-		})
-public class LandingServlet extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/moviefilter" })
+public class MovieFilterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LandingServlet() {
+    public MovieFilterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,18 +30,31 @@ public class LandingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		MovieService service = new MovieService();
-		List<MovieModel> activeMovies = null;
+		String language = request.getParameter("langFilter");
+		String genre = request.getParameter("genreFilter");
+		String status = request.getParameter("status");
+		String search = request.getParameter("movieSearch");
+		
+		List<MovieModel> filteredMovies = null;
 		try {
-			activeMovies = service.getAllActiveMovies();
-			request.setAttribute("activeMovies",activeMovies);
+		if(!status.equals("all")) {
+			filteredMovies = service.getFilteredMovies(language, genre, status, search);
+		}else {
+			filteredMovies = service.getAllActiveMovies();
+		}
+		request.setAttribute("selectedLanguage",   language);
+        request.setAttribute("selectedGenre",  genre);
+        request.setAttribute("searchKeyword",  search);
+        request.setAttribute("selectedStatus", status != null ? status : "all");
+        request.setAttribute("filteredMovies",filteredMovies);
+			
 		} catch (Exception e) {
 			request.setAttribute("error", "Could not load movies Please try again later.");
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(request, response);
 	}
 
 	/**
