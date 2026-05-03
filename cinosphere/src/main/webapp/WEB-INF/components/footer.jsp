@@ -10,7 +10,7 @@
     <div class="footer_container">
         <div class="footer_content">
             <div class="footer_brand">
-                <img src="${pageContext.request.contextPath}/assets/images/image.png" alt="CinoSphere" class="footer_logo">
+                <img src="${pageContext.request.contextPath}/assets/logos/logo.png" alt="CinoSphere" class="footer_logo">
             </div>
             <div class="footer_navigation_group">
                 <h4 class="footer_heading">Legal</h4>

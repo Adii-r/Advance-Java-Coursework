@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CinoSphere</title>
+    <title>Home | CinoSphere</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
@@ -59,6 +59,143 @@
       <span class="row_label">Nearest 3 Locations</span>
     </div>
   </section>
+  
+  
+  <section class="movie_display_section">
+    <div class="movie_decorative_accent_line line_top"></div>
+    <div class="movie_main_content_container">
+        <div class="movie_section_header_container centered_layout">
+            <h2 class="section_display_title">On<em> Screen Now</em></h2>
+        </div>
+
+        <div class="movie_category_navigation_bar">
+            <div class="movie_category_tab_switcher">
+                <button class="movie_category_tab_button active_tab">
+                    <span class="movie_tab_icon_container">
+                        <img src="${pageContext.request.contextPath}/assets/icons/monitor.svg" alt="Now Showing Icon" />
+                    </span>
+                    Now Showing
+                </button>
+                <div class="movie_tab_vertical_divider"></div>
+                <button class="movie_category_tab_button">
+                    <span class="movie_tab_icon_container">
+                        <img src="${pageContext.request.contextPath}/assets/icons/clock.svg" alt="Coming Soon Icon" />
+                    </span>
+                    Coming Soon
+                </button>
+            </div>
+
+            <a href="${pageContext.request.contextPath}/movies" class="movie_navigation_link_all">
+                View All Films 
+                <span class="navigation_arrow_icon">
+                    <img src="${pageContext.request.contextPath}/assets/icons/rightarrow.svg" alt="Right Arrow" />
+                </span>
+            </a>
+        </div>
+
+        <div class="movie_cards_presentation_grid">
+            <div class="movie_feature_film_card">
+                <div class="movie_poster_visual_wrapper">
+                    <div class="movie_status_badge_group">
+                        <span class="movie_certification_badge">PG</span>
+                    </div>
+
+                    <img src="${pageContext.request.contextPath}/assets/posters/poster_1.jpeg" 
+                         alt="The Devil Wears Prada 2" class="movie_poster_image_element"/>
+                    <div class="movie_poster_gradient_overlay"></div>
+                </div>
+
+                <div class="movie_information_panel">
+                    <div class="movie_metadata_text_group">
+                        <h3 class="movie_title">The Devil Wears Prada 2</h3>
+                        <p class="movie_description">English | Comedy</p>
+                    </div>
+                    <div class="movie_action_button_bar">
+                        <button class="movie_booking_primary_button">Book Now</button>
+                        <div class="movie_quick_view_icon_wrapper">
+                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="movie_feature_film_card">
+                <div class="movie_poster_visual_wrapper">
+                    <div class="movie_status_badge_group">
+                        <span class="movie_certification_badge">PG</span>
+                    </div>
+
+                    <img src="${pageContext.request.contextPath}/assets/posters/poster_2.jpg" 
+                         alt="Michael" class="movie_poster_image_element"/>
+                    <div class="movie_poster_gradient_overlay"></div>
+                </div>
+
+                <div class="movie_information_panel">
+                    <div class="movie_metadata_text_group">
+                        <h3 class="movie_title">Michael</h3>
+                        <p class="movie_description">English | Biography</p>
+                    </div>
+                    <div class="movie_action_button_bar">
+                        <button class="movie_booking_primary_button">Book Now</button>
+                        <div class="movie_quick_view_icon_wrapper">
+                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="movie_feature_film_card">
+                <div class="movie_poster_visual_wrapper">
+                    <div class="movie_status_badge_group">
+                        <span class="movie_certification_badge">PG</span>
+                    </div>
+
+                    <img src="${pageContext.request.contextPath}/assets/posters/poster_3.jpg" 
+                         alt="Bhoot Bangla" class="movie_poster_image_element"/>
+                    <div class="movie_poster_gradient_overlay"></div>
+                </div>
+
+                <div class="movie_information_panel">
+                    <div class="movie_metadata_text_group">
+                        <h3 class="movie_title">Bhoot Bangla</h3>
+                        <p class="movie_description">Hindi | Horror</p>
+                    </div>
+                    <div class="movie_action_button_bar">
+                        <button class="movie_booking_primary_button">Book Now</button>
+                        <div class="movie_quick_view_icon_wrapper">
+                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="movie_feature_film_card">
+                <div class="movie_poster_visual_wrapper">
+                    <div class="movie_status_badge_group">
+                        <span class="movie_certification_badge">PG</span>
+                    </div>
+
+                    <img src="${pageContext.request.contextPath}/assets/posters/poster_4.jpg" 
+                         alt="Project Hail Mary" class="movie_poster_image_element"/>
+                    <div class="movie_poster_gradient_overlay"></div>
+                </div>
+
+                <div class="movie_information_panel">
+                    <div class="movie_metadata_text_group">
+                        <h3 class="movie_title">Project Hail Mary</h3>
+                        <p class="movie_description">English | Sci Fi</p>
+                    </div>
+                    <div class="movie_action_button_bar">
+                        <button class="movie_booking_primary_button">Book Now</button>
+                        <div class="movie_quick_view_icon_wrapper">
+                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                        </div>
+                    </div>
+                </div>
+            </div>   
+          </div>
+    </div>
+  </section>
    
   <section class="features_strip">
     <div class="strip_content">
@@ -105,7 +242,7 @@
       </div>
 
       <div class="details_visual">
-        <img src="${pageContext.request.contextPath}/assets/images/poster.jpg"
+        <img src="${pageContext.request.contextPath}/assets/posters/poster.jpg"
              alt="Civil War IMAX Experience"
              class="visual_screen_img">
         <div class="visual_screen_overlay"></div>
@@ -113,7 +250,35 @@
 
     </div>
   </section>
-
+  
+	<section class="newsletter_subscription_section" id="s-newsletter">
+	   <div class="newsletter_accent_line line_top"></div>
+	
+	   <div class="newsletter_content_container centered_layout">
+	       <div class="newsletter_column_registration">
+	           <h2 class="section_display_title">Behind the<em> Curtains</em></h2>
+	           <p class="newsletter_informative_text">
+	               Get exclusive early access to premieres, exclusive member offers, weekly film highlights and
+	               behind the scenes stories, as well as the latest editions from the world of entertainment.
+	           </p>
+	           
+	           <form action="subscribe" method="POST" class="newsletter_interaction_form">
+	               <div class="newsletter_input_field_wrapper">
+	                   <input type="email" name="email" class="newsletter_input_element" placeholder="aditya@gmail.com" required>
+	            
+	                   <span class="newsletter_input_icon_container icon_right"> 
+	                       <img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail Icon" />
+	                   </span>
+	               </div>
+	               <button type="submit" class="newsletter_submit_button">Subscribe</button>
+	           </form>
+	       </div>
+	   </div>
+	
+	   
+	   <div class="newsletter_accent_line line_bottom"></div>
+	</section>
+	 
 </main>
 
 <jsp:include page="WEB-INF/components/footer.jsp" />

@@ -10,7 +10,7 @@
   <nav class="navigation_container">
     
     <a href="${pageContext.request.contextPath}/home" class="navigation_brand">
-      <img src="${pageContext.request.contextPath}/assets/images/image.png" alt="Logo" class="navigation_logo"/>
+      <img src="${pageContext.request.contextPath}/assets/logos/logo.png" alt="Logo" class="navigation_logo"/>
     </a>
 
     <ul class="navigation_menu">
