@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false" %>
-
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,22 +32,21 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 	    </section>
 	    
 	    <section class="movie_filter_section">
+	    <form method="get" action="${pageContext.request.contextPath}/movies">
 		    <div class="movie_filter_container">
-		        
 		        <div class="movie_search_wrapper">
 		            <span class="movie_search_icon_container">
 		                <img src="${pageContext.request.contextPath}/assets/icons/search.svg" alt="Search" />
 		            </span>
-		            <input type="text" placeholder="Search movies, genres, languages..." id="movieSearch" class="movie_search_input">
+		            <input type="text" placeholder="Search movie names..." name="movieSearch" class="movie_search_input" value="${searchKeyword}">
 		        </div>
-		
 		        <div class="movie_filter_dropdown_group">
 		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="langFilter">
+		                <select class="movie_filter_select" name="langFilter">
 		                    <option value="">All Languages</option>
-		                    <option value="english">English</option>
-		                    <option value="hindi">Hindi</option>
-		                    <option value="nepali">Nepali</option>
+		                    <option value="english" ${selectedLanguage=="english"?"selected":""}>English</option>
+		                    <option value="hindi" ${selectedLanguage=="hindi"?"selected":""}>Hindi</option>
+		                    <option value="nepali" ${selectedLanguage=="nepali"?"selected":""}>Nepali</option>
 		                </select>
 		                <span class="movie_select_arrow">
 		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
@@ -55,240 +54,139 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            </div>
 		
 		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="genreFilter">
+		                <select class="movie_filter_select" name="genreFilter">
 		                    <option value="">All Genres</option>
-		                    <option value="action">Action</option>
-		                    <option value="drama">Drama</option>
-		                    <option value="comedy">Comedy</option>
-			                <option value="sci-fi">Sci-Fi</option>
-			                <option value="horror">Horror</option>
-			                <option value="biography">Biography</option>
+		                    <option value="action" ${selectedGenre=="action"?"selected":""}>Action</option>
+		                    <option value="drama" ${selectedGenre=="drama"?"selected":""}>Drama</option>
+		                    <option value="comedy" ${selectedGenre=="comedy"?"selected":""}>Comedy</option>
+			                <option value="sci-fi" ${selectedGenre=="sci-fi"?"selected":""}>Sci-Fi</option>
+			                <option value="horror" ${selectedGenre=="horror"?"selected":""}>Horror</option>
+			                <option value="biography" ${selectedGenre=="biography"?"selected":""}>Biography</option>
 		                </select>
 		                <span class="movie_select_arrow">
 		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
 		                </span>
 		            </div>
-		
 		            <div class="movie_select_wrapper">
-		                <select class="movie_filter_select" id="formatFilter">
-		                    <option value="">All Formats</option>
-		                    <option value="imax">IMAX</option>
-		                    <option value="standard">Standard</option>
-			                <option value="imax 3d">IMAX 3D</option>
+		                <select class="movie_filter_select" name="status">
+		                    <option value="all" ${selectedStatus=="all"|| empty selectedStatus?"selected":""}>All</option>
+		                    <option value="NOW_SHOWING" ${selectedStatus=="NOW_SHOWING"?"selected":""}>Now Showing</option>
+		                    <option value="COMING_SOON" ${selectedStatus=="COMING_SOON"?"selected":""}>Coming Soon</option>
 		                </select>
 		                <span class="movie_select_arrow">
 		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
 		                </span>
+		            </div>
+		             <div class="movie_select_wrapper">
+		            <button type="submit" class="movie_filter_pill">APPLY</button>
 		            </div>
 		        </div>
-		
+			<%-- 
 		        <div class="movie_status_pill_group">
-				    <input type="radio" name="status" id="all" class="pill_radio" checked>
+				    <input type="radio" name="status" id="all" value="all" class="pill_radio" ${selectedStatus=="all" || empty selectedStatus ?"checked":""}>
 				    <label for="all" class="movie_filter_pill">All</label>
 				
-				    <input type="radio" name="status" id="showing" class="pill_radio">
+				    <input type="radio" name="status" id="showing" value="NOW_SHOWING" class="pill_radio" ${selectedStatus=="NOW_SHOWING"?"checked":""}>
 				    <label for="showing" class="movie_filter_pill">Now Showing</label>
 				
-				    <input type="radio" name="status" id="soon" class="pill_radio">
+				    <input type="radio" name="status" id="soon" value="COMING_SOON"class="pill_radio" ${selectedStatus=="COMING_SOON"?"checked":""}>
 				    <label for="soon" class="movie_filter_pill">Coming Soon</label>
+				    <button type="submit" class="movie_filter_pill">APPLY</button>
 				</div>
-		
+			--%>
+				<c:if test="${not empty error}">
+            			<div class="error_banner">
+                		<p>${error}</p>
+            			</div>
+        		</c:if>
 		    </div>
+		    
+		  </form>
 		</section>
-		
+		<c:if test="${not empty filteredMovies}">
+
 		<section class="movie_section">
-			    
 			    <div class="movie_main_content_container">
 			        <div class="movie_cards_presentation_grid">
-			        
-			            <div class="movie_feature_film_card">
-			                <div class="movie_poster_visual_wrapper">
-			                    <div class="movie_status_badge_group">
-			                        <span class="movie_certification_badge">PG</span>
-			                    </div>
-			                    <img src="${pageContext.request.contextPath}/assets/posters/poster_1.jpeg" alt="Poster" class="movie_poster_image_element"/>
-			                </div>
-			                <div class="movie_information_panel">
-			                    <h3 class="movie_title">The Devil Wears Prada 2</h3>
-			                    <p class="movie_description">English | Comedy <span>2h 15m</span></p>
-			                    <div class="movie_action_button_bar">
-			                        <button class="movie_booking_primary_button">Book Now</button>
-			                        <div class="movie_quick_view_icon_wrapper">
-			                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			
-			           
-			            <div class="movie_feature_film_card">
-			                <div class="movie_poster_visual_wrapper">
-			                    <div class="movie_status_badge_group">
-			                        <span class="movie_certification_badge">PG</span>
-			                    </div>
-			                    <img src="${pageContext.request.contextPath}/assets/posters/poster_2.jpg" alt="Poster" class="movie_poster_image_element"/>
-			                </div>
-			                <div class="movie_information_panel">
-			                    <h3 class="movie_title">Michael</h3>
-			                    <p class="movie_description">English | Biography <span>2h 05m</span></p>
-			                    <div class="movie_action_button_bar">
-			                        <button class="movie_booking_primary_button">Book Now</button>
-			                        <div class="movie_quick_view_icon_wrapper">
-			                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			
-			            
-			            <div class="movie_feature_film_card">
-			                <div class="movie_poster_visual_wrapper">
-			                    <div class="movie_status_badge_group">
-			                        <span class="movie_certification_badge">PG</span>
-			                    </div>
-			                    <img src="${pageContext.request.contextPath}/assets/posters/poster_3.jpg" alt="Poster" class="movie_poster_image_element"/>
-			                </div>
-			                <div class="movie_information_panel">
-			                    <h3 class="movie_title">Bhoot Bangla</h3>
-			                    <p class="movie_description">Hindi | Horror <span>2h 40m</span></p>
-			                    <div class="movie_action_button_bar">
-			                        <button class="movie_booking_primary_button">Book Now</button>
-			                        <div class="movie_quick_view_icon_wrapper">
-			                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			
-			           
-			            <div class="movie_feature_film_card">
-			                <div class="movie_poster_visual_wrapper">
-			                    <div class="movie_status_badge_group">
-			                        <span class="movie_certification_badge">PG</span>
-			                    </div>
-			                    <img src="${pageContext.request.contextPath}/assets/posters/poster_4.jpg" alt="Poster" class="movie_poster_image_element"/>
-			                </div>
-			                <div class="movie_information_panel">
-			                    <h3 class="movie_title">Project Hail Mary</h3>
-			                    <p class="movie_description">English | Sci-Fi <span>2h 30m</span></p>
-			                    <div class="movie_action_button_bar">
-			                        <button class="movie_booking_primary_button">Book Now</button>
-			                        <div class="movie_quick_view_icon_wrapper">
-			                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			
-			        </div>
-			    </div>
-			</section>
-	    
-	    
-	    <section class="movie_section">
+			        <c:forEach var="movie" items="${filteredMovies}">
+			         <c:choose>
+			        <c:when test="${movie.movieStatus == 'NOW_SHOWING'}">
+                                    <div class="movie_feature_film_card">
+                                        <div class="movie_poster_visual_wrapper">
+                                            <div class="movie_status_badge_group">
+                                                <span class="movie_certification_badge">${movie.ageRating}</span>
+                                            </div>
+                                            <img src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg"
+                                                 alt="${movie.movieName} poster"
+                                                 class="movie_poster_image_element"/>
+                                        </div>
+                                        <div class="movie_information_panel">
+                                            <h3 class="movie_title">${movie.movieName}</h3>
+                                            <p class="movie_description">
+                                                ${movie.movieLanguage} | ${movie.genre}
+                                                <span>${movie.duration} min</span>
+                                            </p>
+                                            <div class="movie_action_button_bar">
+                                            <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/booking">
+                                                    Book Now
+                                                </button>
+                                                <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
+                                                <div class="movie_quick_view_icon_wrapper">
+                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+			            </c:when>	            
+		            <c:otherwise>
+		            					<div class="movie_feature_film_card coming_soon_card">
+                                        <div class="movie_release_header">
+                                            <span class="release_date_text">${movie.releaseDate}</span>
+                                        </div>
+                                        <div class="movie_poster_visual_wrapper">
+                                            <div class="movie_status_badge_group">
+                                                <span class="movie_certification_badge">${movie.ageRating}</span>
+                                            </div>
+                                            <img src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg"
+                                                 alt="${movie.movieName} poster"
+                                                 class="movie_poster_image_element"/>
+                                        </div>
+                                        <div class="movie_information_panel">
+                                            <h3 class="movie_title">${movie.movieName}</h3>
+                                            <p class="movie_description">
+                                                ${movie.movieLanguage} | ${movie.genre}
+                                                <span>${movie.duration} min</span>
+                                            </p>
+                                            <div class="movie_action_button_bar">
+                                                <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/notif>">
+                                                    Notify me
+                                                </button>
+                                               <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
+                                                <div class="movie_quick_view_icon_wrapper">
+                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+		                </c:otherwise>
+
 		
-		    <div class="movie_main_content_container">
-		        <div class="movie_cards_presentation_grid">
-		            
-		            <div class="movie_feature_film_card coming_soon_card">
-		                <div class="movie_release_header">
-		                    <span class="release_date_text">17 July 2026</span>
-		                </div>
-		
-		                <div class="movie_poster_visual_wrapper">
-		                   	<div class="movie_status_badge_group">
-		                        <span class="movie_certification_badge">PG</span>
-		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_5.jpg" alt="Poster" class="movie_poster_image_element"/>
-		                </div>
-		
-		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">The Odyssey</h3>
-		                    <p class="movie_description">English | Action <span>3h</span></p>
-		                    <div class="movie_action_button_bar">
-		                        <button class="movie_booking_primary_button">Notify Me</button>
-		                        <div class="movie_quick_view_icon_wrapper">
-		                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            
-		            <div class="movie_feature_film_card coming_soon_card">
-		                <div class="movie_release_header">
-		                    <span class="release_date_text">31 July 2026</span>
-		                </div>
-		
-		                <div class="movie_poster_visual_wrapper">
-		                   	<div class="movie_status_badge_group">
-		                        <span class="movie_certification_badge">PG</span>
-		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_6.jpg" alt="Poster" class="movie_poster_image_element"/>
-		                </div>
-		
-		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Spider Man: Brand New Day</h3>
-		                    <p class="movie_description">English | Action  <span>3h 10m</span></p>
-		                    <div class="movie_action_button_bar">
-		                        <button class="movie_booking_primary_button">Notify Me</button>
-		                        <div class="movie_quick_view_icon_wrapper">
-		                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            
-		            <div class="movie_feature_film_card coming_soon_card">
-		                <div class="movie_release_header">
-		                    <span class="release_date_text">21 Aug 2026</span>
-		                </div>
-		
-		                <div class="movie_poster_visual_wrapper">
-		                   	<div class="movie_status_badge_group">
-		                        <span class="movie_certification_badge">ADULT</span>
-		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_7.jpg" alt="Poster" class="movie_poster_image_element"/>
-		                </div>
-		
-		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Insidious: Out of the Further</h3>
-		                    <p class="movie_description">English | Horror  <span>2h 35m</span></p>
-		                    <div class="movie_action_button_bar">
-		                        <button class="movie_booking_primary_button">Notify Me</button>
-		                        <div class="movie_quick_view_icon_wrapper">
-		                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            
-		            <div class="movie_feature_film_card coming_soon_card">
-		                <div class="movie_release_header">
-		                    <span class="release_date_text">02 Oct 2026</span>
-		                </div>
-		
-		                <div class="movie_poster_visual_wrapper">
-		                   	<div class="movie_status_badge_group">
-		                        <span class="movie_certification_badge">PG</span>
-		                    </div>
-		                    <img src="${pageContext.request.contextPath}/assets/posters/poster_8.jpg" alt="Poster" class="movie_poster_image_element"/>
-		                </div>
-		
-		                <div class="movie_information_panel">
-		                    <h3 class="movie_title">Drishyam 3</h3>
-		                    <p class="movie_description">Hindi | Thriller <span>2h 55m</span></p>
-		                    <div class="movie_action_button_bar">
-		                        <button class="movie_booking_primary_button">Notify Me</button>
-		                        <div class="movie_quick_view_icon_wrapper">
-		                            <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		                
-		         </div>		
+		</c:choose>
+		</c:forEach>
+			</div>		
 		    </div>
-		</section>	    
+		</section>
+		</c:if>
+		<c:if test="${empty filteredMovies && empty error}">
+            <section class="movie_section">
+                <div class="movie_main_content_container">
+                    <p class="movie_description" style="color:red;font-size:1rem;">No movies match your current filters</p>
+                </div>
+            </section>
+        </c:if>    
 	</main>
     <jsp:include page="../components/footer.jsp" />
 
