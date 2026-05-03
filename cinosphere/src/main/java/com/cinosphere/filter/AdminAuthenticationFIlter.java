@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.cinosphere.model.CustomerModel;
+import com.cinosphere.model.UsersModel;
 import com.cinosphere.utils.SessionUtil;
 
 /**
@@ -56,8 +56,8 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "user") != null;
 		if (isLoggedIn) {
-			CustomerModel customer = (CustomerModel) SessionUtil.getAttribute(httpRequest, "user");
-			boolean isAdmin = customer.getCustomerRole().equals("ADMIN");
+			UsersModel customer = (UsersModel) SessionUtil.getAttribute(httpRequest, "user");
+			boolean isAdmin = customer.getUserRole().equals("ADMIN");
 			System.out.print(isAdmin);
 		 if(isAdmin) {
 		// pass the request along the filter chain

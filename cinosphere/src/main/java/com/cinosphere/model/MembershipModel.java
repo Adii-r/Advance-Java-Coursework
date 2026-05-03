@@ -4,7 +4,7 @@ package com.cinosphere.model;
  */
 public class MembershipModel {
     private int membershipId;
-    private int customerId;
+    private int userId;
     private String membershipType;
     private String membershipStatus;
     private int totalLoyaltyPoints;
@@ -27,15 +27,15 @@ public class MembershipModel {
      * 
      * @return int
      */
-    public int getCustomerId() { 
-    	return customerId; 
+    public int getUserId() { 
+    	return userId; 
     }
     /**
      * 
      * @param customerId
      */
-    public void setCustomerId(int customerId) {
-    	this.customerId = customerId; 
+    public void setUserId(int customerId) {
+    	this.userId = customerId; 
     }
     /**
      * 

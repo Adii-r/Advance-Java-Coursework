@@ -7,7 +7,7 @@ import java.time.LocalTime;
  */
 public class FeedbackModel {
 	private int feedbackId;
-    private int customerId;
+    private int userId;
     private int movieId;
     private int rating;
     private String description;
@@ -32,15 +32,15 @@ public class FeedbackModel {
      * 
      * @return int
      */
-    public int getCustomerId() { 
-    	return customerId; 
+    public int getUserId() { 
+    	return userId; 
     }
     /**
      * 
-     * @param customerId
+     * @param userId
      */
-    public void setCustomerId(int customerId) { 
-    	this.customerId = customerId; 
+    public void setUserId(int userId) { 
+    	this.userId = userId; 
     }
     /**
      * 

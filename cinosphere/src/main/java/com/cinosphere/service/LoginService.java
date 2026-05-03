@@ -1,6 +1,6 @@
 package com.cinosphere.service;
-import com.cinosphere.dao.CustomerDAO;
-import com.cinosphere.model.CustomerModel;
+import com.cinosphere.dao.UsersDAO;
+import com.cinosphere.model.UsersModel;
 import com.cinosphere.utils.PasswordUtil;
 import com.cinosphere.utils.SessionUtil;
 
@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class LoginService {
 
-	CustomerDAO customerdao = new CustomerDAO();
+	UsersDAO customerdao = new UsersDAO();
 	/**
 	 * Check if username exists and password matches.
 	 * if match found calls login method with customerData and request
@@ -28,7 +28,7 @@ public class LoginService {
             return "Password is required";
         }
         try {
-            CustomerModel customer = customerdao.findByUsername(username);
+            UsersModel customer = customerdao.findByUsername(username);
             if (customer == null) {
                 return "User doesn't exists";
             }
@@ -52,7 +52,7 @@ public class LoginService {
 	 * @param request
 	 * @return
 	 */
-	public String login(CustomerModel customerData,HttpServletRequest request){
+	public String login(UsersModel customerData,HttpServletRequest request){
 		try {  	
     	SessionUtil.setAttribute(request, "user", customerData, 3600);
     	return "Success";

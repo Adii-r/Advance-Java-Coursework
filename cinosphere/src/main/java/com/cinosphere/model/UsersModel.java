@@ -4,8 +4,8 @@ import java.time.LocalDate;
 /**
  * Model class representing database table Customer and its attributes
  */
-public class CustomerModel {
-	private int customerId;
+public class UsersModel {
+	private int userId;
     private String firstName;
     private String lastName;
     private String username;
@@ -15,20 +15,20 @@ public class CustomerModel {
     private String hashPassword;
     private LocalDate registrationDate;
     private boolean isActive;
-    private String customerRole;
+    private String userRole;
     /**
      * 
      * @return int
      */
-    public int getCustomerId() { 
-    	return customerId; 
+    public int getUserId() { 
+    	return userId; 
     }
     /**
      * 
      * @param customerId
      */
-    public void setCustomerId(int customerId) { 
-    	this.customerId = customerId; 
+    public void setUserId(int customerId) { 
+    	this.userId = customerId; 
     }
     /**
      * 
@@ -160,14 +160,14 @@ public class CustomerModel {
      * 
      * @return String
      */
-    public String getCustomerRole() { 
-    	return customerRole;
+    public String getUserRole() { 
+    	return userRole;
     }
     /**
      * 
      * @param customerRole
      */
-    public void setCustomerRole(String customerRole) { 
-    	this.customerRole = customerRole; 
+    public void setUserRole(String customerRole) { 
+    	this.userRole = customerRole; 
     }
 }

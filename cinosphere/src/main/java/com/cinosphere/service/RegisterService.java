@@ -3,16 +3,16 @@ package com.cinosphere.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.cinosphere.dao.CustomerDAO;
+import com.cinosphere.dao.UsersDAO;
 import com.cinosphere.dao.MembershipDAO;
-import com.cinosphere.model.CustomerModel;
+import com.cinosphere.model.UsersModel;
 import com.cinosphere.utils.PasswordUtil;
 
 /**
  *  service class to handle registration operation
  */
 public class RegisterService {
-	CustomerDAO  customerdao = new CustomerDAO();
+	UsersDAO  customerdao = new UsersDAO();
 	MembershipDAO membership = new MembershipDAO();
 	/**
 	 * register customer using customerDAO method
@@ -31,8 +31,8 @@ public class RegisterService {
 		if(!status) {
 			throw new Exception("Failed to insert customer");
 		}
-		CustomerModel customer = customerdao.findByUsername(username);
-		int customerid = customer.getCustomerId();
+		UsersModel customer = customerdao.findByUsername(username);
+		int customerid = customer.getUserId();
 		status = membership.insert(customerid,"Normal person" ,"Active", 0, 0);
 		if(!status) {
 			throw new Exception("Failed to create membership");
