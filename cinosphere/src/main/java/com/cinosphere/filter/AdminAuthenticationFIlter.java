@@ -1,3 +1,5 @@
+
+
 package com.cinosphere.filter;
 
 import jakarta.servlet.Filter;
@@ -23,6 +25,8 @@ import com.cinosphere.utils.SessionUtil;
  * 
  * @author Raunit Giri
  */
+
+/** */
 @WebFilter("/adminpanel")
 public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
        
@@ -52,6 +56,8 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
+		
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "user") != null;
@@ -70,6 +76,9 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 			httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 		}
+			
+
+		
 		
 	}
 
@@ -81,3 +90,4 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 	}
 
 }
+

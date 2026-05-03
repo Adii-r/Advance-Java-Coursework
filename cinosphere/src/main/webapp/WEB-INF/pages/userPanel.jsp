@@ -122,7 +122,7 @@
 						
 						<div class="booking-row">
 							<div class="booking-poster">
-							  <img src="${pageContext.request.contextPath}/assets/posters/poster_2.jpg"
+							  <img src="${pageContext.request.contextPath}/assets/posters/2.jpg"
 							       alt="Michael"
 							       class="booking-poster-image" />
 							</div>
@@ -140,7 +140,7 @@
 			      		
 			      		<div class="booking-row">
 							<div class="booking-poster">
-							  <img src="${pageContext.request.contextPath}/assets/posters/poster_3.jpg"
+							  <img src="${pageContext.request.contextPath}/assets/posters/3.jpg"
 							       alt="Michael"
 							       class="booking-poster-image" />
 							</div>
