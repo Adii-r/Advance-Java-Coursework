@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +56,10 @@
         </div>
 
         <div class="glass_panel_container">
-          <form action="RegisterServlet" method="POST">
+        <c:if test="${error != null}">
+		    	<p class="panel_subtitle" style="color:red;">${error}</p>
+		    	</c:if>
+          <form action="register" method="POST">
               <div class="form_row_double">
                 <div class="form_group_wrapper">
                   <label class="form_label_text">First Name</label>

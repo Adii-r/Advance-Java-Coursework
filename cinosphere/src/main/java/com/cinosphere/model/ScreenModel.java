@@ -12,7 +12,7 @@ public class ScreenModel {
     private double basePrice;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getScreenId() { 
     	return screenId; 
@@ -26,7 +26,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getTheatreId() { 
     	return theatreId; 
@@ -40,7 +40,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getScreenName() { 
     	return screenName; 
@@ -54,7 +54,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getScreenType() { 
     	return screenType; 
@@ -68,7 +68,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getScreenStatus() { 
     	return screenStatus; 
@@ -82,7 +82,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getTotalCapacity() { 
     	return totalCapacity; 
@@ -96,7 +96,7 @@ public class ScreenModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
     public double getBasePrice() { 
     	return basePrice; 

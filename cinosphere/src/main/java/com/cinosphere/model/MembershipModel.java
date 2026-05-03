@@ -11,7 +11,7 @@ public class MembershipModel {
     private double discountPercentage;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getMembershipId() { 
     	return membershipId; 
@@ -25,7 +25,7 @@ public class MembershipModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getCustomerId() { 
     	return customerId; 
@@ -39,7 +39,7 @@ public class MembershipModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getMembershipType() { 
     	return membershipType; 
@@ -53,7 +53,7 @@ public class MembershipModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getMembershipStatus() {
     	return membershipStatus; 
@@ -67,7 +67,7 @@ public class MembershipModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getTotalLoyaltyPoints() { 
     	return totalLoyaltyPoints; 
@@ -81,7 +81,7 @@ public class MembershipModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
     public double getDiscountPercentage() { 
     	return discountPercentage; 

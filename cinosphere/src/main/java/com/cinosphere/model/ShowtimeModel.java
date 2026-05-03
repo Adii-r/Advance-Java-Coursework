@@ -16,7 +16,7 @@ public class ShowtimeModel {
     private String showType;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getShowtimeId() { 
     	return showtimeId; 
@@ -30,7 +30,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getScreenId() { 
     	return screenId; 
@@ -44,7 +44,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getMovieId() {
     	return movieId; 
@@ -58,7 +58,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getShowDate() { 
     	return showDate; 
@@ -72,7 +72,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return LocalTime
      */
     public LocalTime getStartTime() {
     	return startTime; 
@@ -86,7 +86,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return LocalTime
      */
     public LocalTime getEndTime() { 
     	return endTime; 
@@ -100,7 +100,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getShowStatus() { 
     	
@@ -115,7 +115,7 @@ public class ShowtimeModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getShowType() {
     	return showType; 

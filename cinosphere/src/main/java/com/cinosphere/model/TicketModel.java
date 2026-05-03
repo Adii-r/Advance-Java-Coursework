@@ -16,7 +16,7 @@ public class TicketModel {
     
     /**
      * 
-     * @return
+     * @return int
      */
     public int getTicketId() {
     	return ticketId;
@@ -30,7 +30,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getBookingId() {
     	return bookingId; 
@@ -44,7 +44,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getShowtimeId() { 
     	return showtimeId; 
@@ -58,7 +58,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getSeatId() { 
     	return seatId; 
@@ -72,7 +72,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getTicketType() { 
     	return ticketType; 
@@ -86,7 +86,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getTicketStatus() { 
     	return ticketStatus;
@@ -100,7 +100,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return LocalDate
      */
     public LocalDate getIssueDate() { 
     	return issueDate; 
@@ -114,7 +114,7 @@ public class TicketModel {
     }
     /**
      * 
-     * @return
+     * @return double
      */
     public double getTicketPrice() { 
     	return ticketPrice; 

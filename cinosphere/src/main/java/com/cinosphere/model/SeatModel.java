@@ -11,7 +11,7 @@ public class SeatModel {
     private String seatStatus;
     /**
      * 
-     * @return
+     * @return int
      */
     public int getSeatId() { 
     	return seatId;
@@ -25,7 +25,7 @@ public class SeatModel {
     }
     /**
      * 
-     * @return
+     * @return int
      */
     public int getScreenId() { 
     	return screenId; 
@@ -39,7 +39,7 @@ public class SeatModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getSeatNumber() { 
     	return seatNumber; 
@@ -53,7 +53,7 @@ public class SeatModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getRowNumber() { 
     	return rowNumber; 
@@ -67,7 +67,7 @@ public class SeatModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getSeatType() { 
     	return seatType; 
@@ -81,7 +81,7 @@ public class SeatModel {
     }
     /**
      * 
-     * @return
+     * @return String
      */
     public String getSeatStatus() { 
     	return seatStatus; 
