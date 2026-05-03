@@ -213,18 +213,19 @@ public class MovieDAO {
 		
 		if (valueCheck(language)) { sql.append("AND movie_language = ? "); params.add(language); }
 		if (valueCheck(genre))    { sql.append("AND genre = ? ");          params.add(genre);    }
-		if (valueCheck(status))   { sql.append("AND movie_status = ? ");   params.add(status);   }
+		if (valueCheck(status) && !status.equals("all"))   { sql.append("AND movie_status = ? ");   params.add(status);   }
 		if (valueCheck(keyword))  { sql.append("AND movie_name LIKE ? ");  params.add("%" + keyword + "%"); }
 		
 		sql.append("ORDER BY release_date");
 		
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql.toString());
-		
-		for (int i = 1; i <= params.size(); i++) {
-			ps.setString(i, params.get(i));
+		System.out.print(sql);
+		System.out.print(params);
+		for (int i = 0; i < params.size(); i++) {
+			ps.setString(i+1, params.get(i));
 		}
-		
+	
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) movies.add(createMovieModel(rs));
@@ -253,6 +254,6 @@ public class MovieDAO {
 		return movie;
 	}
 	private boolean valueCheck(String value) {
-		return value!=null && value.trim().isEmpty();
+		return value!=null && !value.trim().isEmpty();
 	}
 }

@@ -12,16 +12,16 @@ import com.cinosphere.model.MovieModel;
 import com.cinosphere.service.MovieService;
 
 /**
- * Servlet implementation class MoviesServlet
+ * Servlet implementation class MovieFilterServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/movies" })
-public class MoviesServlet extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/moviefilter" })
+public class MovieFilterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoviesServlet() {
+    public MovieFilterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,6 +30,7 @@ public class MoviesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		MovieService service = new MovieService();
 		String language = request.getParameter("langFilter");
 		String genre = request.getParameter("genreFilter");
@@ -38,7 +39,11 @@ public class MoviesServlet extends HttpServlet {
 		
 		List<MovieModel> filteredMovies = null;
 		try {
-			filteredMovies = service.getFilteredMovies(language, genre, status, search);	
+		if(!status.equals("all")) {
+			filteredMovies = service.getFilteredMovies(language, genre, status, search);
+		}else {
+			filteredMovies = service.getAllActiveMovies();
+		}
 		request.setAttribute("selectedLanguage",   language);
         request.setAttribute("selectedGenre",  genre);
         request.setAttribute("searchKeyword",  search);
@@ -56,6 +61,8 @@ public class MoviesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
