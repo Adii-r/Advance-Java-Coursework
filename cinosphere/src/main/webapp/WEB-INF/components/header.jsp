@@ -20,7 +20,7 @@
       </li>
 
       <li>
-      	<a href="${pageContext.request.contextPath}/#" class="${activePage == 'schedules' ? 'active' : ''}">Schedules</a>
+      	<a href="${pageContext.request.contextPath}/schedules" class="${activePage == 'schedules' ? 'active' : ''}">Schedules</a>
       </li>
 
       <li>
@@ -28,7 +28,7 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'experience' ? 'active' : ''}">Experience</a>
+        <a href="${pageContext.request.contextPath}/experience" class="${activePage == 'experience' ? 'active' : ''}">Experience</a>
       </li>
     </ul>
   
