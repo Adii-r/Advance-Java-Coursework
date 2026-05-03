@@ -59,25 +59,14 @@ public class CustomerDAO {
 		CustomerModel customer = null;
         String sql = "SELECT * FROM customer WHERE username = ?";
         Connection con = DBconfig.getConnection();
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, username);
-        ResultSet rs = pst.executeQuery();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
                 if(rs.next()) {
-                	customer = new CustomerModel();
-                	customer.setCustomerId(rs.getInt("customer_id"));
-                	customer.setFirstName(rs.getString("first_name"));
-                	customer.setLastName(rs.getString("last_name"));
-                	customer.setUsername(rs.getString("username"));
-                	customer.setEmail(rs.getString("email"));
-                	customer.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
-                	customer.setGender(rs.getString("gender"));
-                	customer.setHashPassword(rs.getString("hash_password"));
-                	customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
-                	customer.setisActive(rs.getBoolean("is_active"));
-                	customer.setCustomerRole(rs.getString("customer_role"));
+                	customer = createCustomerModel(rs);
                 }
             rs.close();
-            pst.close();
+            ps.close();
             con.close();
             return customer;
         }
@@ -91,61 +80,76 @@ public class CustomerDAO {
 		CustomerModel customer = null;
         String sql = "SELECT * FROM customer WHERE email = ?";
         Connection con = DBconfig.getConnection();
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, email);
-        ResultSet rs = pst.executeQuery();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
                 if(rs.next()) {
-                	customer = new CustomerModel();
-                	customer.setCustomerId(rs.getInt("customer_id"));
-                	customer.setFirstName(rs.getString("first_name"));
-                	customer.setLastName(rs.getString("last_name"));
-                	customer.setUsername(rs.getString("username"));
-                	customer.setEmail(rs.getString("email"));
-                	customer.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
-                	customer.setGender(rs.getString("gender"));
-                	customer.setHashPassword(rs.getString("hash_password"));
-                	customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
-                	customer.setisActive(rs.getBoolean("is_active"));
-                	customer.setCustomerRole(rs.getString("customer_role"));
+                	customer = createCustomerModel(rs);
                 }
             rs.close();
-            pst.close();
+            ps.close();
             con.close();
             return customer;
         }
 
-/**
- * Create list of all customers
- * @return list object of customer
- * @throws Exception
- */
-public List<CustomerModel> getAllCustomer() throws Exception {
-    List<CustomerModel> customers = new ArrayList<>();
-    Connection con = DBconfig.getConnection();
-    
-    String sql = "SELECT * FROM customer";
-    PreparedStatement pst = con.prepareStatement(sql);
-    ResultSet rs = pst.executeQuery();
-
-    while (rs.next()) {
-        CustomerModel customer = new CustomerModel();
-        customer.setCustomerId(rs.getInt("customer_id"));
-    	customer.setFirstName(rs.getString("first_name"));
-    	customer.setLastName(rs.getString("last_name"));
-    	customer.setUsername(rs.getString("username"));
-    	customer.setEmail(rs.getString("email"));
-    	customer.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
-    	customer.setGender(rs.getString("gender"));
-    	customer.setHashPassword(rs.getString("hash_password"));
-    	customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
-    	customer.setisActive(rs.getBoolean("is_active"));
-    	customer.setCustomerRole(rs.getString("customer_role"));
-        customers.add(customer);
-    }
-    
-    rs.close();
-    pst.close();
-    con.close();
-    return customers;
-}
+	/**
+	 * Create list of all customers
+	 * @return list object of customer
+	 * @throws Exception
+	 */
+	public List<CustomerModel> getAllCustomer() throws Exception {
+	    List<CustomerModel> customers = new ArrayList<>();
+	    Connection con = DBconfig.getConnection();
+	    
+	    String sql = "SELECT * FROM customer";
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ResultSet rs = ps.executeQuery();
+	
+	    while (rs.next()) {
+	        customers.add(createCustomerModel(rs));
+	    }
+	    
+	    rs.close();
+	    ps.close();
+	    con.close();
+	    return customers;
+	}
+	/**
+	 * Soft delete customer record
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean deleteCustomer(String username) throws Exception{
+        String sql = "UPDATE customer SET is_active = ? WHERE username = ? ";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setBoolean(1,false);
+        ps.setString(2, username);
+        
+        return ps.executeUpdate() > 0;
+	}
+	
+	
+	/**
+	 * Helper method to create Customer Object
+	 * @param rs
+	 * @return
+	 * @throws SQLException
+	 */
+	public CustomerModel createCustomerModel(ResultSet rs) throws SQLException {
+		CustomerModel customer = new CustomerModel();
+		customer.setCustomerId(rs.getInt("customer_id"));
+		customer.setFirstName(rs.getString("first_name"));
+		customer.setLastName(rs.getString("last_name"));
+		customer.setUsername(rs.getString("username"));
+		customer.setEmail(rs.getString("email"));
+		customer.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
+		customer.setGender(rs.getString("gender"));
+		customer.setHashPassword(rs.getString("hash_password"));
+		customer.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
+		customer.setisActive(rs.getBoolean("is_active"));
+		customer.setCustomerRole(rs.getString("customer_role"));
+		return customer;
+	}
 }

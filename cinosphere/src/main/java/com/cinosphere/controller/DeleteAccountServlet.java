@@ -7,17 +7,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.cinosphere.model.CustomerModel;
+import com.cinosphere.service.DeleteAccountService;
+import com.cinosphere.utils.SessionUtil;
+
 /**
- * Servlet implementation class UpdateProfileServlet
+ * Servlet implementation class DeleteAccountServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/updateprofile" })
-public class UpdateProfileServlet extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/deleteaccount" })
+public class DeleteAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateProfileServlet() {
+    public DeleteAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +31,15 @@ public class UpdateProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/updateProfile.jsp").forward(request, response);
-			}
+		DeleteAccountService service = new DeleteAccountService();
+		CustomerModel customer = (CustomerModel) SessionUtil.getAttribute(request, "user");
+		try {
+			service.DeleteAccount(customer.getUsername());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect(request.getContextPath() + "/");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -374,7 +374,9 @@
                 <div class="danger-action-label">Delete Account</div>
                 <div class="danger-action-desc">This will permanently delete all your data, bookings, and accumulated Sphere points. This cannot be undone.</div>
               </div>
+              <a href="${pageContext.request.contextPath}/deleteaccount">
               <button class="btn-red" style="padding:9px 16px;font-size:10px;">Delete Account</button>
+			</a>            
             </div>
           </div>
         </div>
