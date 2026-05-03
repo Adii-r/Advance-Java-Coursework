@@ -286,9 +286,9 @@
 
     <footer class="sidebar__footer">
       <div class="user-mini">
-        <div class="user-avatar">PS</div>
+        <div class="user-avatar">AR</div>
         <div>
-          <div class="user-mini__name">Priya Sharma</div>
+          <div class="user-mini__name">Aditya Raut</div>
           <div class="user-mini__tier">Sphere Plus</div>
         </div>
       </div>
@@ -324,8 +324,8 @@
           <input type="file" id="avatarInput" accept="image/*" style="display:none;" onchange="previewAvatar(this)">
         </div>
         <div class="profile-header-info">
-          <div class="profile-header-name" id="headerName">Priya Sharma</div>
-          <div class="profile-header-email" id="headerEmail">priya.sharma@email.com</div>
+          <div class="profile-header-name" id="headerName">Aditya Raut</div>
+          <div class="profile-header-email" id="headerEmail">aditya.raut@email.com</div>
           <div class="profile-header-badges">
             <span class="ph-badge ph-badge--tier">Sphere Plus</span>
             <span class="ph-badge ph-badge--joined">Member since Jan 2026</span>

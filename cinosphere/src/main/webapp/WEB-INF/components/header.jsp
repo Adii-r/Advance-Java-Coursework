@@ -16,7 +16,7 @@
 
     <ul class="navigation_menu">
       <li>
-        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'movies' ? 'active' : ''}">Movies</a>
+        <a href="${pageContext.request.contextPath}/movies" class="${activePage == 'movies' ? 'active' : ''}">Movies</a>
       </li>
 
       <li>
