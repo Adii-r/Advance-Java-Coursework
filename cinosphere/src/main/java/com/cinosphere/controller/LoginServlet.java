@@ -6,8 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
+import com.cinosphere.dao.UsersDAO;
+import com.cinosphere.model.UsersModel;
 import com.cinosphere.service.LoginService;
+import com.cinosphere.utils.SessionUtil;
 
 
 
@@ -51,7 +55,18 @@ public class LoginServlet extends HttpServlet {
         LoginService service= new LoginService();
         String status = service.authenticate(username, password,request); // logs user if credentials match and creates session
         if ("Success".equals(status)) {
-        	response.sendRedirect(request.getContextPath() + "/userpanel");
+        	UsersDAO userdao = new UsersDAO();
+        	UsersModel user=null;
+			try {
+				user = userdao.findByUsername(username);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+        	if(user!=null && user.getUserRole().equals("ADMIN")) {
+        		response.sendRedirect(request.getContextPath() + "/admin");
+        	}else {
+        		response.sendRedirect(request.getContextPath() + "/profile");
+        	}
         	
         }else {
         	//forwarding error message

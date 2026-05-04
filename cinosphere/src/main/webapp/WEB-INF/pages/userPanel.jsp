@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,12 +47,12 @@
 				    
 				    
 				    <div class="sidebar_user_profile">
-				        <div class="user_avatar_circle">
-				        	<span>AR</span> 
+				        <div class="user_avatar_circle" style="overflow: hidden;">
+				        	<img id="imagePreview" style="width: 100%;height: 100%;object-fit: cover;display: block;" src="${pageContext.request.contextPath}/getimage?name=${user.userId}" alt="Preview"> 
 				        </div>
 				        <div class="user_info_stack">
-				            <span class="user_name">Aditya Raut</span>
-				            <span class="membership_tier">Sphere Plus</span>
+				            <span class="user_name">${user.firstName}</span>
+				            <span class="membership_tier">${membership.membershipType}</span>
 				        </div>
 				    </div>			 
 				</div>
@@ -66,9 +67,9 @@
 	            <div class="hero_content_inner">
 	                <div class="hero_flex_layout">
 	                    <div class="greeting_text_block">
-	                        <h2 class="greeting_primary">Welcome back, <em>Aditya</em></h2>
+	                        <h2 class="greeting_primary">Welcome back, <em>${user.firstName}</em></h2>
 	                        <p class="greeting_secondary">
-	                            3 May 2026, Sunday
+	                           <fmt:formatDate value="<%= new java.util.Date() %>" pattern="d MMM yyyy, EEEE" />
 	                        </p>
 	                    </div>
 	
@@ -160,9 +161,9 @@
 			      
 			      <div class="membership-column">
 			      	<div class="membership-card">
-			      		<span class="membership-tier">Sphere Plus</span>
-			      		<div class="membership-name">Aditya Raut</div>
-			      		<div class="membership-points-value">1,240</div>
+			      		<span class="membership-tier">${membership.membershipType}</span>
+			      		<div class="membership-name">${user.firstName} ${user.lastName}</div>
+			      		<div class="membership-points-value">${membership.totalLoyaltyPoints}</div>
 			      		<span class="membership-points-label">Points Available</span>
 			      		
 			      		<div class="membership-progress">

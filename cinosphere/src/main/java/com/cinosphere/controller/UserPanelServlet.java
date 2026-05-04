@@ -7,10 +7,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+
+import com.cinosphere.model.UsersModel;
+import com.cinosphere.service.BookingService;
+import com.cinosphere.service.MembershipService;
+import com.cinosphere.utils.SessionUtil;
+
 /**
  * Servlet implementation class UserPanelServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/userpanel" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/profile" })
 public class UserPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,6 +34,11 @@ public class UserPanelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
+		MembershipService membershipService = new MembershipService();
+		BookingService bookingService = new BookingService();
+		membershipService.setMembershipToSession(request, user.getUserId());
+		bookingService.setBookingsToSession(request, user.getUserId(), "confirmed");
 		request.getRequestDispatcher("/WEB-INF/pages/userPanel.jsp").forward(request, response);
 	}
 

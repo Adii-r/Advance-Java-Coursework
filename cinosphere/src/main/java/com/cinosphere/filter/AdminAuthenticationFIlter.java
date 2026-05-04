@@ -27,7 +27,7 @@ import com.cinosphere.utils.SessionUtil;
  */
 
 /** */
-@WebFilter("/adminpanel")
+@WebFilter("/admin")
 public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
        
     /**

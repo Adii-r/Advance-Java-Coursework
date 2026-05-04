@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +45,10 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 	                    </div>
 	                    <div class="admin_profile_details">
 	                        <span class="admin_profile_name">
-	                            Raunit Giri
+	                            ${user.firstName} ${user.lastName}
 	                        </span>
 	                        <span class="admin_profile_role">
-	                            Administrator
+	                            ${user.userRole}
 	                        </span>
 	                    </div>
 	                </div>
@@ -63,9 +64,10 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			    <div class="admin_dashboard_hero_content">
 			        <div class="admin_dashboard_hero_layout">
 			            <div class="admin_dashboard_heading_block">
-			                <h1 class="admin_dashboard_heading_title">Welcome,<em>Admin</em></h1>
+			                <h1 class="admin_dashboard_heading_title">Welcome,<em>${user.firstName}</em></h1>
 			                <p class="admin_dashboard_heading_subtitle">
-			                    3 May 2026, Sunday
+			                    <fmt:formatDate value="<%= new java.util.Date() %>" pattern="d MMM yyyy, EEEE" />
+	                     
 			                </p>
 			            </div>
 			            <div class="admin_dashboard_action_group">

@@ -92,7 +92,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
-    padding: 0 5% 5% 5%;
+    padding: 0 5% 1.5% 5%;
 }
 
 .update_profile_content_wrapper {
@@ -133,6 +133,7 @@
     height: 88px;
     border-radius: 50%;
     display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
@@ -143,6 +144,12 @@
     background: linear-gradient( 135deg, var(--crimson), var(--crimson-bright));
     border: 3px solid rgba(201,168,76,0.30);
     box-shadow: 0 0 24px rgba(201,168,76,0.12);
+}
+.update_profile_avatar_circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .update_profile_avatar_edit_btn {

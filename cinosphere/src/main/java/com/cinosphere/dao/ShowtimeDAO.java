@@ -91,6 +91,30 @@ public class ShowtimeDAO {
 		ps.close();
 		return shows;
 	}
+	
+	/**
+	 * 
+	 * @param screenId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShowtimeModel findById(int showtimeId) throws Exception{
+		ShowtimeModel show = null;
+		Connection con = DBconfig.getConnection();
+		
+		String sql = "SELECT * FROM showtime WHERE showtime_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, showtimeId);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			show = createShowtimeModel(rs);
+		}
+		rs.close();
+		ps.close();
+		return show;
+	}
+	
 	/**
 	 * Helper to create showtime object
 	 * @param rs
@@ -109,5 +133,6 @@ public class ShowtimeDAO {
 		show.setShowType(rs.getString("show_type"));
 		return show;
 	}
+
 	
 }

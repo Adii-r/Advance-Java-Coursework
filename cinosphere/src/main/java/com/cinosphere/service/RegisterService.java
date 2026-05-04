@@ -33,7 +33,7 @@ public class RegisterService {
 		}
 		UsersModel customer = customerdao.findByUsername(username);
 		int customerid = customer.getUserId();
-		status = membership.insert(customerid,"Normal person" ,"Active", 0, 0);
+		status = membership.insert(customerid,"STARTER" ,"Active", 0, 0);
 		if(!status) {
 			throw new Exception("Failed to create membership");
 		}

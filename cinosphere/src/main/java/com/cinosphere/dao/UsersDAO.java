@@ -139,7 +139,7 @@ public class UsersDAO {
         String sql = "UPDATE users SET is_active = ? WHERE user_id = ? ";
         Connection con = DBconfig.getConnection();
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setBoolean(1,false);
+        ps.setBoolean(1,true);
         ps.setInt(2,userId);
         
         return ps.executeUpdate() > 0;
@@ -156,18 +156,38 @@ public class UsersDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean UpdateUser(int userId,String firstName, String lastName, String username, String email,String hashPassword) throws Exception {
+	public boolean UpdateUser(int userId,String firstName, String lastName, String email,LocalDate dateOfBirth) throws Exception {
 		
-		String sql = "UPDATE users SET first_name =?, last_name=?, username=?, email=?, hash_password=? WHERE userId = ? ";
+		String sql = "UPDATE users SET first_name =?, last_name=?, email=?, date_of_birth=? WHERE user_id = ? ";
 
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString (1,  firstName);
 		ps.setString (2,  lastName);
-		ps.setString (3,  username);
-		ps.setString (4,  email);
-		ps.setString (5,  hashPassword);
-		ps.setInt(6, userId);
+		ps.setString (3,  email);
+		ps.setDate (4,  Date.valueOf(dateOfBirth));
+		ps.setInt(5, userId);
+		return ps.executeUpdate() > 0;
+	}
+	/**
+	 * Update password
+	 * @param userId
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param email
+	 * @param hashPassword
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean UpdateUserPassword(int userId,String password) throws Exception {
+		
+		String sql = "UPDATE users SET hash_password =? WHERE user_id = ? ";
+
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString (1,  password);
+		ps.setInt(2, userId);
 		return ps.executeUpdate() > 0;
 	}
 	
