@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2026 at 05:32 AM
+-- Generation Time: May 04, 2026 at 01:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,6 +37,22 @@ CREATE TABLE `booking` (
   `booking_channel` varchar(30) NOT NULL,
   `loyalty_points_earned` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`booking_id`, `user_id`, `booking_date`, `booking_time`, `booking_status`, `total_amount`, `booking_channel`, `loyalty_points_earned`) VALUES
+(1, 2, '2025-01-10', '10:30:00', 'confirmed', 850.00, 'online', 85),
+(2, 2, '2025-01-18', '14:15:00', 'pending', 1200.00, 'online', 120),
+(3, 2, '2025-02-05', '09:00:00', 'archive', 500.00, 'counter', 0),
+(4, 2, '2025-02-20', '19:45:00', 'confirmed', 650.00, 'online', 65),
+(5, 2, '2025-03-03', '11:00:00', 'confirmed', 1500.00, 'online', 150),
+(6, 3, '2025-01-12', '16:00:00', 'confirmed', 700.00, 'counter', 70),
+(7, 3, '2025-01-25', '20:30:00', 'confirmed', 950.00, 'online', 95),
+(8, 3, '2025-02-14', '13:00:00', 'pending', 600.00, 'online', 0),
+(9, 3, '2025-03-01', '18:00:00', 'confirmed', 1100.00, 'counter', 110),
+(10, 3, '2025-03-10', '21:00:00', 'cancelled', 800.00, 'online', 0);
 
 -- --------------------------------------------------------
 
@@ -75,8 +91,9 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`membership_id`, `user_id`, `membership_type`, `membership_status`, `total_loyalty_points`, `discount_percentage`) VALUES
-(1, 2, 'Normal person', 'Active', 10000, 0.00),
-(2, 3, 'Normal person', 'Active', 100, 0.00);
+(1, 2, 'Elite', 'Active', 10000, 0.00),
+(2, 3, 'Elite', 'Active', 100, 0.00),
+(3, 4, 'STARTER', 'Active', 0, 0.00);
 
 -- --------------------------------------------------------
 
@@ -233,8 +250,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `username`, `email`, `date_of_birth`, `gender`, `hash_password`, `registration_date`, `is_active`, `user_role`) VALUES
-(2, 'user', 'user', 'user', 'user@gmail.com', '2026-05-02', 'other', '$2a$10$OmWUL.hm5LSLWCzkqq/l.e5PTpWIePpdt179gyxsXFQPcqHgJ43ci', '2026-05-03', 1, 'CUSTOMER'),
-(3, 'admin', 'admin', 'admin', 'admin@gmail.com', '2026-05-02', 'other', '$2a$10$jQL7T18UfniO7u.ww89tveroj6aErLvP.6Gd.lYIQe5C7Enye8hN6', '2026-05-03', 1, 'ADMIN');
+(2, 'Aditya', 'Raut', 'user', 'user@gmail.com', '2026-05-02', 'other', '$2a$10$FN0uBcB3jJpeDOoMKPjrsOu9G/0qsQb4pDyjvtUTx5ldJRNRV7Km2', '2026-05-03', 0, 'CUSTOMER'),
+(3, 'Raunit', 'Giri', 'admin', 'admin@gmail.com', '2026-05-02', 'other', '$2a$10$jQL7T18UfniO7u.ww89tveroj6aErLvP.6Gd.lYIQe5C7Enye8hN6', '2026-05-03', 1, 'ADMIN'),
+(4, 'Raunit', 'Giri', 'RAWunit', 'raunit06@gmail.com', '2026-04-27', 'male', '$2a$10$0o00Bpdaq9L5o4xn49MpaeNSnXgLgNWrhqgs0fpVFexHSsTKzW5Ea', '2026-05-04', 1, 'CUSTOMER');
 
 --
 -- Indexes for dumped tables
@@ -329,7 +347,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -341,7 +359,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `membership`
 --
 ALTER TABLE `membership`
-  MODIFY `membership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `membership_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `movie`
@@ -389,7 +407,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
