@@ -41,7 +41,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 	            <div class="admin_sidebar_footer">
 	                <div class="admin_profile_card">
 	                    <div class="admin_profile_avatar">
-	                        <span>RG</span>
+	                        <span>A</span>
 	                    </div>
 	                    <div class="admin_profile_details">
 	                        <span class="admin_profile_name">
