@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2026 at 01:59 PM
+-- Generation Time: May 04, 2026 at 05:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,8 +75,8 @@ CREATE TABLE `membership` (
 --
 
 INSERT INTO `membership` (`membership_id`, `user_id`, `membership_type`, `membership_status`, `total_loyalty_points`, `discount_percentage`) VALUES
-(1, 2, 'Normal person', 'Active', 0, 0.00),
-(2, 3, 'Normal person', 'Active', 0, 0.00);
+(1, 2, 'Normal person', 'Active', 10000, 0.00),
+(2, 3, 'Normal person', 'Active', 100, 0.00);
 
 -- --------------------------------------------------------
 
@@ -96,6 +96,20 @@ CREATE TABLE `movie` (
   `movie_status` varchar(20) NOT NULL,
   `age_rating` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `movie`
+--
+
+INSERT INTO `movie` (`movie_id`, `movie_name`, `duration`, `director`, `genre`, `movie_language`, `description`, `release_date`, `movie_status`, `age_rating`) VALUES
+(1, 'The Devil Wears Prada 2', 135, 'TBD', 'Comedy', 'English', 'Sequel to the iconic fashion drama.', '2026-05-01', 'NOW_SHOWING', 'PG'),
+(2, 'Michael', 125, 'TBD', 'Biography', 'English', 'A biographical film based on a legendary figure.', '2026-05-01', 'NOW_SHOWING', 'PG'),
+(3, 'Bhoot Bangla', 160, 'TBD', 'Horror', 'Hindi', 'A horror story set in a haunted mansion.', '2026-05-01', 'NOW_SHOWING', 'PG'),
+(4, 'Project Hail Mary', 150, 'TBD', 'Sci-Fi', 'English', 'A lone astronaut attempts to save humanity.', '2026-05-01', 'NOW_SHOWING', 'PG'),
+(5, 'The Odyssey', 180, 'TBD', 'Action', 'English', 'An epic journey inspired by the Greek classic.', '2026-07-17', 'COMING_SOON', 'PG'),
+(6, 'Spider Man: Brand New Day', 190, 'TBD', 'Action', 'English', 'A new chapter in Spider-Man’s story.', '2026-07-31', 'COMING_SOON', 'PG'),
+(7, 'Insidious: Out of the Further', 155, 'TBD', 'Horror', 'English', 'A terrifying return to the Further.', '2026-08-21', 'COMING_SOON', 'ADULT'),
+(8, 'Drishyam 3', 175, 'TBD', 'Thriller', 'Hindi', 'Continuation of the gripping Drishyam saga.', '2026-10-02', 'COMING_SOON', 'PG');
 
 -- --------------------------------------------------------
 
@@ -333,7 +347,7 @@ ALTER TABLE `membership`
 -- AUTO_INCREMENT for table `movie`
 --
 ALTER TABLE `movie`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `payment`
