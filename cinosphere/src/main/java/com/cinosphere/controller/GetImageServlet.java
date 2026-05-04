@@ -5,58 +5,52 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/**
- * Servlet implementation class GetImageServlet
- */
 @WebServlet(asyncSupported = true, urlPatterns = { "/getimage" })
 public class GetImageServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR =  System.getProperty("user.home") + File.separator +"assets/profile";
+    private static final long serialVersionUID = 1L;
+    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "assets/profile";
+    private static final String DEFAULT_IMAGE_NAME = "2.png";
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = String.valueOf(request.getParameter("name")); 
-		if (name == null || name.trim().isEmpty()) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        if (name == null || name.trim().isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
             return;
         }
-		File folder = new File(UPLOAD_DIR);
-        if (!folder.exists() || !folder.isDirectory()) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Storage directory not found");
-            return;
+
+        File folder = new File(UPLOAD_DIR);
+        File imageFile = null;
+
+        if (folder.exists() && folder.isDirectory()) {
+            File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(name + "."));
+            if (matches != null && matches.length > 0) {
+                imageFile = matches[0];
+            }
         }
-        File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(name + "."));
-        if (matches != null && matches.length > 0) {
-            File imageFile = matches[0]; // The unique image for this user
-		
-		            // 3. Determine MIME type and Set Headers
+
+        // Fall back to default image if not found
+        if (imageFile == null || !imageFile.exists()) {
+            imageFile = new File(UPLOAD_DIR, DEFAULT_IMAGE_NAME);
+        }
+
+        // Serve whatever file we resolved
+        if (imageFile.exists()) {
             String contentType = getServletContext().getMimeType(imageFile.getName());
-            if (contentType == null) contentType = "image/jpeg"; // Fallback
-            
+            if (contentType == null) contentType = "image/png";
+
             response.setContentType(contentType);
             response.setContentLength((int) imageFile.length());
-
-            // 4. Stream the data
             Files.copy(imageFile.toPath(), response.getOutputStream());
         } else {
-            // If no file matches the unique name, return 404
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found" + name);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found and no default available");
         }
-	}
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
