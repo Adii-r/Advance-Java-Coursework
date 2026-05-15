@@ -8,7 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import com.cinosphere.dao.MembershipDAO;
+import com.cinosphere.model.MembershipModel;
 import com.cinosphere.model.UsersModel;
+import com.cinosphere.service.MembershipService;
 import com.cinosphere.service.UserService;
 import com.cinosphere.utils.SessionUtil;
 
@@ -34,6 +37,8 @@ public class AdminPanelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
 		UserService usersService = new UserService();
 		 List<UsersModel> users;
 		 try {
@@ -45,6 +50,20 @@ public class AdminPanelServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
 			e.printStackTrace();
 		}
+		 
+		MembershipService membershipService = new MembershipService();
+		
+		try {
+			users = usersService.getAllUsers();
+			List<MembershipModel> memberships = membershipService.getMemberships(users);
+			SessionUtil.setAttribute(request, "membershipList", memberships, 3600);
+			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
+			e.printStackTrace();
+		}
+		
+		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
