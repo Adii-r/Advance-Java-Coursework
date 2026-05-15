@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         	UsersModel user=null;
 			try {
 				user = userdao.findByUsername(username);
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
         	if(user!=null && user.getUserRole().equals("ADMIN")) {

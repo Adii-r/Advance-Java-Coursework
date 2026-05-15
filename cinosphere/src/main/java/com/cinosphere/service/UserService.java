@@ -17,5 +17,12 @@ public class UserService {
 	public boolean activateUser(int userId) throws Exception {
         return usersDAO.ActivateUser(userId);
     }
+	public List<UsersModel> getUsersByStatus(boolean isActive) throws Exception {
+		
+		return usersDAO.getUserByStatus(isActive);
+	}
+	public List<UsersModel> findByUsernames(String searchUser) throws Exception {
+		return usersDAO.findByUsernames(searchUser);
+	}
  
 }

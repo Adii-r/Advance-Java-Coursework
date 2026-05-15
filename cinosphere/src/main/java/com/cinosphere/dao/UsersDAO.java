@@ -55,7 +55,7 @@ public class UsersDAO {
 	 * @return user object
 	 * @throws SQLException
 	 */
-	public UsersModel findByUsername(String username) throws SQLException {
+	public UsersModel findByUsername(String username) throws Exception {
 		UsersModel user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
         Connection con = DBconfig.getConnection();
@@ -70,6 +70,25 @@ public class UsersDAO {
             con.close();
             return user;
         }
+	
+	
+	public List<UsersModel> findByUsernames(String username) throws Exception {
+		List<UsersModel> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE username LIKE ?";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1,"%"+ username+"%");
+        ResultSet rs = ps.executeQuery();
+                while(rs.next()) {
+                	users.add(createUserModel(rs));
+                }
+            rs.close();
+            ps.close();
+            con.close();
+            return users;
+	}
+
+	
 	/**
 	 * Find a user by their email
 	 * @param email
@@ -98,11 +117,31 @@ public class UsersDAO {
 	 * @throws Exception
 	 */
 	public List<UsersModel> getAllUser() throws Exception {
+		
 	    List<UsersModel> users = new ArrayList<>();
 	    Connection con = DBconfig.getConnection();
 	    
 	    String sql = "SELECT * FROM users";
 	    PreparedStatement ps = con.prepareStatement(sql);
+	    ResultSet rs = ps.executeQuery();
+	
+	    while (rs.next()) {
+	        users.add(createUserModel(rs));
+	    }
+	    
+	    rs.close();
+	    ps.close();
+	    con.close();
+	    return users;
+	}
+	
+	public List<UsersModel> getUserByStatus(boolean isActive) throws Exception{
+		List<UsersModel> users = new ArrayList<>();
+	    Connection con = DBconfig.getConnection();
+	    
+	    String sql = "SELECT * FROM users WHERE is_active=?";
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setBoolean(1, isActive);
 	    ResultSet rs = ps.executeQuery();
 	
 	    while (rs.next()) {
@@ -212,4 +251,5 @@ public class UsersDAO {
 		user.setUserRole(rs.getString("user_role"));
 		return user;
 	}
+
 }

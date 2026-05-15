@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import com.cinosphere.dao.UsersDAO;
+import com.cinosphere.model.MembershipModel;
 import com.cinosphere.model.UsersModel;
 import com.cinosphere.service.LoginService;
+import com.cinosphere.service.MembershipService;
 import com.cinosphere.utils.FileuploadUtil;
 import com.cinosphere.utils.SessionUtil;
 
@@ -30,14 +32,23 @@ import com.cinosphere.utils.SessionUtil;
 	)
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR =  System.getProperty("user.home") + File.separator +"assets/profile";
-    private UsersDAO usersdao = new UsersDAO();
-
+	private static final String UPLOAD_DIR = new File(System.getProperty("user.dir"))+ File.separator+ "assets" + File.separator+ "profile";
+	UsersDAO usersdao = new UsersDAO();
+    MembershipService membershipService = new MembershipService();
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
+		try {
+			MembershipModel membership = membershipService.getMembershipByuserId(user.getUserId());
+			request.setAttribute("membership", membership);
+		} catch (Exception e) {
+			request.setAttribute("error", "Failed to load profile details.");
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("/WEB-INF/pages/updateProfile.jsp").forward(request, response);
 	}
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,8 +75,7 @@
 			    <div class="update_profile_overview_card">
 			        <div class="update_profile_avatar_wrapper">
 			            <div class="update_profile_avatar_circle">
-			            <img id="imagePreview" src="${pageContext.request.contextPath}/getimage?name=${user.userId}" alt="Preview">
-			                
+			            <img id="imagePreview" style="width: 100%;height: 100%;object-fit: cover;display: block;" src="${pageContext.request.contextPath}/profileimage?name=${user.userId}" alt="Preview"> 	                
 			            </div>
 			            
 			            			        </div>
@@ -109,10 +109,11 @@
 			            </div>
 			            <div class="update_profile_progress_wrapper">
 			                <div class="update_profile_progress_bar">
-			                    <div class="update_profile_progress_fill"></div>
+			                <fmt:formatNumber var="progress" value="${membership.totalLoyaltyPoints > 3000 ?100 :(membership.totalLoyaltyPoints*100.0)/3000}" maxFractionDigits="2"/>   
+			                    <div class="update_profile_progress_fill" style="width:${progress}%"></div>
 			                </div>
-			                <div class="update_profile_progress_text">
-			                    41% to Elite · 1,760 pts needed
+			                <div class="update_profile_progress_text" >
+			       				  ${progress}% to Elite · ${3000-(membership.totalLoyaltyPoints)} pts needed
 			                </div>
 			            </div>
 			        </div>

@@ -10,8 +10,11 @@ import java.util.List;
 
 import com.cinosphere.dao.MembershipDAO;
 import com.cinosphere.model.MembershipModel;
+import com.cinosphere.model.MovieModel;
 import com.cinosphere.model.UsersModel;
+import com.cinosphere.service.BookingService;
 import com.cinosphere.service.MembershipService;
+import com.cinosphere.service.MovieService;
 import com.cinosphere.service.UserService;
 import com.cinosphere.utils.SessionUtil;
 
@@ -23,6 +26,10 @@ import com.cinosphere.utils.SessionUtil;
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin" })
 public class AdminPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserService usersService = new UserService();
+	MembershipService membershipService = new MembershipService();
+	MovieService movieService = new MovieService();
+	BookingService bookingService = new BookingService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,33 +44,21 @@ public class AdminPanelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		UserService usersService = new UserService();
-		 List<UsersModel> users;
 		 try {
-			users = usersService.getAllUsers();
-			SessionUtil.setAttribute(request, "userList", users, 3600);
-			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
+			 List<UsersModel> users = usersService.getAllUsers();
+			 List<MembershipModel> memberships = membershipService.getMemberships(users);
+			 List<Integer> bookings = bookingService.getTotalBookings(users);
+			List<MovieModel> movies = movieService.getAllMovies();
+            request.setAttribute("filteredMovies", movies);
+			request.setAttribute("userList", users);
+			request.setAttribute("membershipList", memberships);
+			request.setAttribute("bookingList", bookings);
 		} catch (Exception e) {
-
-			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
+			request.setAttribute("error", "Failed to load admin dashboard.");
+			
 			e.printStackTrace();
 		}
-		 
-		MembershipService membershipService = new MembershipService();
-		
-		try {
-			users = usersService.getAllUsers();
-			List<MembershipModel> memberships = membershipService.getMemberships(users);
-			SessionUtil.setAttribute(request, "membershipList", memberships, 3600);
-			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
-		} catch (Exception e) {
-			request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
-			e.printStackTrace();
-		}
-		
-		
+		 request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -71,8 +66,68 @@ public class AdminPanelServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+            String movieStatus = request.getParameter("movieStatus");
+            String userType = request.getParameter("userType");
+            String searchMovie = request.getParameter("searchMovie");
+            String searchUser = request.getParameter("searchUser");
+            System.out.print(searchMovie);
+            // Movie filtering
+            List<MovieModel> movies;
+
+            if (movieStatus == null || movieStatus.equals("all")) {
+                movies = movieService.getAllMovies();
+            }
+            else {
+                movies = movieService.getMoviesByStatus(movieStatus);
+            }
+
+            // Search movie
+            if (searchMovie != null && !searchMovie.trim().isEmpty()) {
+                movies = movieService.findByMovieName(searchMovie);
+            }
+            System.out.print(movies);
+            List<UsersModel> users;
+
+            if (userType == null || userType.equals("all")) {
+
+                users = usersService.getAllUsers();
+
+            }
+            else if (userType.equals("active")) {
+
+                users = usersService.getUsersByStatus(true);
+
+            }
+            else {
+
+                users = usersService.getUsersByStatus(false);
+
+            }
+            if (searchUser != null && !searchUser.trim().isEmpty()) {
+
+                users = usersService.findByUsernames(searchUser);
+
+            }
+
+            List<MembershipModel> memberships = membershipService.getMemberships(users);
+
+            List<Integer> bookings = bookingService.getTotalBookings(users);
+            
+            request.setAttribute("userList", users);
+            request.setAttribute("membershipList", memberships);
+            request.setAttribute("bookingList", bookings);
+            request.setAttribute("userType", userType);  
+            request.setAttribute("filteredMovies", movies);
+            request.setAttribute("movieStatus", movieStatus);
+            request.setAttribute("searchUser", searchUser);
+            request.setAttribute("searchMovie", searchMovie);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Failed to process request.");
+        }
+        request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
+    }
 		
 	}
         
-
-}

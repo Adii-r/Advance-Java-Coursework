@@ -1,6 +1,7 @@
 package com.cinosphere.service;
 
 import com.cinosphere.dao.UsersDAO;
+import com.cinosphere.utils.SessionUtil;
 
 public class DeleteAccountService {
 

@@ -45,13 +45,11 @@ public class UpdatePasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String currentPassword = request.getParameter("currentPassword");
-		System.out.print(currentPassword);
 		String newPassword = request.getParameter("newPassword");
-		System.out.print(newPassword);
-		String newPasswordAgain  = request.getParameter("confirmPassword");
+		String confirmPassword  = request.getParameter("confirmPassword");
 		UpdatePasswordService update = new UpdatePasswordService();
 		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
-		String status = update.authenticate(request, user, currentPassword, newPassword, newPasswordAgain);
+		String status = update.authenticate(request, user, currentPassword, newPassword, confirmPassword);
 		System.out.print(status);
 		if ("Success".equals(status)) {
 	        	response.sendRedirect(request.getContextPath() + "/profile");

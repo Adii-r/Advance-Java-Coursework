@@ -106,7 +106,7 @@ public class MovieDAO {
 		String sql = "SELECT * FROM movie WHERE movie_name LIKE ? ORDER BY release_date ASC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, movieName);
+		ps.setString(1, "%"+movieName+"%");
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
@@ -118,6 +118,12 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	/**
+	 * 
+	 * @param ageRating
+	 * @return
+	 * @throws Exception
+	 */
 	public List<MovieModel> findByAgeRating(String ageRating)throws Exception {
 		
 		List<MovieModel> movies = new ArrayList<>();
@@ -138,6 +144,12 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	/**
+	 * 
+	 * @param movieLanguage
+	 * @return
+	 * @throws Exception
+	 */
 	public List<MovieModel> findByMovieLanguage(String movieLanguage)throws Exception {
 			
 			List<MovieModel> movies = new ArrayList<>();
@@ -204,6 +216,11 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public List<MovieModel> getTopActiveMovie() throws Exception{
 		List<MovieModel> movies = new ArrayList<>();
 		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC LIMIT 1;";
@@ -221,7 +238,15 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
-	
+	/**
+	 * 
+	 * @param language
+	 * @param genre
+	 * @param status
+	 * @param keyword
+	 * @return
+	 * @throws Exception
+	 */
 	public List<MovieModel> findByFilters(String language, String genre,  String status, String keyword) throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
 		StringBuilder sql = new StringBuilder("SELECT * FROM movie WHERE 1=1 ");

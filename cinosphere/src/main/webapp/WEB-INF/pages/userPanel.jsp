@@ -48,7 +48,7 @@
 				    
 				    <div class="sidebar_user_profile">
 				        <div class="user_avatar_circle" style="overflow: hidden;">
-				        	<img id="imagePreview" style="width: 100%;height: 100%;object-fit: cover;display: block;" src="${pageContext.request.contextPath}/getimage?name=${user.userId}" alt="Preview"> 
+				        	<img id="imagePreview" style="width: 100%;height: 100%;object-fit: cover;display: block;" src="${pageContext.request.contextPath}/profileimage?name=${user.userId}" alt="Preview"> 
 				        </div>
 				        <div class="user_info_stack">
 				            <span class="user_name">${user.firstName}</span>
@@ -89,25 +89,25 @@
 			<div class="dashboard_scroll_area">
 			    <div class="stats-row">
 			        <div class="stat-card">
-			            <span class="stat-num">12</span>
+			            <span class="stat-num">${totalBookings==null?'0':totalBookings}</span>
 			            <span class="stat-label">Total Bookings</span>
 			            <span class="stat-delta">↑ 3 this month</span>
 			        </div>
 			        
 			        <div class="stat-card">
-			            <span class="stat-num" style="color: var(--gold)">1,240</span>
+			            <span class="stat-num" style="color: var(--gold)">${membership.totalLoyaltyPoints}</span>
 			            <span class="stat-label">Sphere Points</span>
 			            <span class="stat-delta">↑ 200 pts earned</span>
 			        </div>
 			        
 			        <div class="stat-card">
-			            <span class="stat-num" style="color: var(--crimson-bright)">2</span>
-			            <span class="stat-label">Upcoming Shows</span>
+			            <span class="stat-num" style="color: var(--crimson-bright)">TODO</span>
+			            <span class="stat-label">Upcoming Bookings</span>
 			            <span class="stat-delta">Next: Apr 14</span>
 			        </div>
 			        
 			        <div class="stat-card">
-			            <span class="stat-num">Rs 500</span>
+			            <span class="stat-num">TODO</span>
 			            <span class="stat-label">Welcome Credit</span>
 			            <span class="stat-delta">Valid until Jun 2026</span>
 			        </div>
@@ -169,10 +169,10 @@
 			      		<div class="membership-progress">
 			      			<div class="membership-progress-label">
 				          		<span>Progress to Elite</span>
-				          		<span>1,240 / 3,000 pts</span>
+				          		<span>${membership.totalLoyaltyPoints} / 3,000 pts</span>
 			        		</div>
 			        		<div class="membership-progress-bar">
-			        			<div class="membership-progress-fill" style="width: 41%"></div>
+			        			<div class="membership-progress-fill" style="width:${(membership.totalLoyaltyPoints*100)/3000}%"></div>
 			        		</div>
 			        	</div>
 			        	

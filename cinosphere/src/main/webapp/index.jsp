@@ -98,7 +98,7 @@
              <div class="movie_status_badge_group">
                <span class="movie_certification_badge">${movie.ageRating}</span>
                 </div>
-                 <img src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg" alt="${movie.movieName} poster" class="movie_poster_image_element"/>
+                 <img src="${pageContext.request.contextPath}/movieposter?name=${movie.movieId}" alt="${movie.movieName} poster" class="movie_poster_image_element"/>
                   <div class="movie_poster_gradient_overlay"></div>
                   </div>
                                         <div class="movie_information_panel">

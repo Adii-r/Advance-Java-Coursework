@@ -11,22 +11,16 @@ import com.cinosphere.utils.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class MembershipService {
-	public boolean setMembershipToSession(HttpServletRequest request, int userId) {
-		MembershipDAO membershipdao = new MembershipDAO();
-		try {
-			MembershipModel membership = membershipdao.findByUserId(userId);
-			SessionUtil.setAttribute(request, "membership", membership, 3600);
-			return true;
-		} catch (Exception e) {
-			request.setAttribute("error", "Failed to load membership Data");
-			e.printStackTrace();
-			return false;
-		}
-	}
+	MembershipDAO membershipDAO = new MembershipDAO();
+	public MembershipModel getMembershipByuserId(int userId) throws Exception {
+
+			return membershipDAO.findByUserId(userId);
+
+
+}
 	
 	
 	public List<MembershipModel> getMemberships(List<UsersModel> users) throws Exception {
-		MembershipDAO membershipDAO = new MembershipDAO();
 		List<MembershipModel> memberships = new ArrayList<>();
 		
 		for(UsersModel user: users) {

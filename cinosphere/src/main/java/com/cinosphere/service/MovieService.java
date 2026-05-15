@@ -7,22 +7,36 @@ import com.cinosphere.dao.MovieDAO;
 import com.cinosphere.model.MovieModel;
 
 public class MovieService {
-	MovieDAO moviedao = new MovieDAO();
+	MovieDAO movieDAO = new MovieDAO();
 	public List<MovieModel> getFilteredMovies(String language, String genre, String status, String keyword) throws Exception {
 
-			List<MovieModel> filtered = moviedao.findByFilters(language, genre, status, keyword);
+			List<MovieModel> filtered = movieDAO.findByFilters(language, genre, status, keyword);
 
 			return filtered;
 }
 
 public MovieModel getMovieById(int movieId) throws Exception {
-return moviedao.findById(movieId);
+return movieDAO.findById(movieId);
 }
 public List<MovieModel> getAllActiveMovies() throws Exception {
-return moviedao.getAllActiveMovie();
+return movieDAO.getAllActiveMovie();
 }
 
 public List<MovieModel> getTopActiveMovies() throws Exception {
-	return moviedao.getTopActiveMovie();
+	return movieDAO.getTopActiveMovie();
+}
+
+public List<MovieModel> getAllMovies() throws Exception {
+	return movieDAO.findByFilters(null, null, null, null);
+}
+
+public List<MovieModel> getMoviesByStatus(String status) throws Exception {
+ 
+	return movieDAO.findByMovieStatus(status);
+}
+
+public List<MovieModel> findByMovieName(String searchMovie) throws Exception{
+	
+	return movieDAO.findByMovieName(searchMovie);
 }
 }

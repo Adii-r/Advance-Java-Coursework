@@ -90,7 +90,7 @@ public class BookingDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BookingModel> findByUserIdBookingStatus(int userId, String bookingStatus) throws Exception {
+	public List<BookingModel> findByUserId(int userId, String bookingStatus) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
 		String sql = "SELECT * FROM booking WHERE user_id = ? AND booking_status = ?";
         Connection con = DBconfig.getConnection();
@@ -122,6 +122,21 @@ public class BookingDAO {
 		return ps.executeUpdate() > 0;
 	}
 	
+	public int findTotalBookingByUserId(int userId) throws Exception{
+		int booking = 0;
+		String sql = "SELECT COUNT(*) FROM booking WHERE user_id = ?";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+        	booking = rs.getInt(1);
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return booking;
+	}
 	
 	/**
 	 * 
@@ -141,4 +156,5 @@ public class BookingDAO {
 		booking.setLoyaltyPointsEarned(rs.getInt("Loyalty_points_earned"));
 		return booking;
 	}
+
 }

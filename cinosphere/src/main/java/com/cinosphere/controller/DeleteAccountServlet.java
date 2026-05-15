@@ -35,6 +35,7 @@ public class DeleteAccountServlet extends HttpServlet {
 		UsersModel customer = (UsersModel) SessionUtil.getAttribute(request, "user");
 		try {
 			service.DeleteAccount(customer.getUserId());
+			SessionUtil.invalidateSession(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

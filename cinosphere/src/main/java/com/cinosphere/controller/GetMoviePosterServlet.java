@@ -5,18 +5,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/getimage" })
-public class GetImageServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "assets/profile";
-    private static final String DEFAULT_IMAGE_NAME = "2.png";
+/**
+ * Servlet implementation class GetMoviePosterServlet
+ */
+@WebServlet(asyncSupported = true, urlPatterns = { "/movieposter" })
+public class GetMoviePosterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final String UPLOAD_DIR = new File(System.getProperty("user.dir")).getParent()+ File.separator+ "assets" + File.separator+ "poster";
+    private static final String DEFAULT_IMAGE_NAME = "default.png";
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
         if (name == null || name.trim().isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
             return;
@@ -48,9 +52,8 @@ public class GetImageServlet extends HttpServlet {
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found and no default available");
         }
-    }
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
+	
+
 }

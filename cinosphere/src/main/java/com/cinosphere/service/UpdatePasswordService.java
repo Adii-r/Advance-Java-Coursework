@@ -10,20 +10,23 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UpdatePasswordService {
 	UsersDAO userdao = new UsersDAO();
 	
-	public String authenticate(HttpServletRequest request,UsersModel user,String currentPassword, String NewPassword, String NewPasswordAgain) {
+	public String authenticate(HttpServletRequest request,UsersModel user,String currentPassword, String newPassword, String confirmPassword) {
 		System.out.print("authenticateRan");
 		if (currentPassword == null || currentPassword.trim().isEmpty()) {
             return "Current is required";
         }
-        if (NewPassword == null || NewPassword.isEmpty()) {
+        if (newPassword == null || newPassword.isEmpty()) {
             return "New Password is required";
         }
-        if(!NewPassword.equals(NewPasswordAgain)) {
+        else if (newPassword == null || newPassword.length() < 8) {
+            return "Password must be at least 8 characters";
+        }
+        if(!newPassword.equals(confirmPassword)) {
         	return "New Passwords dont match";
         }
         try {
         if(PasswordUtil.checkPassword(currentPassword,user.getHashPassword())) {
-        	return updatePassword(request,user,PasswordUtil.getHashPassword(NewPassword));
+        	return updatePassword(request,user,PasswordUtil.getHashPassword(newPassword));
         	
         }else {
         	return "Current password is incorrect";
