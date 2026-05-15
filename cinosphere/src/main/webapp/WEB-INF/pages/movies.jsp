@@ -81,7 +81,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		            <button type="submit" class="movie_filter_pill">APPLY</button>
 		            </div>
 		        </div>
-			<%-- 
+			<%-- Radio button for movie filter selection 
 		        <div class="movie_status_pill_group">
 				    <input type="radio" name="status" id="all" value="all" class="pill_radio" ${selectedStatus=="all" || empty selectedStatus ?"checked":""}>
 				    <label for="all" class="movie_filter_pill">All</label>

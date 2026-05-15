@@ -103,7 +103,7 @@ public class MovieDAO {
 		List<MovieModel> movies = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
 
-		String sql = "SELECT * FROM movie WHERE movie_name LIKE ? ORDER BY release_date";
+		String sql = "SELECT * FROM movie WHERE movie_name LIKE ? ORDER BY release_date ASC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, movieName);
@@ -123,7 +123,7 @@ public class MovieDAO {
 		List<MovieModel> movies = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
 
-		String sql = "SELECT * FROM movie WHERE age_rating = ? ORDER BY release_date";
+		String sql = "SELECT * FROM movie WHERE age_rating = ? ORDER BY release_date ASC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, ageRating);
@@ -143,7 +143,7 @@ public class MovieDAO {
 			List<MovieModel> movies = new ArrayList<>();
 			Connection con = DBconfig.getConnection();
 	
-			String sql = "SELECT * FROM movie WHERE movie_language = ? ORDER BY release_date";
+			String sql = "SELECT * FROM movie WHERE movie_language = ? ORDER BY release_date ASC";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, movieLanguage);
@@ -168,7 +168,7 @@ public class MovieDAO {
 		List<MovieModel> movies = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
 
-		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date";
+		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, status);
 		ResultSet rs = ps.executeQuery();
@@ -189,7 +189,24 @@ public class MovieDAO {
 	 */
 	public List<MovieModel> getAllActiveMovie() throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
-		String sql = "SELECT * FROM movie WHERE movie_status = ?";
+		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, "NOW_SHOWING");
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			movies.add(createMovieModel(rs));
+		}
+		rs.close();
+	    ps.close();
+	    con.close();
+	    return movies;
+	}
+	public List<MovieModel> getTopActiveMovie() throws Exception{
+		List<MovieModel> movies = new ArrayList<>();
+		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC LIMIT 1;";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, "NOW_SHOWING");
@@ -215,7 +232,7 @@ public class MovieDAO {
 		if (valueCheck(status) && !status.equals("all"))   { sql.append("AND movie_status = ? ");   params.add(status);   }
 		if (valueCheck(keyword))  { sql.append("AND movie_name LIKE ? ");  params.add("%" + keyword + "%"); }
 		
-		sql.append("ORDER BY release_date");
+		sql.append("ORDER BY release_date ASC");
 		
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql.toString());
@@ -252,7 +269,13 @@ public class MovieDAO {
 		movie.setAgeRating(rs.getString("age_rating"));
 		return movie;
 	}
+	/**
+	 * Helper to check values
+	 * @param value
+	 * @return
+	 */
 	private boolean valueCheck(String value) {
 		return value!=null && !value.trim().isEmpty();
 	}
+	
 }

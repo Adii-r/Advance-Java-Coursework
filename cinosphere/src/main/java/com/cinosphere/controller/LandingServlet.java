@@ -39,7 +39,7 @@ public class LandingServlet extends HttpServlet {
 		MovieService service = new MovieService();
 		List<MovieModel> activeMovies = null;
 		try {
-			activeMovies = service.getAllActiveMovies();
+			activeMovies = service.getTopActiveMovies();
 			request.setAttribute("activeMovies",activeMovies);
 		} catch (Exception e) {
 			request.setAttribute("error", "Could not load movies Please try again later.");

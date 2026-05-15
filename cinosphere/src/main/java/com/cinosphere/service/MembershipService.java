@@ -10,7 +10,7 @@ public class MembershipService {
 	public boolean setMembershipToSession(HttpServletRequest request, int userId) {
 		MembershipDAO membershipdao = new MembershipDAO();
 		try {
-			MembershipModel membership = membershipdao.findByCustomerId(userId);
+			MembershipModel membership = membershipdao.findByUserId(userId);
 			SessionUtil.setAttribute(request, "membership", membership, 3600);
 			return true;
 		} catch (Exception e) {

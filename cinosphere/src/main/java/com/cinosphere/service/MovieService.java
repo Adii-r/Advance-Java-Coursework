@@ -21,4 +21,8 @@ return moviedao.findById(movieId);
 public List<MovieModel> getAllActiveMovies() throws Exception {
 return moviedao.getAllActiveMovie();
 }
+
+public List<MovieModel> getTopActiveMovies() throws Exception {
+	return moviedao.getTopActiveMovie();
+}
 }

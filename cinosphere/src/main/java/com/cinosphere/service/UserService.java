@@ -9,7 +9,7 @@ import com.cinosphere.model.UsersModel;
 public class UserService {
 	UsersDAO usersDAO = new UsersDAO();
 	public List<UsersModel> getAllUsers() throws Exception {
-        return usersDAO.getAlluser();
+        return usersDAO.getAllUser();
     }
 	public boolean deactivateUser(int userId) throws Exception {
         return usersDAO.deleteUser(userId);

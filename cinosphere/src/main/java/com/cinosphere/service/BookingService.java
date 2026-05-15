@@ -11,7 +11,7 @@ public class BookingService {
 	public boolean setBookingsToSession(HttpServletRequest request, int userId, String status) {
 		BookingDAO bookingdao = new BookingDAO();
 		 try {
-			List<BookingModel> bookings = bookingdao.findByuserId(userId, status);
+			List<BookingModel> bookings = bookingdao.findByUserIdBookingStatus(userId, status);
 			SessionUtil.setAttribute(request, "bookings", bookings, 3600);
 			return true;
 		} catch (Exception e) {

@@ -37,7 +37,46 @@ public class RegisterService {
 		if(!status) {
 			throw new Exception("Failed to create membership");
 		}
-	}	
+	}
+	public String Authentication(String firstName,String lastName,String gender,String userName, LocalDate dob, String email,String password,String confirmPassword) throws Exception {
+        String status = null;
+		if (firstName == null || firstName.trim().isEmpty()) {
+            status = "Invalid first name";
+        } 
+        else if (!firstName.matches("[a-zA-Z]+")) {
+            status = "First name must contain only letters";
+        }
+        else if (lastName == null || lastName.trim().isEmpty()) {
+            status = "Invalid last name";
+        }
+        else if (!firstName.matches("[a-zA-Z]+")) {
+            status = "First name must contain only letters";
+        } 
+        else if (dob.isAfter(LocalDate.now())) {
+            status = "Invalid date of birth";
+        }else if (password == null || password.length() < 8) {
+            status = "Password must be at least 8 characters";
+        }
+        else if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+        	status = "Enter correct email";
+        }
+        else if(!gender.toLowerCase().equals("male")&&!gender.toLowerCase().equals("female")&&!gender.toLowerCase().equals("other")) {
+        	status = "Gender must be male/female/other";
+        }
+        else if (!password.equals(confirmPassword)) {
+            status = "Passwords do not match";
+        } 
+        else if (EmailCheck(email)) {
+          
+        	status = "Email already exists";
+        } 
+        else if (UsernameCheck(userName)) {
+            status = "Username already exists";
+        }
+        return status;
+	}
+	
+	
 	/**
 	 * Checks if email already exists
 	 * @param email
