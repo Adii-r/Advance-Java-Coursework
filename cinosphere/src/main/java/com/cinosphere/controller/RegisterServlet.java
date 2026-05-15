@@ -52,38 +52,13 @@ public class RegisterServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String passwordAgain = request.getParameter("confirmPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
         String username= request.getParameter("username");
         
         RegisterService register = new RegisterService();
         
-        if (firstName == null || firstName.trim().isEmpty()) {
-            status = "Invalid first name";
-        } 
-        else if (!firstName.matches("[a-zA-Z]+")) {
-            status = "First name must contain only letters";
-        }
-        else if (lastName == null || lastName.trim().isEmpty()) {
-            status = "Invalid last name";
-        }
-        else if (!firstName.matches("[a-zA-Z]+")) {
-            status = "First name must contain only letters";
-        } 
-        else if (dob.isAfter(LocalDate.now())) {
-            status = "Invalid date of birth";
-        }else if (password == null || password.length() < 8) {
-            status = "Password must be at least 8 characters";
-        }
-        else if (!password.equals(passwordAgain)) {
-            status = "Passwords do not match";
-        } 
-        else if (register.EmailCheck(email)) {
-          
-        	status = "Email already exists";
-        } 
-        else if (register.UsernameCheck(username)) {
-            status = "Username already exists";
-        }
+        status = register.Authentication(firstName, lastName,gender, username, dob, email, password, confirmPassword);
+        
         if (status != null) {
             request.setAttribute("error", status);
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);

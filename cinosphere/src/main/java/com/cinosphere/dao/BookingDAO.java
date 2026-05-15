@@ -47,7 +47,7 @@ public class BookingDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BookingModel> findByuserId(int userId) throws Exception {
+	public List<BookingModel> findByUserId(int userId) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
 		String sql = "SELECT * FROM booking WHERE user_id = ?";
         Connection con = DBconfig.getConnection();
@@ -64,12 +64,33 @@ public class BookingDAO {
     }
 	/**
 	 * 
+	 * @param bookingId
+	 * @return
+	 * @throws Exception
+	 */
+	public BookingModel findByBookingId(int bookingId) throws Exception {
+       BookingModel booking = null;
+		String sql = "SELECT * FROM booking WHERE booking_id = ?";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, bookingId);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+        	booking = createBookingModel(rs);
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return booking;
+    }
+	/**
+	 * 
 	 * @param userId
 	 * @param bookingStatus
 	 * @return
 	 * @throws Exception
 	 */
-	public List<BookingModel> findByuserId(int userId, String bookingStatus) throws Exception {
+	public List<BookingModel> findByUserIdBookingStatus(int userId, String bookingStatus) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
 		String sql = "SELECT * FROM booking WHERE user_id = ? AND booking_status = ?";
         Connection con = DBconfig.getConnection();
@@ -85,6 +106,23 @@ public class BookingDAO {
         con.close();
         return bookings;
     }
+	/**
+	 * 
+	 * @param userId
+	 * @param bookingStatus
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean updateBookingStatus(int userId, String bookingStatus)throws Exception {
+		String sql = "UPDATE booking SET bookingStatus = ? WHERE user_id = ?";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString (1, bookingStatus);
+		ps.setInt (2,  userId);
+		return ps.executeUpdate() > 0;
+	}
+	
+	
 	/**
 	 * 
 	 * @param rs

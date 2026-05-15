@@ -44,7 +44,7 @@ public class UsersDAO {
 			ps.setString (6,  gender);
 			ps.setString (7,  hashPassword);
 			ps.setDate   (8,  Date.valueOf(LocalDate.now())); 
-			ps.setBoolean(9, true);                          
+			ps.setBoolean(9, false);                          
 			ps.setString (10, userRole);
 
 			return ps.executeUpdate() > 0;
@@ -97,7 +97,7 @@ public class UsersDAO {
 	 * @return list object of user
 	 * @throws Exception
 	 */
-	public List<UsersModel> getAlluser() throws Exception {
+	public List<UsersModel> getAllUser() throws Exception {
 	    List<UsersModel> users = new ArrayList<>();
 	    Connection con = DBconfig.getConnection();
 	    

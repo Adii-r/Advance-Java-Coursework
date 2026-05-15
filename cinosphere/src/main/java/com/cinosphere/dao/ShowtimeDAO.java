@@ -114,7 +114,46 @@ public class ShowtimeDAO {
 		ps.close();
 		return show;
 	}
-	
+	/**
+	 * 
+	 * @param showtimeId
+	 * @return
+	 * @throws Exception
+	 */
+	public ShowtimeModel updateShowtimeStatus(int showtimeId,String showtimeStatus) throws Exception{
+		ShowtimeModel show = null;
+		Connection con = DBconfig.getConnection();
+		
+		String sql = "UPDATE showtime SET showtime_status=? WHERE showtime_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, showtimeStatus);
+		ps.setInt(2, showtimeId);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			show = createShowtimeModel(rs);
+		}
+		rs.close();
+		ps.close();
+		return show;
+	}
+	public ShowtimeModel updateShowtimeType(int showtimeId,String showtimeType) throws Exception{
+		ShowtimeModel show = null;
+		Connection con = DBconfig.getConnection();
+		
+		String sql = "UPDATE showtime SET showtime_type=? WHERE showtime_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, showtimeType);
+		ps.setInt(2, showtimeId);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			show = createShowtimeModel(rs);
+		}
+		rs.close();
+		ps.close();
+		return show;
+	}
 	/**
 	 * Helper to create showtime object
 	 * @param rs

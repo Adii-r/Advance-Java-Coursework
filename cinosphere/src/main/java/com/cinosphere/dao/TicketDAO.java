@@ -62,6 +62,43 @@ public class TicketDAO {
 	    }
 	 /**
 	  * 
+	  * @param ticketId
+	  * @return
+	  * @throws Exception
+	  */
+	 public List<TicketModel> findByTicketId(int ticketId) throws Exception {
+	        List<TicketModel> tickets = new ArrayList<>();
+		 	String sql = "SELECT * FROM ticket WHERE ticket_id = ?";
+	        Connection con = DBconfig.getConnection();
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setInt(1, ticketId);
+	        ResultSet rs = ps.executeQuery();
+	        while(rs.next()) {
+	        	tickets.add(createTicketModel(rs));
+	        }
+	        rs.close();
+	        ps.close();
+	        con.close();
+	        return tickets;
+	    }
+	 /**
+	  * 
+	  * @param userId
+	  * @param ticketStatus
+	  * @return
+	  * @throws Exception
+	  */
+	 
+	 public boolean updateTicketStatus(int userId,String ticketStatus) throws Exception {
+		 String sql = "UPDATE ticket SET ticket_status = ? WHERE user_id = ?";
+			Connection con = DBconfig.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString (1, ticketStatus);
+			ps.setInt (2,  userId);
+			return ps.executeUpdate() > 0;
+	    }
+	 /**
+	  * 
 	  * @param rs
 	  * @return
 	  * @throws SQLException

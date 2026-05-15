@@ -32,6 +32,9 @@ public class LoginService {
             if (customer == null) {
                 return "User doesn't exists";
             }
+            if(!customer.getisActive()) {
+            	 return "Wait for Admin to verify";
+            }
 
             // Verify the password using PAsswordUtil
             if (PasswordUtil.checkPassword(password, customer.getHashPassword())) {
