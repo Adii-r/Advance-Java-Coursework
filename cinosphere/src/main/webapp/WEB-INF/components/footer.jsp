@@ -10,7 +10,7 @@
     <div class="footer_container">
         <div class="footer_content">
             <div class="footer_brand">
-                <img src="${pageContext.request.contextPath}/assets/logos/logo.png" alt="CinoSphere" class="footer_logo">
+                <img src="${pageContext.request.contextPath}/logo?name=logo" alt="CinoSphere" class="footer_logo">
             </div>
             <div class="footer_navigation_group">
                 <h4 class="footer_heading">Legal</h4>
@@ -44,9 +44,9 @@
 			        </ul>
 	        		<div class="bubble_divider"></div>
 			        <div class="footer_social_links">
-			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail"></a>
-			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/assets/icons/instagram.svg" alt="Instagram"></a>
-			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/assets/icons/twitter.svg" alt="Twitter"></a>
+			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/icon?name=mail" alt="Mail"></a>
+			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/icon?name=instagram" alt="Instagram"></a>
+			            <a href="#" class="social_link"><img src="${pageContext.request.contextPath}/icon?name=twitter" alt="Twitter"></a>
 			        </div>
     			</div>
 			</div>

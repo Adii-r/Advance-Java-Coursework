@@ -63,7 +63,7 @@
 		          <div class="input_field_wrapper">
 		            <input type="username" name="username" class="input_control" placeholder="Emilio" value="${typedUser}" required />
 		            <span class="input_icon"> 
-		              <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="User" />
+		              <img src="${pageContext.request.contextPath}/icon?name=user" alt="User" />
 		            </span>
 		          </div>
 		        </div>
@@ -73,7 +73,7 @@
 		          <div class="input_field_wrapper">
 		            <input type="password" name="password" class="input_control" placeholder="••••••••" required />
 		            <span class="input_icon"> 
-		              <img src="${pageContext.request.contextPath}/assets/icons/lock.svg" alt="Lock" />
+		              <img src="${pageContext.request.contextPath}/icon?name=lock" alt="Lock" />
 		            </span>
 		          </div>
 		           <a href="#" class="link_muted_small forgot_link">Forgot Password?</a>

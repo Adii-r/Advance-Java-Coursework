@@ -29,7 +29,7 @@
 		    <div class="movie_filter_container">
 		        <div class="movie_search_wrapper">
 		            <span class="movie_search_icon_container">
-		                <img src="${pageContext.request.contextPath}/assets/icons/search.svg" alt="Search" />
+		                <img src="${pageContext.request.contextPath}/icon?name=search" alt="Search" />
 		            </span>
 		            <input type="text" placeholder="Search movie names..." name="movieSearch" class="movie_search_input" value="${searchKeyword}">
 		        </div>
@@ -42,7 +42,7 @@
 		                    <option value="nepali" ${selectedLanguage=="nepali"?"selected":""}>Nepali</option>
 		                </select>
 		                <span class="movie_select_arrow">
-		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+		                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 		                </span>
 		            </div>
 		
@@ -57,7 +57,7 @@
 			                <option value="biography" ${selectedGenre=="biography"?"selected":""}>Biography</option>
 		                </select>
 		                <span class="movie_select_arrow">
-		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+		                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 		                </span>
 		            </div>
 		            <div class="movie_select_wrapper">
@@ -67,7 +67,7 @@
 		                    <option value="COMING_SOON" ${selectedStatus=="COMING_SOON"?"selected":""}>Coming Soon</option>
 		                </select>
 		                <span class="movie_select_arrow">
-		                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+		                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 		                </span>
 		            </div>
 		             <div class="movie_select_wrapper">

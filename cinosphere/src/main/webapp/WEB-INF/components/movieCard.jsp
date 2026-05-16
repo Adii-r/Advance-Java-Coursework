@@ -32,7 +32,7 @@
 
             <a href="${pageContext.request.contextPath}/movie-detail?movieId=${param.movieId}">
                 <div class="movie_quick_view_icon_wrapper">
-                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
+                    <img src="${pageContext.request.contextPath}/icon?name=info" alt="Info" />
                 </div>
             </a>
         </div>

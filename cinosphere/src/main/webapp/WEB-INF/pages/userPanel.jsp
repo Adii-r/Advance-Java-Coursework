@@ -23,7 +23,7 @@
                		class="sidebar_nav_item ${(empty param.view or param.view eq 'dashboard') ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
-	                            <img src="assets/icons/dashboard.svg" alt="Dashboard" />
+	                            <img src="${pageContext.request.contextPath}/icon?name=dashboard" alt="Dashboard" />
 	                        </span>
 	                    </div>
 	                    <span class="sidebar_nav_label">Dashboard</span>
@@ -35,7 +35,7 @@
                		class="sidebar_nav_item ${param.view eq 'profile' ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
-	                            <img src="assets/icons/user.svg" alt="Profile" />
+	                            <img src="${pageContext.request.contextPath}/icon?name=user" alt="Profile" />
 	                        </span>
 	                    </div>
 	                    <span class="sidebar_nav_label">Profile Settings</span>
@@ -76,7 +76,7 @@
 	                    <div class="hero_action_cluster">
 	                        <div class="notification_wrapper">
 	                            <span class="notification_icon">
-	                                <img src="assets/icons/bell.svg" alt="Notifications" />
+	                                <img src="${pageContext.request.contextPath}/icon?name=bell" alt="Notifications" />
 	                            </span>
 	                        </div>
 	                        <button class="hero_button_primary">Book Now</button>
@@ -123,7 +123,7 @@
 						
 						<div class="booking-row">
 							<div class="booking-poster">
-							  <img src="${pageContext.request.contextPath}/assets/posters/2.jpg"
+							  <img src="${pageContext.request.contextPath}/movieposter?name=2"
 							       alt="Michael"
 							       class="booking-poster-image" />
 							</div>
@@ -141,7 +141,7 @@
 			      		
 			      		<div class="booking-row">
 							<div class="booking-poster">
-							  <img src="${pageContext.request.contextPath}/assets/posters/3.jpg"
+							  <img src="${pageContext.request.contextPath}/movieposter?name=3"
 							       alt="Michael"
 							       class="booking-poster-image" />
 							</div>

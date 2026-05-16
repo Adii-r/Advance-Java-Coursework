@@ -79,7 +79,7 @@
 			        <div class="form_input_wrapper">
 			            <input type="text" name="username" class="form_input_field" placeholder="adir" required>
 			            <span class="form_input_icon"> 
-			                <img src="${pageContext.request.contextPath}/assets/icons/user.svg" alt="User" />
+			                <img src="${pageContext.request.contextPath}/icon?name=user" alt="User" />
 			            </span>
 			        </div>
 			    </div>
@@ -89,7 +89,7 @@
 			        <div class="form_input_wrapper">
 			            <input type="email" name="email" class="form_input_field" placeholder="aditya@gmail.com" required>
 			            <span class="form_input_icon"> 
-			                <img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail" />
+			                <img src="${pageContext.request.contextPath}/icon?name=mail" alt="Mail" />
 			            </span>
 			        </div>
 			    </div>
@@ -138,7 +138,7 @@
                   <div class="form_input_wrapper">
                     <input type="password" name="password" class="form_input_field" placeholder="••••••••" required>
                     <span class="form_input_icon"> 
-		              <img src="${pageContext.request.contextPath}/assets/icons/lock.svg" alt="Lock" />
+		              <img src="${pageContext.request.contextPath}/icon?name=lock" alt="Lock" />
 		            </span>
                   </div>
                 </div>
@@ -147,7 +147,7 @@
                   <div class="form_input_wrapper">
                     <input type="password" name="confirmPassword" class="form_input_field" placeholder="••••••••" required>
                     <span class="form_input_icon"> 
-		              <img src="${pageContext.request.contextPath}/assets/icons/checkmark.svg" alt="Checkmark" />
+		              <img src="${pageContext.request.contextPath}/icon?name=checkmark" alt="Checkmark" />
 		            </span>
                   </div>
                 </div>

@@ -71,7 +71,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		
 		      <div class="info_card_item">
 		        <span class="info_card_icon_wrapper icon_theme_gold">
-		          <img src="${pageContext.request.contextPath}/assets/icons/location.svg">
+		          <img src="${pageContext.request.contextPath}/icon?name=location">
 		        </span>
 		        <div>
 		          <div class="info_card_label_text">Address</div>
@@ -81,7 +81,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		
 		      <div class="info_card_item">
 		        <span class="info_card_icon_wrapper icon_theme_gold">
-		          <img src="${pageContext.request.contextPath}/assets/icons/phone.svg">
+		          <img src="${pageContext.request.contextPath}/icon?name=phone">
 		        </span>
 		        <div>
 		          <div class="info_card_label_text">Phone</div>
@@ -96,7 +96,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		
 		      <div class="info_card_item">
 		        <span class="info_card_icon_wrapper icon_theme_red">
-		          <img src="${pageContext.request.contextPath}/assets/icons/mail.svg">
+		          <img src="${pageContext.request.contextPath}/icon?name=mail">
 		        </span>
 		        <div>
 		          <div class="info_card_label_text">Email</div>
@@ -106,7 +106,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		
 		      <div class="info_card_item">
 		        <span class="info_card_icon_wrapper icon_theme_gold">
-		          <img src="${pageContext.request.contextPath}/assets/icons/clock.svg">
+		          <img src="${pageContext.request.contextPath}/icon?name=clock">
 		        </span>
 		        <div>
 		          <div class="info_card_label_text">Box Office</div>

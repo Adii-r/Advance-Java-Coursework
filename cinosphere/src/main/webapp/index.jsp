@@ -32,7 +32,7 @@
 
       <div class="hero_actions">
         <a href="${pageContext.request.contextPath}/#" class="hero_button">
-          <img src="${pageContext.request.contextPath}/assets/icons/ticket.svg" alt="ticket" class="hero_button_icon" />
+          <img src="${pageContext.request.contextPath}/icon?name=ticket" alt="ticket" class="hero_button_icon" />
           <span class="hero_button_text">Reserve Now</span>   
         </a>
       </div>
@@ -74,7 +74,7 @@
             <div class="movie_category_tab_switcher">
                 <button class="movie_category_tab_button active_tab">
                     <span class="movie_tab_icon_container">
-                        <img src="${pageContext.request.contextPath}/assets/icons/monitor.svg" alt="Now Showing Icon" />
+                        <img src="${pageContext.request.contextPath}/icon?name=monitor" alt="Now Showing Icon" />
                     </span>
                     Now Showing
                 </button>
@@ -84,7 +84,7 @@
             <a href="${pageContext.request.contextPath}/movies" class="movie_navigation_link_all">
                 View All Films 
                 <span class="navigation_arrow_icon">
-                    <img src="${pageContext.request.contextPath}/assets/icons/rightarrow.svg" alt="Right Arrow" />
+                    <img src="${pageContext.request.contextPath}/icon?name=rightarrow" alt="Right Arrow" />
                 </span>
             </a>
         </div>
@@ -183,7 +183,7 @@
 	                   <input type="email" name="email" class="newsletter_input_element" placeholder="aditya@gmail.com" required>
 	            
 	                   <span class="newsletter_input_icon_container icon_right"> 
-	                       <img src="${pageContext.request.contextPath}/assets/icons/mail.svg" alt="Mail Icon" />
+	                       <img src="${pageContext.request.contextPath}/icon?name=mail" alt="Mail Icon" />
 	                   </span>
 	               </div>
 	               <button type="submit" class="newsletter_submit_button">Subscribe</button>

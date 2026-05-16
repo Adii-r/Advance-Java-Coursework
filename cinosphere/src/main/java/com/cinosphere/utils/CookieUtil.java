@@ -16,7 +16,7 @@ public class CookieUtil {
     public static void addCookie(HttpServletResponse response, String name, String value, int min) {
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
-        cookie.setMaxAge(min);
+        cookie.setMaxAge(min*60);
         cookie.setHttpOnly(true); // Prevents XSS access to the cookie
         // cookie.setSecure(true); // Uncomment if using HTTPS
         

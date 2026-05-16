@@ -25,7 +25,7 @@
                		class="sidebar_nav_item ${(empty param.view or param.view eq 'dashboard') ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
-	                            <img src="assets/icons/dashboard.svg" alt="Dashboard" />
+	                            <img src="${pageContext.request.contextPath}/icon?name=dashboard" alt="Dashboard" />
 	                        </span>
 	                    </div>
 	                    <span class="sidebar_nav_label">Dashboard</span>
@@ -37,7 +37,7 @@
                		class="sidebar_nav_item ${param.view eq 'profile' ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
-	                            <img src="assets/icons/user.svg" alt="Profile" />
+	                            <img src="${pageContext.request.contextPath}/icon?name=user" alt="Profile" />
 	                        </span>
 	                    </div>
 	                    <span class="sidebar_nav_label">Profile Settings</span>
@@ -80,7 +80,7 @@
 			            
 			            			        </div>
 			        <label for="profileAvatarInput" class="update_profile_avatar_edit_btn">
-			                    <img src="${pageContext.request.contextPath}/assets/icons/camera.svg"
+			                    <img src="${pageContext.request.contextPath}/icon?name=camera"
 			                         alt="Upload Avatar">
 			                </label>
 			                <input type="file" name="profileAvatarInput" id="profileAvatarInput" class="update_profile_avatar_input" accept="image/*">
@@ -123,7 +123,7 @@
 			<section class="update_profile_form_grid">
 			    <div class="update_profile_form_card">
 			        <div class="update_profile_card_title">
-			            <img src="${pageContext.request.contextPath}/assets/icons/user.svg"
+			            <img src="${pageContext.request.contextPath}/icon?name=user"
 			                 alt="User Icon">
 			            <span>Personal Information</span>
 			        </div>
@@ -174,7 +174,7 @@
 			    <div class="update_profile_form_card">
 
 				    <div class="update_profile_card_title">
-				        <img src="${pageContext.request.contextPath}/assets/icons/lock.svg"
+				        <img src="${pageContext.request.contextPath}/icon?name=lock"
 				             alt="Lock Icon">
 				        <span>Change Password</span>
 				    </div>
@@ -191,7 +191,7 @@
 				                   class="update_profile_input_field">
 				
 				            <span class="update_profile_input_icon">
-				                <img src="${pageContext.request.contextPath}/assets/icons/lock.svg"
+				                <img src="${pageContext.request.contextPath}/icon?name=lock"
 				                     alt="Current Password Icon">
 				            </span>
 				        </div>
@@ -209,7 +209,7 @@
 				                   class="update_profile_input_field">
 				
 				            <span class="update_profile_input_icon">
-				                <img src="${pageContext.request.contextPath}/assets/icons/edit.svg"
+				                <img src="${pageContext.request.contextPath}/icon?name=edit"
 				                     alt="New Password Icon">
 				            </span>
 				        </div>
@@ -227,7 +227,7 @@
 				                   class="update_profile_input_field">
 				
 				            <span class="update_profile_input_icon">
-				                <img src="${pageContext.request.contextPath}/assets/icons/checkmark.svg"
+				                <img src="${pageContext.request.contextPath}/icon?name=checkmark"
 				                     alt="Confirm Password Icon">
 				            </span>
 				        </div>
@@ -255,7 +255,7 @@
 			        
 			        <div class="update_profile_danger_zone_box">
 			            <div class="update_profile_danger_header">
-			                <img src="${pageContext.request.contextPath}/assets/icons/warning.svg" alt="Warning">
+			                <img src="${pageContext.request.contextPath}/icon?name=warning" alt="Warning">
 			                <span>Danger Zone</span>
 			            </div>
 			

@@ -1,20 +1,22 @@
 package com.cinosphere.service;
 import com.cinosphere.dao.UsersDAO;
 import com.cinosphere.model.UsersModel;
+import com.cinosphere.utils.CookieUtil;
 import com.cinosphere.utils.PasswordUtil;
 import com.cinosphere.utils.SessionUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Service class to handle login operation
  */
 public class LoginService {
 
-	UsersDAO customerdao = new UsersDAO();
+	UsersDAO userDAO = new UsersDAO();
 	/**
 	 * Check if username exists and password matches.
-	 * if match found calls login method with customerData and request
+	 * if match found calls login method with userData and request
 	 * @param username
 	 * @param password
 	 * @param request
@@ -28,17 +30,17 @@ public class LoginService {
             return "Password is required";
         }
         try {
-            UsersModel customer = customerdao.findByUsername(username);
-            if (customer == null) {
+            UsersModel user = userDAO.findByUsername(username);
+            if (user == null) {
                 return "User doesn't exists";
             }
-            if(!customer.getisActive()) {
+            if(!user.getisActive()) {
             	 return "Wait for Admin to verify";
             }
 
             // Verify the password using PAsswordUtil
-            if (PasswordUtil.checkPassword(password, customer.getHashPassword())) {
-                return login(customer,request);
+            if (PasswordUtil.checkPassword(password, user.getHashPassword())) {
+                return login(user,request);
             } 
             else {
                 return "Password is incorrect";
@@ -50,14 +52,14 @@ public class LoginService {
         }
 	}
 	/**
-	 * Use customer data to create session on current request
-	 * @param customerData
+	 * Use user data to create session on current request
+	 * @param userData
 	 * @param request
 	 * @return
 	 */
-	public String login(UsersModel customerData,HttpServletRequest request){
+	public String login(UsersModel userData,HttpServletRequest request){
 		try {  	
-    	SessionUtil.setAttribute(request, "user", customerData, 3600);
+    	SessionUtil.setAttribute(request, "user", userData, 3600);
     	return "Success";
 		}
 		catch(Exception e){
@@ -65,5 +67,17 @@ public class LoginService {
 			return "Service unavailable";
 		}
 
+	}
+	/**
+	 * Create a cookie of latest login username
+	 * @param response
+	 * @param userName
+	 * @param time
+	 */
+	public void createLoginCookie(HttpServletResponse response,String username,int time) {
+		CookieUtil.addCookie(response, "username", username, time);
+	}
+	public String getLoginCookie(HttpServletRequest request,String name) {
+		return CookieUtil.getCookieValue(request, name);
 	}
 }

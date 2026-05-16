@@ -30,7 +30,7 @@
 						class="admin_navigation_item active">
 						<div class="admin_navigation_icon_box">
 							<img
-								src="${pageContext.request.contextPath}/assets/icons/dashboard.svg"
+								src="${pageContext.request.contextPath}/icon?name=dashboard"
 								alt="Dashboard">
 						</div> <span class="admin_navigation_text"> Dashboard </span>
 					</a>
@@ -73,7 +73,7 @@
 						<div class="admin_dashboard_action_group">
 							<div class="notification_wrapper">
 								<span class="notification_icon"> <img
-									src="assets/icons/bell.svg" alt="Notifications" />
+									src="${pageContext.request.contextPath}/icon?name=bell" alt="Notifications" />
 								</span>
 							</div>
 							<button class="admin_dashboard_primary_button">Add Movie</button>
@@ -120,14 +120,14 @@
 							<div class="admin_panel_actions">
 								<div class="admin_search_wrapper">
 									<img
-										src="${pageContext.request.contextPath}/assets/icons/search.svg"
+										src="${pageContext.request.contextPath}/icon?name=search"
 										alt="Search" class="admin_search_icon" /> <input type="text"
 										name="searchMovie" class="admin_search_input"
 										placeholder="Search movies..." value="${searchmovie}"/>
 								</div>
 								<button class="admin_add_movie_button" type="submit">
 									<img
-										src="${pageContext.request.contextPath}/assets/icons/search.svg"
+										src="${pageContext.request.contextPath}/icon?name=search"
 										alt="Search" />  Search
 								</button>
 							</div>
@@ -201,7 +201,7 @@
 											<div class="admin_movie_action_group">
 												<button class="admin_action_button edit">
 													<img
-														src="${pageContext.request.contextPath}/assets/icons/edit.svg"
+														src="${pageContext.request.contextPath}/icon?name=edit"
 														alt="Edit" />
 											</div>
 										</td>
@@ -224,14 +224,14 @@
 
 								<div class="admin_search_wrapper">
 									<img
-										src="${pageContext.request.contextPath}/assets/icons/search.svg"
+										src="${pageContext.request.contextPath}/icon?name=search"
 										alt="Search" class="admin_search_icon" /> <input type="text"
 										name="searchUser" class="admin_search_input"
 										placeholder="Search users..." value="${searchUser }"/>
 								</div>
 								<button class="admin_add_movie_button" type="submit">
 									<img
-										src="${pageContext.request.contextPath}/assets/icons/search.svg"
+										src="${pageContext.request.contextPath}/icon?name=search"
 										alt="Search" /> Search
 								</button>
 

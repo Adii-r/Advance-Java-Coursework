@@ -28,7 +28,7 @@ import com.cinosphere.utils.SessionUtil;
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	LoginService loginService= new LoginService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setAttribute("typedUser", loginService.getLoginCookie(request,"username"));
 		request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 	}
 
@@ -52,13 +53,14 @@ public class LoginServlet extends HttpServlet {
 		//Extracting and using details from request to authenticate and log user
 		String username = request.getParameter("username");
         String password = request.getParameter("password");
-        LoginService service= new LoginService();
-        String status = service.authenticate(username, password,request); // logs user if credentials match and creates session
+        
+        String status = loginService.authenticate(username, password,request); // logs user if credentials match and creates session
         if ("Success".equals(status)) {
         	UsersDAO userdao = new UsersDAO();
         	UsersModel user=null;
 			try {
 				user = userdao.findByUsername(username);
+				loginService.createLoginCookie(response, username,  43200);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

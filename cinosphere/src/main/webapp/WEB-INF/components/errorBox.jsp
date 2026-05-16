@@ -7,7 +7,7 @@
 
 <div class="error_banner" role = "alert">
     <div class="error_banner_icon_container">
-        <img src="${pageContext.request.contextPath}/assets/icons/warning.svg" alt="Warning" />
+        <img src="${pageContext.request.contextPath}/icon?name=warning" alt="Warning" />
     </div>
     
     <div class="error_banner_text_group">
@@ -15,6 +15,6 @@
     </div>
     
     <button class="error_banner_close_button">
-        <img src="${pageContext.request.contextPath}/assets/icons/close.svg" alt="Close" />
+        <img src="${pageContext.request.contextPath}/icon?name=close" alt="Close" />
     </button>
 </div>

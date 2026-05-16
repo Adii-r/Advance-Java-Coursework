@@ -48,7 +48,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			    <div class="schedules_filter_container">
 			        <div class="schedules_search_wrapper">
 			            <span class="schedules_search_icon_container">
-			                <img src="${pageContext.request.contextPath}/assets/icons/search.svg" alt="Search" />
+			                <img src="${pageContext.request.contextPath}/icon?name=search" alt="Search" />
 			            </span>
 			            <input type="text" placeholder="Search movies..." name="movieSearch" class="schedules_search_input" value="${searchKeyword}">
 			        </div>
@@ -64,7 +64,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			                    <option value="night" ${selectedTime=="night"?"selected":""}>Night (After 9PM)</option>
 			                </select>
 			                <span class="schedules_select_arrow">
-			                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+			                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 			                </span>
 			            </div>
 			        
@@ -76,7 +76,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			                    <option value="butwal" ${selectedLocation=="butwal"?"selected":""}>Butwal</option>
 			                </select>
 			                <span class="schedules_select_arrow">
-			                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+			                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 			                </span>
 			            </div>
 			            
@@ -88,7 +88,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			                    <option value="nepali" ${selectedLanguage=="nepali"?"selected":""}>Nepali</option>
 			                </select>
 			                <span class="schedules_select_arrow">
-			                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+			                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 			                </span>
 			            </div>
 			
@@ -101,7 +101,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 			                    <option value="Standard" ${selectedformat=="Standard"?"selected":""}>Standard</option>
 			                </select>
 			                <span class="schedules_select_arrow">
-			                    <img src="${pageContext.request.contextPath}/assets/icons/arrowdown.svg" alt="Arrow Down" />
+			                    <img src="${pageContext.request.contextPath}/icon?name=arrowdown" alt="Arrow Down" />
 			                </span>
 			            </div>
 			             <div class="schedules_select_wrapper">
