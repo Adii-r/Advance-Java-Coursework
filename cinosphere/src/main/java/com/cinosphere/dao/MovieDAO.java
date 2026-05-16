@@ -221,9 +221,9 @@ public class MovieDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<MovieModel> getTopActiveMovie() throws Exception{
+	public List<MovieModel> get4ActiveMovie() throws Exception{
 		List<MovieModel> movies = new ArrayList<>();
-		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC LIMIT 1;";
+		String sql = "SELECT * FROM movie WHERE movie_status = ? ORDER BY release_date ASC LIMIT 4;";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, "NOW_SHOWING");

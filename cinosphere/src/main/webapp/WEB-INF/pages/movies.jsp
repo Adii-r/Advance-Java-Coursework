@@ -149,7 +149,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                                             <div class="movie_status_badge_group">
                                                 <span class="movie_certification_badge">${movie.ageRating}</span>
                                             </div>
-                                            <img src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg"
+                                            <img src = "${pageContext.request.contextPath}/movieposter?name=${movie.movieId}"
                                                  alt="${movie.movieName} poster"
                                                  class="movie_poster_image_element"/>
                                         </div>

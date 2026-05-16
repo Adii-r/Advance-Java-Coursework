@@ -179,7 +179,7 @@
       </div>
 
       <div class="details_visual">
-        <img src="${pageContext.request.contextPath}/assets/posters/poster.jpg"
+        <img src = "${pageContext.request.contextPath}/movieposter?name=poster"
              alt="Civil War IMAX Experience"
              class="visual_screen_img">
         <div class="visual_screen_overlay"></div>

@@ -184,7 +184,7 @@
 											<div class="admin_movie_info">
 												<div class="admin_movie_poster">
 													<img
-														src="${pageContext.request.contextPath}/assets/posters/${movie.movieId}.jpg"
+														src = "${pageContext.request.contextPath}/movieposter?name=${movie.movieId}"
 														alt="Michael" class="admin_movie_poster_image" />
 												</div>
 												<span class="admin_movie_name"> ${movie.movieName} </span>

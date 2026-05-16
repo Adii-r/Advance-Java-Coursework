@@ -22,8 +22,8 @@ public List<MovieModel> getAllActiveMovies() throws Exception {
 return movieDAO.getAllActiveMovie();
 }
 
-public List<MovieModel> getTopActiveMovies() throws Exception {
-	return movieDAO.getTopActiveMovie();
+public List<MovieModel> get4ActiveMovies() throws Exception {
+	return movieDAO.get4ActiveMovie();
 }
 
 public List<MovieModel> getAllMovies() throws Exception {

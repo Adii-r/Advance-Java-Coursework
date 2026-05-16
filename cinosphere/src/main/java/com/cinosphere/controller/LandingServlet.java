@@ -39,9 +39,8 @@ public class LandingServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		MovieService service = new MovieService();
-		List<MovieModel> activeMovies = null;
 		try {
-			activeMovies = service.getTopActiveMovies();
+			List<MovieModel> activeMovies  = service.get4ActiveMovies();
 			request.setAttribute("activeMovies",activeMovies);
 		} catch (Exception e) {
 			request.setAttribute("error", "Could not load movies Please try again later.");
