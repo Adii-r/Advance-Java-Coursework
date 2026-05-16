@@ -280,7 +280,7 @@
 							<tbody>
 
 								<c:if test="${not empty userList}">
-									<c:forEach var="user" items="${userList}" varStatus="loop">>
+									<c:forEach var="user" items="${userList}" varStatus="loop">
 										<c:set var="membership"
 											value="${membershipList[loop.index]}" />
 										<c:set var="booking"
