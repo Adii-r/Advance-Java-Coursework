@@ -16,8 +16,8 @@ import java.nio.file.Files;
 @WebServlet(asyncSupported = true, urlPatterns = { "/movieposter" })
 public class GetMoviePosterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = new File(System.getProperty("user.dir")).getParent()+ File.separator+ "assets" + File.separator+ "poster";
-    private static final String DEFAULT_IMAGE_NAME = "default.png";
+	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"poster";   
+	private static final String DEFAULT_IMAGE_NAME = "default.png";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");

@@ -37,11 +37,7 @@ public class LandingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(
-			    Paths.get("")
-			         .toAbsolutePath()
-			         .toString()
-			);
+
 		MovieService service = new MovieService();
 		List<MovieModel> activeMovies = null;
 		try {

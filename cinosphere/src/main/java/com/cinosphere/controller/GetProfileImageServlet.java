@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/profileimage" })
 public class GetProfileImageServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIR = new File(System.getProperty("user.dir"))+ File.separator+ "assets" + File.separator+ "profile";
+    private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"profile";   
     private static final String DEFAULT_IMAGE_NAME = "2.png";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,7 +22,12 @@ public class GetProfileImageServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
             return;
         }
-
+        System.out.print(UPLOAD_DIR);
+		System.out.println(
+			    Paths.get("")
+			         .toAbsolutePath()
+			         .toString()
+			);
         File folder = new File(UPLOAD_DIR);
         File imageFile = null;
 

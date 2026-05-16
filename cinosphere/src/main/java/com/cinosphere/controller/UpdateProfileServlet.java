@@ -32,7 +32,7 @@ import com.cinosphere.utils.SessionUtil;
 	)
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = new File(System.getProperty("user.dir"))+ File.separator+ "assets" + File.separator+ "profile";
+	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"profile";   
 	UsersDAO usersdao = new UsersDAO();
     MembershipService membershipService = new MembershipService();
     
