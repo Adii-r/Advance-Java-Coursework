@@ -44,6 +44,18 @@ public class MovieDAO {
 		ps.setString(9, ageRating);
 		return ps.executeUpdate() >0;
 	}
+	
+	public boolean updateStatus(int movieId,String movieStatus) throws Exception{
+		Connection con = DBconfig.getConnection();
+		String sql = "UPDATE movie SET movie_status=? WHERE movie_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, movieStatus);
+		ps.setInt(2, movieId);
+		return ps.executeUpdate() > 0;
+	}
+	
+	
+	
 	/**
 	 * find movie data using id
 	 * @param movieId

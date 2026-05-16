@@ -171,6 +171,7 @@
 							<thead>
 								<tr>
 									<th>Film</th>
+									<th>Release Date</th>
 									<th>Duration</th>
 									<th>Age Rating</th>
 									<th>Status</th>
@@ -190,6 +191,7 @@
 												<span class="admin_movie_name"> ${movie.movieName} </span>
 											</div>
 										</td>
+										<td>${movie.releaseDate}</td>
 										<td>${movie.duration}</td>
 										<td>${movie.ageRating}</td>
 										<td><span
@@ -201,12 +203,6 @@
 													<img
 														src="${pageContext.request.contextPath}/assets/icons/edit.svg"
 														alt="Edit" />
-												</button>
-												<button class="admin_action_button delete">
-													<img
-														src="${pageContext.request.contextPath}/assets/icons/delete.svg"
-														alt="Delete" />
-												</button>
 											</div>
 										</td>
 									</tr>
@@ -217,7 +213,7 @@
 				</div>
 			</section>
 
-			<section class="admin_user_management_section">
+			<section id="user_management"class="admin_user_management_section">
 
 				<div class="admin_panel_card">
 					<div class="admin_panel_header">
@@ -273,22 +269,22 @@
 								<tr>
 									<th>Name</th>
 									<th>Email</th>
+									<th>Role</th>
 									<th>Tier</th>
 									<th>Bookings</th>
 									<th>Points</th>
 									<th>Status</th>
 									<th>Toggle</th>
-									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 
 								<c:if test="${not empty userList}">
-									<c:forEach var="user" items="${userList}">
+									<c:forEach var="user" items="${userList}" varStatus="loop">>
 										<c:set var="membership"
-											value="${membershipList[userList.indexOf(user)]}" />
+											value="${membershipList[loop.index]}" />
 										<c:set var="booking"
-											value="${bookingList[userList.indexOf(user)]}" />
+											value="${bookingList[loop.index]}" />
 										<tr>
 											<td>
 												<div class="admin_user_identity">
@@ -302,6 +298,7 @@
 												</div>
 											</td>
 											<td>${user.email}</td>
+											<td>${user.userRole}</td>
 											<td><span class="admin_tier_badge elite">
 													${membership.membershipType} </span></td>
 											<td>${booking}</td>
@@ -335,18 +332,6 @@
 											        </button>
 											
 											    </form>
-											</td>
-											<td>
-												<div class="admin_movie_action_group">
-													<form action="${pageContext.request.contextPath}/admindeleteaccount" method="post">
-														<input type="hidden" name="userId" value="${user.userId}">
-														<button class="admin_action_button delete" type="submit">
-															<img
-																src="${pageContext.request.contextPath}/assets/icons/delete.svg"
-																alt="Delete" />
-														</button>
-													</form>
-												</div>
 											</td>
 										</tr>
 									</c:forEach>

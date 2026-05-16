@@ -13,7 +13,7 @@
         <div class="movie_status_badge_group">
             <span class="movie_certification_badge">${param.ageRating}</span>
         </div>
-        	<img src="${pageContext.request.contextPath}/assets/posters/${param.movieId}.jpg" alt="${param.movieName} poster" class="movie_poster_image_element"/>
+        	<img src = "${pageContext.request.contextPath}/movieposter?name=${param.movieId}" alt="${param.movieName} poster" class="movie_poster_image_element"/>
         <div class="movie_poster_gradient_overlay"></div>
     </div>
 

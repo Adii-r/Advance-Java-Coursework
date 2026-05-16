@@ -83,7 +83,7 @@ public class SeatDAO {
 	 * @throws Exception
 	 */
 	public boolean updateSeatStatus(int seatId, String seatStatus) throws Exception {
-		String sql = "UPDATE seat SET seat_status=? WHERE user_id=?";
+		String sql = "UPDATE seat SET seat_status=? WHERE seat_id=?";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, seatStatus);

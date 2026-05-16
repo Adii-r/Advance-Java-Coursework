@@ -54,7 +54,7 @@ public class BookingDAO {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, userId);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()) {
+        while(rs.next()) {
         	bookings.add(createBookingModel(rs));
         }
         rs.close();
@@ -98,7 +98,7 @@ public class BookingDAO {
         ps.setInt(1, userId);
         ps.setString(2, bookingStatus);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()) {
+        while(rs.next()) {
         	bookings.add(createBookingModel(rs));
         }
         rs.close();

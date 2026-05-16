@@ -1,6 +1,7 @@
 package com.cinosphere.service;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.cinosphere.dao.MovieDAO;
@@ -38,5 +39,30 @@ public List<MovieModel> getMoviesByStatus(String status) throws Exception {
 public List<MovieModel> findByMovieName(String searchMovie) throws Exception{
 	
 	return movieDAO.findByMovieName(searchMovie);
+}
+
+
+public void updateAllMovieStatus() throws Exception{
+	List<MovieModel> movies = getAllMovies();
+	LocalDate today = LocalDate.now();
+	for(MovieModel movie: movies) {
+		String status = movie.getMovieStatus();
+		if(status.equals("ARCHIVED")) continue;
+		LocalDate release = movie.getReleaseDate();
+		if(release.isAfter(today)){
+			if(!status.equals("COMNG_SOON"))
+				updateMovieStatus(movie.getMovieId(), "COMMING_SOON");
+		}else{
+			if(!status.equals("NOW_SHOWING"))
+				updateMovieStatus(movie.getMovieId(), "NOW_SHOWING");
+		}
+	}
+	
+}
+
+
+public boolean updateMovieStatus(int movieId,String movieStatus) throws Exception{
+	return movieDAO.updateStatus(movieId, movieStatus);
+
 }
 }
