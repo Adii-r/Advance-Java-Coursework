@@ -12,11 +12,13 @@
     <div class="schedules_row_movie">
         <div class="schedules_row_poster">
         	<img src="${pageContext.request.contextPath}/movieposter?name=${param.movieId}" alt="${param.movieName} poster" class="movie_poster_image_element"/>
-        	<div class="schedules_row_poster-overlay"></div>
         </div>
         <div class="schedules_row__information">
             <div class="schedules_row_title">${param.movieName}</div>
-            <div class="schedules_row_description"> ${param.language} · ${param.duration} min · ${param.genre}</div>
+            <div class = "description_group">
+	            <div class="schedules_row_description"> ${param.language} · ${param.genre}</div>
+	            <div class="schedules_row_description"> ${param.duration} min</div>
+            </div>
             <div class="schedule_row_badges">
                 <span class="age_rating_badge">${param.ageRating}</span>
                 <span class="format_badge">${param.format}</span>
