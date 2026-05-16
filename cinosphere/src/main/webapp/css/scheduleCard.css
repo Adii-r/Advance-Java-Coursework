@@ -1,0 +1,166 @@
+.schedules_row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: var(--surface);
+    transition: border-color 0.25s ease;
+}
+
+.schedules_row:hover {
+    border-color: rgba(201, 168, 76, 0.22);
+}
+
+
+.schedules_row_movie {
+    display: flex;
+    gap: 14px;
+    padding: 1.25rem;
+    border-right: 1px solid var(--glass-border);
+    background: var(--surface2);
+}
+
+.schedules_row_poster {
+    width: 56px;
+    height: 80px;
+    border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.schedules_row_poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.schedules_row_poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(8, 10, 14, 0.6));
+}
+
+.schedules_row__information {
+    flex: 1;
+}
+
+.schedules_row_title {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.schedules_row_description {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.schedule_row_badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.age_rating_badge,
+.format_badge {
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--glass-border);
+}
+
+.age_rating_badge {
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    border-color: rgba(201, 168, 76, 0.25);
+}
+
+.format_badge {
+    background: rgba(198, 40, 40, 0.12);
+    color: var(--crimson-bright);
+    border-color: rgba(198, 40, 40, 0.22);
+}
+
+.schedules_row_times {
+    padding: 1.25rem 1.5rem;
+}
+
+.time_hall_block {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.time_hall_block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.time_hall_label {
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time_hall_label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.times_slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.time_slot {
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    border-radius: var(--radius-sm);
+
+    padding: 10px 16px;
+    min-width: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time_slot:hover {
+    border-color: rgba(201, 168, 76, 0.35);
+    background: rgba(201, 168, 76, 0.06);
+}
+
+.time_slot_times {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+}

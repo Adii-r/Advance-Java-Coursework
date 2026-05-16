@@ -1,0 +1,57 @@
+.schedules_date_pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: var(--radius-md);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    flex-shrink: 0;
+    min-width: 70px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.schedules_date_pill:hover {
+    border-color: var(--gold-dim);
+    background: var(--glass-hover);
+}
+
+.schedules_date_pill.active {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+}
+
+.schedules_date_pill_day {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.schedules_date_pill_num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.1;
+}
+
+.schedules_date_pill_month {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top:3px;
+}
+
+.schedules_date_pill.active .schedules_date_pill_day,
+.schedules_date_pill.active .schedules_date_pill_num,
+.schedules_date_pill.active .schedules_date_pill_month {
+    color: var(--gold-dim);
+}

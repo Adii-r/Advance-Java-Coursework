@@ -113,16 +113,6 @@
     color: var(--text);
 }
 
-.movie_status_pill_group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.pill_radio {
-    display: none;
-} 
-
 .movie_filter_pill {
     font-family: var(--font-ui);
     font-size: 9px;
@@ -133,7 +123,7 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 7px 16px;
+    padding: 9px 21px;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -141,11 +131,10 @@
     display: inline-block;
 }
 
-
-.pill_radio:checked + .movie_filter_pill {
-    color: var(--gold);
-    background: rgba(201, 168, 76, 0.12);
-    border-color: var(--gold-dim);
+.movie_filter_pill:hover {
+  transform: translateY(-0.6px);
+  transition: color 0.5s ease;
+  border-color: var(--gold-dim);
 }
 
 .movie_display_section {
