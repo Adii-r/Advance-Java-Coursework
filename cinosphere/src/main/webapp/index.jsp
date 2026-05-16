@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | CinoSphere</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movieCard.css">
 </head>
 
 <body>
@@ -89,49 +90,27 @@
         </div>
 
         <div class="movie_cards_presentation_grid">
-            	<c:if test="${not empty activeMovies}">
-   		<c:forEach var="movie" items="${activeMovies}">
-	    <c:choose>
-		<c:when test="${movie.movieStatus == 'NOW_SHOWING'}">
-            <div class="movie_feature_film_card">
-             <div class="movie_poster_visual_wrapper">
-             <div class="movie_status_badge_group">
-               <span class="movie_certification_badge">${movie.ageRating}</span>
-                </div>
-                 <img src="${pageContext.request.contextPath}/movieposter?name=${movie.movieId}" alt="${movie.movieName} poster" class="movie_poster_image_element"/>
-                  <div class="movie_poster_gradient_overlay"></div>
-                  </div>
-                                        <div class="movie_information_panel">
-                                        <div class="movie_metadata_text_group">
-                                            <h3 class="movie_title">${movie.movieName}</h3>
-                                            <p class="movie_description">
-                                                ${movie.movieLanguage} | ${movie.genre}
-                                                <span>${movie.duration} min</span>
-                                            </p>
-                                            <div class="movie_action_button_bar">
-                                            <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/booking">
-                                                    Book Now
-                                                </button>
-                                                <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
-                                                <div class="movie_quick_view_icon_wrapper">
-                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                             </div>
-            				</c:when>
-           			 </c:choose>
-            </c:forEach>
-            </c:if>  
+        	<c:if test="${not empty activeMovies}">
+        		<c:forEach var="movie" items="${activeMovies}">
+        			 <jsp:include page="WEB-INF/components/movieCard.jsp">
+		                <jsp:param name="movieId" value="${movie.movieId}" />
+		                <jsp:param name="movieName" value="${movie.movieName}" />
+		                <jsp:param name="movieLanguage" value="${movie.movieLanguage}" />
+		                <jsp:param name="genre" value="${movie.genre}" />
+		                <jsp:param name="duration" value="${movie.duration}" />
+		                <jsp:param name="ageRating" value="${movie.ageRating}" />
+		                <jsp:param name="releaseDate" value="${movie.releaseDate}" />
+		                <jsp:param name="status" value="${movie.movieStatus}" />
+		            </jsp:include>
+            	</c:forEach>
+             </c:if>  
          </div>
-    </div>
-    <c:if test="${error}">
-                <div class="movie_main_content_container">
-                    <p class="movie_description" style="color:red;font-size:1rem;">${error}</p>
-                </div>
-        </c:if>    
+        					
+	<c:if test="${not empty error}">
+    	<div class="movie_main_content_container">
+        <p class="movie_description" style="color:red;font-size:1rem;">${error}</p>
+    	</div>
+	</c:if>
   </section>
    
   <section class="features_strip">

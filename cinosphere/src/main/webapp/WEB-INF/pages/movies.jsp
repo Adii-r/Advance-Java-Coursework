@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,11 +6,10 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Movies | CinoSphere</title>
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movies.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movieCard.css">
 </head>
 
 <body>
@@ -20,16 +18,11 @@ pageEncoding="UTF-8" isELIgnored="false" %>
     
     <main class="movie_screen"> 
     
-	    <section class="hero_movie_section">	
-	        <div class="overlay"></div>
-	        
-	        <div class="main_content_container">
-	            <div class="hero_text_stack">
-	                <h1 class="hero_primary_title">What's <em>Playing</em></h1>
-	                <p class="hero_narrative_subtitle">Storytelling under spectacle, explore the latest blockbusters now showing.</p>
-	            </div>
-	        </div>
-	    </section>
+	    <jsp:include page="../components/heroBanner.jsp">
+		    <jsp:param name="titleMain" value="What's" />
+		    <jsp:param name="titleEm" value="Playing" />
+		    <jsp:param name="subtitle" value="Storytelling under spectacle, explore the latest blockbusters now showing." />
+		</jsp:include>
 	    
 	    <section class="movie_filter_section">
 	    <form method="get" action="${pageContext.request.contextPath}/movies">
@@ -105,80 +98,24 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		</section>
 		<c:if test="${not empty filteredMovies}">
 
-		<section class="movie_section">
-			    <div class="movie_main_content_container">
-			        <div class="movie_cards_presentation_grid">
-			        <c:forEach var="movie" items="${filteredMovies}">
-			         <c:choose>
-			        <c:when test="${movie.movieStatus == 'NOW_SHOWING'}">
-                                    <div class="movie_feature_film_card">
-                                        <div class="movie_poster_visual_wrapper">
-                                            <div class="movie_status_badge_group">
-                                                <span class="movie_certification_badge">${movie.ageRating}</span>
-                                            </div>                                       
-                                            <img src="${pageContext.request.contextPath}/movieposter?name=${movie.movieId}"
-                                                 alt="${movie.movieName} poster"
-                                                 class="movie_poster_image_element"/>
-                                        </div>
-                                        <div class="movie_information_panel">
-                                            <h3 class="movie_title">${movie.movieName}</h3>
-                                            <p class="movie_description">
-                                                ${movie.movieLanguage} | ${movie.genre}
-                                                <span>${movie.duration} min</span>
-                                            </p>
-                                            <div class="movie_action_button_bar">
-                                            <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/booking">
-                                                    Book Now
-                                                </button>
-                                                <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
-                                                <div class="movie_quick_view_icon_wrapper">
-                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-			            </c:when>	            
-		            <c:otherwise>
-		            					<div class="movie_feature_film_card coming_soon_card">
-                                        <div class="movie_release_header">
-                                            <span class="release_date_text">${movie.releaseDate}</span>
-                                        </div>
-                                        <div class="movie_poster_visual_wrapper">
-                                            <div class="movie_status_badge_group">
-                                                <span class="movie_certification_badge">${movie.ageRating}</span>
-                                            </div>
-                                            <img src = "${pageContext.request.contextPath}/movieposter?name=${movie.movieId}"
-                                                 alt="${movie.movieName} poster"
-                                                 class="movie_poster_image_element"/>
-                                        </div>
-                                        <div class="movie_information_panel">
-                                            <h3 class="movie_title">${movie.movieName}</h3>
-                                            <p class="movie_description">
-                                                ${movie.movieLanguage} | ${movie.genre}
-                                                <span>${movie.duration} min</span>
-                                            </p>
-                                            <div class="movie_action_button_bar">
-                                                <button class="movie_booking_primary_button" href="${pageContext.request.contextPath}/notif>">
-                                                    Notify me
-                                                </button>
-                                               <a href='${pageContext.request.contextPath}/movie-detail?movieId=${movie.movieId}'>
-                                                <div class="movie_quick_view_icon_wrapper">
-                                                    <img src="${pageContext.request.contextPath}/assets/icons/info.svg" alt="Info" />
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-		                </c:otherwise>
-
-		
-		</c:choose>
-		</c:forEach>
-			</div>		
-		    </div>
-		</section>
+			<section class="movie_section">
+				<div class="movie_main_content_container">
+					<div class="movie_cards_presentation_grid">
+				        <c:forEach var="movie" items="${filteredMovies}">
+				          <jsp:include page="../components/movieCard.jsp">
+			                <jsp:param name="movieId" value="${movie.movieId}" />
+			                <jsp:param name="movieName" value="${movie.movieName}" />
+			                <jsp:param name="movieLanguage" value="${movie.movieLanguage}" />
+			                <jsp:param name="genre" value="${movie.genre}" />
+			                <jsp:param name="duration" value="${movie.duration}" />
+			                <jsp:param name="ageRating" value="${movie.ageRating}" />
+			                <jsp:param name="releaseDate" value="${movie.releaseDate}" />
+			                <jsp:param name="status" value="${movie.movieStatus}" />
+			             </jsp:include>
+			            </c:forEach>
+			         </div>		
+			    </div>
+			</section>
 		</c:if>
 		<c:if test="${empty filteredMovies && empty error}">
             <section class="movie_section">

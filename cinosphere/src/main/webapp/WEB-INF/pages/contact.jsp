@@ -7,9 +7,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Experience| CinoSphere</title>
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
 </head>
@@ -20,17 +18,12 @@ pageEncoding="UTF-8" isELIgnored="false" %>
     
     <main class="contact_screen"> 
     
-	    <section class="hero_contact_section">	
-	        <div class="contact_overlay"></div>
-	        
-	        <div class="contact_container">
-	            <div class="contact_hero_text">
-	                <h1 class="contact_primary_title">Stay <em>Connected</em></h1>
-	                <p class="contact_subtitle">We’d love to hear from you, from booking assistance and partnership enquiries to simply saying hello</p>
-	            </div>
-	        </div>
-	    </section>
-	    
+    	<jsp:include page="../components/heroBanner.jsp">
+		    <jsp:param name="titleMain" value="Stay" />
+		    <jsp:param name="titleEm" value="Connected" />
+		    <jsp:param name="subtitle" value="We’d love to hear from you, from booking assistance and partnership enquiries to simply saying hello." />
+		</jsp:include>
+    
 	    <section class="contact_content_wrapper">
 		  <div class="contact_page_grid_container">
 

@@ -7,9 +7,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Schedules| CinoSphere</title>
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movies.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/schedules.css">
@@ -21,17 +19,12 @@ pageEncoding="UTF-8" isELIgnored="false" %>
     
     <main class="schedules_screen"> 
     
-	    <section class="hero_schedules_section">	
-	        <div class="schedules_overlay"></div>
-	        
-	        <div class="schedules_container">
-	            <div class="hero_text">
-	                <h1 class="primary_title">What's <em>Showing</em></h1>
-	                <p class="subtitle">Explore available screenings and book the show that fits your time, language, and favourite cinema..</p>
-	            </div>
-	        </div>
-	    </section>
-	    
+    	<jsp:include page="../components/heroBanner.jsp">
+		    <jsp:param name="titleMain" value="What's" />
+		    <jsp:param name="titleEm" value="Showing" />
+		    <jsp:param name="subtitle" value="Explore available screenings and book the show that fits your time, language, and favourite cinema." />
+		</jsp:include>
+    
 	    <section class="movie_filter_section">
 		    <div class="movie_filter_container">
 		        

@@ -56,9 +56,11 @@
         </div>
 
         <div class="glass_panel_container">
-        <c:if test="${error != null}">
-		    	<p class="panel_subtitle" style="color:red;">${error}</p>
-		    	</c:if>
+         <c:if test="${not empty error}">
+		    <jsp:include page="../components/errorBox.jsp">
+		        <jsp:param name="errorMessage" value="${error}" />
+		    </jsp:include>
+		</c:if>
           <form action="register" method="POST">
               <div class="form_row_double">
                 <div class="form_group_wrapper">
