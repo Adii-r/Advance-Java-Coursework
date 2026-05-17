@@ -52,6 +52,9 @@ public class RegisterService {
         else if (!firstName.matches("[a-zA-Z]+")) {
             status = "First name must contain only letters";
         } 
+        else if (!lastName.matches("[a-zA-Z]+")) {
+            status = "last name must contain only letters";
+        } 
         else if (dob.isAfter(LocalDate.now())) {
             status = "Invalid date of birth";
         }else if (password == null || password.length() < 8) {
