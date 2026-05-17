@@ -61,6 +61,10 @@ public class RegisterServlet extends HttpServlet {
         
         if (status != null) {
             request.setAttribute("error", status);
+            request.setAttribute("username",username);
+            request.setAttribute("firstName",firstName);
+            request.setAttribute("lastName",lastName);
+            request.setAttribute("email",email);
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
             return;
         }

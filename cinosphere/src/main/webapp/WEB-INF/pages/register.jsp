@@ -65,11 +65,11 @@
               <div class="form_row_double">
                 <div class="form_group_wrapper">
                   <label class="form_label_text">First Name</label>
-                  <input type="text" name="firstName" class="form_input_field" placeholder="Aditya" required>
+                  <input type="text" name="firstName" class="form_input_field" placeholder="Aditya" value="${firstName}" required>
                 </div>
                 <div class="form_group_wrapper">
                   <label class="form_label_text">Last Name</label>
-                  <input type="text" name="lastName" class="form_input_field" placeholder="Raut" required>
+                  <input type="text" name="lastName" class="form_input_field" placeholder="Raut" value="${lastName}" required>
                 </div>
               </div>
 
@@ -77,7 +77,7 @@
 			    <div class="form_group_wrapper">
 			        <label class="form_label_text">Username</label>
 			        <div class="form_input_wrapper">
-			            <input type="text" name="username" class="form_input_field" placeholder="adir" required>
+			            <input type="text" name="username" class="form_input_field" placeholder="adir" value="${username}" required>
 			            <span class="form_input_icon"> 
 			                <img src="${pageContext.request.contextPath}/icon?name=user" alt="User" />
 			            </span>
@@ -87,7 +87,7 @@
 			    <div class="form_group_wrapper">
 			        <label class="form_label_text">Email Address</label>
 			        <div class="form_input_wrapper">
-			            <input type="email" name="email" class="form_input_field" placeholder="aditya@gmail.com" required>
+			            <input type="email" name="email" class="form_input_field" placeholder="aditya@gmail.com" value="${email}" required>
 			            <span class="form_input_icon"> 
 			                <img src="${pageContext.request.contextPath}/icon?name=mail" alt="Mail" />
 			            </span>
