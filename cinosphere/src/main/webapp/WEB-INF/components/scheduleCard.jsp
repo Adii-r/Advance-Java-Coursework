@@ -17,11 +17,10 @@
             <div class="schedules_row_title">${param.movieName}</div>
             <div class = "description_group">
 	            <div class="schedules_row_description"> ${param.language} · ${param.genre}</div>
-	            <div class="schedules_row_description"> ${param.duration} min</div>
             </div>
             <div class="schedule_row_badges">
                 <span class="age_rating_badge">${param.ageRating}</span>
-                <span class="format_badge">${param.format}</span>
+                <span class="format_badge">${param.duration} min</span>
             </div>
         </div>
     </div>
@@ -33,13 +32,16 @@
 	        <c:set var="times" value="${fn:split(cleanBlock, '|')[1]}" />
 	        <div class="time_hall_block">
 	            <div class="time_hall_label">${hallName}</div>
-	            <form method="get" action="${pageContext.request.contextPath}/schedules">
-	                <input type="hidden" name="movieId" value="${param.movieId}" />
+	            <form method="get" action="${pageContext.request.contextPath}/booking">
+	                <input type="hidden" name="movieId" value="${param.movieId}"/>
+	                <input type="hidden" name="screenName" value="${hallName}">	
+	                <input type="hidden" name="screenDate" value="${selectedDate}">	
 	                <div class="times_slots">
 	                    <c:forEach var="time" items="${fn:split(times, ',')}">
 	                        <button type="submit" name="selectedTime" value="${time}" class="time_slot">
 	                            <div class="time_slot_times">${time}</div>
 	                        </button>
+	                    </form>
 	                    </c:forEach>
 	                </div>
 	            </form>

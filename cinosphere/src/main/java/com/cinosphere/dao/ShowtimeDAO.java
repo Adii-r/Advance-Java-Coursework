@@ -49,6 +49,27 @@ public class ShowtimeDAO {
 	}
 	/**
 	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ShowtimeModel> findAllActive() throws Exception {
+		List<ShowtimeModel> shows = new ArrayList<>();
+		String sql = "SELECT * FROM showtime WHERE show_status = 'ACTIVE' ORDER BY show_date, movie_id, start_time";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			shows.add(createShowtimeModel(rs));
+		}
+		rs.close();
+		ps.close();
+		con.close();
+		return shows;
+	}
+	
+	
+	/**
+	 * 
 	 * @param movieId
 	 * @return
 	 * @throws Exception
@@ -82,6 +103,23 @@ public class ShowtimeDAO {
 		String sql = "SELECT * FROM showtime WHERE screen_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, screenId);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			shows.add(createShowtimeModel(rs));
+		}
+		rs.close();
+		ps.close();
+		return shows;
+	}
+	
+	public List<ShowtimeModel> findByDate(LocalDate showDate) throws Exception {
+		List<ShowtimeModel> shows = new ArrayList<>();
+		Connection con = DBconfig.getConnection();
+		
+		String sql = "SELECT * FROM showtime WHERE show_date = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setDate(1, Date.valueOf(showDate));
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
@@ -145,6 +183,10 @@ public class ShowtimeDAO {
 		ps.setInt(2, showtimeId);
 		return ps.executeUpdate()>0;
 	}
+	
+	
+	
+	
 	/**
 	 * Helper to create showtime object
 	 * @param rs
@@ -153,7 +195,7 @@ public class ShowtimeDAO {
 	 */
 	public ShowtimeModel createShowtimeModel(ResultSet rs) throws SQLException {
 		ShowtimeModel show = new ShowtimeModel();
-		show.setShowtimeId(rs.getInt("show_id"));
+		show.setShowtimeId(rs.getInt("showtime_id"));
 		show.setScreenId(rs.getInt("screen_id"));
 		show.setMovieId(rs.getInt("movie_id"));
 		show.setShowDate(rs.getDate("show_date").toLocalDate());
@@ -163,6 +205,7 @@ public class ShowtimeDAO {
 		show.setShowType(rs.getString("show_type"));
 		return show;
 	}
+
 
 	
 }

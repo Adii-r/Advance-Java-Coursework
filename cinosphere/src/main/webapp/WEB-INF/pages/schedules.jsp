@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false" %>
-
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +28,6 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		
 			<section class="date_strip_section">
 			    <div class="schedules_date_strip">
-			
 			        <c:forEach var="date" items="${dateList}">
 			
 			            <jsp:include page="../components/dateCard.jsp">
@@ -113,24 +112,30 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		</form>
 		
 		<section class="schedules_list_section">
+            <c:choose>
+                <c:when test="${empty movieList}">
+                    <div class="schedules_empty">
+                        <p>No screenings found for the selected date and filters.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="movie" items="${movieList}" varStatus="s">
+                        <jsp:include page="../components/scheduleCard.jsp">
+                            <jsp:param name="movieId"   value="${movie.movieId}"   />
+                            <jsp:param name="movieName" value="${movie.movieName}" />
+                            <jsp:param name="language"  value="${movie.movieLanguage}"  />
+                            <jsp:param name="genre"     value="${movie.genre}"     />
+                            <jsp:param name="ageRating" value="${movie.ageRating}" />
+                            <jsp:param name="duration"    value="${movie.duration}" />
+                            <jsp:param name="halls"     value="${hallsList[s.index]}" />
+                            <jsp:param name="date"     value="${selectedDate}" />
+                        </jsp:include>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
 
-		    <jsp:include page="../components/scheduleCard.jsp">
-		
-		        <jsp:param name="movieId" value="1" />
-		        <jsp:param name="movieName" value="The Devil Wears Prada 2" />
-		        <jsp:param name="language" value="Hindi" />
-		        <jsp:param name="duration" value="163" />
-		        <jsp:param name="genre" value="Action, Biography" />
-		        <jsp:param name="ageRating" value="PG" />
-		        <jsp:param name="format" value="IMAX" />
-		        <jsp:param name="halls"
-		            value="Hall A — IMAX 4K Laser|10:00 AM,1:30 PM,5:00 PM,8:30 PM;
-		                   Hall B — Standard|11:15 AM,3:00 PM,7:00 PM;"/>
-		
-		    </jsp:include>
-		
-		</section>
-			    
+        </section>
+	    
 	</main>
     <jsp:include page="../components/footer.jsp" />
 
