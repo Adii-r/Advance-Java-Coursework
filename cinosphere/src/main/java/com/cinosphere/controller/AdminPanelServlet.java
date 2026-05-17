@@ -71,7 +71,6 @@ public class AdminPanelServlet extends HttpServlet {
             String userType = request.getParameter("userType");
             String searchMovie = request.getParameter("searchMovie");
             String searchUser = request.getParameter("searchUser");
-            System.out.print(searchMovie);
             // Movie filtering
             List<MovieModel> movies;
 
@@ -86,7 +85,6 @@ public class AdminPanelServlet extends HttpServlet {
             if (searchMovie != null && !searchMovie.trim().isEmpty()) {
                 movies = movieService.findByMovieName(searchMovie);
             }
-            System.out.print(movies);
             List<UsersModel> users;
 
             if (userType == null || userType.equals("all")) {

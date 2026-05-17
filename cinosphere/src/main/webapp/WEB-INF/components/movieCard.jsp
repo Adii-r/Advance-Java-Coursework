@@ -22,11 +22,11 @@
         <p class="movie_description"> ${param.movieLanguage} | ${param.genre} <span>${param.duration} min</span> </p>
         <div class="movie_action_button_bar">
         	<c:choose>
-                <c:when test="${param.movieStatus == 'NOW_SHOWING'}">
-                    <button class="movie_booking_primary_button">Book Now</button>
+                <c:when test="${param.status == 'NOW_SHOWING'}">
+               		<a href="${pageContext.request.contextPath}/schedules" class="movie_booking_primary_button button">Book Now</a>
                 </c:when>
                 <c:otherwise>
-                    <button class="movie_booking_primary_button">Notify me</button>
+                    <a href="${pageContext.request.contextPath}/#" class="movie_booking_primary_button button">Notify Me</a>
                 </c:otherwise>
             </c:choose>
 
