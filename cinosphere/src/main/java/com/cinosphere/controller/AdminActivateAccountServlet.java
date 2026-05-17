@@ -42,7 +42,7 @@ public class AdminActivateAccountServlet extends HttpServlet {
 	            e.printStackTrace();
 	        }
 
-	        response.sendRedirect(request.getContextPath()+"/admin");
+	        response.sendRedirect(request.getContextPath()+"/admin#user_management");
 	    }	
 
 }

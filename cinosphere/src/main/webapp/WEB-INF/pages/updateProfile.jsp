@@ -33,7 +33,7 @@
 	                
 	              
 	                <span class="sidebar_section_label">Account</span>
-	                <a href="${pageContext.request.contextPath}/updateprofile?view=profile" 
+	                <a href="${pageContext.request.contextPath}/updateprofile" 
                		class="sidebar_nav_item ${param.view eq 'profile' ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">

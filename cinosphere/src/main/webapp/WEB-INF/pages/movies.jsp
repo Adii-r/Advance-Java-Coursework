@@ -74,32 +74,18 @@
 		            <button type="submit" class="movie_filter_pill">APPLY</button>
 		            </div>
 		        </div>
-			<%-- Radio button for movie filter selection 
-		        <div class="movie_status_pill_group">
-				    <input type="radio" name="status" id="all" value="all" class="pill_radio" ${selectedStatus=="all" || empty selectedStatus ?"checked":""}>
-				    <label for="all" class="movie_filter_pill">All</label>
-				
-				    <input type="radio" name="status" id="showing" value="NOW_SHOWING" class="pill_radio" ${selectedStatus=="NOW_SHOWING"?"checked":""}>
-				    <label for="showing" class="movie_filter_pill">Now Showing</label>
-				
-				    <input type="radio" name="status" id="soon" value="COMING_SOON"class="pill_radio" ${selectedStatus=="COMING_SOON"?"checked":""}>
-				    <label for="soon" class="movie_filter_pill">Coming Soon</label>
-				    <button type="submit" class="movie_filter_pill">APPLY</button>
-				</div>
-			--%>
-				<c:if test="${not empty error}">
-            			<div class="error_banner">
-                		<p>${error}</p>
-            			</div>
-        		</c:if>
 		    </div>
 		    
 		  </form>
 		</section>
-		<c:if test="${not empty filteredMovies}">
-
 			<section class="movie_section">
 				<div class="movie_main_content_container">
+						 <c:if test="${not empty error}">
+				    <jsp:include page="../components/errorBox.jsp">
+				        <jsp:param name="errorMessage" value="${error}" />
+				    </jsp:include>
+				</c:if>
+				<c:if test="${not empty filteredMovies}">
 					<div class="movie_cards_presentation_grid">
 				        <c:forEach var="movie" items="${filteredMovies}">
 				          <jsp:include page="../components/movieCard.jsp">
@@ -113,10 +99,11 @@
 			                <jsp:param name="status" value="${movie.movieStatus}" />
 			             </jsp:include>
 			            </c:forEach>
-			         </div>		
+			         </div>	
+			     </c:if>	
 			    </div>
 			</section>
-		</c:if>
+		
 		<c:if test="${empty filteredMovies && empty error}">
             <section class="movie_section">
                 <div class="movie_main_content_container">

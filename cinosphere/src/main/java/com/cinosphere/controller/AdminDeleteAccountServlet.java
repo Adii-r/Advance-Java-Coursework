@@ -37,7 +37,7 @@ public class AdminDeleteAccountServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath() + "/admin");
+		response.sendRedirect(request.getContextPath() + "/admin#user_management");
 	}
 
 }
