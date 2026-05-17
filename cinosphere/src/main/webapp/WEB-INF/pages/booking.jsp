@@ -26,14 +26,14 @@
 			        <div class="movie_card_title">${movie.movieName}</div>
 			        <div class="movie_card_description"> ${selectedDate} · ${selectedTime} · ${selectedHall} </div>
 			        <div class="movie_card_badge_group">
-			            <span class="movie_card_badge">${movie.format}</span>
+			            <span class="movie_card_badge"></span>
 			            <span class="movie_card_badge movie_card_badge_gold">${movie.ageRating}</span>
 			            <span class="movie_card_badge movie_card_badge_neutral">${movie.duration} min</span>
 			        </div>
 			    </div>
 			
 			    <a href="${pageContext.request.contextPath}/schedules" class="movie_card_button"> Change Show
-			        <img src="${pageContext.request.contextPath}/assets/icons/arrowright.svg" alt="Arrow Right" class="movie_card_button_icon"/>
+			        <img src="${pageContext.request.contextPath}/icon?name=arrowright" alt="Arrow Right" class="movie_card_button_icon"/>
 			    </a>
 				</div>
 		</section>

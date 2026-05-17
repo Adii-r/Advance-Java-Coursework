@@ -7,12 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.cinosphere.service.MovieService;
+
 /**
  * Servlet implementation class Booking
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/booking" })
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	MovieService movieService = new MovieService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,6 +30,20 @@ public class BookingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int movieId = Integer.parseInt(request.getParameter("movieId"));
+		String hallName= request.getParameter("screenName");
+		String showtime = request.getParameter("selectedTime");
+		String date = request.getParameter("selectedDate");
+		
+		try {
+			request.setAttribute("movie",movieService.getMovieById(movieId));
+			request.setAttribute("selectedTime",showtime);
+			request.setAttribute("selectedDate",date);
+			request.setAttribute("selectedHall",hallName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("/WEB-INF/pages/booking.jsp").forward(request, response);
 	}
 
