@@ -1,0 +1,159 @@
+.booking_screen {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 383px;
+    background: var(--deep);
+    padding-top: 100px;
+}
+
+.booking_left_section {
+    padding: 2.5rem 3rem;
+    border-right: 2px solid var(--glass-border);
+}
+
+.checkout_panel {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+}
+
+.movie_card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.movie_card_poster {
+    width: 48px;
+    height: 68px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.movie_poster_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movie_card_information {
+    flex: 1;
+}
+
+.movie_card_title {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.movie_card_description {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.movie_card_badge_group {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.movie_card_badge {
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    padding: 3px 9px;
+
+    border-radius: 999px;
+
+    background: var(--glass-hover);
+    border: 1px solid var(--glass-border);
+    color: var(--crimson-bright);
+}
+
+.movie_card_badge_gold {
+    color: var(--gold);
+}
+
+.movie_card_badge_neutral {
+    color: var(--text-muted);
+}
+
+.movie_card_button {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+
+    color: var(--gold-dim);
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.movie_card_button:hover {
+    color: var(--gold);
+}
+
+.movie_card_button_icon {
+    width: 11px;
+    height: 11px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(75%);
+}
+
+.checkout_header {
+    margin-bottom: 2rem;
+}
+
+.section_eyebrow {
+    display: inline-block;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    color: var(--gold-dim);
+
+    margin-bottom: 10px;
+}
+
+.checkout_title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.1;
+}
+
+.checkout_title em {
+    font-style: italic;
+    color: var(--gold);
+}
