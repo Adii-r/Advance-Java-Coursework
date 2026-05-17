@@ -14,13 +14,13 @@
 }
 
 .schedules_date_pill:hover {
-    border-color: var(--gold-dim);
+    border-color: var(--gold-light);
     background: var(--glass-hover);
 }
 
 .schedules_date_pill.active {
-    background: var(--gold-dim);
-    border-color: var(--gold);
+    background: rgba(201, 168, 76, 0.06);
+    border-color: var(--gold-dim);
 }
 
 .schedules_date_pill_day {
