@@ -89,20 +89,20 @@
 			<section class="admin_metrics_section">
 				<div class="admin_metrics_grid">
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_gold">Rs 2.4L</span>
+						<span class="admin_metric_value admin_metric_gold">Rs ${revenueToday}</span>
 						<span class="admin_metric_title">Revenue Today</span> <span
-							class="admin_metric_change"> ↑ 18% vs yesterday </span>
+							class="admin_metric_change"> ↑ ${revenueChange} vs yesterday </span>
 					</div>
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_green"> 847 </span> <span
+						<span class="admin_metric_value admin_metric_green"> ${ticketsSoldToday} </span> <span
 							class="admin_metric_title"> Tickets Sold </span> <span
-							class="admin_metric_change"> ↑ 124 vs avg </span>
+							class="admin_metric_change"> ↑ ${ticketsChange} vs yesterday </span>
 					</div>
 
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_gold"> 34 </span> <span
+						<span class="admin_metric_value admin_metric_gold">  ${newMembersToday} </span> <span
 							class="admin_metric_title"> New Members </span> <span
-							class="admin_metric_change"> ↑ 8 vs yesterday </span>
+							class="admin_metric_change"> ↑ ${usersChange} vs yesterday </span>
 					</div>
 					<div class="admin_metric_card">
 						<span class="admin_metric_value admin_metric_red">${totalBooking}</span> <span
@@ -212,13 +212,14 @@
 									</tr>
 								</c:forEach>
 								</c:if>
-								<c:if test="${empty error && empty filteredMovies }">
-								    <jsp:include page="../components/errorBox.jsp">
-								        <jsp:param name="errorMessage" value="${error}" />
-								    </jsp:include>
-								</c:if>
+							
 							</tbody>
 						</table>
+							<c:if test="${empty error && empty filteredMovies }">
+								    <jsp:include page="../components/errorBox.jsp">
+								        <jsp:param name="errorMessage" value="No movie found" />
+								    </jsp:include>
+								</c:if>
 					</div>
 				</div>
 			</section>
@@ -346,15 +347,16 @@
 										</tr>
 									</c:forEach>
 								</c:if>
-								<c:if test="${empty userList && empty error}">
+								
+							</tbody>
+						</table>
+						<c:if test="${empty userList && empty error}">
 									<tr><td>
 				    				<jsp:include page="../components/errorBox.jsp">
 				        			<jsp:param name="errorMessage" value="No User" />
 				    				</jsp:include>
 									</td></tr>
 								</c:if>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</section>

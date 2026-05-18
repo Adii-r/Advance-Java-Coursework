@@ -294,6 +294,40 @@ public class BookingDAO {
 	}
 	/**
 	 * 
+	 * @return
+	 */
+	public double getRevenue(LocalDate date) throws Exception {
+	    double total = 0;
+		String sql = " SELECT SUM(total_amount) FROM booking WHERE DATE(booking_date) = ?";
+	    Connection con = DBconfig.getConnection();
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setDate(1, Date.valueOf(date));
+	    ResultSet rs = ps.executeQuery();
+	    if (rs.next()) {
+	       total = rs.getDouble(1);
+	    }
+	    rs.close();
+	    ps.close();
+	    con.close();
+	    return total;
+	}
+	public int getBookings(LocalDate date) throws Exception {
+	    int total = 0;
+	    String sql = "SELECT COUNT(*) FROM booking WHERE booking_date = ?";
+	    Connection con = DBconfig.getConnection();
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setDate(1, Date.valueOf(date));
+	    ResultSet rs = ps.executeQuery();
+	    if (rs.next()) {
+	        total = rs.getInt(1);
+	    }
+	    rs.close();
+	    ps.close();
+	    con.close();
+	    return total;
+	}
+	/**
+	 * 
 	 * @param rs
 	 * @return
 	 * @throws SQLException

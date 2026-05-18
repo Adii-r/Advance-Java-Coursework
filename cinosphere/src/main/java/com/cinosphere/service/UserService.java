@@ -1,5 +1,6 @@
 package com.cinosphere.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.cinosphere.dao.UsersDAO;
@@ -23,6 +24,12 @@ public class UserService {
 	}
 	public List<UsersModel> findByUsernames(String searchUser) throws Exception {
 		return usersDAO.findByUsernames(searchUser);
+	}
+	public int getTodayNewUsers() throws Exception{
+	    return usersDAO.getNewUsers(LocalDate.now());
+	}
+	public int getYesterdayNewUsers() throws Exception{
+	    return usersDAO.getNewUsers(LocalDate.now().minusDays(1));
 	}
  
 }

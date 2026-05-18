@@ -67,5 +67,18 @@ public class BookingService {
 		return bookingDAO.getCurrentMonthBookings(userId);
 		
 	}
-	
+	public double getTodayRevenue() throws Exception {
+	    return bookingDAO.getRevenue(LocalDate.now());
+	}
+
+	public int getTodayBooking() throws Exception {
+	    return bookingDAO.getBookings(LocalDate.now());
+	}
+	public double getYesterdayRevenue() throws Exception {
+	    return bookingDAO.getRevenue(LocalDate.now().minusDays(1));
+	}
+
+	public int getYesterdayBooking() throws Exception {
+	    return bookingDAO.getBookings(LocalDate.now().minusDays(1));
+	}
 }

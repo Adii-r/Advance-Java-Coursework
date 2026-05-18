@@ -229,6 +229,23 @@ public class UsersDAO {
 		ps.setInt(2, userId);
 		return ps.executeUpdate() > 0;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNewUsers(LocalDate date) throws Exception{
+		int total = 0;
+	    String query = " SELECT COUNT(*) FROM users WHERE DATE(registration_date) = ?";
+	    Connection con = DBconfig.getConnection();
+	    PreparedStatement ps = con.prepareStatement(query);
+	    ps.setDate(1, Date.valueOf(date));
+	    ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	          total = rs.getInt(1);
+	        }
+	    return total;
+	}
 	
 	/**
 	 * Helper method to create user Object

@@ -48,13 +48,28 @@ public class AdminPanelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 try {
+			 double revenueToday = bookingService.getTodayRevenue();
+			 int ticketsSoldToday = bookingService.getTodayBooking();
+			 int newMembersToday = usersService.getTodayNewUsers();
+			 int totalBooking = bookingService.getTotalBookings();
+			 double revenueYesterday = bookingService.getYesterdayRevenue();
+			 int ticketsSoldYesterday = bookingService.getYesterdayBooking();
+			 int newMembersYesterday = usersService.getYesterdayNewUsers();
+			 
+			 
+			 
+			 request.setAttribute("revenueToday", revenueToday);
+			 request.setAttribute("ticketsSoldToday", ticketsSoldToday);
+			 request.setAttribute("newMembersToday", newMembersToday);
+			 request.setAttribute("totalBooking", totalBooking);
+			 request.setAttribute("revenueChange",calculateChange(revenueToday, revenueYesterday));
+			request.setAttribute("ticketsChange",ticketsSoldToday-ticketsSoldYesterday);
+			request.setAttribute("usersChange",newMembersToday-newMembersYesterday);
 			 List<UsersModel> users = usersService.getAllUsers();
 			 List<MembershipModel> memberships = membershipService.getMemberships(users);
 			 List<Integer> bookings = bookingService.getTotalBookings(users);
-			 int totalBooking = bookingService.getTotalBookings();
 			 List<MovieModel> movies = movieService.getAllMovies();
 			 request.setAttribute("today",LocalDate.now().format(formatter));
-			request.setAttribute("totalBooking", totalBooking);
             request.setAttribute("filteredMovies", movies);
 			request.setAttribute("userList", users);
 			request.setAttribute("membershipList", memberships);
@@ -73,6 +88,20 @@ public class AdminPanelServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			double revenueToday = bookingService.getTodayRevenue();
+			int ticketsSoldToday = bookingService.getTodayBooking();
+			int newMembersToday = usersService.getTodayNewUsers();
+			int totalBooking = bookingService.getTotalBookings();
+			 double revenueYesterday = bookingService.getYesterdayRevenue();
+			 int ticketsSoldYesterday = bookingService.getYesterdayBooking();
+			 int newMembersYesterday = usersService.getYesterdayNewUsers();
+			request.setAttribute("revenueToday", revenueToday);
+			request.setAttribute("ticketsSoldToday", ticketsSoldToday);
+			request.setAttribute("newMembersToday", newMembersToday);
+			request.setAttribute("totalBooking", totalBooking);
+			 request.setAttribute("revenueChange",calculateChange(revenueToday, revenueYesterday));
+			request.setAttribute("ticketsChange",ticketsSoldToday-ticketsSoldYesterday);
+			request.setAttribute("usersChange",newMembersToday-newMembersYesterday);
             String movieStatus = request.getParameter("movieStatus");
             String userType = request.getParameter("userType");
             String searchMovie = request.getParameter("searchMovie");
@@ -132,6 +161,13 @@ public class AdminPanelServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
     }
-		
+	private String calculateChange(double today, double yesterday) {
+	    if (yesterday == 0) {
+	        return today > 0 ? "100%" : "0%";
+	    }
+
+	    double change = ((today - yesterday) / yesterday) * 100;
+	    return String.format("%.0f%%", change);
+	}
 	}
         

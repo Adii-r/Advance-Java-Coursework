@@ -89,27 +89,27 @@
 			<div class="dashboard_scroll_area">
 			    <div class="stats-row">
 			        <div class="stat-card">
-			            <span class="stat-num">${totalBooking}</span>
+			            <span class="stat-num">${totalBooking==null?'0':totalBooking}</span>
 			            <span class="stat-label">Total Bookings</span>
-			            <span class="stat-delta">↑ ${bookingMonthTotal} this month</span>
+			            <span class="stat-delta">↑ ${bookingMonthTotal==null?'0':bookingMonthTotal} this month</span>
 			        </div>
 			        
 			        <div class="stat-card">
-			            <span class="stat-num" style="color: var(--gold)">${membership.totalLoyaltyPoints}</span>
+			            <span class="stat-num" style="color: var(--gold)">${membership.totalLoyaltyPoints==null?'0':membership.totalLoyaltyPoints}</span>
 			            <span class="stat-label">Sphere Points</span>
-			            <span class="stat-delta">↑ ${loyaltyPointsEarned} pts earned</span>
+			            <span class="stat-delta">↑ ${loyaltyPointsEarned==null?'0':loyaltyPointsEarned} pts earned</span>
 			        </div>
 			        
 			        <div class="stat-card">
-			            <span class="stat-num" style="color: var(--crimson-bright)">${upcomingBooking}</span>
+			            <span class="stat-num" style="color: var(--crimson-bright)">${upcomingBooking==null?'None':upcomingBooking}</span>
 			            <span class="stat-label">Upcoming Bookings</span>
-			            <span class="stat-delta">Next:${upcommingDate}</span>
+			            <span class="stat-delta">Next:${upcommingDate==null?'None':upcommingDate}</span>
 			        </div>
 			        
 			        <div class="stat-card">
 			            <span class="stat-num">Rs. 500</span>
 			            <span class="stat-label">Welcome Credit</span>
-			            <span class="stat-delta">Valid until Jun 2026</span>
+			            <span class="stat-delta">Valid until Oct 2026</span>
 			        </div>
 			    </div>
 			</div>
@@ -119,7 +119,7 @@
 			
 				<div class="booking-column">
 					<div class="panel-glass">
-						<div class="section-title">Upcoming Bookings <a href="#">View all →</a></div>
+						<div class="section-title">Upcoming Bookings <!--<a href="#">View all →</a>--></div>
 						
 						<c:choose>
 							<c:when test="${not empty bookings}">
