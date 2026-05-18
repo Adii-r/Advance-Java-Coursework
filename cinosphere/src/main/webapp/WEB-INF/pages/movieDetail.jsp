@@ -21,7 +21,7 @@
 		<div class="detail_hero">
 		
 			<div class="detail_hero_background">
-		       <img src="${pageContext.request.contextPath}/movieposter?name=${movie.movieId}"  alt="${movie.movieName} Poster" class="detail_hero_background_poster"/>
+		       <img src="${pageContext.request.contextPath}/background?name=${movie.movieId}"  alt="${movie.movieName} Poster" class="detail_hero_background_poster"/>
 		 	</div>
 
 		  <div class="detail_hero_content">
@@ -38,7 +38,6 @@
 		      </div>
 		
 		      <h1 class="detail_title"> ${movie.movieName}</h1>
-		      <p class="detail_tagline">A Legend of a Star born.</p>
 		    </div>
 		  </div>
 		
@@ -47,7 +46,7 @@
 		<div class="detail_body">
 			<div class="detail_about_section">
 				<span class="detail_section_eyebrow"> ${movie.genre} </span>
-				<h2 class="detail_section_title"> About this <em>Film</em> </h2>
+				<h2 class="detail_section_title"> About this <em>Movie</em> </h2>
 				<p class="detail_description"> ${movie.description}</p>
 				
 		        <div class="detail_meta_section">

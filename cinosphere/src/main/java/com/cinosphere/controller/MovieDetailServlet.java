@@ -33,14 +33,15 @@ public class MovieDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<MovieModel> filteredMovies = null;
-		String language = request.getParameter("langFilter");
-		String genre = request.getParameter("genreFilter");
-		String status = request.getParameter("status");
-		String search = request.getParameter("movieSearch");
-		int movieId = Integer.parseInt(request.getParameter("movieId"));
+		String movieId = request.getParameter("movieId");
 		try {
-			filteredMovies = movieService.getFilteredMovies(language, genre, status, search);
-			request.setAttribute("movie",movieService.getMovieById(movieId));
+			if(movieId==null||movieId.isEmpty()) {
+				response.sendRedirect("movie");
+				return;
+			}
+			int id = Integer.parseInt(movieId);
+			filteredMovies = movieService.get4ActiveMovies();
+			request.setAttribute("movie",movieService.getMovieById(id));
 			request.setAttribute("filteredMovies",filteredMovies);
 		} catch (Exception e) {
 		    e.printStackTrace();

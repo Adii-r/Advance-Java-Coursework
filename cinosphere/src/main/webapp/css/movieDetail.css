@@ -15,7 +15,7 @@
 
 .detail_hero_background_poster {
   transform: scale(1.2);
-  filter: blur(10px) brightness(0.6);
+  filter: blur(8px) brightness(0.65);
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -92,10 +92,10 @@
   letter-spacing: 0.12em;
   padding: 4px 10px;
   border-radius: 20px;
-  color: var(--text-dim);
   text-transform: uppercase;
-  background: var(--glass-hover);
   border: 1px solid var(--glass-border);
+  background: rgba(198, 40, 40, 0.15);
+  color: var(--crimson-bright);
 }
 
 .detail_title {
@@ -105,20 +105,13 @@
   font-weight: 300;
   line-height: 1.0;
   color: var(--gold-light);
-  margin-bottom: 0.5rem;
-}
-
-.detail_tagline {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-style: italic;
-  font-weight: 300;
-  color: var(--text-dim);
-  margin-left:10px;
 }
 
 .detail_body {
-  padding: 3rem 4rem;
+  padding: 2rem 4rem;
+  background:  radial-gradient(ellipse 100% 80% at 70% 60%, var(--crimson-glow) 0%, transparent 90%),
+ 				radial-gradient(ellipse 80% 60% at 0% 90%, var(--gold-glow) 0%, transparent 50%),
+    			linear-gradient(180deg, var(--obsidian) 0%, var(--deep) 100%);
 }
 
 .detail_about_section {
@@ -127,62 +120,62 @@
 
 .detail_section_eyebrow {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-family: var(--font-ui);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light);
 }
 
 .detail_section_title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 300;
+  font-size: 48px;
+  font-style:italic;
+  font-weight: 400;
   color: var(--text);
 }
 
 .detail_section_title em {
-  color: var(--gold);
+  color: var(--gold-light);
   font-style: italic;
 }
 
 .detail_description {
   margin-bottom: 2rem;
-  font-family: var(--font-body);
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.95;
   color: var(--text-dim);
 }
 
 .detail_meta_section {
-  margin-bottom: 2.5rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--glass-border);
+  margin-bottom: 1.5rem;
 }
 
 .detail_meta_grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(2, 0.18fr);
+  gap: 0.8rem;
 }
 
 .detail_meta_label {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-family: var(--font-ui);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.20em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--gold-light);
 }
 
 .detail_meta_value {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text-dim);
 }
@@ -190,6 +183,7 @@
 .detail_related_section {
   padding: 4rem;
   background: var(--deep);
+  border-top: 1px solid rgba(201,168,76,0.40);
 }
 
 .detail_related_header {
@@ -199,33 +193,12 @@
   margin-bottom: 2rem;
 }
 
-.detail_section_eyebrow {
-  font-family: var(--font-ui);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-}
-
-.detail_section_title {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 300;
-  color: var(--text);
-}
-
-.detail_section_title em {
-  color: var(--gold);
-  font-style: italic;
-}
-
 .detail_view_all_link {
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  margin-bottom:25px;
 }
 
 .detail_view_all_text {
@@ -234,36 +207,21 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--gold);
   transition: color 0.2s ease;
 }
 
-.detail_view_all_icon_wrapper {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(201,168,76,0.15);
-  border: 1px solid var(--gold);
-  transition: all 0.2s ease;
-}
-
 .detail_view_all_icon {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
+	width: 12px;
+    height: 12px;
+    object-fit: contain;
+    transition: filter 0.2s ease;
+    filter: brightness(0) invert(0.6);
 }
 
 .detail_view_all_link:hover .detail_view_all_text {
-  color: var(--gold);
-}
-
-.detail_view_all_link:hover .detail_view_all_icon_wrapper {
-  background: rgba(201,168,76,0.30);
-  transform: scale(1.08);
-  box-shadow: 0 0 12px rgba(201,168,76,0.35);
+  color: var(--gold-light);
+  transform: translateY(-1px);
 }
 
 .detail_related_grid {
