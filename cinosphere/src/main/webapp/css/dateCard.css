@@ -20,7 +20,7 @@
 
 .schedules_date_pill.active {
     background: rgba(201, 168, 76, 0.06);
-    border-color: var(--gold-dim);
+    border-color: var(--gold-light);
 }
 
 .schedules_date_pill_day {
@@ -53,5 +53,5 @@
 .schedules_date_pill.active .schedules_date_pill_day,
 .schedules_date_pill.active .schedules_date_pill_num,
 .schedules_date_pill.active .schedules_date_pill_month {
-    color: var(--gold-dim);
+    color: var(--gold);
 }

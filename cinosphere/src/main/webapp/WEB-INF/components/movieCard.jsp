@@ -30,7 +30,7 @@
                 </c:otherwise>
             </c:choose>
 
-            <a href="${pageContext.request.contextPath}/movie-detail?movieId=${param.movieId}">
+            <a href="${pageContext.request.contextPath}/moviedetail?movieId=${param.movieId}">
                 <div class="movie_quick_view_icon_wrapper">
                     <img src="${pageContext.request.contextPath}/icon?name=info" alt="Info" />
                 </div>

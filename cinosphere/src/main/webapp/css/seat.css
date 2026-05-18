@@ -1,0 +1,63 @@
+.seat {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px 4px 2px 2px;
+  border: 1px solid var(--glass-border);
+  border-color: rgba(74,222,128,0.22);   
+  background: rgba(74,222,128,0.15); 
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.seat::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2px;
+  right: 2px;
+  height: 3px;
+  background: rgba(74,222,128,0.18); 
+  border-radius: 2px 2px 0 0;
+}
+
+.seat:hover:not(.seat_reserved) {
+  background: rgba(201,168,76,0.60);
+  border-color: rgba(201, 168, 76, 0.5);
+  transform: scale(1.08);
+}
+
+.seat_reserved {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: rgba(198, 40, 40, 0.32);
+  border-color: rgba(198, 40, 40, 0.42);
+}
+
+.seat_input {
+  display: none;
+}
+
+.seat_visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.seat_number {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-dim);
+  line-height: 1;
+}
+
+.seat_reserved .seat_number {
+  color: var(--crimson-bright);
+}
