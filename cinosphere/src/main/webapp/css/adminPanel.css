@@ -528,6 +528,7 @@ html,body {
 .admin_movie_action_group {
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 .admin_action_button {
@@ -579,6 +580,11 @@ html,body {
 .admin_action_button.edit:hover {
     border-color: rgba(201,168,76,0.35);
     background: rgba(201,168,76,0.08);
+}
+
+.admin_action_button.delete:hover {
+    background: rgba(198, 40, 40, 0.12);
+    border-color: rgba(198, 40, 40, 0.22);
 }
 
 .admin_user_management_section {

@@ -216,6 +216,11 @@
 													<img
 														src="${pageContext.request.contextPath}/icon?name=edit"
 														alt="Edit" /></button>
+										
+												<button class="admin_action_button delete">
+													<img
+														src="${pageContext.request.contextPath}/icon?name=delete"
+														alt="del" /></button>
 											</div>
 										</td>
 									</tr>
