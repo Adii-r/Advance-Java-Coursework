@@ -84,10 +84,10 @@ public class UserPanelServlet extends HttpServlet {
             
             List<TicketModel> tickets = ticketService.getTicketByBooking(booking.getBookingId());
             TicketModel firstTicket = tickets.get(0);
-            ShowtimeModel showtime  = showtimeService.findShowtimeById(firstTicket.getShowtimeId());
+            ShowtimeModel showtime  = showtimeService.getShowtimeById(firstTicket.getShowtimeId());
             MovieModel    movie     = movieService.getMovieById(showtime.getMovieId());
             ScreenModel   screen    = screenService.getScreenById(showtime.getScreenId());
-            TheatreModel  theatre   = theatreService.findTheatreById(screen.getTheatreId());
+            TheatreModel  theatre   = theatreService.getTheatreById(screen.getTheatreId());
             
             List<String> seats = new ArrayList<>();
             for (TicketModel t : tickets) {
