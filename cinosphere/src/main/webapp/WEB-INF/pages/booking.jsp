@@ -26,7 +26,7 @@
 			
 			    <div class="movie_card_information">
 			        <div class="movie_card_title">${movie.movieName}</div>
-			        <div class="movie_card_description">${selectedTime} · ${selectedDate} · ${selectedHall} </div>
+			        <div class="movie_card_description">${time} · ${date} · ${hallName} </div>
 			        <div class="movie_card_badge_group">
 			            <span class="movie_card_badge movie_card_badge_gold">${movie.ageRating}</span>
 			            <span class="movie_card_badge movie_card_badge_neutral">${movie.duration} min</span>
@@ -42,26 +42,26 @@
 
 				    <div class="seat_selection_heading">
 				        <span class="section_eyebrow">Select Your Seats</span>
-				        <h2 class="seat_selection_title"> ${selectedHall} </h2>
+				        <h2 class="seat_selection_title"> ${hallName} </h2>
 				    </div>
-			
+			<!--  
 					<div class="hall_selector">
-					    <label class="hall_pill ${selectedHall == 'A' ? 'active' : ''}">
-					        <input type="radio" name="selectedHall" value="A" class="hall_radio_input" ${selectedHall == 'A' ? 'checked' : ''}>
+					    <label class="hall_pill ${hallName == 'A' ? 'active' : ''}">
+					        <input type="radio" name="hallName" value="A" class="hall_radio_input" ${hallName == 'A' ? 'checked' : ''}>
 					        <span>Hall A — IMAX</span>
 					    </label>
 					
-					    <label class="hall_pill ${selectedHall == 'B' ? 'active' : ''}">
-					        <input type="radio" name="selectedHall" value="B" class="hall_radio_input" ${selectedHall == 'B' ? 'checked' : ''}>
+					    <label class="hall_pill ${hallName == 'B' ? 'active' : ''}">
+					        <input type="radio" name="hallName" value="B" class="hall_radio_input" ${hallName == 'B' ? 'checked' : ''}>
 					        <span>Hall B — IMAX</span>
 					    </label>
 					
-					    <label class="hall_pill ${selectedHall == 'C' ? 'active' : ''}">
-					        <input type="radio" name="selectedHall" value="C" class="hall_radio_input" ${selectedHall == 'C' ? 'checked' : ''}>
+					    <label class="hall_pill ${hallName == 'C' ? 'active' : ''}">
+					        <input type="radio" name="hallName" value="C" class="hall_radio_input" ${hallName == 'C' ? 'checked' : ''}>
 					        <span>Hall C — Premium</span>
 					    </label>
 					</div>
-					
+				-->
 					<div class="seat_indicator_bar">
 						<div class="indicator_item">
 					        <div class="overlay overlay_available"></div>

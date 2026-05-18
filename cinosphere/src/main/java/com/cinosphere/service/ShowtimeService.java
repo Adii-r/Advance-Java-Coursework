@@ -15,7 +15,7 @@ public class ShowtimeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ShowtimeModel findShowtimeById(int showtimeId) throws Exception{
+	public ShowtimeModel getShowtimeById(int showtimeId) throws Exception{
 			return showtimeDAO.findByShowtimeId(showtimeId);
 
 	}
@@ -25,7 +25,7 @@ public class ShowtimeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ShowtimeModel> findShowtimesByScreenId(int screenId) throws Exception {
+	public List<ShowtimeModel> getShowtimesByScreenId(int screenId) throws Exception {
 		return showtimeDAO.findByScreenId(screenId);
 	}
 	/**
@@ -34,7 +34,7 @@ public class ShowtimeService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ShowtimeModel> findShowtimesByMovieId(int movieId) throws Exception {
+	public List<ShowtimeModel> getShowtimesByMovieId(int movieId) throws Exception {
 		return showtimeDAO.findByMovieId(movieId);
 	}
 	/**

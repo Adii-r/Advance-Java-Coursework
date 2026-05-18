@@ -181,19 +181,21 @@ public class SchedulesService {
 	            if (locationFilter != null && !locationFilter.isEmpty() && !locationFilter.equals("all") && !theatre.getCity().equalsIgnoreCase(locationFilter)) continue;
 	            String hallLabel = theatre.getCity()+ " — " +screen.getScreenName() + " — " + screen.getScreenType();
 
-	            String times = screenEntry.getValue().stream().map(st -> st.getStartTime().format(timeFmt)).collect( Collectors.joining(","));
-
+	            String times = screenEntry.getValue().stream().map(st -> st.getStartTime().format(timeFmt)+ "." +st.getShowtimeId()).collect( Collectors.joining(","));
+	            
 	            if (halls.length() > 0)
 	                halls.append(";");
 
-	            halls.append(hallLabel).append("|").append(times);
+	            halls.append(hallLabel).append("|").append(times).append("|").append(screen.getScreenId());
 	        }
-
+	        System.out.print(halls);
+	        
 	        hallsList.add(halls.toString());
 	    }
-
+	    
 	    return hallsList;
 	}
+	
 	/**
 	 * @param time   showtime start time
 	 * @param filter value from <select name="timeFilter">
