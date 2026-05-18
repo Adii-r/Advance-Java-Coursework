@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variable.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/scheduleCard.css">
 </head>
 

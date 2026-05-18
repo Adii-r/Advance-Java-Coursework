@@ -30,13 +30,17 @@ public class BookingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int movieId = Integer.parseInt(request.getParameter("movieId"));
+		String movieId = request.getParameter("movieId");
 		String hallName= request.getParameter("screenName");
 		String showtime = request.getParameter("selectedTime");
 		String date = request.getParameter("selectedDate");
-		
+		if(movieId==null||movieId.isEmpty()) {
+			response.sendRedirect("schedules");
+			return;
+		}
+		int id = Integer.parseInt(movieId);
 		try {
-			request.setAttribute("movie",movieService.getMovieById(movieId));
+			request.setAttribute("movie",movieService.getMovieById(id));
 			request.setAttribute("selectedTime",showtime);
 			request.setAttribute("selectedDate",date);
 			request.setAttribute("selectedHall",hallName);

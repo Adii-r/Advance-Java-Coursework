@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.cinosphere.dao.MembershipDAO;
@@ -26,6 +28,7 @@ import com.cinosphere.utils.SessionUtil;
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin" })
 public class AdminPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d MMM, EEEE");
 	UserService usersService = new UserService();
 	MembershipService membershipService = new MembershipService();
 	MovieService movieService = new MovieService();
@@ -48,7 +51,10 @@ public class AdminPanelServlet extends HttpServlet {
 			 List<UsersModel> users = usersService.getAllUsers();
 			 List<MembershipModel> memberships = membershipService.getMemberships(users);
 			 List<Integer> bookings = bookingService.getTotalBookings(users);
-			List<MovieModel> movies = movieService.getAllMovies();
+			 int totalBooking = bookingService.getTotalBookings();
+			 List<MovieModel> movies = movieService.getAllMovies();
+			 request.setAttribute("today",LocalDate.now().format(formatter));
+			request.setAttribute("totalBooking", totalBooking);
             request.setAttribute("filteredMovies", movies);
 			request.setAttribute("userList", users);
 			request.setAttribute("membershipList", memberships);
@@ -71,7 +77,6 @@ public class AdminPanelServlet extends HttpServlet {
             String userType = request.getParameter("userType");
             String searchMovie = request.getParameter("searchMovie");
             String searchUser = request.getParameter("searchUser");
-            System.out.print(searchMovie);
             // Movie filtering
             List<MovieModel> movies;
 
@@ -86,7 +91,6 @@ public class AdminPanelServlet extends HttpServlet {
             if (searchMovie != null && !searchMovie.trim().isEmpty()) {
                 movies = movieService.findByMovieName(searchMovie);
             }
-            System.out.print(movies);
             List<UsersModel> users;
 
             if (userType == null || userType.equals("all")) {

@@ -1,4 +1,5 @@
 package com.cinosphere.service;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class BookingService {
 	public List<Integer> getTotalBookings(List<UsersModel> users) throws Exception {
 		
 		List<Integer> bookingCount = new ArrayList<>();
-		for(UsersModel user: users) {
+		for(UsersModel userId: users) {
 			
-			int totalBooking = bookingDAO.findTotalBookingByUserId(user.getUserId());
+			int totalBooking = getTotalBookings(userId.getUserId());
 			
 			bookingCount.add(totalBooking);
 		}
@@ -35,11 +36,36 @@ public class BookingService {
 		return bookingCount;
 	}
 
-	public int getTotalBookings(UsersModel user) throws Exception{
+	public int getTotalBookings(int userId) throws Exception{
 		
-		return bookingDAO.findTotalBookingByUserId(user.getUserId());
+		return bookingDAO.findTotalBookingByUserId(userId);
+	}
+	public int getTotalUpcomingBookings(int userId) throws Exception{
+		
+		return bookingDAO.findTotalUpcomingByUserId(userId);
+	}
+	
+	public int getLatestLoyaltyPointsEarned(int userId) throws Exception {
+		BookingModel booking = bookingDAO.findLatestConfirmedByUserId(userId);
+		return booking.getLoyaltyPointsEarned();
 	}
 	
 	
+	public LocalDate getLatestComingBookingDate(int userId) throws Exception{
+				
+		BookingModel booking = bookingDAO.findLatestComingByUserId(userId);
+		return booking.getBookingDate();
+	}
+	public int getTotalBookings() throws Exception{
+		return bookingDAO.getTotalBookings();
+	}
+	public List<BookingModel> getUpcomingBookings(int userId) throws Exception{
+		
+		return bookingDAO.findUpcomingByUserId(userId);
+	}
+	public int getTotalBookingsThisMonth(int userId) throws Exception {
+		return bookingDAO.getCurrentMonthBookings(userId);
+		
+	}
 	
 }

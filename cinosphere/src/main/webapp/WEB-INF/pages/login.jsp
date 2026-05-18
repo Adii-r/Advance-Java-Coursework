@@ -50,15 +50,16 @@
 		      <h2 class="panel_title">Log <em>In</em></h2>
 		      <p class="panel_subtitle">Enter your credentials to continue</p>
 		    </header>
-		    <div class="glass_card"> 
-		      <form action="${pageContext.request.contextPath}/login" method="POST" class="form_standard">
-		        
-		        <div class="form_group">
-		        <c:if test="${not empty error}">
+		    <div class="glass_card">
+		    <c:if test="${not empty error}">
 				    <jsp:include page="../components/errorBox.jsp">
 				        <jsp:param name="errorMessage" value="${error}" />
 				    </jsp:include>
-				</c:if>
+				</c:if> 
+		      <form action="${pageContext.request.contextPath}/login" method="POST" class="form_standard">
+		        
+		        <div class="form_group">
+		        
 		          <label class="field_label">Username</label>
 		          <div class="input_field_wrapper">
 		            <input type="username" name="username" class="input_control" placeholder="Emilio" value="${typedUser}" required />

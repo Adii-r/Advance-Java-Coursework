@@ -14,7 +14,7 @@ public class TicketService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TicketModel> findTicketByBooking(int booking_id) throws Exception {
+	public List<TicketModel> getTicketByBooking(int booking_id) throws Exception {
 		return ticketDAO.findByBookingId(booking_id);
 	}
 	/**

@@ -65,8 +65,7 @@
 								Welcome,<em>${user.firstName}</em>
 							</h1>
 							<p class="admin_dashboard_heading_subtitle">
-								<fmt:formatDate value="<%=new java.util.Date()%>"
-									pattern="d MMM yyyy, EEEE" />
+								${today}
 
 							</p>
 						</div>
@@ -82,7 +81,11 @@
 				</div>
 			</section>
 
-
+			<c:if test="${not empty error}">
+				    <jsp:include page="../components/errorBox.jsp">
+				        <jsp:param name="errorMessage" value="${error}" />
+				    </jsp:include>
+			</c:if>
 			<section class="admin_metrics_section">
 				<div class="admin_metrics_grid">
 					<div class="admin_metric_card">
@@ -102,8 +105,8 @@
 							class="admin_metric_change"> ↑ 8 vs yesterday </span>
 					</div>
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_red">3</span> <span
-							class="admin_metric_title"> Pending Issues </span> <span
+						<span class="admin_metric_value admin_metric_red">${totalBooking}</span> <span
+							class="admin_metric_title"> Total Bookings </span> <span
 							class="admin_metric_change admin_metric_negative">↑ 2 new
 							today</span>
 					</div>
@@ -179,6 +182,7 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:if test="${not empty filteredMovies}">
 								<c:forEach var="movie" items="${filteredMovies}">
 									<tr>
 										<td>
@@ -207,6 +211,12 @@
 										</td>
 									</tr>
 								</c:forEach>
+								</c:if>
+								<c:if test="${empty error && empty filteredMovies }">
+								    <jsp:include page="../components/errorBox.jsp">
+								        <jsp:param name="errorMessage" value="${error}" />
+								    </jsp:include>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
@@ -337,14 +347,11 @@
 									</c:forEach>
 								</c:if>
 								<c:if test="${empty userList && empty error}">
-									<div class="admin_user_identity">
-										<p style="color: red; font-size: 1rem;">No user</p>
-									</div>
-								</c:if>
-								<c:if test="${not empty error}">
-									<div class="admin_user_identity">
-										<p style="color: red; font-size: 1rem;">${error}</p>
-									</div>
+									<tr><td>
+				    				<jsp:include page="../components/errorBox.jsp">
+				        			<jsp:param name="errorMessage" value="No User" />
+				    				</jsp:include>
+									</td></tr>
 								</c:if>
 							</tbody>
 						</table>

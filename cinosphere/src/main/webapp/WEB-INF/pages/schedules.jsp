@@ -112,8 +112,13 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 		</form>
 		
 		<section class="schedules_list_section">
+				<c:if test="${not empty error}">
+				    <jsp:include page="../components/errorBox.jsp">
+				        <jsp:param name="errorMessage" value="${error}" />
+				    </jsp:include>
+				</c:if>
             <c:choose>
-                <c:when test="${empty movieList}">
+                <c:when test="${empty movieList && empty error}">
                     <div class="schedules_empty">
                         <p>No screenings found for the selected date and filters.</p>
                     </div>
@@ -133,7 +138,6 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
-
         </section>
 	    
 	</main>

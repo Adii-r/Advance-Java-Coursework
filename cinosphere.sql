@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2026 at 01:31 PM
+-- Generation Time: May 17, 2026 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,6 +71,18 @@ CREATE TABLE `feedback` (
   `feedback_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`feedback_id`, `user_id`, `movie_id`, `rating`, `description`, `feedback_date`, `feedback_time`, `feedback_status`) VALUES
+(1, 2, 1, 4, 'A fantastic sequel that lives up to the original! Great performances and witty dialogue.', '2025-01-11', '12:00:00', 'approved'),
+(2, 2, 2, 5, 'A masterfully crafted biography. Truly inspiring and emotionally powerful.', '2025-01-19', '15:00:00', 'approved'),
+(3, 2, 3, 3, 'Decent horror experience but the story felt a bit predictable. The atmosphere was great though.', '2025-02-06', '10:30:00', 'approved'),
+(4, 2, 4, 5, 'Absolutely mind-blowing! Best sci-fi film in years. Kept me on the edge of my seat the entire time.', '2025-03-04', '09:00:00', 'approved'),
+(5, 3, 1, 4, 'Loved the fashion, drama, and humor. A worthy follow-up to the first film.', '2025-01-13', '17:30:00', 'approved'),
+(6, 3, 4, 5, 'Stunning visuals and a gripping storyline. A must-watch for sci-fi fans.', '2025-03-02', '19:00:00', 'pending');
+
 -- --------------------------------------------------------
 
 --
@@ -121,8 +133,8 @@ CREATE TABLE `movie` (
 INSERT INTO `movie` (`movie_id`, `movie_name`, `duration`, `director`, `genre`, `movie_language`, `description`, `release_date`, `movie_status`, `age_rating`) VALUES
 (1, 'The Devil Wears Prada 2', 135, 'TBD', 'Comedy', 'English', 'Sequel to the iconic fashion drama.', '2026-05-01', 'NOW_SHOWING', 'PG'),
 (2, 'Michael', 125, 'TBD', 'Biography', 'English', 'A biographical film based on a legendary figure.', '2026-05-01', 'NOW_SHOWING', 'PG'),
-(3, 'Bhoot Bangla', 160, 'TBD', 'Horror', 'Hindi', 'A horror story set in a haunted mansion.', '2026-05-01', 'NOW_SHOWING', 'PG'),
-(4, 'Project Hail Mary', 150, 'TBD', 'Sci-Fi', 'English', 'A lone astronaut attempts to save humanity.', '2026-05-01', 'NOW_SHOWING', 'PG'),
+(3, 'Bhoot Bangla', 160, 'TBD', 'Horror', 'Hindi', 'A horror story set in a haunted mansion.', '2026-05-18', 'NOW_SHOWING', 'PG'),
+(4, 'Project Hail Mary', 150, 'TBD', 'Sci-Fi', 'English', 'A lone astronaut attempts to save humanity.', '2026-05-17', 'NOW_SHOWING', 'PG'),
 (5, 'The Odyssey', 180, 'TBD', 'Action', 'English', 'An epic journey inspired by the Greek classic.', '2026-07-17', 'COMING_SOON', 'PG'),
 (6, 'Spider Man: Brand New Day', 190, 'TBD', 'Action', 'English', 'A new chapter in Spider-Man’s story.', '2026-07-31', 'COMING_SOON', 'PG'),
 (7, 'Insidious: Out of the Further', 155, 'TBD', 'Horror', 'English', 'A terrifying return to the Further.', '2026-08-21', 'COMING_SOON', 'ADULT'),
@@ -144,6 +156,22 @@ CREATE TABLE `payment` (
   `payment_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `booking_id`, `payment_method`, `payment_amount`, `payment_date`, `payment_time`, `payment_status`) VALUES
+(1, 1, 'Credit Card', 850.00, '2025-01-10', '10:25:00', 'completed'),
+(2, 2, 'UPI', 1200.00, '2025-01-18', '14:10:00', 'pending'),
+(3, 3, 'Cash', 500.00, '2025-02-05', '08:55:00', 'completed'),
+(4, 4, 'Debit Card', 650.00, '2025-02-20', '19:40:00', 'completed'),
+(5, 5, 'UPI', 1500.00, '2025-03-03', '10:55:00', 'completed'),
+(6, 6, 'Credit Card', 700.00, '2025-01-12', '15:55:00', 'completed'),
+(7, 7, 'Net Banking', 950.00, '2025-01-25', '20:25:00', 'completed'),
+(8, 8, 'UPI', 600.00, '2025-02-14', '12:55:00', 'pending'),
+(9, 9, 'Credit Card', 1100.00, '2025-03-01', '17:55:00', 'completed'),
+(10, 10, 'UPI', 800.00, '2025-03-10', '20:55:00', 'refunded');
+
 -- --------------------------------------------------------
 
 --
@@ -160,6 +188,17 @@ CREATE TABLE `screen` (
   `base_price` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `screen`
+--
+
+INSERT INTO `screen` (`screen_id`, `theatre_id`, `screen_name`, `screen_type`, `screen_status`, `total_capacity`, `base_price`) VALUES
+(1, 1, 'Screen 1', 'IMAX', 'active', 150, 500.00),
+(2, 1, 'Screen 2', '4DX', 'active', 100, 450.00),
+(3, 1, 'Screen 3', 'Standard', 'active', 200, 250.00),
+(4, 2, 'Screen 1', 'IMAX', 'active', 120, 480.00),
+(5, 2, 'Screen 2', 'Standard', 'active', 180, 230.00);
+
 -- --------------------------------------------------------
 
 --
@@ -174,6 +213,37 @@ CREATE TABLE `seat` (
   `seat_type` varchar(20) NOT NULL,
   `seat_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `seat`
+--
+
+INSERT INTO `seat` (`seat_id`, `screen_id`, `seat_number`, `row_number`, `seat_type`, `seat_status`) VALUES
+(1, 1, 'A1', 'A', 'VIP', 'available'),
+(2, 1, 'A2', 'A', 'VIP', 'available'),
+(3, 1, 'A3', 'A', 'Premium', 'available'),
+(4, 1, 'A4', 'A', 'Premium', 'available'),
+(5, 1, 'B1', 'B', 'Standard', 'available'),
+(6, 2, 'A1', 'A', 'VIP', 'available'),
+(7, 2, 'A2', 'A', 'VIP', 'available'),
+(8, 2, 'A3', 'A', 'Premium', 'available'),
+(9, 2, 'B1', 'B', 'Standard', 'available'),
+(10, 2, 'B2', 'B', 'Standard', 'available'),
+(11, 3, 'A1', 'A', 'Standard', 'available'),
+(12, 3, 'A2', 'A', 'Standard', 'available'),
+(13, 3, 'A3', 'A', 'Premium', 'available'),
+(14, 3, 'B1', 'B', 'Standard', 'available'),
+(15, 3, 'B2', 'B', 'Standard', 'available'),
+(16, 4, 'A1', 'A', 'VIP', 'available'),
+(17, 4, 'A2', 'A', 'VIP', 'available'),
+(18, 4, 'A3', 'A', 'Premium', 'available'),
+(19, 4, 'B1', 'B', 'Standard', 'available'),
+(20, 4, 'B2', 'B', 'Standard', 'available'),
+(21, 5, 'A1', 'A', 'Standard', 'available'),
+(22, 5, 'A2', 'A', 'Standard', 'available'),
+(23, 5, 'A3', 'A', 'Premium', 'available'),
+(24, 5, 'B1', 'B', 'Standard', 'available'),
+(25, 5, 'B2', 'B', 'Standard', 'available');
 
 -- --------------------------------------------------------
 
@@ -192,6 +262,20 @@ CREATE TABLE `showtime` (
   `show_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `showtime`
+--
+
+INSERT INTO `showtime` (`showtime_id`, `screen_id`, `movie_id`, `show_date`, `start_time`, `end_time`, `show_status`, `show_type`) VALUES
+(1, 1, 1, '2026-05-16', '10:00:00', '12:15:00', 'ACTIVE', 'IMAX'),
+(2, 1, 2, '2026-05-16', '13:30:00', '15:35:00', 'ACTIVE', 'IMAX'),
+(3, 2, 3, '2026-05-16', '11:00:00', '13:40:00', 'ACTIVE', '4DX'),
+(4, 3, 4, '2026-05-16', '14:00:00', '16:30:00', 'ACTIVE', 'Standard'),
+(5, 4, 1, '2026-05-17', '10:30:00', '12:45:00', 'ACTIVE', 'IMAX'),
+(6, 5, 2, '2026-05-17', '15:00:00', '17:05:00', 'ACTIVE', 'Standard'),
+(7, 5, 2, '2026-05-18', '13:00:00', '15:05:00', 'ACTIVE', 'Standard'),
+(8, 4, 2, '2026-05-18', '12:00:00', '16:05:00', 'ACTIVE', 'IMAX');
+
 -- --------------------------------------------------------
 
 --
@@ -207,6 +291,14 @@ CREATE TABLE `theatre` (
   `total_screens` int(11) NOT NULL,
   `theatre_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `theatre`
+--
+
+INSERT INTO `theatre` (`theatre_id`, `theatre_name`, `city`, `email`, `contact_number`, `total_screens`, `theatre_status`) VALUES
+(1, 'Cinosphere Prime', 'Kathmandu', 'prime@cinosphere.com', '9849832584', 3, 'active'),
+(2, 'Cinosphere Central', 'Pokhara', 'central@cinosphere.com', '9849832584', 2, 'active');
 
 -- --------------------------------------------------------
 
@@ -224,6 +316,32 @@ CREATE TABLE `ticket` (
   `issue_date` date NOT NULL,
   `ticket_price` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`ticket_id`, `booking_id`, `showtime_id`, `seat_id`, `ticket_type`, `ticket_status`, `issue_date`, `ticket_price`) VALUES
+(1, 1, 1, 1, 'VIP', 'confirmed', '2025-01-10', 425.00),
+(2, 1, 1, 2, 'VIP', 'confirmed', '2025-01-10', 425.00),
+(3, 2, 2, 3, 'PREMIUM', 'pending', '2025-01-18', 400.00),
+(4, 2, 2, 4, 'PREMIUM', 'pending', '2025-01-18', 400.00),
+(5, 2, 2, 5, 'REGULAR', 'pending', '2025-01-18', 400.00),
+(6, 3, 3, 6, 'VIP', 'archive', '2025-02-05', 500.00),
+(7, 4, 4, 11, 'REGULAR', 'confirmed', '2025-02-20', 325.00),
+(8, 4, 4, 12, 'REGULAR', 'confirmed', '2025-02-20', 325.00),
+(9, 5, 5, 16, 'VIP', 'confirmed', '2025-03-03', 500.00),
+(10, 5, 5, 17, 'VIP', 'confirmed', '2025-03-03', 500.00),
+(11, 5, 5, 18, 'PREMIUM', 'confirmed', '2025-03-03', 500.00),
+(12, 6, 1, 3, 'PREMIUM', 'confirmed', '2025-01-12', 350.00),
+(13, 6, 1, 4, 'PREMIUM', 'confirmed', '2025-01-12', 350.00),
+(14, 7, 2, 1, 'VIP', 'confirmed', '2025-01-25', 475.00),
+(15, 7, 2, 2, 'VIP', 'confirmed', '2025-01-25', 475.00),
+(16, 8, 3, 7, 'VIP', 'pending', '2025-02-14', 600.00),
+(17, 9, 4, 13, 'PREMIUM', 'confirmed', '2025-03-01', 550.00),
+(18, 9, 4, 14, 'PREMIUM', 'confirmed', '2025-03-01', 550.00),
+(19, 10, 6, 21, 'REGULAR', 'cancelled', '2025-03-10', 400.00),
+(20, 10, 6, 22, 'REGULAR', 'cancelled', '2025-03-10', 400.00);
 
 -- --------------------------------------------------------
 
@@ -353,7 +471,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `membership`
@@ -371,37 +489,37 @@ ALTER TABLE `movie`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `screen`
 --
 ALTER TABLE `screen`
-  MODIFY `screen_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `screen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `seat`
 --
 ALTER TABLE `seat`
-  MODIFY `seat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `seat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `showtime`
 --
 ALTER TABLE `showtime`
-  MODIFY `showtime_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `showtime_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `theatre`
 --
 ALTER TABLE `theatre`
-  MODIFY `theatre_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `theatre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
