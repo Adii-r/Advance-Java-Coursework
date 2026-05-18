@@ -28,7 +28,6 @@
 	                    </div>
 	                    <span class="sidebar_nav_label">Dashboard</span>
 	                </a>
-	                
 	              
 	                <span class="sidebar_section_label">Account</span>
 	                <a href="${pageContext.request.contextPath}/updateprofile" 
@@ -119,7 +118,7 @@
 			
 				<div class="booking-column">
 					<div class="panel-glass">
-						<div class="section-title">Upcoming Bookings <a href="#">View all →</a></div>
+						<div class="section-title">Upcoming Bookings</div>
 						
 						<c:choose>
 							<c:when test="${not empty bookings}">
