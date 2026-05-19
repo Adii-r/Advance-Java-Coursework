@@ -116,7 +116,7 @@
 					<div class="admin_metric_card">
 						<span class="admin_metric_value admin_metric_red">${totalBooking}</span> <span
 							class="admin_metric_title"> Total Bookings </span> <span
-							class="admin_metric_change admin_metric_negative">↑ 2 new
+							class="admin_metric_change admin_metric_negative">
 							today</span>
 					</div>
 				</div>
@@ -126,7 +126,7 @@
 			<section class="admin_movie_management_section">
 				<div class="admin_panel_card">
 					<div class="admin_panel_header">
-						<h3 class="admin_panel_title">Movie Management</h3>
+						<h3 class="admin_panel_title" id="movie_management">Movie Management</h3>
 						<form action="${pageContext.request.contextPath}/admin"
 							method="post">
 							<div class="admin_panel_actions">
@@ -216,11 +216,12 @@
 													<img
 														src="${pageContext.request.contextPath}/icon?name=edit"
 														alt="Edit" /></button>
-										
+										<a href="${pageContext.request.contextPath}/archivemovie?movieId=${movie.movieId}">
 												<button class="admin_action_button delete">
 													<img
 														src="${pageContext.request.contextPath}/icon?name=delete"
 														alt="del" /></button>
+										</a>
 											</div>
 										</td>
 									</tr>
