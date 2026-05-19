@@ -47,20 +47,16 @@ public class UserPanelServlet extends HttpServlet {
 	ScreenService screenService = new ScreenService();
 	TheatreService theatreService = new TheatreService();
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserPanelServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
+		if("ADMIN".equals(user.getUserRole())) {
+			response.sendRedirect(request.getContextPath()+"/admin");
+			return;
+		}
 		int userId= user.getUserId();
 		int totalBooking = bookingService.getTotalBookings(userId);
 		int upcomingBooking = bookingService.getTotalUpcomingBookings(userId);

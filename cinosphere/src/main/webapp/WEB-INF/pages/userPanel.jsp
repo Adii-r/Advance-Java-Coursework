@@ -78,7 +78,9 @@
 	                                <img src="${pageContext.request.contextPath}/icon?name=bell" alt="Notifications" />
 	                            </span>
 	                        </div>
+	                        <a href="${pageContext.request.contextPath}/schedules">
 	                        <button class="hero_button_primary">Book Now</button>
+	                        </a>
 	                    </div>
 	                </div>
 	            </div>
