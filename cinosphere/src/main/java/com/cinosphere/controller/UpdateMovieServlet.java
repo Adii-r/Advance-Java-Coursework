@@ -142,7 +142,7 @@ public class UpdateMovieServlet extends HttpServlet {
 
 				int movieId = movieService.insertAndGetId(movieName, duration, director, genre,
 						movieLanguage, description, releaseDate, movieStatus, ageRating);
-				Part filePart = request.getPart("profileAvatarInput");
+				Part filePart = request.getPart("moviePoster");
 				 if (FileuploadUtil.isImage(filePart)) {
 					 
 					 String userId = String.valueOf(movieId);
@@ -154,6 +154,9 @@ public class UpdateMovieServlet extends HttpServlet {
 					        }
 					    }
 				 }
+				 String extension = FileuploadUtil.getFileExtension(filePart.getSubmittedFileName());
+                 String fileName = movieId + extension;
+                 FileuploadUtil.saveFile(filePart, UPLOAD_DIR, fileName);
 
 				for (int i = 0; i < halls.length; i++) {
 

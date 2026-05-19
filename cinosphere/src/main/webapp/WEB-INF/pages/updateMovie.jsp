@@ -89,7 +89,7 @@
 	                                <div class="admin_avatar_poster_wrapper">
 	                                    <label for="poster_file_input" class="admin_avatar_circle_frame">
 	                                        <img id="poster_view_element" 
-	                                             src="${pageContext.request.contextPath}/movieposter?name=${movie.movieId}" alt="${movie.movieName} poster"/>
+	                                             src="${pageContext.request.contextPath}/movieposter?name=${movieId}" alt="${movieTitle} poster"/>
 	                                        <div class="admin_avatar_hover_overlay">
 	                                            <span>Select File</span>
 	                                        </div>
