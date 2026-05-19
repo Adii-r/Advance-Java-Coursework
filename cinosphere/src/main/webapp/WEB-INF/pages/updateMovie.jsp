@@ -75,7 +75,8 @@
             </c:if>
             
             <div class="admin_movie_content_wrapper">
-	            <form action="${pageContext.request.contextPath}/admin/updatemovie" method="POST" enctype="multipart/form-data" class="admin_workspace_form">
+	            <form action="${pageContext.request.contextPath}/updatemovie" method="POST" enctype="multipart/form-data" class="admin_workspace_form">
+				<input type="hidden" name="rows" value="${rows != null ? rows : 1}">
 	                <div class="admin_workspace_card">
 	                    <div class="admin_card_header">
 	                        <span class="admin_card_eyebrow">Manage Movies</span>
@@ -101,7 +102,7 @@
 	                                <div class="form_single_row">
 	                                    <div class="admin_field_group">
 	                                        <label class="admin_field_label" for="movie_title">Movie Title *</label>
-	                                        <input type="text" id="movie_title" name="movieTitle" class="admin_form_input" placeholder="e.g. Raja Shivaji" value="${movie.movieName}" required />
+	                                        <input type="text" id="movie_title" name="movieTitle" class="admin_form_input" placeholder="e.g. Raja Shivaji" value="${movieTitle}" required />
 	                                    </div>
 	                                </div>
 	                                
@@ -111,18 +112,49 @@
 	                                        <label class="admin_field_label" for="movie_lang">Language *</label>
 	                                        <select id="movie_lang" name="movieLanguage" class="admin_form_select" required>
 	                                            <option value="">Select</option>
-	                                            <option ${movie.movielanguage == 'Hindi' ? 'selected' : ''}>Hindi</option>
-	                                            <option ${movie.movielanguage == 'English' ? 'selected' : ''}>English</option>
-	    
+	                                            <option value="Hindi" ${movieLanguage == 'Hindi' ? 'selected' : ''}>Hindi</option>
+	                                            <option value="English" ${movieLanguage == 'English' ? 'selected' : ''}>English</option>
+	    										<option value="Nepali" ${movieLanguage == 'Nepali' ? 'selected' : ''}>Nepali</option>
 	                                        </select>
 	                                    </div>
 	                                    <div class="admin_field_group">
 	                                        <label class="admin_field_label" for="movie_genre">Genre *</label>
-	                                        <input type="text" id="movie_genre" name="movieGenre" class="admin_form_input" placeholder="Action, Drama, Sci-Fi" value="${movie.genre}" required />
+	                                        <select id="movie_genre" name="movieGenre"  class="admin_form_select"  required>	
+												    <option value="">Select Genre</option>
+												    <option value="Action"
+												        ${movieGenre == 'Action' ? 'selected' : ''}>
+												        Action
+												    </option>
+												    <option value="Drama"
+												        ${movieGenre == 'Drama' ? 'selected' : ''}>
+												        Drama
+												    </option>
+												    <option value="Comedy"
+												        ${movieGenre == 'Comedy' ? 'selected' : ''}>
+												        Comedy
+												    </option>
+												    <option value="Sci-Fi"
+												        ${movieGenre == 'Sci-Fi' ? 'selected' : ''}>
+												        Sci-Fi
+												    </option>
+												    <option value="Thriller"
+												        ${movieGenre == 'Thriller' ? 'selected' : ''}>
+												        Thriller
+												    </option>
+												    <option value="Romance"
+												        ${movieGenre == 'Romance' ? 'selected' : ''}>
+												        Romance
+												    </option>
+												    <option value="Horror"
+												        ${movieGenre == 'Horror' ? 'selected' : ''}>
+												        Horror
+												    </option>
+												
+												</select>
 	                                    </div>
 	                                    <div class="admin_field_group">
 	                                        <label class="admin_field_label" for="movie_duration">Duration (min) *</label>
-	                                        <input type="number" id="movie_duration" name="movieDuration" class="admin_form_input" placeholder="148" min="1" value="${movie.duration}" required />
+	                                        <input type="number" id="movie_duration" name="movieDuration" class="admin_form_input" placeholder="148" min="1" value="${movieDuration}" required />
 	                                    </div>
 	                                </div>
 	                                
@@ -131,8 +163,8 @@
 	                                        <label class="admin_field_label" for="movie_cert">Certificate *</label>
 	                                        <select id="movie_cert" name="movieCertificate" class="admin_form_select" required>
 	                                            <option value="">Select</option>
-	                                            <option ${movie.ageRating == 'PG' ? 'selected' : ''}>PG</option>
-	                                            <option ${movie.ageRating == 'A' ? 'selected' : ''}>A</option>
+	                                            <option ${movieCertificate == 'PG' ? 'selected' : ''}>PG</option>
+	                                            <option ${movieCertificate == 'A' ? 'selected' : ''}>A</option>
 	
 	                                        </select>
 	                                    </div>
@@ -140,9 +172,9 @@
 	                                        <label class="admin_field_label" for="movie_status">Status *</label>
 	                                        <select id="movie_status" name="movieStatus" class="admin_form_select" required>
 	                                            <option value="">Select</option>
-	                                            <option value="NOW_SHOWING" ${movie.movieStatus == 'NOW_SHOWING' ? 'selected' : ''}>Showing</option>
-	                                            <option value="COMING_SOON" ${movie.movieStatus == 'COMING_SOON' ? 'selected' : ''}>Upcoming</option>
-	                                            <option value="ARCHIVED" ${movie.movieStatus == 'ARCHIVED' ? 'selected' : ''}>Archived</option>
+	                                            <option value="NOW_SHOWING" ${movieStatus == 'NOW_SHOWING' ? 'selected' : ''}>Showing</option>
+	                                            <option value="COMING_SOON" ${movieStatus == 'COMING_SOON' ? 'selected' : ''}>Upcoming</option>
+	                                            <option value="ARCHIVED" ${movieStatus == 'ARCHIVED' ? 'selected' : ''}>Archived</option>
 	                                        </select>
 	                                    </div>
 	                                  </div>
@@ -151,18 +183,18 @@
 										    <div class="admin_fields_stacked_column">
 										        <div class="admin_field_group">
 										            <label class="admin_field_label" for="movie_director">Director *</label>
-										            <input type="text" id="movie_director" name="movieDirector" class="admin_form_input" placeholder="Director name" value="${movie.director}" required />
+										            <input type="text" id="movie_director" name="movieDirector" class="admin_form_input" placeholder="Director name" value="${movieDirector}" required />
 										        </div>
 										        
 										        <div class="admin_field_group">
 										            <label class="admin_field_label" for="movie_release">Release Date *</label>
-										            <input type="date" id="movie_release" name="movieReleaseDate" class="admin_form_input" value="${movie.releaseDate}" required />
+										            <input type="date" id="movie_release" name="movieReleaseDate" class="admin_form_input" value="${movieReleaseDate}" required />
 										        </div>
 										    </div>	
 										    
 										    <div class="admin_field_group structural_textarea_fill">
 										        <label class="admin_field_label" for="movie_desc">Description *</label>
-										        <textarea id="movie_desc" name="movieDescription" class="admin_form_textarea execution_fill" placeholder="Write a compelling 2-3 sentence synopsis of the film..." required>${movie.description}</textarea>
+										        <textarea id="movie_desc" name="movieDescription" class="admin_form_textarea execution_fill" placeholder="Write a compelling 2-3 sentence synopsis of the film..." required>${movieDescription}</textarea>
 										    </div>
 										</div>
 	         
@@ -182,60 +214,42 @@
 	                                <span class="schedule_grid_header_title">Hall</span>
 	                                <span class="schedule_grid_header_title">Date</span>
 	                                <span class="schedule_grid_header_title">Time</span>
-	                                <span class="schedule_grid_header_title">Location</span>
+	                                <!-- <span class="schedule_grid_header_title">Location</span> -->
 	                                <span></span>
 	                            </div>
 	
 	                           
-	                            <div class="schedule_add_row">
-	                                <select name="scheduleHall" class="admin_form_select">
-	                                    <option value="">Select Hall</option>
-	                                    <option>IMAX Luxury</option>
-	                                    <option>Auditorium 1</option>
-	                                </select>
-	                                <input type="date" name="scheduleDate" class="admin_form_input">
-	                                <input type="time" name="scheduleTime" class="admin_form_input">
-	                                <select name="scheduleLocation" class="admin_form_select">
-	                                    <option value="">Select Location</option>
-	                                    <option>Kathmandu</option>
-	                                    <option>Pokhara</option>
-	                                </select>
-	                                <button type="button" class="remove_button">
-        								<img src="${pageContext.request.contextPath}/icon?name=delete" alt="del" class="admin_button_icon">
+	                            <div id="scheduleContainer">
+								<c:forEach var="i" begin="1" end="${rows}" step="1">
+								
+    							<div class="schedule_add_row">
+	                                <select name="scheduleHall[]" class="admin_form_select">								
+									    <option value="">Select Hall</option>							
+									    <c:forEach var="screen" items="${screens}" varStatus="loop">	
+									    <c:set var="theatre" value="${theatres[loop.index]}" />				
+									        <option value="${screen.screenId}" ${scheduleHall[loop.index] == screen.screenId ? 'selected' : ''}>
+									            ${screen.screenName} ~ ${theatre.city}
+									        </option>									
+									    </c:forEach>									
+									</select>
+	                                <input type="date" name="scheduleDate[]" class="admin_form_input" value="${scheduleDate[loop.index]}">
+	                                <input type="time" name="scheduleTime[]" class="admin_form_input" value="${scheduleTime[loop.index]}">
+	                                <button type="submit" name="operation"  value="delete" class="remove_button">      		
+	                                <img src="${pageContext.request.contextPath}/icon?name=delete" alt="del" class="admin_button_icon">
    									</button>
 	                            </div>
-	
-	                            
-	                            <button type="button" class="add_button">
+							</c:forEach>
+	                            <button type="submit" name="operation" value="add" class="add_button">
         							<img src="${pageContext.request.contextPath}/icon?name=plus" alt="add" class="admin_button_icon">
    								</button>
 	                        </div>
-	
-	                        
-	                        <div class="admin_location_segment_wrapper">
-	                            <span class="admin_field_label">Available Locations</span>
-	                            
-	                            <div class="location_checkbox_flex_matrix">
-	                                <label class="loc_check_label">
-	                                    <input type="checkbox" name="movieLocations" value="Kathmandu" class="custom_location_checkbox" checked> 
-	                                    <span class="checkbox_label_text">Kathmandu</span>
-	                                </label>
-	                                <label class="loc_check_label">
-	                                    <input type="checkbox" name="movieLocations" value="Pokhara" class="custom_location_checkbox"> 
-	                                    <span class="checkbox_label_text">Pokhara</span>
-	                                </label>
-	                                <label class="loc_check_label">
-	                                    <input type="checkbox" name="movieLocations" value="Butwal" class="custom_location_checkbox"> 
-	                                    <span class="checkbox_label_text">Butwal</span>
-	                                </label>
-	                            </div>
-	                        </div>
 	                    </div>
-	                    
 	                  
 	                    <div class="admin_workspace_form_footer">
+	                    <a href="${pageContext.request.contextPath}/admin">
 	                        <button type="button" class="button_model_secondary">Cancel</button>
-	                        <button type="submit" class="button_model_primary">Save Modifications</button>
+	                    </a>
+	                        <button type="submit" name="operation" value="save" class="button_model_primary">Save Modifications</button>
 	                    </div>
 	                </form>
             	</div>

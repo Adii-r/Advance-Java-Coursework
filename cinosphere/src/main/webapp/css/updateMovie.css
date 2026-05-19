@@ -269,7 +269,7 @@
 
 .schedule_header_grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+    grid-template-columns: 1fr 1fr 1fr 44px;
     gap: 12px;
     margin-bottom: 0.75rem;
     padding: 0 12px;
@@ -286,7 +286,7 @@
 
 .schedule_add_row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+    grid-template-columns: 1fr 1fr 1fr 44px;
     gap: 12px;
     align-items: center;
     margin-bottom: 1rem;

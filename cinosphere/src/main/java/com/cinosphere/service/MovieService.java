@@ -65,4 +65,9 @@ public boolean updateMovieStatus(int movieId,String movieStatus) throws Exceptio
 	return movieDAO.updateStatus(movieId, movieStatus);
 
 }
+
+public int insertAndGetId(String movieName, int duration, String director, String genre, String movieLanguage, String description, LocalDate releaseDate, String movieStatus, String ageRating) throws Exception {
+	return movieDAO.insertAndGetId(movieName, duration, director, genre, movieLanguage, description, releaseDate, movieStatus, ageRating);
+	
+}
 }

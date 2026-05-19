@@ -89,6 +89,26 @@ public class ScreenDAO {
 	}
 	/**
 	 * 
+	 * @param theatreId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ScreenModel> getAllScreen() throws Exception{
+		List<ScreenModel> screens = new ArrayList<>();
+		String sql = "SELECT * FROM screen";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+        	screens.add(createScreenModel(rs));
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return screens;
+	}
+	/**
+	 * 
 	 * @param screenId
 	 * @return
 	 * @throws Exception
@@ -125,4 +145,5 @@ public class ScreenDAO {
 		screen.setBasePrice(rs.getDouble("base_price"));
 		return screen;
 	}
+
 }

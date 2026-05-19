@@ -61,4 +61,9 @@ public class ScreenService {
 		public boolean updateBasePrice(int screenId, double basePrice) throws Exception {
 			return screenDAO.updateScreenBasePrice(screenId, basePrice);
 		}
+
+
+		public List<ScreenModel> getAllScreens() throws Exception{
+			return screenDAO.getAllScreen();
+		}
 }

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,30 @@ public class MovieDAO {
 		ps.setString(9, ageRating);
 		return ps.executeUpdate() >0;
 	}
+	
+	public int insertAndGetId(String movieName, int duration, String director, String genre, String movieLanguage, String description,LocalDate releaseDate ,String movieStatus, String ageRating) throws Exception {
+		String sql = "INSERT INTO movie (movie_name,duration,director,genre,movie_language,description,release_date,movie_status,age_rating)"
+				+"VALUES (?,?,?,?,?,?,?,?,?)";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		
+		ps.setString(1, movieName);
+		ps.setInt(2, duration);
+		ps.setString(3, director);
+		ps.setString(4, genre);
+		ps.setString(5, movieLanguage);
+		ps.setString(6, description);
+		ps.setDate(7,Date.valueOf(releaseDate));
+		ps.setString(8, movieStatus);
+		ps.setString(9, ageRating);
+		int rows = ps.executeUpdate();
+		if (rows == 0) { ps.close(); con.close(); return -1; }
+		ResultSet keys = ps.getGeneratedKeys();
+		int newId = keys.next() ? keys.getInt(1) : -1;
+		keys.close(); ps.close(); con.close();
+		return newId;
+	}
+	
 	
 	public boolean updateStatus(int movieId,String movieStatus) throws Exception{
 		Connection con = DBconfig.getConnection();
