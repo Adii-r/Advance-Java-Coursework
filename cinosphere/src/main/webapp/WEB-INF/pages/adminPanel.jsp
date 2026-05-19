@@ -18,6 +18,7 @@
 </head>
 
 <body>
+	<c:set var="currentAdminPage" value="dashboard" scope="request" />
 
 	<jsp:include page="../components/header.jsp" />
 
@@ -25,23 +26,35 @@
 		<aside class="admin_sidebar_panel">
 			<div class="admin_sidebar_inner">
 				<nav class="admin_navigation_menu">
-					<span class="admin_navigation_label"> Main Navigation </span> <a
-						href="${pageContext.request.contextPath}/admin"
-						class="admin_navigation_item active">
-						<div class="admin_navigation_icon_box">
-							<img
-								src="${pageContext.request.contextPath}/icon?name=dashboard"
-								alt="Dashboard">
-						</div> <span class="admin_navigation_text"> Dashboard </span>
-					</a>
+					<div class="admin_menu_group">
+				        <span class="admin_navigation_label"> Main</span> 
+				        <a href="${pageContext.request.contextPath}/admin"
+				           class="admin_navigation_item ${currentAdminPage eq 'dashboard' ? 'active' : ''}">
+				            <div class="admin_navigation_icon_box">
+				                <img src="${pageContext.request.contextPath}/icon?name=dashboard" alt="Dashboard">
+				            </div> 
+				            <span class="admin_navigation_text"> Dashboard </span>
+				        </a>
+				    </div>
+
+				    <div class="admin_menu_group">
+				        <span class="admin_navigation_label"> Actions </span> 
+				        <a href="${pageContext.request.contextPath}/updatemovie"
+				           class="admin_navigation_item ${currentAdminPage eq 'updatemovie' ? 'active' : ''}">
+				            <div class="admin_navigation_icon_box">
+				                <img src="${pageContext.request.contextPath}/icon?name=monitor" alt="Actions">
+				            </div> 
+				            <span class="admin_navigation_text"> Movies </span>
+				        </a>
+				    </div>
 				</nav>
 
 				<div class="admin_sidebar_footer">
 					<div class="admin_profile_card">
 						<div class="admin_profile_avatar">
-							<span><img id="imagePreview"
+							<img id="imagePreview"
 								src="${pageContext.request.contextPath}/profileimage?name=${user.userId}"
-								alt="Preview"> </span>
+								alt="Preview"> 
 						</div>
 						<div class="admin_profile_details">
 							<span class="admin_profile_name"> ${user.firstName}
@@ -66,16 +79,12 @@
 							</h1>
 							<p class="admin_dashboard_heading_subtitle">
 								${today}
-
 							</p>
 						</div>
 						<div class="admin_dashboard_action_group">
-							<div class="notification_wrapper">
-								<span class="notification_icon"> <img
-									src="${pageContext.request.contextPath}/icon?name=bell" alt="Notifications" />
-								</span>
-							</div>
-							<button class="admin_dashboard_primary_button">Add Movie</button>
+							<button class="admin_dashboard_primary_button">
+							<img src="${pageContext.request.contextPath}/icon?name=plus"
+								alt="Add" /> Add Movie</button>
 						</div>
 					</div>
 				</div>
@@ -199,14 +208,19 @@
 										<td>${movie.duration}</td>
 										<td>${movie.ageRating}</td>
 										<td><span
-											class="status-pill ${movie.movieStatus=='NOW_SHOWING'?'status-confirmed': movie.movieStatus=='COMING_SOON'?'status-upcomming':'status-archived'}">
+											class="status_pill ${movie.movieStatus=='NOW_SHOWING'?'status_confirmed': movie.movieStatus=='COMING_SOON'?'status_upcoming':'status_archived'}">
 												${movie.movieStatus} </span></td>
 										<td>
 											<div class="admin_movie_action_group">
 												<button class="admin_action_button edit">
 													<img
 														src="${pageContext.request.contextPath}/icon?name=edit"
-														alt="Edit" />
+														alt="Edit" /></button>
+										
+												<button class="admin_action_button delete">
+													<img
+														src="${pageContext.request.contextPath}/icon?name=delete"
+														alt="del" /></button>
 											</div>
 										</td>
 									</tr>
@@ -308,14 +322,14 @@
 													<span class="admin_user_name"> ${user.username} </span>
 												</div>
 											</td>
-											<td>${user.email}</td>
-											<td>${user.userRole}</td>
+											<td class="admin_email_cell">${user.email}</td>
+											<td class="admin_user_cell">${user.userRole}</td>
 											<td><span class="admin_tier_badge elite">
 													${membership.membershipType} </span></td>
-											<td>${booking}</td>
-											<td>${membership.totalLoyaltyPoints}</td>
+											<td class="admin_booking_cell">${booking}</td>
+											<td class="admin_points_cell">${membership.totalLoyaltyPoints}</td>
 											<td><span
-												class="status-pill ${user.isActive==true?'status-confirmed':'status-past suspended-status'}">
+												class="status_pill ${user.isActive==true?'status_confirmed':'status_past suspended_status'}">
 													${user.isActive==true?"ACTIVE":"INACTIVE"} </span></td>
 											<td>
 											    <form action="${pageContext.request.contextPath}${user.isActive ? '/admindeleteaccount':'/adminactivateaccount'}"

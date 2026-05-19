@@ -24,7 +24,7 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/#" class="${activePage == 'about' ? 'active' : ''}">About Us</a>
+        <a href="${pageContext.request.contextPath}/aboutus" class="${activePage == 'about' ? 'active' : ''}">About Us</a>
       </li>
 
       <li>

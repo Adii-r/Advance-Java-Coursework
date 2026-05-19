@@ -50,16 +50,24 @@ html,body {
 
 .admin_navigation_menu {
     flex: 1;
-    padding-top: 2.5rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.admin_menu_group {
+    display: flex;
+    flex-direction: column;
 }
 
 .admin_navigation_label {
     display: block;
-    padding: 0 3.5rem 0.75rem;
+    padding: 1.5rem 3.5rem 0.5rem;
     font-family: var(--font-ui);
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--text-muted);
 }
@@ -68,10 +76,11 @@ html,body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 13px 3.2rem;
-    text-decoration: none;
-    border-left: 3px solid transparent;
+    padding: 12px 3.0rem;
+    cursor: pointer;
     transition: 0.2s ease;
+    border-left: 3.5px solid transparent;
+    text-decoration: none;
 }
 
 .admin_navigation_item.active {
@@ -80,13 +89,14 @@ html,body {
 }
 
 .admin_navigation_icon_box {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
 }
 
 .admin_navigation_icon_box img {
@@ -97,7 +107,7 @@ html,body {
 
 .admin_navigation_text {
     font-family: var(--font-display);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text);
 }
@@ -121,6 +131,7 @@ html,body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--crimson), var(--crimson-bright));
     display: flex;
     align-items: center;
@@ -128,10 +139,10 @@ html,body {
     border: 2px solid rgba(201,168,76,0.3);
 }
 
-.admin_profile_avatar span {
-    font-family: var(--font-display);
-    font-size: 18px;
-    color: var(--text);
+.admin_profile_avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .admin_profile_details {
@@ -143,7 +154,6 @@ html,body {
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
-
     color: var(--text);
 }
 
@@ -158,7 +168,7 @@ html,body {
 
 .admin_dashboard_hero_section {
     position: relative;
-    min-height: 200px;
+    min-height: 150px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -166,7 +176,7 @@ html,body {
     background-color: var(--obsidian);
     border-bottom: 1px solid rgba(201, 168, 76, 0.15);
     overflow: hidden;
-    margin-top: 25px;
+    margin-top: 50px;
 }
 
 .admin_dashboard_hero_background {
@@ -216,8 +226,8 @@ html,body {
 .admin_dashboard_heading_subtitle {
     font-family: var(--font-display);
     font-size: 16px;
-    color: var(--crimson-bright);
-    margin-top: 5px;
+    color: var(--gold-dim); 
+    margin-top: 10px;
     margin-left: 8px;
     letter-spacing: 0.04em;
 }
@@ -228,26 +238,6 @@ html,body {
     gap: 16px;
     flex-shrink: 0;
 }
-
-.notification_wrapper {
-    width: 50px;
-    height: 45px;
-    border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.notification_wrapper img{
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
-}
-
 
 .admin_dashboard_primary_button {
     width: 100%;
@@ -265,6 +255,14 @@ html,body {
     background:linear-gradient(135deg,var(--gold-light),var(--gold));
     transition: all 0.2s ease;
     box-shadow:0 4px 18px rgba(201, 168, 76, 0.18);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin_dashboard_primary_button img {
+    width: 12px;
+    height: 12px;
 }
 
 .admin_dashboard_primary_button:hover {
@@ -302,7 +300,6 @@ html,body {
     border-color: rgba(201,168,76,0.22);
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
-
 
 .admin_metric_value {
     font-family: var(--font-display);
@@ -453,7 +450,6 @@ html,body {
     margin-bottom: -1px;
     cursor: pointer;
     transition: 0.2s ease;
-
     font-family: var(--font-ui);
     font-size: 10px;
     font-weight: 700;
@@ -493,9 +489,10 @@ html,body {
 
 .admin_movie_table tbody td {
     padding: 14px 10px;
-    font-family: var(--font-body);
-    font-size: 13px;
+    font-family: var(--font-display);
+    font-size: 16px;
     color: var(--text);
+    font-weight: 700;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -521,8 +518,9 @@ html,body {
 }
 
 .admin_movie_name {
-    font-family: var(--font-ui);
-    font-size: 13px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text);
 }
@@ -552,7 +550,7 @@ html,body {
     filter: brightness(0) invert(0.8);
 }
 
-.status-pill {
+.status_pill {
   font-family: var(--font-ui);
   font-size: 9px;
   font-weight: 700;
@@ -561,18 +559,23 @@ html,body {
   border-radius: 10px;
 }
 
-.status-confirmed {
+.status_confirmed {
   color: #4ade80;
   background: rgba(74, 222, 128, 0.1);
   border: 1px solid rgba(74, 222, 128, 0.2);
 }
 
-.status-upcoming {
+.status_upcoming {
   color: var(--gold);
   background: rgba(201, 168, 76, 0.1);
   border: 1px solid rgba(201, 168, 76, 0.2);
 }
 
+.status_archived {
+  background: rgba(198, 40, 40, 0.12);
+  color: var(--crimson-bright);
+  border-color: rgba(198, 40, 40, 0.22);
+}
 
 .admin_action_button.edit:hover {
     border-color: rgba(201,168,76,0.35);
@@ -580,50 +583,12 @@ html,body {
 }
 
 .admin_action_button.delete:hover {
-    border-color: rgba(198,40,40,0.35);
-    background: rgba(198,40,40,0.08);
-}
-
-.admin_action_button.edit:hover img {
-    filter: brightness(0) saturate(100%) invert(73%) sepia(33%) saturate(502%) hue-rotate(8deg);
-}
-
-.admin_action_button.delete:hover img {
-    filter: brightness(0) saturate(100%) invert(30%) sepia(93%) saturate(1500%);
+    background: rgba(198, 40, 40, 0.12);
+    border-color: rgba(198, 40, 40, 0.22);
 }
 
 .admin_user_management_section {
     padding: 0 5% 3rem;
-}
-
-.admin_add_user_button {
-    height: 40px;
-    padding: 0 16px;
-    border: none;
-    border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, var(--crimson-bright), var(--crimson));
-    color: var(--text);
-    font-family: var(--font-ui);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.admin_add_user_button img {
-    width: 12px;
-    height: 12px;
-    filter: brightness(0) invert(1);
-}
-
-.admin_add_user_button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(198,40,40,0.24);
 }
 
 .admin_user_identity {
@@ -636,16 +601,19 @@ html,body {
     width: 38px;
     height: 38px;
     border-radius: 50%;
+    overflow: hidden; 
     background: linear-gradient(135deg, var(--gold-light), var(--gold));
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
 
-    font-family: var(--font-ui);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--obsidian);
+.admin_user_avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;    
 }
 
 .admin_user_avatar.elite {
@@ -659,10 +627,30 @@ html,body {
 }
 
 .admin_user_name {
-    font-family: var(--font-ui);
-    font-size: 13px;
+    font-family: var(--font-display);
+    font-style:italic;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text);
+}
+
+.admin_email_cell,
+.admin_booking_cell,
+.admin_points_cell {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 700;
+    font-style: italic;
+}
+
+.admin_user_cell{
+	font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 700;
+    text-transform: lowercase;
+    font-style: italic;
 }
 
 .admin_tier_badge {
@@ -671,7 +659,6 @@ html,body {
     justify-content: center;
     padding: 4px 10px;
     border-radius: 999px;
-
     font-family: var(--font-ui);
     font-size: 9px;
     font-weight: 700;
@@ -686,9 +673,9 @@ html,body {
 }
 
 .admin_tier_badge.elite {
-    color: #f87171;
-    background: rgba(248,113,113,0.1);
-    border: 1px solid rgba(248,113,113,0.2);
+	background: rgba(198, 40, 40, 0.12);
+  	color: var(--crimson-bright);
+    border: 1px solid rgba(198, 40, 40, 0.22);
 }
 
 .admin_tier_badge.starter {
@@ -697,10 +684,10 @@ html,body {
     border: 1px solid var(--glass-border);
 }
 
-.suspended-status {
-    color: #f87171;
-    background: rgba(248,113,113,0.1);
-    border-color: rgba(248,113,113,0.2);
+.suspended_status {
+    background: rgba(198, 40, 40, 0.12);
+  	color: var(--crimson-bright);
+    border: 1px solid rgba(198, 40, 40, 0.22);
 }
 
 .admin_status_toggle {

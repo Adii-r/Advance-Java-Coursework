@@ -34,7 +34,7 @@ html,body{
     flex-shrink: 0;
     position: sticky;
     top: 80px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 80px - 25px);
     margin-top: 25px; 
 }
 
@@ -106,14 +106,14 @@ html,body{
 
 
 .sidebar_footer {
-    padding: 0 2.8rem;
+	padding: 1.5rem 2.8rem;
     margin-top: auto;
     border-top: 1px solid rgba(201, 168, 76, 0.3);
     background: var(--obsidian);
 }
 
 .footer_divider {
-    height: 20px;
+    height: 0px;
     opacity: 0.6;
 }
 
@@ -173,7 +173,7 @@ html,body{
 
 .hero_overlay_section {
     position: relative;
-    min-height: 200px;
+    min-height: 150px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -181,7 +181,7 @@ html,body{
     background-color: var(--obsidian);
     border-bottom: 1px solid rgba(201, 168, 76, 0.15);
     overflow: hidden;
-    margin-top:25px;
+    margin-top:50px;
 }
 
 .hero_radial_bg {
@@ -285,7 +285,7 @@ html,body{
 }
 
 .dashboard_scroll_area {
-    padding: 3rem 5%;
+    padding: 3rem 5% 0rem 5%;
     flex: 1;
     width: 100%;
 }
@@ -294,7 +294,6 @@ html,body{
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 30px;
-    margin-bottom: 2rem;
 }
 
 .stat-card {
@@ -365,18 +364,6 @@ html,body{
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.section-title a {
-  font-size: 10px;
-  color: var(--gold-dim);
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  transition: color 0.2s ease;
-}
-
-.section-title a:hover {
-	color: var(--gold-light);
 }
 
 .section-title-spaced {

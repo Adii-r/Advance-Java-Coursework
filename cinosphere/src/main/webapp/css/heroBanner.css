@@ -15,8 +15,9 @@
     position: absolute;
     inset: 0;
     background: 
-    radial-gradient(ellipse 80% 60% at 50% 20%, var(--crimson-glow) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, var(--gold-glow) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 50% 20%, var(--crimson-glow) 0%, transparent 80%),
+    radial-gradient(ellipse 90% 100% at top left, var(--crimson-glow) 0%, transparent 90%),
+    radial-gradient(ellipse 40% 90% at 80% 60%, var(--gold-glow) 0%, transparent 70%),
     linear-gradient(180deg, var(--obsidian) 0%, var(--deep) 100%);
     filter: blur(10px);
     opacity: 0.9;

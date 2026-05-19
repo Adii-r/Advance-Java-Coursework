@@ -45,7 +45,6 @@
 		
 		<div class="detail_body">
 			<div class="detail_about_section">
-				<span class="detail_section_eyebrow"> ${movie.genre} </span>
 				<h2 class="detail_section_title"> About this <em>Movie</em> </h2>
 				<p class="detail_description"> ${movie.description}</p>
 				

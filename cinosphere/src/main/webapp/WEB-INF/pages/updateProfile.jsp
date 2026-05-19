@@ -22,7 +22,7 @@
 	            <nav class="sidebar_nav_menu">
 	                <span class="sidebar_section_label">Main</span>
 	                <a href="${pageContext.request.contextPath}/profile" 
-               		class="sidebar_nav_item ${(empty param.view or param.view eq 'dashboard') ? 'active' : ''}">
+               			class="sidebar_nav_item ${activeTab eq 'dashboard' ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
 	                            <img src="${pageContext.request.contextPath}/icon?name=dashboard" alt="Dashboard" />
@@ -33,8 +33,8 @@
 	                
 	              
 	                <span class="sidebar_section_label">Account</span>
-	                <a href="${pageContext.request.contextPath}/updateprofile" 
-               		class="sidebar_nav_item ${param.view eq 'profile' ? 'active' : ''}">
+	                 <a href="${pageContext.request.contextPath}/updateprofile" 
+               			class="sidebar_nav_item ${activeTab eq 'updateprofile' ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">
 	                            <img src="${pageContext.request.contextPath}/icon?name=user" alt="Profile" />
@@ -71,19 +71,18 @@
 			</section>
 		<form method="post" enctype="multipart/form-data">	
 			<section class="update_profile_content_wrapper">
-			
 			    <div class="update_profile_overview_card">
 			        <div class="update_profile_avatar_wrapper">
 			            <div class="update_profile_avatar_circle">
-			            <img id="imagePreview" style="width: 100%;height: 100%;object-fit: cover;display: block;" src="${pageContext.request.contextPath}/profileimage?name=${user.userId}" alt="Preview"> 	                
+			            <img id="imagePreview" src="${pageContext.request.contextPath}/profileimage?name=${user.userId}" alt="Preview"> 	                
 			            </div>
-			            
-			            			        </div>
-			        <label for="profileAvatarInput" class="update_profile_avatar_edit_btn">
-			                    <img src="${pageContext.request.contextPath}/icon?name=camera"
-			                         alt="Upload Avatar">
-			                </label>
-			                <input type="file" name="profileAvatarInput" id="profileAvatarInput" class="update_profile_avatar_input" accept="image/*">
+			        
+				        <label for="profileAvatarInput" class="update_profile_avatar_edit_button">
+				                    <img src="${pageContext.request.contextPath}/icon?name=camera"
+				                         alt="Upload Avatar">
+				         </label>
+	                	<input type="file" name="profileAvatarInput" id="profileAvatarInput" class="update_profile_avatar_input" accept="image/*">
+	                </div>
 			        <div class="update_profile_user_details">
 			            <h3 class="update_profile_user_name">
 			                ${user.firstName} ${user.lastName}

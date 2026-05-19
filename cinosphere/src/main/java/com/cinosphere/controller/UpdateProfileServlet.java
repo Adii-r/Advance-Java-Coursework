@@ -49,6 +49,7 @@ public class UpdateProfileServlet extends HttpServlet {
 			request.setAttribute("error", "Failed to load profile details.");
 			e.printStackTrace();
 		}
+		request.setAttribute("activeTab", "updateprofile");
 		request.getRequestDispatcher("/WEB-INF/pages/updateProfile.jsp").forward(request, response);
 	}
 
