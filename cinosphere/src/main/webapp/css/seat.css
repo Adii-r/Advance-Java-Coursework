@@ -1,19 +1,24 @@
 .seat {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 4px 4px 2px 2px;
-  border: 1px solid var(--glass-border);
-  border-color: rgba(74,222,128,0.22);   
-  background: rgba(74,222,128,0.15); 
+  border: 1px solid rgba(74,222,128,0.22);
+  background: rgba(74,222,128,0.15);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  user-select: none;
 }
-
+.seat_checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 .seat::after {
   content: '';
   position: absolute;
@@ -67,4 +72,10 @@
 
 .seat_reserved .seat_number {
   color: var(--crimson-bright);
+}
+.seat_available:has(.seat_checkbox:checked) {
+  background: rgba(201,168,76,0.60);
+  border-color: rgba(201,168,76,0.5);
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(201,168,76,0.25);
 }

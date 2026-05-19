@@ -189,7 +189,8 @@ public class BookingServlet extends HttpServlet {
 	    boolean useSphere       = "true".equals(request.getParameter("useSpherePoints"));	
 	    request.setAttribute("movieId",movieIdStr);
 		request.setAttribute("showtimeId",showtimeIdStr);
-	    if (seatIds == null || seatIds.length == 0 || paymentMethod == null || paymentMethod.isEmpty()) {	    	 
+	    if (seatIds == null || seatIds.length == 0 || paymentMethod == null || paymentMethod.isEmpty()) {
+	    	request.setAttribute("error", "Select a payment method");
 	    	doGet(request, response);
 			return;
 		}

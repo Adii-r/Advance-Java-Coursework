@@ -58,19 +58,13 @@
 						<div class="indicator_item">
 					        <div class="overlay overlay_available"></div>
 					        <span class="label">Available</span>
-					    </div>
-					
-					    <div class="indicator_item">
-					        <div class="overlay overlay_reserved"></div>
-					        <span class="label">Reserved</span>
-					    </div>
-					
+					    </div>				
 					    <div class="indicator_item">
 					        <div class="overlay overlay_taken"></div>
 					        <span class="label">Taken</span>
 					    </div>
 					    <div class="indicator_item">
-					    	<div class="overlay overlay_selected"></div>
+					    	<div class="overlay overlay_reserved"></div>
 					    	<span class="label">Selected</span>
 					    </div>
 					</div>
@@ -125,40 +119,47 @@
                         </c:if>
 
                         <c:if test="${seat.rowNumber != prevRow}">
-                            <c:if test="${prevRow != ''}"></div></c:if>
-                            <div class="seat_row">
-                            <span class="seat_row_label">${seat.rowNumber}</span>
-                            <c:set var="prevRow" value="${seat.rowNumber}"/>
-                        </c:if>
-
-                        <c:set var="colInRow" value="${(seatNum - 1) mod 18 + 1}"/>
-                        <c:if test="${colInRow == 4 or colInRow == 14}">
-                            <div class="seat_aisle"></div>
-                        </c:if>
-
-                        <c:choose>
-                            <c:when test="${isTaken}">
-                                <div class="seat seat_taken" title="${seat.rowNumber}${seatNum} — Taken">
-                                    <span class="seat_visual"><span class="seat_number">${seatNum}</span></span>
-                                </div>
-                            </c:when>
-                            <c:when test="${isReserved}">
-                                <div class="seat seat_reserved" title="${seat.rowNumber}${seatNum} — Reserved">
-                                    <span class="seat_visual"><span class="seat_number">${seatNum}</span></span>
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <label class="seat seat_available ${isChecked ? 'seat_selected' : ''}"
-                                       title="${seat.rowNumber}${seatNum}">
-                                    <input type="checkbox"
-                                           name="selectedSeats"
-                                           value="${seat.seatId}"
-                                           class="seat_checkbox"
-                                           ${isChecked ? 'checked' : ''}/>
-                                    <span class="seat_visual"><span class="seat_number">${seatNum}</span></span>
-                                </label>
-                            </c:otherwise>
-                        </c:choose>
+                    <c:if test="${prevRow != ''}"></div></c:if>
+                    <div class="seat_row">
+                        <span class="seat_row_label">${seat.rowNumber}</span>
+                    <c:set var="prevRow"   value="${seat.rowNumber}"/>
+                    <c:set var="colInRow"  value="0"/>
+                </c:if>
+                <c:set var="colInRow" value="${colInRow + 1}"/>
+                <c:if test="${colInRow == 4 or colInRow == 14}">
+                    <div class="seat_aisle"></div>
+                </c:if>
+                <c:choose>
+                    <c:when test="${isTaken}">
+                        <div class="seat seat_taken"
+                             title="${seat.rowNumber}${colInRow} — Taken">
+                            <span class="seat_visual">
+                                <span class="seat_number">${colInRow}</span>
+                            </span>
+                        </div>
+                    </c:when>
+                    <c:when test="${isReserved}">
+                        <div class="seat seat_reserved"
+                             title="${seat.rowNumber}${colInRow} — Reserved">
+                            <span class="seat_visual">
+                                <span class="seat_number">${colInRow}</span>
+                            </span>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <label class="seat seat_available ${isChecked ? 'seat_selected' : ''}"
+                               title="${seat.rowNumber}${colInRow}">
+                            <input type="checkbox"
+                                   name="selectedSeats"
+                                   value="${seat.seatId}"
+                                   class="seat_checkbox"
+                                   ${isChecked ? 'checked' : ''}/>
+                            <span class="seat_visual">
+                                <span class="seat_number">${colInRow}</span>
+                            </span>
+                        </label>
+                    </c:otherwise>
+                </c:choose>
                     </c:forEach>
                     <c:if test="${not empty seats}"></div></c:if>
                 </div>
@@ -179,7 +180,11 @@
 			</div>
 			
 			<div class="checkout_body">	
-			
+					    <c:if test="${not empty error}">
+				    <jsp:include page="../components/errorBox.jsp">
+				        <jsp:param name="errorMessage" value="${error}" />
+				    </jsp:include>
+				</c:if> 
 				<div class="checkout_section_label"> Selected Seats (<span><c:out value="${seatCount != null ? seatCount : 0}" /></span>)</div>
         	
 	        	<div class="selected_seats_area">
@@ -289,11 +294,6 @@
                         </label>
                     </div>
                 </div>
-
-                <c:if test="${not empty error}">
-                    <div class="booking_error_msg">${error}</div>
-                </c:if>
-
                 <div class="checkout_footer">
                     <div class="checkout_footer_line"></div>
                     <c:choose>
