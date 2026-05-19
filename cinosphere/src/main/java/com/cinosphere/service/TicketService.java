@@ -46,9 +46,8 @@ public class TicketService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean createTicket(int bookingId, int showtimeId, int seatId, String ticketType, double ticketPrice) throws Exception {
-		String issueDate = LocalDate.now().toString();
-		return ticketDAO.insert(bookingId, showtimeId, seatId, ticketType, "ACTIVE", issueDate, ticketPrice);
+	public boolean createTicket(int bookingId, int showtimeId, int seatId, String ticketType,String ticketStatus,LocalDate issueDate, double ticketPrice) throws Exception {
+		return ticketDAO.insert(bookingId, showtimeId, seatId, ticketType, ticketStatus, issueDate, ticketPrice);
 	}
 	
 }

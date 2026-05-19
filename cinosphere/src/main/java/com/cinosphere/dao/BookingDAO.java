@@ -6,11 +6,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.cinosphere.model.BookingModel;
 import com.cinosphere.utils.DBconfig;
@@ -28,7 +31,7 @@ public class BookingDAO {
  * @return
  * @throws Exception
  */
-	public boolean insert(int userId, String bookingDate, LocalTime bookingTime,String bookingStatus, double totalAmount,String bookingChannel, int loyaltyPointsEarned) throws Exception {
+	public boolean insert(int userId, LocalDate bookingDate, LocalTime bookingTime,String bookingStatus, double totalAmount,String bookingChannel, int loyaltyPointsEarned) throws Exception {
 		String sql = "INSERT INTO booking  (user_id, booking_date, booking_time, booking_status,total_amount, booking_channel, loyalty_points_earned) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		Connection con = DBconfig.getConnection();
@@ -41,7 +44,38 @@ public class BookingDAO {
 		ps.setString    (6, bookingChannel);
 		ps.setInt       (7, loyaltyPointsEarned);
 		return ps.executeUpdate()>0;
-}
+	}
+	/**
+	 * 
+	 * @param userId
+	 * @param bookingDate
+	 * @param bookingTime
+	 * @param bookingStatus
+	 * @param totalAmount
+	 * @param bookingChannel
+	 * @param loyaltyPointsEarned
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertAndGetId(int userId, LocalDate bookingDate, LocalTime bookingTime,String bookingStatus, double totalAmount,String bookingChannel, int loyaltyPointsEarned) throws Exception {
+		String sql = "INSERT INTO booking  (user_id, booking_date, booking_time, booking_status,total_amount, booking_channel, loyalty_points_earned) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setInt       (1, userId);
+		ps.setDate      (2, Date.valueOf(bookingDate));
+		ps.setTime    (3, Time.valueOf(bookingTime)); 
+		ps.setString    (4, bookingStatus);
+		ps.setBigDecimal(5, BigDecimal.valueOf(totalAmount));
+		ps.setString    (6, bookingChannel);
+		ps.setInt       (7, loyaltyPointsEarned);
+		int rows = ps.executeUpdate();
+		if (rows == 0) { ps.close(); con.close(); return -1; }
+		ResultSet keys = ps.getGeneratedKeys();
+		int newId = keys.next() ? keys.getInt(1) : -1;
+		keys.close(); ps.close(); con.close();
+		return newId;
+	}
 	/**
 	 * 
 	 * @param userId
@@ -251,6 +285,40 @@ public class BookingDAO {
         ps.close();
         con.close();
         return booking;
+	}
+	/**
+	 * 
+	 * @param showtimeId
+	 * @return
+	 * @throws Exception
+	 */
+	public Set<Integer> getReservedSeatIdsByShowtime(int showtimeId) throws Exception {
+		Set<Integer> seatIds = new HashSet<>();
+		String sql = "SELECT t.seat_id FROM ticket t JOIN booking b ON b.booking_id = t.booking_id WHERE t.showtime_id = ? AND b.booking_status = 'pending'";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, showtimeId);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) seatIds.add(rs.getInt("seat_id"));
+		rs.close(); ps.close(); con.close();
+		return seatIds;
+	}
+	/**
+	 * 
+	 * @param showtimeId
+	 * @return
+	 * @throws Exception
+	 */
+	public Set<Integer> getConfirmedSeatIdsByShowtime(int showtimeId) throws Exception {
+		Set<Integer> seatIds = new HashSet<>();
+		String sql = "SELECT t.seat_id FROM ticket t JOIN booking b ON b.booking_id = t.booking_id WHERE t.showtime_id = ? AND b.booking_status = 'confirmed'";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, showtimeId);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) seatIds.add(rs.getInt("seat_id"));
+		rs.close(); ps.close(); con.close();
+		return seatIds;
 	}
 	/**
 	 * 

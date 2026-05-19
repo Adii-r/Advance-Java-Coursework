@@ -1,6 +1,6 @@
 .seat {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   border-radius: 4px 4px 2px 2px;
   border: 1px solid var(--glass-border);
   border-color: rgba(74,222,128,0.22);   
@@ -35,6 +35,13 @@
   cursor: not-allowed;
   opacity: 0.7;
   background: rgba(198, 40, 40, 0.32);
+  border-color: rgba(198, 40, 40, 0.42);
+}
+
+.seat_taken {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background: rgba(198, 40, 40, 0.42);
   border-color: rgba(198, 40, 40, 0.42);
 }
 

@@ -43,7 +43,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
 		try {
-			MembershipModel membership = membershipService.getMembershipByuserId(user.getUserId());
+			MembershipModel membership = membershipService.getByUserId(user.getUserId());
 			request.setAttribute("membership", membership);
 		} catch (Exception e) {
 			request.setAttribute("error", "Failed to load profile details.");

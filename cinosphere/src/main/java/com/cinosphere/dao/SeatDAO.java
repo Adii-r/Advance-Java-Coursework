@@ -21,13 +21,13 @@ public class SeatDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean insert(int screenId, String seatNumber, String rowNumber,String seatType, String seatStatus) throws Exception {
+	public boolean insert(int screenId, int seatNumber, String rowNumber,String seatType, String seatStatus) throws Exception {
 			String sql = "INSERT INTO seat (screen_id, seat_number, row_number, seat_type, seat_status) "
 			     + "VALUES (?, ?, ?, ?, ?)";
 			Connection con = DBconfig.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt   (1, screenId);
-			ps.setString(2, seatNumber);
+			ps.setInt(2, seatNumber);
 			ps.setString(3, rowNumber);
 			ps.setString(4, seatType);
 			ps.setString(5, seatStatus);
@@ -102,7 +102,7 @@ public class SeatDAO {
 		seat.setSeatId(rs.getInt("seat_id"));
 		seat.setScreenId(rs.getInt("screen_id"));
 		seat.setRowNumber(rs.getString("row_number"));
-		seat.setSeatNumber(rs.getString("seat_number"));
+		seat.setSeatNumber(rs.getInt("seat_number"));
 		seat.setSeatType(rs.getString("seat_type"));
 		seat.setSeatStatus(rs.getString("seat_status"));
 		return seat;

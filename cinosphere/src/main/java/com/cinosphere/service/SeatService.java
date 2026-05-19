@@ -17,7 +17,7 @@ public class SeatService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean insertSeat(int screenId,String seatNumber,String rowNumber,String seatType,String seatStatus) throws Exception {
+	public boolean insertSeat(int screenId,int seatNumber,String rowNumber,String seatType,String seatStatus) throws Exception {
 		return seatDAO.insert(screenId, seatNumber, rowNumber, seatType, seatStatus);
 	}
 	/**

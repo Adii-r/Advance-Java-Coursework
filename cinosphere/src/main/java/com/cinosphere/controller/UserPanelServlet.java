@@ -66,7 +66,7 @@ public class UserPanelServlet extends HttpServlet {
 		int upcomingBooking = bookingService.getTotalUpcomingBookings(userId);
 		LocalDate nearestUpcomming = bookingService.getLatestComingBookingDate(userId);
 		int loyaltyPointsEarned = bookingService.getLatestLoyaltyPointsEarned(userId);
-		MembershipModel membership = membershipService.getMembershipByuserId(userId);
+		MembershipModel membership = membershipService.getByUserId(userId);
 		int monthTotal = bookingService.getTotalBookingsThisMonth(userId);
 		
 		List<BookingModel> bookings = bookingService.getUpcomingBookings(userId);

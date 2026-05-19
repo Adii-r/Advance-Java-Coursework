@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class MembershipService {
 	MembershipDAO membershipDAO = new MembershipDAO();
-	public MembershipModel getMembershipByuserId(int userId) throws Exception {
+	public MembershipModel getByUserId(int userId) throws Exception {
 
 			return membershipDAO.findByUserId(userId);
 
@@ -31,6 +31,12 @@ public class MembershipService {
 		}
 		
 		return memberships;
+		
+	}
+
+
+	public void updateMembershipLoyaltyPoints(int userId, int newPoints) throws Exception {
+		membershipDAO.updateMembershipLoyaltyPoints(userId, newPoints);
 		
 	}
 }

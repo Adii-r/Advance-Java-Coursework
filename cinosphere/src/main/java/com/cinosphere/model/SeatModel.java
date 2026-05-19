@@ -5,7 +5,7 @@ package com.cinosphere.model;
 public class SeatModel {
 	private int seatId;
     private int screenId;
-    private String seatNumber;
+    private int seatNumber;
     private String rowNumber;
     private String seatType;
     private String seatStatus;
@@ -41,14 +41,14 @@ public class SeatModel {
      * 
      * @return String
      */
-    public String getSeatNumber() { 
+    public int getSeatNumber() { 
     	return seatNumber; 
     }
     /**
      * 
      * @param seatNumber
      */
-    public void setSeatNumber(String seatNumber) { 
+    public void setSeatNumber(int seatNumber) { 
     	this.seatNumber = seatNumber; 
     }
     /**

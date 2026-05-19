@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class TicketDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	 public boolean insert(int bookingId, int showtimeId, int seatId, String ticketType, String ticketStatus,String issueDate, double ticketPrice) throws Exception {
+	 public boolean insert(int bookingId, int showtimeId, int seatId, String ticketType, String ticketStatus,LocalDate issueDate, double ticketPrice) throws Exception {
 			String sql = "INSERT INTO ticket (booking_id, showtime_id, seat_id, ticket_type, "
 			      + "ticket_status, issue_date, ticket_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			Connection con = DBconfig.getConnection();

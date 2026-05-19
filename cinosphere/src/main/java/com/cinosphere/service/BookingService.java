@@ -1,7 +1,9 @@
 package com.cinosphere.service;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.cinosphere.dao.BookingDAO;
 import com.cinosphere.model.BookingModel;
@@ -80,5 +82,16 @@ public class BookingService {
 
 	public int getYesterdayBooking() throws Exception {
 	    return bookingDAO.getBookings(LocalDate.now().minusDays(1));
+	}
+	public Set<Integer> getConfirmedSeatIdsByShowtime(int showtimeId) throws Exception {
+		return bookingDAO.getConfirmedSeatIdsByShowtime(showtimeId);
+	}
+	public Set<Integer> getBookedSeatIdsByShowtime(int showtimeId) throws Exception {
+		// TODO Auto-generated method stub
+		return bookingDAO.getReservedSeatIdsByShowtime(showtimeId);
+	}
+	public int insertAndGetId(int userId, LocalDate today, LocalTime now, String string, double totalAmount,
+			String string2, int pointsEarned) throws Exception {
+		return bookingDAO.insertAndGetId(userId, today, now, string, totalAmount, string2, pointsEarned);
 	}
 }
