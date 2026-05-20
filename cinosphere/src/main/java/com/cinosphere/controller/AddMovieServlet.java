@@ -1,29 +1,47 @@
 package com.cinosphere.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.cinosphere.model.ScreenModel;
+import com.cinosphere.model.TheatreModel;
 import com.cinosphere.service.ScreenService;
 import com.cinosphere.service.ShowtimeService;
+import com.cinosphere.service.TheatreService;
+import com.cinosphere.utils.FileuploadUtil;
 import com.cinosphere.service.MovieService;
 
 /**
  * Servlet implementation class AdminAddMovieServlet
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/addmovie" })
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024 * 2,
+	    maxFileSize = 1024 * 1024 * 10,
+	    maxRequestSize = 1024 * 1024 * 50
+	)
 public class AddMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"poster";  
+	private static final String BACKGROUND_UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"background";  
 	ScreenService screenService = new ScreenService();
-    MovieService movieService = new MovieService();
-    ShowtimeService showtimeService = new ShowtimeService();
+	TheatreService theatreService = new TheatreService();
+	MovieService movieService = new MovieService();
+	ShowtimeService showtimeService = new ShowtimeService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,69 +54,186 @@ public class AddMovieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		loadScreen(request);
+		request.setAttribute("rows", 0);
+        request.setAttribute("type","add");
+		request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String status = null;
-		String movieName = null;
-		int duration = 0;
-		String director = null;
-		String genre=null;
-		String movieLanguage=null; 
-		String description = null;
-		LocalDate releaseDate = null;
-		String movieStatus = null;
-		String ageRating = null;
-		
-		try {
-			movieName =	request.getParameter("movieTitle");
-			genre =	 request.getParameter("movieGenre");
-			movieLanguage =	request.getParameter("movieLanguage");
-			ageRating =	request.getParameter("movieCertificate");
-			movieStatus =request.getParameter("movieStatus");
-			director =	request.getParameter("movieDirector");
-			description = request.getParameter("movieDescription");
-			String releaseDateStr =request.getParameter("movieReleaseDate");
-			String durationStr =request.getParameter("movieDuration");
-			
-			if(movieName == null || movieName.isBlank()) {
-				request.setAttribute("error","Movie title required");
-				request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
-				return;
-			}
-			if(durationStr.matches("[a-zA-Z]+")) {
-				request.setAttribute("error","Duration in Mins number");
-				request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
-				return;
-			}
-			String[] halls = request.getParameterValues( "scheduleHall[]");
+		String operation = request.getParameter("operation");
+		String deleteRow = request.getParameter("deleteRow");
+		String rows = request.getParameter("rows");
+		String movieName = request.getParameter("movieTitle");
+		String genre = request.getParameter("movieGenre");
+		String movieLanguage = request.getParameter("movieLanguage");
+		String ageRating = request.getParameter("movieCertificate");
+		String movieStatus = request.getParameter("movieStatus");
+		String director = request.getParameter("movieDirector");
+		String description = request.getParameter("movieDescription");
+		String releaseDateStr = request.getParameter("movieReleaseDate");
+		String durationStr = request.getParameter("movieDuration");
 
-			String[] dates =request.getParameterValues("scheduleDate[]");
+		String[] halls = request.getParameterValues("scheduleHall[]");
+		String[] dates = request.getParameterValues("scheduleDate[]");
+		String[] times = request.getParameterValues("scheduleTime[]");
 
-			String[] times = request.getParameterValues("scheduleTime[]");
-			if(halls == null || halls.length == 0 || dates == null || dates.length ==0 || times == null || times.length == 0) {
-				request.setAttribute("error","At least one schedule required");
-				request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
-				return;
-			}
-			duration = Integer.parseInt(durationStr);
-			
-			int movieId = movieService.insertAndGetId(movieName, duration, director, genre, movieLanguage, description, releaseDate, movieStatus, ageRating);
-			if(movieId==-1) throw new Exception("Movie insert failed.");
-			
-			for(int i = 0; i < halls.length; i++) {
-				//showtimeService.insertShowtime( movieId,Integer.parseInt(halls[i]),LocalDate.parse(dates[i]),LocalTime.parse(times[i]),Endtime=times[i]+duration,showStatus, SHowtype);
-			}
-		} catch (Exception e) {
-			status = "Failed to add movie";
-			e.printStackTrace();
+
+		int row = 0;
+		if (rows != null && !rows.isEmpty()) {
+			row = Integer.parseInt(rows);
 		}
-		request.setAttribute("error", status);
+		if ("add".equals(operation)) {
+
+			row++;
+
+			loadAttributes(request, row, halls, dates, times, movieName, genre, movieLanguage,
+					ageRating, movieStatus, director, description, releaseDateStr, durationStr);
+
+			loadScreen(request);
+			request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+			return;
+		}
+		if (deleteRow != null) {
+		    int deleteIndex = Integer.parseInt(deleteRow);
+		    List<String> hallList = new ArrayList<>(Arrays.asList(halls));
+		    List<String> dateList = new ArrayList<>(Arrays.asList(dates));
+		    List<String> timeList = new ArrayList<>(Arrays.asList(times));
+		    hallList.remove(deleteIndex);
+		    dateList.remove(deleteIndex);
+		    timeList.remove(deleteIndex);
+		    halls = hallList.toArray(new String[0]);
+		    dates = dateList.toArray(new String[0]);
+		    times = timeList.toArray(new String[0]);
+		    row--;
+		    loadAttributes(request, row, halls, dates, times,movieName, genre, movieLanguage,ageRating, movieStatus, director,description, releaseDateStr, durationStr);
+		    loadScreen(request);
+		    request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+		    return;
+		}
+
+		if ("save".equals(operation)) {
+
+			loadAttributes(request, row, halls, dates, times, movieName, genre, movieLanguage,
+					ageRating, movieStatus, director, description, releaseDateStr, durationStr);
+
+			try {
+				if (movieName == null || movieName.isBlank()) {
+					request.setAttribute("error", "Enter movie name");
+					request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+					return;
+				}
+
+				if (durationStr == null || !durationStr.matches("\\d+")) {
+					request.setAttribute("error", "Duration must be a number");
+					request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+					return;
+				}
+
+				int duration = Integer.parseInt(durationStr);
+				LocalDate releaseDate = LocalDate.parse(releaseDateStr);
+
+
+				if (halls == null || dates == null || times == null) {
+					request.setAttribute("error", "At least one schedule required");
+					request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+					return;
+				}
+
+
+				int movieId = movieService.insertAndGetId(movieName, duration, director, genre,
+				movieLanguage, description, releaseDate, movieStatus, ageRating);
+				uploadImg(request,"moviePoster", movieId, BACKGROUND_UPLOAD_DIR);
+				uploadImg(request,"movieBackground", movieId, UPLOAD_DIR);
+				
+
+				for (int i = 0; i < halls.length; i++) {
+
+
+					if (halls[i].isBlank() || dates[i].isBlank() || times[i].isBlank()) {
+						continue;
+					}
+
+					LocalTime start = LocalTime.parse(times[i]);
+					LocalTime end = start.plus(Duration.ofMinutes(duration));
+
+					showtimeService.insertShowtime(Integer.parseInt(halls[i]),movieId,LocalDate.parse(dates[i]),start,end,"ACTIVE","STANDARD");}
+
+
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				request.setAttribute("error", "Failed to save movie");
+			}
+		}
+
+		loadAttributes(request, row, halls, dates, times, movieName, genre, movieLanguage,
+				ageRating, movieStatus, director, description, releaseDateStr, durationStr);
+
+		response.sendRedirect(request.getContextPath() + "/updatemovie");
 	}
 
+	private void loadAttributes(HttpServletRequest request, int rows, String[] halls,
+			String[] dates, String[] times, String movieName, String genre,
+			String movieLanguage, String ageRating, String movieStatus,
+			String director, String description,
+			String releaseDateStr, String durationStr) {
+
+		request.setAttribute("rows", rows);
+		request.setAttribute("scheduleHall", halls);
+		request.setAttribute("scheduleDate", dates);
+		request.setAttribute("scheduleTime", times);
+		request.setAttribute("movieTitle", movieName);
+		request.setAttribute("movieGenre", genre);
+		request.setAttribute("movieLanguage", movieLanguage);
+		request.setAttribute("movieCertificate", ageRating);
+		request.setAttribute("movieStatus", movieStatus);
+		request.setAttribute("movieDirector", director);
+		request.setAttribute("movieDescription", description);
+		request.setAttribute("movieReleaseDate", releaseDateStr);
+		request.setAttribute("movieDuration", durationStr);
+	}
+	
+	private void loadScreen(HttpServletRequest request) {
+		List<ScreenModel> screens = null;
+		List<TheatreModel> theatres = new ArrayList<>();
+		try {
+
+			screens = screenService.getAllScreens();
+
+			request.setAttribute("screens", screens);
+
+			for (ScreenModel screen : screens) {
+				System.out.println("[GET] Fetching theatre for screen: " + screen.getTheatreId());
+				theatres.add(theatreService.getTheatreById(screen.getTheatreId()));
+			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("screens", screens);
+		request.setAttribute("theatres", theatres);
+	}
+	private void uploadImg(HttpServletRequest request,String fieldName,int movieId, String path) throws Exception {
+		Part filePart = request.getPart(fieldName);
+		 if (FileuploadUtil.isImage(filePart)) {
+			 
+			 String userId = String.valueOf(movieId);
+			 File folder = new File(UPLOAD_DIR);
+			    File[] oldFiles = folder.listFiles((dir, name) -> name.startsWith(userId + "."));
+			    if (oldFiles != null) {
+			        for (File old : oldFiles) {
+			            old.delete();
+			        }
+			    }
+		 }
+		 String extension = FileuploadUtil.getFileExtension(filePart.getSubmittedFileName());
+        String fileName = movieId + extension;
+        FileuploadUtil.saveFile(filePart, path, fileName);
+	}
 }

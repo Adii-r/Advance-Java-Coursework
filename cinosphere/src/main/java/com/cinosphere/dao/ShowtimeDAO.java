@@ -183,8 +183,19 @@ public class ShowtimeDAO {
 		ps.setInt(2, showtimeId);
 		return ps.executeUpdate()>0;
 	}
-	
-	
+	/**
+	 * 
+	 * @param movieId
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean deleteByMovieId(int movieId) throws Exception {
+	    String sql = "DELETE FROM showtime WHERE movie_id = ?";
+	    Connection con = DBconfig.getConnection();
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setInt(1, movieId);
+	    return ps.executeUpdate() > 0;
+	}
 	
 	
 	/**

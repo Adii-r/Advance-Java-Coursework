@@ -70,4 +70,9 @@ public int insertAndGetId(String movieName, int duration, String director, Strin
 	return movieDAO.insertAndGetId(movieName, duration, director, genre, movieLanguage, description, releaseDate, movieStatus, ageRating);
 	
 }
+
+public boolean updateMovie(int movieId, String movieName, int duration, String director, String genre, String movieLang,String description, LocalDate releaseDate, String movieStatus, String ageRating) throws Exception {
+	return movieDAO.updateMovie(movieId, movieName, duration, director, genre, movieLang, description, releaseDate, movieStatus, ageRating);
+	
+}
 }

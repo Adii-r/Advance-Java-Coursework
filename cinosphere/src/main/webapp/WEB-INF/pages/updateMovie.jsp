@@ -36,7 +36,7 @@
 				    
 				    <div class="admin_menu_group">
 				        <span class="admin_navigation_label"> Actions </span> 
-				        <a href="${pageContext.request.contextPath}/updatemovie"
+				        <a href="${pageContext.request.contextPath}/addmovie"
 				           class="admin_navigation_item ${currentAdminPage eq 'updatemovie' ? 'active' : ''}">
 				            <div class="admin_navigation_icon_box">
 				                <img src="${pageContext.request.contextPath}/icon?name=monitor" alt="Actions">
@@ -75,8 +75,9 @@
             </c:if>
             
             <div class="admin_movie_content_wrapper">
-	            <form action="${pageContext.request.contextPath}/updatemovie" method="POST" enctype="multipart/form-data" class="admin_workspace_form">
-				<input type="hidden" name="rows" value="${rows != null ? rows : 1}">
+	            <form action="${pageContext.request.contextPath}/${type=='update'?'updatemovie':'addmovie'}" method="POST" enctype="multipart/form-data" class="admin_workspace_form">
+				<input type="hidden" name="rows" value="${rows != null ? rows : 0}">
+				<input type="hidden" name="movieId" value="${movieId}">
 	                <div class="admin_workspace_card">
 	                    <div class="admin_card_header">
 	                        <span class="admin_card_eyebrow">Manage Movies</span>
@@ -94,8 +95,30 @@
 	                                            <span>Select File</span>
 	                                        </div>
 	                                    </label>
-	                                    <input type="file" id="poster_file_input" name="moviePoster" accept="image/*" class="admin_hidden_file_input" />
+	                                    <input type="file" id="poster_file_input" name="moviePoster" accept="image/*" class="admin_hidden_file_input"/>
 	                                </div>
+	                                <label class="admin_field_label_av" style="padding-left: 2rem;">Movie Background</label>
+										
+										<div class="admin_background_upload_wrapper">
+										
+										    <label for="background_file_input" class="admin_background_frame">
+										
+										        <img
+										            id="background_view_element"
+										            src="${pageContext.request.contextPath}/background?name=${movieId}"
+										            alt="${movieTitle} background"
+										            class="admin_background_preview"
+										        />
+										
+										        <div class="admin_background_overlay">
+										            <span>Select Background</span>
+										        </div>
+										
+										    </label>
+										
+										    <input type="file" id="background_file_input" name="movieBackground" accept="image/*" class="admin_hidden_file_input"/>
+										
+										</div>
 	                            </div>
 	                            
 	                            <div class="admin_fields_entry_pane">
@@ -220,21 +243,21 @@
 	
 	                           
 	                            <div id="scheduleContainer">
-								<c:forEach var="i" begin="1" end="${rows}" step="1">
+								<c:forEach var="i" begin="0" end="${rows}" step="1" varStatus="x">
 								
     							<div class="schedule_add_row">
 	                                <select name="scheduleHall[]" class="admin_form_select">								
 									    <option value="">Select Hall</option>							
 									    <c:forEach var="screen" items="${screens}" varStatus="loop">	
 									    <c:set var="theatre" value="${theatres[loop.index]}" />				
-									        <option value="${screen.screenId}" ${scheduleHall[loop.index] == screen.screenId ? 'selected' : ''}>
+									        <option value="${screen.screenId}" ${scheduleHall[x.index] == screen.screenId ? 'selected' : ''}>
 									            ${screen.screenName} ~ ${theatre.city}
 									        </option>									
 									    </c:forEach>									
 									</select>
-	                                <input type="date" name="scheduleDate[]" class="admin_form_input" value="${scheduleDate[loop.index]}">
-	                                <input type="time" name="scheduleTime[]" class="admin_form_input" value="${scheduleTime[loop.index]}">
-	                                <button type="submit" name="operation"  value="delete" class="remove_button">      		
+	                                <input type="date" name="scheduleDate[]" class="admin_form_input" value="${scheduleDate[x.index]}">
+	                                <input type="time" name="scheduleTime[]" class="admin_form_input" value="${scheduleTime[x.index]}">
+	                                <button type="submit" name="deleteRow" value="${x.index}" class="remove_button">    		
 	                                <img src="${pageContext.request.contextPath}/icon?name=delete" alt="del" class="admin_button_icon">
    									</button>
 	                            </div>

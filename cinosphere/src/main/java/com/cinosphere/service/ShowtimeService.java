@@ -72,4 +72,8 @@ public class ShowtimeService {
 	public boolean insertShowtime(int screenId, int movieId, LocalDate showDate, LocalTime startTime, LocalTime endTime, String showStatus, String showType) throws Exception {
 		return showtimeDAO.insert(screenId, movieId, showDate, startTime, endTime, showStatus, showType);
 	}
+	public boolean deleteShowtimesByMovieId(int movieId) throws Exception {
+		return showtimeDAO.deleteByMovieId(movieId);
+		
+	}
 }

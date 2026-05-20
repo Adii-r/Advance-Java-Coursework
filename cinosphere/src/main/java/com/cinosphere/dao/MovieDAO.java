@@ -45,7 +45,20 @@ public class MovieDAO {
 		ps.setString(9, ageRating);
 		return ps.executeUpdate() >0;
 	}
-	
+	/**
+	 * 
+	 * @param movieName
+	 * @param duration
+	 * @param director
+	 * @param genre
+	 * @param movieLanguage
+	 * @param description
+	 * @param releaseDate
+	 * @param movieStatus
+	 * @param ageRating
+	 * @return
+	 * @throws Exception
+	 */
 	public int insertAndGetId(String movieName, int duration, String director, String genre, String movieLanguage, String description,LocalDate releaseDate ,String movieStatus, String ageRating) throws Exception {
 		String sql = "INSERT INTO movie (movie_name,duration,director,genre,movie_language,description,release_date,movie_status,age_rating)"
 				+"VALUES (?,?,?,?,?,?,?,?,?)";
@@ -68,8 +81,45 @@ public class MovieDAO {
 		keys.close(); ps.close(); con.close();
 		return newId;
 	}
-	
-	
+	/**
+	 * 
+	 * @param movieId
+	 * @param movieName
+	 * @param duration
+	 * @param director
+	 * @param genre
+	 * @param movieLanguage
+	 * @param description
+	 * @param releaseDate
+	 * @param movieStatus
+	 * @param ageRating
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean updateMovie(int movieId, String movieName, int duration, String director, String genre, String movieLanguage, String description, LocalDate releaseDate, String movieStatus, String ageRating) throws Exception {	
+		String sql = "UPDATE movie SET movie_name = ?, duration = ?, director = ?, genre = ?, movie_language = ?,description = ?, release_date = ?, movie_status = ?, age_rating = ? WHERE movie_id = ?";
+		try (Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql)) {
+		ps.setString(1, movieName);
+		ps.setInt(2, duration);
+		ps.setString(3, director);
+		ps.setString(4, genre);
+		ps.setString(5, movieLanguage);
+		ps.setString(6, description);
+		ps.setDate(7, Date.valueOf(releaseDate));
+		ps.setString(8, movieStatus);
+		ps.setString(9, ageRating);
+		ps.setInt(10, movieId);		
+		return ps.executeUpdate() > 0;
+		}
+	}
+	/**
+	 * 
+	 * @param movieId
+	 * @param movieStatus
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean updateStatus(int movieId,String movieStatus) throws Exception{
 		Connection con = DBconfig.getConnection();
 		String sql = "UPDATE movie SET movie_status=? WHERE movie_id = ?";

@@ -39,7 +39,7 @@
 
 				    <div class="admin_menu_group">
 				        <span class="admin_navigation_label"> Actions </span> 
-				        <a href="${pageContext.request.contextPath}/updatemovie"
+				        <a href="${pageContext.request.contextPath}/addmovie"
 				           class="admin_navigation_item ${currentAdminPage eq 'updatemovie' ? 'active' : ''}">
 				            <div class="admin_navigation_icon_box">
 				                <img src="${pageContext.request.contextPath}/icon?name=monitor" alt="Actions">
@@ -82,9 +82,11 @@
 							</p>
 						</div>
 						<div class="admin_dashboard_action_group">
+						<a href="${pageContext.request.contextPath}/addmovie">
 							<button class="admin_dashboard_primary_button">
 							<img src="${pageContext.request.contextPath}/icon?name=plus"
 								alt="Add" /> Add Movie</button>
+						</a>
 						</div>
 					</div>
 				</div>
@@ -172,9 +174,9 @@
 
 						<form action="${pageContext.request.contextPath}/admin"
 							method="post" style="display: inline;">
-							<input type="hidden" name="movieStatus" value="ARCHIVED">
+							<input type="hidden" name="movieStatus" value="ARCHIVE">
 							<button
-								class="admin_movie_tab ${movieStatus=='ARCHIVED'?'active':''}"
+								class="admin_movie_tab ${movieStatus=='ARCHIVE'?'active':''}"
 								type="submit">Archived</button>
 						</form>
 					</div>
@@ -212,10 +214,12 @@
 												${movie.movieStatus} </span></td>
 										<td>
 											<div class="admin_movie_action_group">
+											<a href="${pageContext.request.contextPath}/updatemovie?movieId=${movie.movieId}">
 												<button class="admin_action_button edit">
 													<img
 														src="${pageContext.request.contextPath}/icon?name=edit"
 														alt="Edit" /></button>
+										</a>
 										<a href="${pageContext.request.contextPath}/archivemovie?movieId=${movie.movieId}">
 												<button class="admin_action_button delete">
 													<img
