@@ -14,20 +14,10 @@ import java.nio.file.Paths;
 public class GetProfileImageServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"profile";   
-    private static final String DEFAULT_IMAGE_NAME = "2.png";
+    private static final String DEFAULT_IMAGE_NAME = "default";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        if (name == null || name.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
-            return;
-        }
-        System.out.print(UPLOAD_DIR);
-		System.out.println(
-			    Paths.get("")
-			         .toAbsolutePath()
-			         .toString()
-			);
         File folder = new File(UPLOAD_DIR);
         File imageFile = null;
 
@@ -37,13 +27,12 @@ public class GetProfileImageServlet extends HttpServlet {
                 imageFile = matches[0];
             }
         }
-
-        // Fall back to default image if not found
         if (imageFile == null || !imageFile.exists()) {
-            imageFile = new File(UPLOAD_DIR, DEFAULT_IMAGE_NAME);
+        	File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(DEFAULT_IMAGE_NAME + "."));
+            if (matches != null && matches.length > 0) {
+                imageFile = matches[0];
+            }
         }
-
-        // Serve whatever file we resolved
         if (imageFile.exists()) {
             String contentType = getServletContext().getMimeType(imageFile.getName());
             if (contentType == null) contentType = "image/png";

@@ -8,15 +8,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cinosphere.dao.MembershipDAO;
+import com.cinosphere.model.BookingModel;
 import com.cinosphere.model.MembershipModel;
 import com.cinosphere.model.MovieModel;
+import com.cinosphere.model.ScreenModel;
+import com.cinosphere.model.SeatModel;
+import com.cinosphere.model.ShowtimeModel;
+import com.cinosphere.model.TheatreModel;
+import com.cinosphere.model.TicketModel;
 import com.cinosphere.model.UsersModel;
 import com.cinosphere.service.BookingService;
 import com.cinosphere.service.MembershipService;
 import com.cinosphere.service.MovieService;
+import com.cinosphere.service.ScreenService;
+import com.cinosphere.service.SeatService;
+import com.cinosphere.service.ShowtimeService;
+import com.cinosphere.service.TheatreService;
+import com.cinosphere.service.TicketService;
 import com.cinosphere.service.UserService;
 import com.cinosphere.utils.SessionUtil;
 
@@ -29,11 +41,16 @@ import com.cinosphere.utils.SessionUtil;
 public class AdminPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d MMM, EEEE");
-	UserService usersService = new UserService();
-	MembershipService membershipService = new MembershipService();
-	MovieService movieService = new MovieService();
+	DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
 	BookingService bookingService = new BookingService();
-       
+	MembershipService membershipService = new MembershipService();
+	TicketService ticketService = new TicketService();
+	SeatService seatService = new SeatService();
+	MovieService movieService = new MovieService();
+	ShowtimeService showtimeService = new ShowtimeService();
+	ScreenService screenService = new ScreenService();
+	TheatreService theatreService = new TheatreService();
+    UserService usersService = new UserService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,7 +73,7 @@ public class AdminPanelServlet extends HttpServlet {
 			 int ticketsSoldYesterday = bookingService.getYesterdayBooking();
 			 int newMembersYesterday = usersService.getYesterdayNewUsers();
 			 
-			 
+			 setBookingManagement(request);
 			 
 			 request.setAttribute("revenueToday", revenueToday);
 			 request.setAttribute("ticketsSoldToday", ticketsSoldToday);
@@ -106,6 +123,7 @@ public class AdminPanelServlet extends HttpServlet {
             String userType = request.getParameter("userType");
             String searchMovie = request.getParameter("searchMovie");
             String searchUser = request.getParameter("searchUser");
+
             // Movie filtering
             List<MovieModel> movies;
 
@@ -115,8 +133,6 @@ public class AdminPanelServlet extends HttpServlet {
             else {
                 movies = movieService.getMoviesByStatus(movieStatus);
             }
-
-            // Search movie
             if (searchMovie != null && !searchMovie.trim().isEmpty()) {
                 movies = movieService.findByMovieName(searchMovie);
             }
@@ -142,14 +158,14 @@ public class AdminPanelServlet extends HttpServlet {
                 users = usersService.findByUsernames(searchUser);
 
             }
-
+            setBookingManagement(request);
             List<MembershipModel> memberships = membershipService.getMemberships(users);
-
-            List<Integer> bookings = bookingService.getTotalBookings(users);
-            
+            List<Integer> Totalbookings = bookingService.getTotalBookings(users); 
+            request.setAttribute("totalBooking",        totalBooking);
+            request.setAttribute("today", LocalDate.now().format(formatter));
             request.setAttribute("userList", users);
             request.setAttribute("membershipList", memberships);
-            request.setAttribute("bookingList", bookings);
+            request.setAttribute("bookingList", Totalbookings);
             request.setAttribute("userType", userType);  
             request.setAttribute("filteredMovies", movies);
             request.setAttribute("movieStatus", movieStatus);
@@ -161,6 +177,8 @@ public class AdminPanelServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
     }
+	
+	
 	private String calculateChange(double today, double yesterday) {
 	    if (yesterday == 0) {
 	        return today > 0 ? "100%" : "0%";
@@ -168,6 +186,58 @@ public class AdminPanelServlet extends HttpServlet {
 
 	    double change = ((today - yesterday) / yesterday) * 100;
 	    return String.format("%.0f%%", change);
+	}
+	private void setBookingManagement(HttpServletRequest request) throws Exception {
+		
+        List<BookingModel> bookings = bookingService.getAllBookings();
+		List<Integer> bookingIds      = new ArrayList<>();
+        List<String>  movieNames    = new ArrayList<>();
+        List<String>  showDates     = new ArrayList<>();
+        List<String>  startTimes    = new ArrayList<>();
+        List<String>  screenNames   = new ArrayList<>();
+        List<String>  seatLabels    = new ArrayList<>(); 
+        List<Double>  totalAmounts   = new ArrayList<>();
+        List<Integer>  totalPointsEarned = new ArrayList<>(); 
+        List<String>  bookingStatuses = new ArrayList<>();
+        List<String>  usernames = new ArrayList<>();
+        for (BookingModel booking : bookings) {
+        	
+            List<TicketModel> tickets = ticketService.getTicketByBooking(booking.getBookingId());
+            TicketModel firstTicket = tickets.get(0);
+            ShowtimeModel showtime  = showtimeService.getShowtimeById(firstTicket.getShowtimeId());
+            MovieModel    movie     = movieService.getMovieById(showtime.getMovieId());
+            ScreenModel   screen    = screenService.getScreenById(showtime.getScreenId());
+            UsersModel  user   = usersService.getUserById(booking.getUserId());
+            
+            List<String> seats = new ArrayList<>();
+            for (TicketModel t : tickets) {
+                SeatModel seat = seatService.getSeatById(t.getSeatId());
+                seats.add(seat.getRowNumber() + seat.getSeatNumber());
+            }
+            
+            bookingIds.add(booking.getBookingId());
+            movieNames.add(movie.getMovieName());
+            showDates.add(showtime.getShowDate().format(formatter));
+            startTimes.add(showtime.getStartTime().format(timeFormatter));
+            screenNames.add(screen.getScreenName());
+            seatLabels.add(String.join(", ", seats));
+            bookingStatuses.add(booking.getBookingStatus());
+            usernames.add(user.getUsername());
+            totalAmounts.add(booking.getTotalAmount());
+            totalPointsEarned.add(booking.getLoyaltyPointsEarned()); 
+            }
+		
+        
+        request.setAttribute("totalPointsEarned",  totalPointsEarned);
+        request.setAttribute("bookings",         bookingIds);
+        request.setAttribute("movieNames",       movieNames);
+        request.setAttribute("showDates",        showDates);
+        request.setAttribute("startTimes",       startTimes);
+        request.setAttribute("totalAmounts",           totalAmounts);
+        request.setAttribute("screenNames",      screenNames);
+        request.setAttribute("seatLabels",       seatLabels);
+        request.setAttribute("usernames",       usernames);
+        request.setAttribute("bookingStatuses",  bookingStatuses);
 	}
 	}
         

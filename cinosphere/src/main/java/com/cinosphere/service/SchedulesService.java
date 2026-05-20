@@ -122,6 +122,7 @@ public class SchedulesService {
 	    for (Map.Entry<Integer, List<ShowtimeModel>> movieEntry : mapMovie.entrySet()) {
 
 	        MovieModel movie = movieDAO.findById(movieEntry.getKey());
+	        if(movie.getMovieStatus().equals("ARCHIVE")) continue;
 
 	        if (langFilter != null && !langFilter.isEmpty() && !movie.getMovieLanguage().equalsIgnoreCase(langFilter)) continue;
 

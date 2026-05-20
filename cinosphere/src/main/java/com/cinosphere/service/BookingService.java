@@ -94,4 +94,13 @@ public class BookingService {
 			String string2, int pointsEarned) throws Exception {
 		return bookingDAO.insertAndGetId(userId, today, now, string, totalAmount, string2, pointsEarned);
 	}
+	public List<BookingModel> getAllBookings() throws Exception {
+		// TODO Auto-generated method stub
+		return bookingDAO.getAllBookings();
+	}
+	public void updateBookingStatusToArchive(int bookingId) throws Exception {
+		bookingDAO.updateBookingStatus(bookingId, "archive");
+		
+	}
+
 }

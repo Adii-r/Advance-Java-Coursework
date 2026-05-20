@@ -99,6 +99,46 @@ public class BookingDAO {
     }
 	/**
 	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BookingModel> findByBookingStatus(String bookingStatus) throws Exception {
+        List<BookingModel> bookings = new ArrayList<>();
+		String sql = "SELECT * FROM booking WHERE booking_status = ?";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, bookingStatus);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+        	bookings.add(createBookingModel(rs));
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return bookings;
+    }
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BookingModel> getAllBookings() throws Exception {
+        List<BookingModel> bookings = new ArrayList<>();
+		String sql = "SELECT * FROM booking";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+        	bookings.add(createBookingModel(rs));
+        }
+        rs.close();
+        ps.close();
+        con.close();
+        return bookings;
+    }
+	/**
+	 * 
 	 * @param bookingId
 	 * @return
 	 * @throws Exception
@@ -148,12 +188,12 @@ public class BookingDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean updateBookingStatus(int userId, String bookingStatus)throws Exception {
-		String sql = "UPDATE booking SET bookingStatus = ? WHERE user_id = ?";
+	public boolean updateBookingStatus(int bookingId, String bookingStatus)throws Exception {
+		String sql = "UPDATE booking SET booking_status = ? WHERE booking_id = ?";
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString (1, bookingStatus);
-		ps.setInt (2,  userId);
+		ps.setInt (2,  bookingId);
 		return ps.executeUpdate() > 0;
 	}
 	/**

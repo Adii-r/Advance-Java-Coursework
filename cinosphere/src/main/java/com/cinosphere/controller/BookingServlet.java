@@ -135,6 +135,8 @@ public class BookingServlet extends HttpServlet {
             double discountAmt=0;
             if (useSphere && discountPct > 0) {
                  discountAmt = round(subtotal * discountPct / 100.0);
+            }else {
+            	useSphere=false;
             }
             double totalAmount = round(subtotal - discountAmt);
 			String hallName = theatre.getCity() + " — " + screen.getScreenName();

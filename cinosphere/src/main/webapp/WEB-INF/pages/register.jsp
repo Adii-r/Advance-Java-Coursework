@@ -99,15 +99,15 @@
                 <div class="form_group_wrapper">
                   <label class="form_label_text">Gender</label>
                   <select name="gender" class="form_select_field" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="" ${gender==null?'selected':''} disabled>Select</option>
+                    <option value="male" ${gender=='male'?'selected':''}>Male</option>
+                    <option value="female" ${gender=='female'?'selected':''}>Female</option>
+                    <option value="other" ${gender=='other'?'selected':''}>Other</option>
                   </select>
                 </div>
                 <div class="form_group_wrapper">
                   <label class="form_label_text">Date of Birth</label>
-                  <input type="date" name="dob" class="form_input_field" placeholder="DD/MM/YYYY" required>
+                  <input type="date" name="dob" class="form_input_field" placeholder="DD/MM/YYYY" value="${dob}" required>
                 </div>
               </div>
 

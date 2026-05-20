@@ -28,7 +28,7 @@ public List<MovieModel> get4ActiveMovies() throws Exception {
 }
 
 public List<MovieModel> getAllMovies() throws Exception {
-	return movieDAO.findByFilters(null, null, null, null);
+	return movieDAO.getAllMovie();
 }
 
 public List<MovieModel> getMoviesByStatus(String status) throws Exception {
@@ -47,7 +47,7 @@ public void updateAllMovieStatus() throws Exception{
 	LocalDate today = LocalDate.now();
 	for(MovieModel movie: movies) {
 		String status = movie.getMovieStatus();
-		if(status.equals("ARCHIVED")) continue;
+		if(status.equals("ARCHIVE")) continue;
 		LocalDate release = movie.getReleaseDate();
 		if(release.isAfter(today)){
 			if(!status.equals("COMNG_SOON"))

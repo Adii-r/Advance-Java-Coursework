@@ -31,5 +31,9 @@ public class UserService {
 	public int getYesterdayNewUsers() throws Exception{
 	    return usersDAO.getNewUsers(LocalDate.now().minusDays(1));
 	}
+	public UsersModel getUserById(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		return usersDAO.findByUserId(userId);
+	}
  
 }

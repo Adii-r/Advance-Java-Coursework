@@ -27,10 +27,11 @@ public class AdminActivateAccountServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userId = Integer.parseInt( request.getParameter("userId"));
+		String userIdstr =request.getParameter("userId");
 	    boolean current = Boolean.parseBoolean(request.getParameter("currentStatus"));
 	    UserService service = new UserService();
 	        try {
+	        	int userId =  Integer.parseInt(userIdstr);
 	            if(current){
 	                service.deactivateUser(userId);
 	            }

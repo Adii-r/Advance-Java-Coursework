@@ -17,15 +17,10 @@ import java.nio.file.Files;
 public class GetMovieBackgroundPosterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"background";   
-	private static final String DEFAULT_IMAGE_NAME = "default.png";
+	private static final String DEFAULT_IMAGE_NAME = "default";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-        if (name == null || name.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
-            return;
-        }
-
         File folder = new File(UPLOAD_DIR);
         File imageFile = null;
 
@@ -38,8 +33,12 @@ public class GetMovieBackgroundPosterServlet extends HttpServlet {
 
         // Fall back to default image if not found
         if (imageFile == null || !imageFile.exists()) {
-            imageFile = new File(UPLOAD_DIR, DEFAULT_IMAGE_NAME);
+        	File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(DEFAULT_IMAGE_NAME + "."));
+            if (matches != null && matches.length > 0) {
+                imageFile = matches[0];
+            }
         }
+
 
         // Serve whatever file we resolved
         if (imageFile.exists()) {

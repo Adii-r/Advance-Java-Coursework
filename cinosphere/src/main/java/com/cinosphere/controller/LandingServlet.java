@@ -17,10 +17,7 @@ import com.cinosphere.service.MovieService;
  */
 @WebServlet(
 		asyncSupported = true, 
-		urlPatterns = { 
-				"/landing", 
-				"/"
-		})
+		urlPatterns = {"/home"})
 public class LandingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

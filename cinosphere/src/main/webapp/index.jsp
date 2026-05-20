@@ -31,7 +31,7 @@
       </p>
 
       <div class="hero_actions">
-        <a href="${pageContext.request.contextPath}/#" class="hero_button">
+        <a href="${pageContext.request.contextPath}/schedules" class="hero_button">
           <img src="${pageContext.request.contextPath}/icon?name=ticket" alt="ticket" class="hero_button_icon" />
           <span class="hero_button_text">Reserve Now</span>   
         </a>

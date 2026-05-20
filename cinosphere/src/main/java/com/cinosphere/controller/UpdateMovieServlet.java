@@ -44,10 +44,6 @@ public class UpdateMovieServlet extends HttpServlet {
     TheatreService  theatreService  = new TheatreService();
     MovieService    movieService    = new MovieService();
     ShowtimeService showtimeService = new ShowtimeService();
-
-    // ──────────────────────────────────────────────────────────────────────────
-    // GET — load existing movie + its showtimes into the form
-    // ──────────────────────────────────────────────────────────────────────────
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

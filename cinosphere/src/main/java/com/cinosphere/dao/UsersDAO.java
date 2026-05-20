@@ -110,7 +110,27 @@ public class UsersDAO {
             con.close();
             return user;
         }
-
+	/**
+	 * Find a user by their id
+	 * @param email
+	 * @return user object
+	 * @throws SQLException
+	 */
+	public UsersModel findByUserId(int userId) throws SQLException {
+		UsersModel user = null;
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        Connection con = DBconfig.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+                if(rs.next()) {
+                	user = createUserModel(rs);
+                }
+            rs.close();
+            ps.close();
+            con.close();
+            return user;
+        }
 	/**
 	 * Create list of all users
 	 * @return list object of user

@@ -23,11 +23,6 @@ public class GetLogoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-        if (name == null || name.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing name parameter");
-            return;
-        }
-
         File folder = new File(UPLOAD_DIR);
         File imageFile = null;
 

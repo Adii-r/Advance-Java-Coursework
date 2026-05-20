@@ -102,24 +102,24 @@
 					<div class="admin_metric_card">
 						<span class="admin_metric_value admin_metric_gold">Rs ${revenueToday}</span>
 						<span class="admin_metric_title">Revenue Today</span> <span
-							class="admin_metric_change"> ↑ ${revenueChange} vs yesterday </span>
+							class="admin_metric_change">${revenueChange} vs yesterday </span>
 					</div>
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_green"> ${ticketsSoldToday} </span> <span
-							class="admin_metric_title"> Tickets Sold </span> <span
-							class="admin_metric_change"> ↑ ${ticketsChange} vs yesterday </span>
+						<span class="admin_metric_value admin_metric_gold"> ${ticketsSoldToday} </span> <span
+							class="admin_metric_title"> Tickets Sold Today </span> <span
+							class="admin_metric_change">${ticketsChange} vs yesterday </span>
 					</div>
 
 					<div class="admin_metric_card">
 						<span class="admin_metric_value admin_metric_gold">  ${newMembersToday} </span> <span
-							class="admin_metric_title"> New Members </span> <span
-							class="admin_metric_change"> ↑ ${usersChange} vs yesterday </span>
+							class="admin_metric_title"> New Members Today </span> <span
+							class="admin_metric_change">${usersChange} vs yesterday </span>
 					</div>
 					<div class="admin_metric_card">
-						<span class="admin_metric_value admin_metric_red">${totalBooking}</span> <span
+						<span class="admin_metric_value admin_metric_gold">${totalBooking==null?0:totalBooking}</span> <span
 							class="admin_metric_title"> Total Bookings </span> <span
-							class="admin_metric_change admin_metric_negative">
-							today</span>
+							class="admin_metric_change">
+							${ticketsSoldToday==null?0:ticketsSoldToday} new booking</span>
 					</div>
 				</div>
 			</section>
@@ -337,7 +337,7 @@
 												class="status_pill ${user.isActive==true?'status_confirmed':'status_past suspended_status'}">
 													${user.isActive==true?"ACTIVE":"INACTIVE"} </span></td>
 											<td>
-											    <form action="${pageContext.request.contextPath}${user.isActive ? '/admindeleteaccount':'/adminactivateaccount'}"
+											    <form action="${pageContext.request.contextPath}/adminactivateaccount"
 											          method="post">
 											
 											        <input type="hidden"
@@ -379,6 +379,65 @@
 					</div>
 				</div>
 			</section>
+			<section id="booking_management" class="admin_user_management_section">
+			<div class="admin_panel_card">
+				<div class="admin_panel_header">
+					<h3 class="admin_panel_title">Booking Management</h3>
+												<div class="admin_panel_actions">
+								
+								<a class="admin_add_movie_button button" href="${pageContext.request.contextPath}/updatebookingstatus">
+									<img
+										src="${pageContext.request.contextPath}/icon?name=search"
+										alt="Search" />  Update
+								</a>
+							</div>
+				</div>
+				<div class="admin_movie_table_wrapper">
+					<table class="admin_movie_table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Movie</th>
+								<th>Username</th>
+								<th>Hall</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Seats</th>
+								<th>Total Amount</th>
+								<th>Points Earned</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${not empty bookings}">
+								<c:forEach items="${bookings}" varStatus="loop">
+									<tr>
+										<td>${bookings[loop.index]}</td>
+										<td>${movieNames[loop.index]}</td>
+										<td>${usernames[loop.index] }</td>
+										<td>${screenNames[loop.index]}</td>
+										<td>${showDates[loop.index]}</td>
+										<td>${startTimes[loop.index]}</td>
+										<td class="admin_email_cell">${seatLabels[loop.index]}</td>
+										<td>Rs ${totalAmounts[loop.index]}</td>
+										<td class="admin_points_cell">${totalPointsEarned[loop.index]}</td>
+										<td><span
+											class="status_pill ${bookingStatuses[loop.index]=='confirmed'?'status_confirmed':'status_archived'}">
+												${bookingStatuses[loop.index]}
+										</span></td>
+									</tr>
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
+					<c:if test="${empty bookings && empty error}">
+						<jsp:include page="../components/errorBox.jsp">
+							<jsp:param name="errorMessage" value="No bookings found" />
+						</jsp:include>
+					</c:if>
+				</div>
+			</div>
+		</section>
 		</main>
 	</div>
 

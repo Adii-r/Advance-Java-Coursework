@@ -303,6 +303,21 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	public List<MovieModel> getAllMovie() throws Exception {
+		List<MovieModel> movies = new ArrayList<>();
+		String sql = "SELECT * FROM movie ORDER BY release_date ASC";
+		Connection con = DBconfig.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			movies.add(createMovieModel(rs));
+		}
+		rs.close();
+	    ps.close();
+	    con.close();
+	    return movies;
+	}
 	/**
 	 * 
 	 * @return
@@ -336,7 +351,7 @@ public class MovieDAO {
 	 */
 	public List<MovieModel> findByFilters(String language, String genre,  String status, String keyword) throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
-		StringBuilder sql = new StringBuilder("SELECT * FROM movie WHERE 1=1 ");
+		StringBuilder sql = new StringBuilder("SELECT * FROM movie WHERE movie_status != 'ARCHIVE'");
 		List<String> params = new ArrayList<>();
 		
 		if (valueCheck(language)) { sql.append("AND movie_language = ? "); params.add(language); }
@@ -348,8 +363,6 @@ public class MovieDAO {
 		
 		Connection con = DBconfig.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql.toString());
-		System.out.print(sql);
-		System.out.print(params);
 		for (int i = 0; i < params.size(); i++) {
 			ps.setString(i+1, params.get(i));
 		}
