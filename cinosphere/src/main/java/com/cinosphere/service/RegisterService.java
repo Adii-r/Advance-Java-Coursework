@@ -66,7 +66,7 @@ public class RegisterService {
         else if (lastName == null || lastName.trim().isEmpty()) {
             status = "Invalid last name";
         }
-        else if (!firstName.matches("[a-zA-Z]+")) {
+        else if (!lastName.matches("[a-zA-Z]+")) {
             status = "First name must contain only letters";
         } 
         else if (!lastName.matches("[a-zA-Z]+")) {

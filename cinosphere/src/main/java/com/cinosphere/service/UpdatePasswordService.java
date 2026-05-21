@@ -31,7 +31,7 @@ public class UpdatePasswordService {
         if (newPassword == null || newPassword.isEmpty()) {
             return "New Password is required";
         }
-        else if (newPassword == null || newPassword.length() < 8) {
+        else if (newPassword.length() < 8) {
             return "Password must be at least 8 characters";
         }
         if(!newPassword.equals(confirmPassword)) {

@@ -251,7 +251,7 @@ public class BookingServlet extends HttpServlet {
 	                ticketService.createTicket(bookingId, showtimeId, sid, ticketType, "ACTIVE", today, ticketPrice);
 	            }
 	            paymentService.createPayment(bookingId, paymentMethod, totalAmount);
-	            int newPoints = (useSphere ? spherePoints-POINT_MIN : spherePoints) + pointsEarned;
+	            int newPoints = (useSphere ? spherePoints-POINT_MIN : spherePoints) + pointsEarned; //deduction of 300 points for applying the discount
                 membershipService.updateMembershipLoyaltyPoints(user.getUserId(), newPoints);
                 response.sendRedirect(request.getContextPath()+ "/profile");
 	    }catch(Exception e){
