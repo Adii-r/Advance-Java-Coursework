@@ -19,7 +19,7 @@ import com.cinosphere.utils.SessionUtil;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter
- * This filter filters out request made to /userpanel, /logout, /booking from users who aren't logged in
+ * This filter filters out request made to user dependent pages from users who aren't logged in
  * Users without session are redirected toward login page
  * 
  * @author Raunit Giri
@@ -27,22 +27,13 @@ import com.cinosphere.utils.SessionUtil;
 @WebFilter({"/logout","/profile","/updateprofile","/admin","/booking","/updatepassword","/updatemovie","/updatebookingstatus","/deleteaccount","/archivemovie","/adminactivateaccount","/addmovie"})
 public class AuthenticationFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
-    /**
-     * @see HttpFilter#HttpFilter()
-     */
-    public AuthenticationFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
+	 * Main filter method that checks whether the user is logged in or not.
+	 * If logged in → request is passed to next filter/servlet.
+	 * If not logged in → user is redirected to login page and cache is disabled
+	 * to prevent accessing protected pages using back button.
+	 *
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

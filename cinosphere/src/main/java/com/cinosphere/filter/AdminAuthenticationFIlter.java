@@ -4,7 +4,6 @@ package com.cinosphere.filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -20,51 +19,29 @@ import com.cinosphere.utils.SessionUtil;
 
 /**
  * Servlet Filter implementation class AdminAuthenticationFIlter
- * This filter filters out request made to admin panel from users who aren't logged in
+ * This filter filters out request made to admin dependent pages from users who aren't logged in
  * and who don't poses administrator privileges
  * 
  * @author Raunit Giri
  */
-
-/** */
 @WebFilter({"/admin","/updatemovie","/updatebookingstatus","/archivemovie","/adminactivateaccount","/addmovie"})
-public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
-       
-    /**
-	 * 
-	 */
+public class AdminAuthenticationFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * @see HttpFilter#HttpFilter()
+     * Main filter method that checks whether the user is logged in and has ADMIN role.
+     * If not logged in → redirects to login page.
+     * If logged in but not ADMIN → returns HTTP 403 Forbidden.
+     * 
+     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
      */
-    public AdminAuthenticationFIlter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		
-		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "user") != null;
 		if (isLoggedIn) {
-			UsersModel customer = (UsersModel) SessionUtil.getAttribute(httpRequest, "user");
-			boolean isAdmin = customer.getUserRole().equals("ADMIN");
-			System.out.print(isAdmin);
+			UsersModel user = (UsersModel) SessionUtil.getAttribute(httpRequest, "user");
+			boolean isAdmin = user.getUserRole().equals("ADMIN");
 		 if(isAdmin) {
 			 chain.doFilter(request, response);
 		 }else {
@@ -80,12 +57,6 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 		
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
 
 }
 

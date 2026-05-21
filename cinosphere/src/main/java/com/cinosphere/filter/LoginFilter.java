@@ -27,25 +27,12 @@ import com.cinosphere.model.UsersModel;
 public class LoginFilter extends HttpFilter implements Filter {
        
 	private static final long serialVersionUID = 1L;
-
 	/**
-     * @see HttpFilter#HttpFilter()
+     * Main filter method that intercepts requests to /login and /register.
+     * Redirects logged in users away from authentication pages.
+     * 
+     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
      */
-    public LoginFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -66,12 +53,4 @@ public class LoginFilter extends HttpFilter implements Filter {
 			}
 		}
 	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
-
 }
