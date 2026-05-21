@@ -23,6 +23,16 @@ import com.cinosphere.utils.SessionUtil;
 
 /**
  * Servlet implementation class UpdateProfileServlet
+ * 
+ * This servlet handles user profile updates including personal information
+ * such as name, email, date of birth, and profile image upload. It retrieves
+ * the current user from the session, updates the database with the new details,
+ * refreshes the session data after a successful update, and manages profile
+ * image replacement by storing the new image and removing the previous one.
+ * The updated profile information is then reflected in the user session and
+ * the user is redirected back to the profile page.
+ * 
+ *@author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/updateprofile" })
 @MultipartConfig(
@@ -32,11 +42,14 @@ import com.cinosphere.utils.SessionUtil;
 	)
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"profile";   
-	UsersDAO usersdao = new UsersDAO();
-    MembershipService membershipService = new MembershipService();
+	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"profile";  // Directory where profile images are stored 
+	private UsersDAO usersdao = new UsersDAO();
+    private MembershipService membershipService = new MembershipService();
     
 	/**
+	 * Handles GET requests for the update profile page. It retrieves the logged-in
+	 * user’s membership details and forwards them to the update profile view for
+	 * display and editing.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,6 +67,12 @@ public class UpdateProfileServlet extends HttpServlet {
 	}
 
 	/**
+	 * 
+	 * Handles POST requests for updating user profile information. It processes form
+	 * data submitted by the user, updates the database records, refreshes session
+	 * information, and manages profile image upload if provided. After processing,
+	 * the user is redirected to the profile page or back to the update page in case
+	 * of an error.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

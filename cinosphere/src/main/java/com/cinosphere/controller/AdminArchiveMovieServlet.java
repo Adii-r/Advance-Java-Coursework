@@ -11,6 +11,12 @@ import com.cinosphere.service.MovieService;
 
 /**
  * Servlet implementation class AdminArchiveMovieServlet
+ *
+ * This servlet handles the archiving of movies from the admin panel. It updates the movie
+ * status to ARCHIVE, effectively removing it from active listings while preserving its data
+ * in the system for record-keeping and management purposes.
+ *
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/archivemovie" })
 public class AdminArchiveMovieServlet extends HttpServlet {
@@ -19,15 +25,11 @@ public class AdminArchiveMovieServlet extends HttpServlet {
 	MovieService movieService = new MovieService();
 	
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminArchiveMovieServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
+	 * Handles GET requests for archiving a movie by updating its status to ARCHIVE based on
+	 * the provided movie ID. After successful processing, the admin is redirected back to
+	 * the movie management section of the admin panel.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +48,8 @@ public class AdminArchiveMovieServlet extends HttpServlet {
 	}
 
 	/**
+	 * Handles POST requests for archiving a movie by delegating the request to the GET method.
+	 *
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

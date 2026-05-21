@@ -9,7 +9,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+/**
+ * Servlet implementation class GetProfileImageServlet
+ * 
+ * This servlet is responsible for retrieving and serving user profile images.
+ * It fetches the image file from the server storage based on the provided
+ * username parameter. If a user-specific image is not found, it falls back to
+ * a default profile image. The image is then streamed directly to the client
+ * with the appropriate MIME type for rendering in the browser.
+ * 
+ * @author Raunit Giri
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/profileimage" })
 public class GetProfileImageServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -43,9 +53,5 @@ public class GetProfileImageServlet extends HttpServlet {
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found and no default available");
         }
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }

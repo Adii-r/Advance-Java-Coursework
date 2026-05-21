@@ -32,31 +32,45 @@ import com.cinosphere.utils.SessionUtil;
 
 /**
  * Servlet implementation class UserPanelServlet
+ * 
+ * This servlet is responsible for handling the user profile page. It retrieves
+ * all necessary information related to the logged-in user such as booking history,
+ * upcoming bookings, membership details, and loyalty points. It also gathers
+ * associated movie, showtime, seat, screen, and theatre information required
+ * to display a complete user dashboard view. The collected data is then passed
+ * to the JSP page for rendering.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/profile" })
 public class UserPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d MMM, EEEE");
-	DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
-	BookingService bookingService = new BookingService();
-	MembershipService membershipService = new MembershipService();
-	TicketService ticketService = new TicketService();
-	SeatService seatService = new SeatService();
-	MovieService movieService = new MovieService();
-	ShowtimeService showtimeService = new ShowtimeService();
-	ScreenService screenService = new ScreenService();
-	TheatreService theatreService = new TheatreService();
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d MMM, EEEE"); //Formatter used to display dates in a readable format such as day, date, and month.
+	private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a"); //Formatter used to display showtime in 12-hour format with AM/PM.
+	private BookingService bookingService = new BookingService();
+	private MembershipService membershipService = new MembershipService();
+	private TicketService ticketService = new TicketService();
+	private SeatService seatService = new SeatService();
+	private MovieService movieService = new MovieService();
+	private ShowtimeService showtimeService = new ShowtimeService();
+	private ScreenService screenService = new ScreenService();
+	private TheatreService theatreService = new TheatreService();
 	
 	/**
+	 * Handles GET requests for the user profile page by retrieving the logged-in user,
+	 * checking access permissions, and loading all relevant booking and profile-related
+	 * data required to display the user dashboard.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+		// Redirect admin users away from user panel
 		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
 		if("ADMIN".equals(user.getUserRole())) {
 			response.sendRedirect(request.getContextPath()+"/admin");
 			return;
 		}
+		// Fetch userdata
 		int userId= user.getUserId();
 		int totalBooking = bookingService.getTotalBookings(userId);
 		int upcomingBooking = bookingService.getTotalUpcomingBookings(userId);
@@ -103,7 +117,7 @@ public class UserPanelServlet extends HttpServlet {
             
             
             }
-		
+        // Set attributes for JSP rendering
         request.setAttribute("totalBooking",        totalBooking);
         request.setAttribute("upcomingBooking",     upcomingBooking);
         request.setAttribute("loyaltyPointsEarned", loyaltyPointsEarned);
@@ -125,15 +139,16 @@ public class UserPanelServlet extends HttpServlet {
 			request.setAttribute("error", "Failed to load profile details.");
 			e.printStackTrace();
 		}
+		// Forward to user profile JSP
 		request.getRequestDispatcher("/WEB-INF/pages/userPanel.jsp").forward(request, response);
 	}
-
 	/**
+	 * Handles POST requests for the profile page. It delegates processing to the GET
+	 * method as both requests share the same functionality.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
-
 }

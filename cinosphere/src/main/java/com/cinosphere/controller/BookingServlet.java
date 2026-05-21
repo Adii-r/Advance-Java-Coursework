@@ -29,9 +29,15 @@ import com.cinosphere.service.ShowtimeService;
 import com.cinosphere.service.TheatreService;
 import com.cinosphere.service.TicketService;
 import com.cinosphere.utils.SessionUtil;
-
 /**
  * Servlet implementation class Booking
+ *
+ * This servlet handles the booking process for movie tickets including seat selection,
+ * pricing calculation, loyalty point application, and payment processing. It also
+ * prepares all required movie, screen, theatre, and showtime data for rendering the
+ * booking page and final confirmation.
+ *
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/booking" })
 public class BookingServlet extends HttpServlet {
@@ -60,9 +66,14 @@ public class BookingServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Handles GET requests for the booking page by loading all required booking data
+     * such as movie details, showtime information, seat layout, pricing breakdown,
+     * and membership-based discount calculations. The prepared data is forwarded
+     * to the booking JSP for rendering the seat selection and checkout interface.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String movieIdStr    = request.getParameter("movieId");
 		String showtimeIdStr = request.getParameter("showtimeId");
@@ -177,6 +188,11 @@ public class BookingServlet extends HttpServlet {
 	}
 
 	/**
+	 * Handles POST requests for processing a booking transaction including seat validation,
+	 * price calculation, loyalty point application, ticket creation, and payment recording.
+	 * On successful booking, the user is redirected to the profile page, otherwise the
+	 * booking page is reloaded with an error message.
+	 *
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -247,18 +263,18 @@ public class BookingServlet extends HttpServlet {
 	    }
 	}
 	/**
-	 * 
-	 * @param v
-	 * @return
+	 * Returns a rounded value up to 2 decimal places.
+	 * @param v the raw numeric value
+	 * @return rounded value up to 2 decimal places
 	 */
     private double round(double v) {
         return Math.round(v * 100.0) / 100.0;
     }
     /**
-     * 
-     * @param sm
-     * @return
-     */
+	 * Determines the pricing multiplier based on seat type.
+	 * @param sm seat model containing seat type information
+	 * @return pricing multiplier based on seat category
+	 */
     private double multiplier(SeatModel sm) {
         if (sm == null) return STANDARD;
         String t = sm.getSeatType() == null ? "" : sm.getSeatType().toLowerCase();

@@ -33,9 +33,15 @@ import com.cinosphere.service.UserService;
 import com.cinosphere.utils.SessionUtil;
 
 /**
- * @author Raunit Giri
- * @
  * Servlet implementation class AdminPanelServlet
+ *
+ * This servlet handles the administration dashboard of the system. It is responsible for
+ * retrieving and displaying overall system statistics such as revenue, ticket sales, user
+ * registrations, and booking data. It also supports filtering of movies and users, and
+ * provides aggregated data required for managing bookings, users, and content within the
+ * admin panel.
+ *
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/admin" })
 public class AdminPanelServlet extends HttpServlet {
@@ -52,16 +58,13 @@ public class AdminPanelServlet extends HttpServlet {
 	TheatreService theatreService = new TheatreService();
     UserService usersService = new UserService();
     /**
-     * @see HttpServlet#HttpServlet()
+     * Handles GET requests for the admin dashboard by loading overall system statistics such as
+     * total bookings, revenue summaries, ticket sales, and new user registrations. It also
+     * prepares booking management data, user lists, membership details, and movie information
+     * required for rendering the admin dashboard.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    public AdminPanelServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 try {
@@ -99,8 +102,11 @@ public class AdminPanelServlet extends HttpServlet {
 		 request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
 	/**
+	 * Handles POST requests for the admin dashboard by processing filter inputs for movies and
+	 * users, including status-based filtering and keyword search. It refreshes dashboard metrics
+	 * and updates the displayed booking, user, membership, and movie data accordingly.
+	 *
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -178,7 +184,13 @@ public class AdminPanelServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/adminPanel.jsp").forward(request, response);
     }
 	
-	
+	/**
+	 * Calculates the percentage change between two values
+	 *
+	 * @param today the current day's value
+	 * @param yesterday the previous day's value
+	 * @return formatted percentage change as a string
+	 */
 	private String calculateChange(double today, double yesterday) {
 	    if (yesterday == 0) {
 	        return today > 0 ? "100%" : "0%";
@@ -187,6 +199,12 @@ public class AdminPanelServlet extends HttpServlet {
 	    double change = ((today - yesterday) / yesterday) * 100;
 	    return String.format("%.0f%%", change);
 	}
+	/**
+	 * Loads and prepares booking management data for the admin dashboard. .
+	 *
+	 * @param request the HttpServletRequest used to store prepared booking data attributes
+	 * @throws Exception if any data retrieval or processing error occurs
+	 */
 	private void setBookingManagement(HttpServletRequest request) throws Exception {
 		
         List<BookingModel> bookings = bookingService.getAllBookings();

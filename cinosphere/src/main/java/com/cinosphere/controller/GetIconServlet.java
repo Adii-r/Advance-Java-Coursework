@@ -12,6 +12,13 @@ import java.nio.file.Files;
 
 /**
  * Servlet implementation class GetIconServlet
+ * 
+ * This servlet is responsible for retrieving and serving icon images stored
+ * on the server. It fetches the requested icon based on the provided name
+ * parameter and streams the image directly to the client. This enables dynamic
+ * icon rendering throughout the application UI components.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/icon" })
 public class GetIconServlet extends HttpServlet {
@@ -19,6 +26,11 @@ public class GetIconServlet extends HttpServlet {
 	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"icon";   
 
 	/**
+	 * Handles GET requests for retrieving icon images. It validates the request
+	 * parameter, searches the server directory for a matching icon file, and
+	 * streams the image to the HTTP response with the correct MIME type. If the
+	 * icon is not found, an appropriate error response is returned.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

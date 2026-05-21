@@ -16,16 +16,27 @@ import com.cinosphere.utils.CookieUtil;
 
 /**
  * Servlet implementation class SchedulesServlet
- *
- *
+ * 
+ * This servlet is responsible for displaying and managing the movie schedules
+ * page. It retrieves filter values such as date, time, location, language, and
+ * format from both cookies and request parameters, ensuring that user-selected
+ * preferences are preserved across sessions. It then fetches the relevant
+ * schedule data from the service layer and forwards it to the schedules JSP
+ * for rendering the movie listing based on applied filters.
+ * 
  * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/schedules" })
 public class SchedulesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	SchedulesService schedulesService = new SchedulesService();
+	private SchedulesService schedulesService = new SchedulesService();
 
 	/**
+	 * Handles GET requests for the schedules page. It retrieves filter values from
+	 * cookies and request parameters, stores updated preferences back into cookies,
+	 * and fetches filtered movie schedule data based on the selected criteria. The
+	 * prepared data is then forwarded to the schedules JSP page for display.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -90,14 +101,10 @@ public class SchedulesServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/WEB-INF/pages/schedules.jsp").forward(request, response);
 	}
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Ensures that null values are safely converted into empty strings to prevent
+	 * null-related errors when storing values in cookies or processing filters.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
 	private String safeString(String value) {
 		return value != null ? value : "";
 	}

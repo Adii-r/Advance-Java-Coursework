@@ -18,26 +18,24 @@ import com.cinosphere.utils.SessionUtil;
 /**
  * Servlet implementation class LoginServlet
  * 
- * This servlet handles the login functionality.
- * It displays the login page on GET requests and processes user credentials 
- * on POST requests. If the login is successful, it redirects the user to 
- * the user panel, otherwise, it displays an error message on the login page.
+ * This servlet handles user authentication for the system. It is responsible
+ * for displaying the login page and processing login credentials submitted by
+ * the user. On successful authentication, it creates a user session and redirects
+ * the user either to the admin dashboard or user profile depending on their role.
+ * On failure, it returns the user back to the login page with an appropriate
+ * error message.
  * 
  * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	LoginService loginService= new LoginService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+	private LoginService loginService= new LoginService();
 	/**
+	 * Handles GET requests for the login page. It loads any saved login cookie
+	 * data (such as username) to improve user experience and forwards the request
+	 * to the login JSP page.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,6 +45,12 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
+	 * Handles POST requests for login authentication. It retrieves user credentials
+	 * from the request, validates them through the login service, creates a session
+	 * and login cookie on success, and redirects the user based on their role.
+	 * If authentication fails, the user is returned to the login page with an error
+	 * message.
+	 *
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,10 +60,8 @@ public class LoginServlet extends HttpServlet {
         
         String status = loginService.authenticate(username, password,request); // logs user if credentials match and creates session
         if ("Success".equals(status)) {
-        	UsersDAO userdao = new UsersDAO();
-        	UsersModel user=null;
+        	UsersModel user= (UsersModel) SessionUtil.getAttribute(request, "user");
 			try {
-				user = userdao.findByUsername(username);
 				loginService.createLoginCookie(response, username,  43200);
 			} catch (Exception e) {
 				e.printStackTrace();

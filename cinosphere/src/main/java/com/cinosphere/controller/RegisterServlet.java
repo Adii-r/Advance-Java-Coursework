@@ -11,27 +11,40 @@ import java.time.LocalDate;
 import com.cinosphere.service.RegisterService;
 
 /**
- * Servlet implementation class RegisterServlet.
+ * Servlet implementation class RegisterServlet
  * 
- * This servlet handles the registration functionality.
- * It displays the register page on GET requests and processes user details 
- * on POST requests. if registration, it redirects the user to login servlet
- * otherwise, it displays an error message on the register page.
+ * This servlet handles user registration functionality for the system. It is
+ * responsible for displaying the registration page and processing user input
+ * during account creation. The servlet validates user-provided details through
+ * the service layer, and if the registration is successful, it redirects the
+ * user to the login page. In case of validation failure or errors, appropriate
+ * error messages are forwarded back to the registration page for user feedback.
  * 
  * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private RegisterService register = new RegisterService();
+	
 	/**
+	 * Handles GET requests for the registration page. It simply forwards the user
+	 * to the register JSP page where the registration form is displayed.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response); 
 	}
 
 	/**
+	 * Handles POST requests for user registration. It retrieves user input from the
+	 * form, validates the provided data through the registration service, and checks
+	 * for errors such as invalid input or mismatched passwords. If validation fails,
+	 * the user is redirected back to the registration page with error messages.
+	 * Otherwise, a new user account is created and the user is redirected to the
+	 * login page upon successful registration.
+	 *
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,8 +58,6 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String username= request.getParameter("username");
-        
-        RegisterService register = new RegisterService();
         
         status = register.Authentication(firstName, lastName,gender, username, dob, email, password, confirmPassword);
         
@@ -64,9 +75,11 @@ public class RegisterServlet extends HttpServlet {
         
         register.addCustomer(firstName, lastName, username, email, dob, gender,password);
         response.sendRedirect(request.getContextPath()+"/login");
+        return;
 		} catch (Exception e) {
 	            e.printStackTrace();
-	            response.getWriter().println("Error: " + e.getMessage());
+	            request.setAttribute("error", "Unexpected error occurred. Please try again.");
+	            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 	    }
 	}
 

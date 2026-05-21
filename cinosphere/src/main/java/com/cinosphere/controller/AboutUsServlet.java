@@ -8,21 +8,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AboutUsServlet
+ * Servlet implementation class AboutUsServlet.
+ * 
+ * This servlet is responsible for displaying the About Us page of the application.
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/aboutus" })
 public class AboutUsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AboutUsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
+	 * Handles GET requests for the About Us page.
+	 * 
+	 * This method forwards the request directly to the About Us JSP page
+	 * located under WEB-INF, ensuring that the page is not directly accessible
+	 * from the browser URL.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +32,7 @@ public class AboutUsServlet extends HttpServlet {
 	}
 
 	/**
+	 * Handles POST requests for the About Us page.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

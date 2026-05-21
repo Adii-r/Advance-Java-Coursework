@@ -19,6 +19,14 @@ import com.cinosphere.service.TicketService;
 
 /**
  * Servlet implementation class UpdateAllBookingStatusServlet
+ * 
+ * This servlet is responsible for automatically updating booking statuses
+ * based on showtime schedules. It checks all bookings in the system and
+ * marks them as archived if their corresponding showtime date or time has
+ * already passed. This ensures that outdated bookings are properly maintained
+ * and no longer treated as active records in the system.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/updatebookingstatus" })
 public class UpdateAllBookingStatusServlet extends HttpServlet {
@@ -26,17 +34,16 @@ public class UpdateAllBookingStatusServlet extends HttpServlet {
 	BookingService bookingService = new BookingService();
 	TicketService ticketService = new TicketService();
 	ShowtimeService showtimeService = new ShowtimeService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateAllBookingStatusServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Handles GET requests for updating all booking statuses. It retrieves all
+     * bookings, checks their associated showtime date and time, and updates the
+     * booking status to "archive" if the showtime has already passed. After
+     * processing, the user is redirected back to the admin booking management
+     * section.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<BookingModel> bookings;
 		try {
@@ -68,5 +75,7 @@ public class UpdateAllBookingStatusServlet extends HttpServlet {
 		}
 		response.sendRedirect("admin#booking_management");
 	}
+	
+	
 
 }

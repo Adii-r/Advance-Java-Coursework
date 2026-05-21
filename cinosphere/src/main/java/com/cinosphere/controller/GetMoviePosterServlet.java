@@ -12,13 +12,28 @@ import java.nio.file.Files;
 
 /**
  * Servlet implementation class GetMoviePosterServlet
+ * 
+ * This servlet is responsible for retrieving and serving movie poster images
+ * from the server storage. It fetches the poster based on the provided movie
+ * name parameter(movie ID) and streams the image directly to the client. If the specific
+ * movie poster is not found, it falls back to a default poster image to ensure
+ * a consistent UI experience across the application.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/movieposter" })
 public class GetMoviePosterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"poster";   
 	private static final String DEFAULT_IMAGE_NAME = "default";
-
+	/**
+	 * Handles GET requests for retrieving movie poster images. It searches the
+	 * server directory for a poster matching the given movie name. If no match
+	 * is found, a default poster image is used. The resolved image is then written
+	 * directly to the HTTP response with the correct MIME type.
+	 *
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
         File folder = new File(UPLOAD_DIR);

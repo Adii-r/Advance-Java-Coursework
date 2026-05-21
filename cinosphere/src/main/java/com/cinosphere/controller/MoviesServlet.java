@@ -13,24 +13,29 @@ import com.cinosphere.service.MovieService;
 
 /**
  * Servlet implementation class MoviesServlet
+ * 
+ * This servlet is responsible for handling the movie listing page. It retrieves
+ * filter parameters such as language, genre, status, and search keywords from
+ * the request, and fetches the corresponding filtered movie list from the service
+ * layer. The resulting data is then forwarded to the movies JSP page for display,
+ * allowing users to browse and filter available movies dynamically.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/movies" })
 public class MoviesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private MovieService service = new MovieService();
     /**
-     * @see HttpServlet#HttpServlet()
+     * Handles GET requests for the movies page. It retrieves filter parameters from
+     * the request, applies them to fetch a filtered list of movies from the service
+     * layer, and forwards the processed data to the movies JSP page for rendering.
+     * In case of errors, an appropriate message is displayed to the user.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    public MoviesServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MovieService service = new MovieService();
+		
 		String language = request.getParameter("langFilter");
 		String genre = request.getParameter("genreFilter");
 		String status = request.getParameter("status");
@@ -51,11 +56,5 @@ public class MoviesServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("/WEB-INF/pages/movies.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }
+

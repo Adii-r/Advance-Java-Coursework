@@ -10,40 +10,28 @@ import java.io.IOException;
 import com.cinosphere.utils.SessionUtil;
 
 /**
- * Servlet implementation class LogoutServlet.
+ * Servlet implementation class LogoutServlet
  * 
- * This servlet handles the logout functionality.
- * on GET requests, ends current session and redirects to landing page
- * No need to check if session exists as filter applies
+ * This servlet handles user logout functionality. It invalidates the current
+ * user session, effectively logging the user out of the system, and redirects
+ * them back to the landing page. Since session validation is already handled
+ * by filters, this servlet focuses solely on session termination and redirecting
+ * the user to a public page.
  * 
  * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/logout" })
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
-     * @see HttpServlet#HttpServlet()
+     * Handles GET requests for logging out the user. It invalidates the current
+     * session and redirects the user to the homepage after logout.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    public LogoutServlet() {
-        super();
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		SessionUtil.invalidateSession(request);
 		response.sendRedirect(request.getContextPath() + "/");
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

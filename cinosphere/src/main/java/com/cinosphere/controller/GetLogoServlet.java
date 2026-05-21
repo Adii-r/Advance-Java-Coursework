@@ -12,6 +12,13 @@ import java.nio.file.Files;
 
 /**
  * Servlet implementation class GetLogoServlet
+ * 
+ * This servlet is responsible for retrieving and serving logo images stored
+ * on the server. It fetches the appropriate logo based on the provided name
+ * parameter and streams it directly to the client for rendering in the UI.
+ * This allows dynamic logo loading across different parts of the application.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/logo" })
 public class GetLogoServlet extends HttpServlet {
@@ -19,6 +26,11 @@ public class GetLogoServlet extends HttpServlet {
 	private static final String UPLOAD_DIR =System.getProperty("user.home")+ File.separator+ "webassets"+ File.separator+"logo";   
 
 	/**
+	 * Handles GET requests for retrieving logo images. It searches the server
+	 * directory for a logo matching the provided name parameter and writes the
+	 * image directly to the HTTP response with the correct content type. If no
+	 * matching image is found, a 404 error is returned.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +45,7 @@ public class GetLogoServlet extends HttpServlet {
             }
         }
         // Serve whatever file we resolved
-        if (imageFile.exists()) {
+        if (imageFile != null && imageFile.exists()) {
             String contentType = getServletContext().getMimeType(imageFile.getName());
             if (contentType == null) contentType = "image/png";
 

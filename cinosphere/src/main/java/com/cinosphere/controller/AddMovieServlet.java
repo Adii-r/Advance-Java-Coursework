@@ -26,7 +26,15 @@ import com.cinosphere.utils.FileuploadUtil;
 import com.cinosphere.service.MovieService;
 
 /**
- * Servlet implementation class AdminAddMovieServlet
+ * Servlet implementation class AddMovieServlet.
+ * 
+ * This servlet provides functionality for administrators to add new movies
+ * along with their schedules, screening details, and media assets.
+ * It supports dynamic form operations such as adding or removing schedule rows,
+ * validates movie input data, handles file uploads (poster and background images),
+ * and creates associated showtime records in the system.
+ * 
+ * @author Raunit Giri
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/addmovie" })
 @MultipartConfig(
@@ -50,9 +58,12 @@ public class AddMovieServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Handles GET requests for the Add Movie servlet.  This method initializes the movie creation form by loading all available screens
+     * and their associated theatres. It also sets the default state of the form  and forwards the request to the movie update page.
+     * 
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		loadScreen(request);
 		request.setAttribute("rows", 0);
@@ -61,6 +72,12 @@ public class AddMovieServlet extends HttpServlet {
 	}
 
 	/**
+	 * Handles POST requests for the Add Movie servlet. 
+	 * This method processes form operations related to movie creation and scheduling.
+	 * It supports adding schedule rows, deleting schedule rows, and saving the movie.
+	 * During save, it validates input data, inserts the movie into the database,
+	 * uploads poster and background images, and creates associated showtimes..
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -168,6 +185,8 @@ public class AddMovieServlet extends HttpServlet {
 
 				e.printStackTrace();
 				request.setAttribute("error", "Failed to save movie");
+				request.getRequestDispatcher("/WEB-INF/pages/updateMovie.jsp").forward(request, response);
+				return;
 			}
 		}
 
@@ -176,7 +195,12 @@ public class AddMovieServlet extends HttpServlet {
 
 		response.sendRedirect(request.getContextPath() + "/updatemovie");
 	}
-
+	/**
+	 * Loads all movie form data and schedule arrays into the request scope.
+	 * This method is used to persist form state across forward operations such as
+	 * add row, delete row, or validation failure.
+	 *
+	 */
 	private void loadAttributes(HttpServletRequest request, int rows, String[] halls,
 			String[] dates, String[] times, String movieName, String genre,
 			String movieLanguage, String ageRating, String movieStatus,
@@ -197,7 +221,10 @@ public class AddMovieServlet extends HttpServlet {
 		request.setAttribute("movieReleaseDate", releaseDateStr);
 		request.setAttribute("movieDuration", durationStr);
 	}
-	
+	/**
+	 * Loads all available screens and their associated theatres into the request scope.
+	 * @param request the HTTP request object used to store screen and theatre lists
+	 */
 	private void loadScreen(HttpServletRequest request) {
 		List<ScreenModel> screens = null;
 		List<TheatreModel> theatres = new ArrayList<>();
@@ -205,10 +232,7 @@ public class AddMovieServlet extends HttpServlet {
 
 			screens = screenService.getAllScreens();
 
-			request.setAttribute("screens", screens);
-
 			for (ScreenModel screen : screens) {
-				System.out.println("[GET] Fetching theatre for screen: " + screen.getTheatreId());
 				theatres.add(theatreService.getTheatreById(screen.getTheatreId()));
 			}
 
@@ -219,12 +243,17 @@ public class AddMovieServlet extends HttpServlet {
 		request.setAttribute("screens", screens);
 		request.setAttribute("theatres", theatres);
 	}
+	/**
+	 * Uploads and saves an image file for a movie.
+	 * If a new image is provided, it deletes any existing image for the same movie ID
+	 * before saving the new one
+	 */
 	private void uploadImg(HttpServletRequest request,String fieldName,int movieId, String path) throws Exception {
 		Part filePart = request.getPart(fieldName);
 		 if (FileuploadUtil.isImage(filePart)) {
 			 
 			 String userId = String.valueOf(movieId);
-			 File folder = new File(UPLOAD_DIR);
+			 File folder = new File(path);
 			    File[] oldFiles = folder.listFiles((dir, name) -> name.startsWith(userId + "."));
 			    if (oldFiles != null) {
 			        for (File old : oldFiles) {

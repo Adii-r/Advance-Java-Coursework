@@ -26,7 +26,19 @@ import com.cinosphere.service.ScreenService;
 import com.cinosphere.service.ShowtimeService;
 import com.cinosphere.service.TheatreService;
 import com.cinosphere.utils.FileuploadUtil;
-
+/**
+ * Servlet implementation class UpdateMovieServlet
+ * 
+ * This servlet manages the update functionality for movies in the system.
+ * It handles both displaying existing movie details and processing updates
+ * including movie metadata, scheduling showtimes, and media uploads such as
+ * posters and background images. It also supports dynamic addition and removal
+ * of showtime rows and ensures that updated schedules are properly stored in
+ * the database. The servlet acts as the central controller for modifying movie
+ * information from the admin panel.
+ * 
+ * @author Raunit Giri
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/updatemovie" })
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2,
@@ -35,16 +47,22 @@ import com.cinosphere.utils.FileuploadUtil;
 )
 public class UpdateMovieServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIR =
-        System.getProperty("user.home") + File.separator + "webassets" + File.separator + "poster";
-    private static final String BACKGROUND_UPLOAD_DIR =
-        System.getProperty("user.home") + File.separator + "webassets" + File.separator + "background";
+    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "webassets" + File.separator + "poster";
+    private static final String BACKGROUND_UPLOAD_DIR =System.getProperty("user.home") + File.separator + "webassets" + File.separator + "background";
 
-    ScreenService   screenService   = new ScreenService();
-    TheatreService  theatreService  = new TheatreService();
-    MovieService    movieService    = new MovieService();
-    ShowtimeService showtimeService = new ShowtimeService();
-    @Override
+    private ScreenService   screenService   = new ScreenService();
+    private TheatreService  theatreService  = new TheatreService();
+    private MovieService    movieService    = new MovieService();
+    private ShowtimeService showtimeService = new ShowtimeService();
+    
+    /**
+     * Handles GET requests for loading the movie update page. It retrieves the
+     * selected movie details using the movie ID, loads existing showtime schedules,
+     * and prepares screen and theatre data required for editing. The data is then
+     * forwarded to the update movie JSP page for display.
+     *
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -80,7 +98,17 @@ public class UpdateMovieServlet extends HttpServlet {
     }
 
    
-    @Override
+    /**
+     * Handles POST requests for updating movie information. It processes form data
+     * including movie details, showtime schedules, and uploaded media files. Based
+     * on the operation type (add row, delete row, or save), it dynamically updates
+     * the schedule rows, validates input data, updates the movie record, manages
+     * showtime records, and handles file uploads for posters and background images.
+     * After successful processing, the user is redirected to the admin panel or
+     * back to the update page in case of errors or validation failures.
+     *
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String operation    = request.getParameter("operation");
@@ -188,7 +216,12 @@ public class UpdateMovieServlet extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/updatemovie?movieId=" + movieIdStr);
     }
-
+    /**
+     * Populates request attributes with movie and schedule-related data so that
+     * the JSP page can retain form values after add, delete, or validation actions.
+     * This ensures that user-entered data is not lost during page refresh or
+     * re-rendering of the update form.
+     */
     private void loadAttributes(HttpServletRequest request, String movieId, int rows, String[] halls, String[] dates, String[] times, String movieName, String genre, String movieLang, String ageRating, String movieStatus, String director, String description, String releaseDateStr, String durationStr) {
 
         request.setAttribute("movieId",          movieId);
@@ -206,7 +239,11 @@ public class UpdateMovieServlet extends HttpServlet {
         request.setAttribute("movieReleaseDate", releaseDateStr);
         request.setAttribute("movieDuration",    durationStr);
     }
-
+    /**
+     * Loads all available screens and their corresponding theatre information
+     * from the database and attaches them to the request. This data is used to
+     * populate dropdowns or selection lists in the movie update interface.
+     */
     private void loadScreen(HttpServletRequest request) {
         try {
             List<ScreenModel>  screens  = screenService.getAllScreens();
@@ -220,7 +257,12 @@ public class UpdateMovieServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Retrieves existing showtime records for a specific movie and converts them
+     * into arrays of hall IDs, dates, and times. These values are stored in the
+     * request so that the update form can display and edit existing schedules.
+     * If no showtimes exist, the method initializes an empty state for the form.
+     */
     private void loadShowtimesIntoRequest(HttpServletRequest request, int movieId)
             throws Exception {
         List<ShowtimeModel> showtimes = showtimeService.getShowtimesByMovieId(movieId);
@@ -243,7 +285,13 @@ public class UpdateMovieServlet extends HttpServlet {
         request.setAttribute("scheduleDate", dates);
         request.setAttribute("scheduleTime", times);
     }
-
+    /**
+     * Handles optional image upload for movie assets such as posters and background
+     * images. It validates whether a file is provided and is a valid image, removes
+     * any existing file for the same movie ID, and saves the new file to the
+     * configured upload directory. This ensures that only the latest image is
+     * stored for each movie.
+     */
     private void uploadImgIfPresent(HttpServletRequest request, String fieldName,
             int movieId, String uploadDir) {
         try {
