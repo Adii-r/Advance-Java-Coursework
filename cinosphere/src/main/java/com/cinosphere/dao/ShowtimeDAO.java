@@ -16,11 +16,12 @@ import com.cinosphere.model.ShowtimeModel;
 import com.cinosphere.utils.DBconfig;
 
 /**
- *  Class for SQL operation involving SHowtime
+ * DAO class responsible for all showtime-related database operations.
  */
 public class ShowtimeDAO {
 	/**
-	 * Method to insert new showtime into the database
+	 * Inserts a new showtime record into the database.
+	 *
 	 * @param screenId
 	 * @param movieId
 	 * @param showDate
@@ -28,8 +29,8 @@ public class ShowtimeDAO {
 	 * @param endTime
 	 * @param showStatus
 	 * @param showType
-	 * @return
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(int screenId, int movieId, LocalDate showDate, LocalTime startTime, LocalTime endTime, String showStatus, String showType) throws Exception {
 		String sql = "INSERT INTO showtime (screen_id,movie_id,show_date,start_time,end_time,show_status,show_type)"
@@ -48,9 +49,10 @@ public class ShowtimeDAO {
 		return ps.executeUpdate() > 0;		
 	}
 	/**
-	 * 
-	 * @return
-	 * @throws Exception
+	 * Retrieves all active showtime records.
+	 *
+	 * @return list of active showtime records
+	 * @throws Exception if database operation fails
 	 */
 	public List<ShowtimeModel> findAllActive() throws Exception {
 		List<ShowtimeModel> shows = new ArrayList<>();
@@ -69,10 +71,11 @@ public class ShowtimeDAO {
 	
 	
 	/**
-	 * 
+	 * Retrieves showtimes using movie ID.
+	 *
 	 * @param movieId
-	 * @return
-	 * @throws Exception
+	 * @return list of showtime records
+	 * @throws Exception if database operation fails
 	 */
 	public List<ShowtimeModel> findByMovieId(int movieId) throws Exception{
 		List<ShowtimeModel> shows = new ArrayList<>();
@@ -91,10 +94,11 @@ public class ShowtimeDAO {
 		return shows;
 	}
 	/**
-	 * 
+	 * Retrieves showtimes using screen ID.
+	 *
 	 * @param screenId
-	 * @return
-	 * @throws Exception
+	 * @return list of showtime records
+	 * @throws Exception if database operation fails
 	 */
 	public List<ShowtimeModel> findByScreenId(int screenId) throws Exception{
 		List<ShowtimeModel> shows = new ArrayList<>();
@@ -112,7 +116,13 @@ public class ShowtimeDAO {
 		ps.close();
 		return shows;
 	}
-	
+	/**
+	 * Retrieves showtimes using show date.
+	 *
+	 * @param showDate
+	 * @return list of showtime records
+	 * @throws Exception if database operation fails
+	 */
 	public List<ShowtimeModel> findByDate(LocalDate showDate) throws Exception {
 		List<ShowtimeModel> shows = new ArrayList<>();
 		Connection con = DBconfig.getConnection();
@@ -131,10 +141,11 @@ public class ShowtimeDAO {
 	}
 	
 	/**
-	 * 
-	 * @param screenId
-	 * @return
-	 * @throws Exception
+	 * Retrieves showtime details using showtime ID.
+	 *
+	 * @param showtimeId
+	 * @return showtime record
+	 * @throws Exception if database operation fails
 	 */
 	public ShowtimeModel findByShowtimeId(int showtimeId) throws Exception{
 		ShowtimeModel show = null;
@@ -153,10 +164,12 @@ public class ShowtimeDAO {
 		return show;
 	}
 	/**
-	 * 
+	 * Updates showtime status.
+	 *
 	 * @param showtimeId
-	 * @return
-	 * @throws Exception
+	 * @param showtimeStatus
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateShowtimeStatus(int showtimeId,String showtimeStatus) throws Exception{
 		Connection con = DBconfig.getConnection();
@@ -168,11 +181,12 @@ public class ShowtimeDAO {
 		return ps.executeUpdate()>0;
 	}
 	/**
-	 * 
+	 * Updates showtime type.
+	 *
 	 * @param showtimeId
 	 * @param showtimeType
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateShowtimeType(int showtimeId,String showtimeType) throws Exception{
 		Connection con = DBconfig.getConnection();
@@ -184,10 +198,11 @@ public class ShowtimeDAO {
 		return ps.executeUpdate()>0;
 	}
 	/**
-	 * 
+	 * Deletes all showtimes for a movie.
+	 *
 	 * @param movieId
-	 * @return
-	 * @throws Exception
+	 * @return true if deleted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean deleteByMovieId(int movieId) throws Exception {
 	    String sql = "DELETE FROM showtime WHERE movie_id = ?";
@@ -199,10 +214,11 @@ public class ShowtimeDAO {
 	
 	
 	/**
-	 * Helper to create showtime object
+	 * Creates a ShowtimeModel object from the result set.
+	 *
 	 * @param rs
-	 * @return ShowtimeModel object
-	 * @throws SQLException
+	 * @return populated ShowtimeModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public ShowtimeModel createShowtimeModel(ResultSet rs) throws SQLException {
 		ShowtimeModel show = new ShowtimeModel();

@@ -6,8 +6,17 @@ import java.sql.ResultSet;
 
 import com.cinosphere.model.TheatreModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all theatre-related database operations.
+ */
 public class TheatreDAO {
+	/**
+	 * Retrieves theatre details using theatre ID.
+	 *
+	 * @param theatreId
+	 * @return TheatreModel object if found, otherwise null
+	 * @throws Exception if database operation fails
+	 */
 	public TheatreModel findById(int theatreId) throws Exception {
 
         TheatreModel theatre = null;
@@ -27,7 +36,13 @@ public class TheatreDAO {
         return theatre;
     }
 
-	
+	/**
+	 * Creates a TheatreModel object from ResultSet data.
+	 *
+	 * @param rs
+	 * @return TheatreModel object
+	 * @throws Exception if result set processing fails
+	 */
 	public TheatreModel createTheaterModel(ResultSet rs) throws Exception {	
         TheatreModel theatre = new TheatreModel();
         theatre.setTheatreId(rs.getInt("theatre_id"));
