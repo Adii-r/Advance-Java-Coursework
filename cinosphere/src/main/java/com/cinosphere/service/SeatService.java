@@ -4,48 +4,30 @@ import java.util.List;
 
 import com.cinosphere.dao.SeatDAO;
 import com.cinosphere.model.SeatModel;
-
+/**
+ * Service Class that is the bridge between Servlet and SeatDAO
+ * Contains methods used to call methods of DAO and perform interaction with DB Seat Table
+ * 
+ * @author Raunit Giri
+ */
 public class SeatService {
-	SeatDAO seatDAO = new SeatDAO();
+	private SeatDAO seatDAO = new SeatDAO();
 	/**
-	 * 
+	 * Finds Seat using screen Id
 	 * @param screenId
-	 * @param seatNumber
-	 * @param rowNumber
-	 * @param seatType
-	 * @param seatStatus
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean insertSeat(int screenId,int seatNumber,String rowNumber,String seatType,String seatStatus) throws Exception {
-		return seatDAO.insert(screenId, seatNumber, rowNumber, seatType, seatStatus);
-	}
-	/**
-	 * 
-	 * @param screenId
-	 * @return
+	 * @return Seat List
 	 * @throws Exception
 	 */
 	public List<SeatModel> getSeatsByScreenId(int screenId) throws Exception {
 		return seatDAO.findByScreenId(screenId);
 	}
 	/**
-	 * 
+	 * Finds seat using Id
 	 * @param seatId
-	 * @return
+	 * @return Seat
 	 * @throws Exception
 	 */
 	public SeatModel getSeatById(int seatId) throws Exception {
 		return seatDAO.findBySeatId(seatId);
-	}
-	/**
-	 * 
-	 * @param seatId
-	 * @param seatStatus
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean updateSeatStatus(int seatId, String seatStatus) throws Exception {
-		return seatDAO.updateSeatStatus(seatId, seatStatus);
 	}
 }

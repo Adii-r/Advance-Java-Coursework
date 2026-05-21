@@ -5,6 +5,11 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * Utility class responsible for session operations
+ * 
+ * Helpers to ensure consistent behavior around creation,
+ * retrieval, and invalidation of sessions.
+ * 
+ * @author Raunit Giri
  */
 public class SessionUtil {
 	/**

@@ -3,7 +3,13 @@ package com.cinosphere.utils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+/**
+ * Utility class for Cookie Operations
+ * 
+ * Contains helpers to create, get and delete cookie from http response, request
+ * 
+ * @author Raunit Giri
+ */
 public class CookieUtil {
 
 	/**
@@ -11,17 +17,16 @@ public class CookieUtil {
      * @param response HttpServletResponse
      * @param name Name of the cookie
      * @param value Value of the cookie
-     * @param maxAge Max age in seconds
+     * @param min Max age in minutes
      */
     public static void addCookie(HttpServletResponse response, String name, String value, int min) {
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
         cookie.setMaxAge(min*60);
         cookie.setHttpOnly(true); // Prevents XSS access to the cookie
-        // cookie.setSecure(true); // Uncomment if using HTTPS
-        
         response.addCookie(cookie);
     }
+    
     /**
      * Retrieve a cookie value by name
      * @param response HttpServletResponse
@@ -48,7 +53,7 @@ public class CookieUtil {
     public static void deleteCookie(HttpServletResponse response, String name) {
         Cookie cookie = new Cookie(name, "");
         cookie.setPath("/");
-        cookie.setMaxAge(0); // This tells the browser to delete it immediately
+        cookie.setMaxAge(0); // Deletes the cookie
         response.addCookie(cookie);
     }
 

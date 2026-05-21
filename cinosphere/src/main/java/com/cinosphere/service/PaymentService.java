@@ -5,46 +5,23 @@ import java.time.LocalTime;
 
 import com.cinosphere.dao.PaymentDAO;
 import com.cinosphere.model.PaymentModel;
-
+/**
+ * Service Class that is the bridge between Servlet and PaymentDAO
+ * Contains methods used to call methods of DAO and perform interaction with DB Payment Table
+ * 
+ * @author Raunit Giri
+ */
 public class PaymentService {
-	PaymentDAO paymentDAO = new PaymentDAO();
+	private PaymentDAO paymentDAO = new PaymentDAO();
 	/**
-	 * 
+	 * Create payment record
 	 * @param bookingId
 	 * @param paymentMethod
 	 * @param paymentAmount
-	 * @return
+	 * @return boolean
 	 * @throws Exception
 	 */
 	public boolean createPayment(int bookingId, String paymentMethod, double paymentAmount) throws Exception {
 		return paymentDAO.insert(bookingId,paymentMethod,paymentAmount,LocalDate.now(),LocalTime.now(),"COMPLETED");
-	}
-	/**
-	 * 
-	 * @param bookingId
-	 * @return
-	 * @throws Exception
-	 */
-	public PaymentModel getPaymentByBookingId(int bookingId) throws Exception {
-		return paymentDAO.findByBookingId(bookingId);
-	}
-	/**
-	 * 
-	 * @param paymentId
-	 * @return
-	 * @throws Exception
-	 */
-	public PaymentModel getPaymentById(int paymentId) throws Exception {
-		return paymentDAO.findByPaymentId(paymentId);
-	}
-	/**
-	 * 
-	 * @param paymentId
-	 * @param paymentStatus
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean updatePaymentStatus(int paymentId, String paymentStatus) throws Exception {
-		return paymentDAO.updatePaymentStatus(paymentId, paymentStatus);
 	}
 }

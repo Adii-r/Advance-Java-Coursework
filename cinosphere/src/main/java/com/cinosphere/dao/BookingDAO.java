@@ -331,23 +331,6 @@ public class BookingDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public Set<Integer> getReservedSeatIdsByShowtime(int showtimeId) throws Exception {
-		Set<Integer> seatIds = new HashSet<>();
-		String sql = "SELECT t.seat_id FROM ticket t JOIN booking b ON b.booking_id = t.booking_id WHERE t.showtime_id = ? AND b.booking_status = 'pending'";
-		Connection con = DBconfig.getConnection();
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, showtimeId);
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) seatIds.add(rs.getInt("seat_id"));
-		rs.close(); ps.close(); con.close();
-		return seatIds;
-	}
-	/**
-	 * 
-	 * @param showtimeId
-	 * @return
-	 * @throws Exception
-	 */
 	public Set<Integer> getConfirmedSeatIdsByShowtime(int showtimeId) throws Exception {
 		Set<Integer> seatIds = new HashSet<>();
 		String sql = "SELECT t.seat_id FROM ticket t JOIN booking b ON b.booking_id = t.booking_id WHERE t.showtime_id = ? AND b.booking_status = 'confirmed'";

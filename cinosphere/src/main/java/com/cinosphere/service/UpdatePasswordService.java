@@ -6,10 +6,23 @@ import com.cinosphere.utils.PasswordUtil;
 import com.cinosphere.utils.SessionUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+/**
+ * Service Class which facilitates password update
+ * Contains methods to authenticate and updatepassowrd
+ * 
+ * @author Raunit Giri
+ */
 public class UpdatePasswordService {
-	UsersDAO userdao = new UsersDAO();
-	
+	private UsersDAO userdao = new UsersDAO();
+	/**
+	 * Validates input values and updates password if conditions are correct
+	 * @param request
+	 * @param user
+	 * @param currentPassword
+	 * @param newPassword
+	 * @param confirmPassword
+	 * @return Status
+	 */
 	public String authenticate(HttpServletRequest request,UsersModel user,String currentPassword, String newPassword, String confirmPassword) {
 		System.out.print("authenticateRan");
 		if (currentPassword == null || currentPassword.trim().isEmpty()) {
@@ -38,8 +51,14 @@ public class UpdatePasswordService {
 	}
 	
 	
-	
-	public String updatePassword(HttpServletRequest request,UsersModel  user, String Password) {
+	/**
+	 * Helper method to update password of user
+	 * @param request
+	 * @param user
+	 * @param Password
+	 * @return
+	 */
+	private String updatePassword(HttpServletRequest request,UsersModel  user, String Password) {
 		try {
 			userdao.UpdateUserPassword(user.getUserId(), Password);
 			user.setHashPassword(Password);

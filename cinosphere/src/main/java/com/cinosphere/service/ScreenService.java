@@ -4,65 +4,39 @@ import java.util.List;
 
 import com.cinosphere.dao.ScreenDAO;
 import com.cinosphere.model.ScreenModel;
-
+/**
+ * Service Class that is the bridge between Servlet and ScreengDAO
+ * Contains methods used to call methods of DAO and perform interaction with DB Screen Table
+ * 
+ * @author Raunit Giri
+ */
 public class ScreenService {
-	ScreenDAO screenDAO = new ScreenDAO();
+	private ScreenDAO screenDAO = new ScreenDAO();
 		/**
-		 * 
-		 * @param theatreId
-		 * @param screenName
-		 * @param screenType
-		 * @param screenStatus
-		 * @param capacity
-		 * @param basePrice
-		 * @return
-		 * @throws Exception
-		 */
-		public boolean insertScreen(int theatreId, String screenName, String screenType, String screenStatus, int capacity, double basePrice)  throws Exception{
-			return screenDAO.insert(theatreId, screenName, screenType, screenStatus, capacity, basePrice);
-		}
-	
-	
-		/**
-		 * 
-		 * @param theatreId
-		 * @return
-		 * @throws Exception
-		 */
-		public List<ScreenModel> getScreensByTheatreId(int theatreId) throws Exception {
-			return screenDAO.findBytheatreId(theatreId);
-		}
-		/**
-		 * 
+		 * Finds screen suing Id
 		 * @param screenId
-		 * @return
+		 * @return screen
 		 * @throws Exception
 		 */
 		public ScreenModel getScreenById(int screenId) throws Exception {
 			return screenDAO.findByScreenId(screenId);
 		}
 		/**
-		 * 
-		 * @param screenId
-		 * @param screenStatus
-		 * @return
-		 * @throws Exception
-		 */
-		public boolean updateScreenStatus(int screenId, String screenStatus) throws Exception {
-			return screenDAO.updateScreenStatus(screenId, screenStatus);
-		}
-		/**
-		 * 
+		 * Updates base price of screen
 		 * @param screenId
 		 * @param basePrice
-		 * @return
+		 * @return boolean
 		 * @throws Exception
 		 */
 		public boolean updateBasePrice(int screenId, double basePrice) throws Exception {
 			return screenDAO.updateScreenBasePrice(screenId, basePrice);
 		}
 
-
+		/**
+		 * Finds all screen records
+		 * @return screen
+		 * @throws Exception
+		 */
 		public List<ScreenModel> getAllScreens() throws Exception{
 			return screenDAO.getAllScreen();
 		}

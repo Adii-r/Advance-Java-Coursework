@@ -5,45 +5,31 @@ import java.util.List;
 
 import com.cinosphere.dao.TicketDAO;
 import com.cinosphere.model.TicketModel;
-
+/**
+ * Service Class that is the bridge between Servlet and TicketDAO
+ * Contains methods used to call methods of DAO and perform interaction with DB Ticket Table
+ * 
+ * @author Raunit Giri
+ */
 public class TicketService {
-	TicketDAO ticketDAO = new TicketDAO();
+	private TicketDAO ticketDAO = new TicketDAO();
 	/**
-	 * 
+	 * Finds tickets using Booking Id
 	 * @param booking_id
-	 * @return
+	 * @return Ticket List
 	 * @throws Exception
 	 */
 	public List<TicketModel> getTicketByBooking(int booking_id) throws Exception {
 		return ticketDAO.findByBookingId(booking_id);
 	}
 	/**
-	 * 
-	 * @param ticketId
-	 * @return
-	 * @throws Exception
-	 */
-	public TicketModel getTicketById(int ticketId) throws Exception {
-		return ticketDAO.findByTicketId(ticketId);
-	}
-	/**
-	 * 
-	 * @param ticketId
-	 * @param ticketStatus
-	 * @return
-	 * @throws Exception
-	 */
-	public boolean updateTicketStatus(int ticketId, String ticketStatus) throws Exception {
-		return ticketDAO.updateTicketStatus(ticketId, ticketStatus);
-	}
-	/**
-	 * 
+	 * Create ticket record using details provided
 	 * @param bookingId
 	 * @param showtimeId
 	 * @param seatId
 	 * @param ticketType
 	 * @param ticketPrice
-	 * @return
+	 * @return boolean
 	 * @throws Exception
 	 */
 	public boolean createTicket(int bookingId, int showtimeId, int seatId, String ticketType,String ticketStatus,LocalDate issueDate, double ticketPrice) throws Exception {

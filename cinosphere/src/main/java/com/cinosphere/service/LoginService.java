@@ -10,10 +10,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Service class to handle login operation
+ * Contains methods for authentication, add user to session and Cookie interactions
+ * 
+ * @author Raunit Giri
+ * 
  */
 public class LoginService {
 
-	UsersDAO userDAO = new UsersDAO();
+	private UsersDAO userDAO = new UsersDAO();
 	/**
 	 * Check if username exists and password matches.
 	 * if match found calls login method with userData and request
@@ -77,6 +81,12 @@ public class LoginService {
 	public void createLoginCookie(HttpServletResponse response,String username,int time) {
 		CookieUtil.addCookie(response, "username", username, time);
 	}
+	/**
+	 * Finds value of login cookie
+	 * @param request
+	 * @param name
+	 * @return
+	 */
 	public String getLoginCookie(HttpServletRequest request,String name) {
 		return CookieUtil.getCookieValue(request, name);
 	}

@@ -90,9 +90,7 @@ public class BookingServlet extends HttpServlet {
 			List<SeatModel> seats = seatService.getSeatsByScreenId(screenId);
 			request.setAttribute("seats", seats);
 			Set<Integer> takenIds    = bookingService.getConfirmedSeatIdsByShowtime(showtimeId);
-            Set<Integer> reservedIds = bookingService.getBookedSeatIdsByShowtime(showtimeId);
             request.setAttribute("takenSeatIds",    takenIds);
-            request.setAttribute("reservedSeatIds", reservedIds);
             String[] checked = request.getParameterValues("selectedSeats");
             List<Integer> checkedIds = new ArrayList<>();
             if (checked != null) {
@@ -111,7 +109,7 @@ public class BookingServlet extends HttpServlet {
             double basePrice = screen.getBasePrice();
             
             for (int sid : checkedIds) {
-                if (takenIds.contains(sid) || reservedIds.contains(sid)) continue;
+                if (takenIds.contains(sid)) continue;
                 SeatModel sm = seatService.getSeatById(sid);
                 int seatNum = sm.getSeatNumber();
                 String label = sm.getRowNumber() + sm.getSeatNumber();
@@ -204,11 +202,9 @@ public class BookingServlet extends HttpServlet {
 	         double subtotal = 0;
 	         List<Integer> validSeatIds = new ArrayList<>();
 	         Set<Integer> takenIds    = bookingService.getConfirmedSeatIdsByShowtime(showtimeId);
-	         Set<Integer> reservedIds = bookingService.getBookedSeatIdsByShowtime(showtimeId);
-	         reservedIds.removeAll(takenIds);
 	         for (String s : seatIds) {
 	                int sid = Integer.parseInt(s);
-	                if (takenIds.contains(sid) || reservedIds.contains(sid)) continue;
+	                if (takenIds.contains(sid)) continue;
 	                SeatModel sm = seatService.getSeatById(sid);
 	                validSeatIds.add(sid);
 	                subtotal += round(basePrice * multiplier(sm));

@@ -10,10 +10,13 @@ import com.cinosphere.utils.PasswordUtil;
 
 /**
  *  service class to handle registration operation
+ *  Contains method to add user,validate,check email and username
+ *  
+ *  @author Raunit Giri
  */
 public class RegisterService {
-	UsersDAO  customerdao = new UsersDAO();
-	MembershipDAO membership = new MembershipDAO();
+	private UsersDAO  customerdao = new UsersDAO();
+	private MembershipDAO membership = new MembershipDAO();
 	/**
 	 * register customer using customerDAO method
 	 * @param firstName
@@ -38,6 +41,20 @@ public class RegisterService {
 			throw new Exception("Failed to create membership");
 		}
 	}
+	/**
+	 * Validates entered filed before registering user
+	 * This makes it so that only correct and complete values are entered.
+	 * @param firstName
+	 * @param lastName
+	 * @param gender
+	 * @param userName
+	 * @param dob
+	 * @param email
+	 * @param password
+	 * @param confirmPassword
+	 * @return Status of Authentication checks
+	 * @throws Exception
+	 */
 	public String Authentication(String firstName,String lastName,String gender,String userName, LocalDate dob, String email,String password,String confirmPassword) throws Exception {
         String status = null;
 		if (firstName == null || firstName.trim().isEmpty()) {
@@ -83,7 +100,7 @@ public class RegisterService {
 	/**
 	 * Checks if email already exists
 	 * @param email
-	 * @return
+	 * @return boolean
 	 * @throws Exception
 	 */
 	public boolean EmailCheck(String email) throws Exception {
@@ -95,7 +112,7 @@ public class RegisterService {
 	/**
 	 * Checks if username already exists
 	 * @param username
-	 * @return
+	 * @return boolean
 	 * @throws Exception
 	 */
 	public boolean UsernameCheck(String username) throws Exception {

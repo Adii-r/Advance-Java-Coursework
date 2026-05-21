@@ -3,9 +3,13 @@ package com.cinosphere.utils;
 import org.mindrot.jbcrypt.BCrypt;
 /**
  * Utility Class for passwordHashing and Checking
+ * 
+ * helper responsible for creating hash password and 
+ * 
+ * @author Raunit Giri
  */
 public class PasswordUtil {
-
+	//Salt Cost
     private static final int COST = 10;
     
     /**
@@ -17,7 +21,7 @@ public class PasswordUtil {
         return BCrypt.hashpw(password, BCrypt.gensalt(COST));
     }
     /**
-     * 
+     * Compares String with Hash 
      * @param input Password to check
      * @param storedHash Stored hashed password
      * @return boolean

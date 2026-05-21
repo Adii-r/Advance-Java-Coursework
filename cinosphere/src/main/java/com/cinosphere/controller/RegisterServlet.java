@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import com.cinosphere.service.RegisterService;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class RegisterServlet.
  * 
  * This servlet handles the registration functionality.
  * It displays the register page on GET requests and processes user details 
@@ -23,15 +23,6 @@ import com.cinosphere.service.RegisterService;
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

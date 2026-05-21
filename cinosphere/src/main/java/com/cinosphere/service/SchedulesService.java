@@ -17,15 +17,20 @@ import com.cinosphere.model.MovieModel;
 import com.cinosphere.model.ScreenModel;
 import com.cinosphere.model.ShowtimeModel;
 import com.cinosphere.model.TheatreModel;
-
+/**
+ * Service class for schedule operation
+ * Contains methods to create Date strip, and create Schedules
+ * 
+ * @author Raunit Giri
+ */
 public class SchedulesService {
-	ShowtimeDAO showtimeDAO = new ShowtimeDAO();
-	MovieDAO    movieDAO    = new MovieDAO();
-	ScreenDAO   screenDAO   = new ScreenDAO();
-	TheatreDAO theatreDAO = new TheatreDAO();
+	private ShowtimeDAO showtimeDAO = new ShowtimeDAO();
+	private MovieDAO    movieDAO    = new MovieDAO();
+	private ScreenDAO   screenDAO   = new ScreenDAO();
+	private TheatreDAO theatreDAO = new TheatreDAO();
 	/**
-	 * 
-	 * @return
+	 * Creates List of maped String containging details to create Date card
+	 * @return List of Map String
 	 */
 	public List<Map<String, String>> getDateStrip() {
 		List<Map<String, String>> dateList = new ArrayList<>();
@@ -47,13 +52,14 @@ public class SchedulesService {
 	
 	
 	/**
-	 * 
+	 * Using the filters creates Object with values to create a schedule Card
+	 * Uses multiple helper method
 	 * @param selectedDate
 	 * @param timeFilter
 	 * @param formatFilter
 	 * @param langFilter
 	 * @param movieSearch
-	 * @return
+	 * @return Map<String, Object> which contains movieList and hallsList
 	 * @throws Exception
 	 */
 	public Map<String, Object> getSchedules(String selectedDate, String timeFilter, String formatFilter, String langFilter, String movieSearch, String locationFilter) throws Exception {
@@ -72,14 +78,14 @@ public class SchedulesService {
 	return result;
 	}
 	/**
-	 * 
+	 * Helper method to get showtimes using filter
 	 * @param selectedDate
 	 * @param timeFilter
 	 * @param formatFilter
-	 * @return
+	 * @return SHowtime List
 	 * @throws Exception
 	 */
-	public List<ShowtimeModel> getFilteredShowtimes(String selectedDate, String timeFilter, String formatFilter) throws Exception {
+	private List<ShowtimeModel> getFilteredShowtimes(String selectedDate, String timeFilter, String formatFilter) throws Exception {
 		
 		List<ShowtimeModel> showtimes = showtimeDAO.findByDate(LocalDate.parse(selectedDate));
 		
@@ -93,11 +99,11 @@ public class SchedulesService {
 	    return showtimes;
 	}
 	/**
-	 * 
+	 * helper method to create map of showtime grouped by movie 
 	 * @param showtimes
-	 * @return
+	 * @return Map of movieId, showtime
 	 */
-	public Map<Integer, List<ShowtimeModel>> groupShowtimesByMovie(List<ShowtimeModel> showtimes) {
+	private Map<Integer, List<ShowtimeModel>> groupShowtimesByMovie(List<ShowtimeModel> showtimes) {
 
 	    Map<Integer, List<ShowtimeModel>> mapMovie = new LinkedHashMap<>();
 
@@ -108,14 +114,14 @@ public class SchedulesService {
 	    return mapMovie;
 	}
 	/**
-	 * 
+	 * helper method to create movie List wiht filters and maped showtime
 	 * @param byMovie
 	 * @param langFilter
 	 * @param movieSearch
-	 * @return
+	 * @return movie List
 	 * @throws Exception
 	 */
-	public List<MovieModel> createMovieList(Map<Integer, List<ShowtimeModel>> mapMovie,String langFilter,String movieSearch,String locationFilter) throws Exception {
+	private List<MovieModel> createMovieList(Map<Integer, List<ShowtimeModel>> mapMovie,String langFilter,String movieSearch,String locationFilter) throws Exception {
 
 		List<MovieModel> movieList = new ArrayList<>();
 
@@ -147,14 +153,14 @@ public class SchedulesService {
 	    return movieList;
 	}
 	/**
-	 * 
+	 * helper method to create String of details needed to construct Schedule cards
 	 * @param byMovie
 	 * @param langFilter
 	 * @param movieSearch
-	 * @return
+	 * @return String List
 	 * @throws Exception
 	 */
-	public List<String> createHallsList( Map<Integer, List<ShowtimeModel>> mapMovie, String langFilter,String movieSearch,String locationFilter) throws Exception{
+	private List<String> createHallsList( Map<Integer, List<ShowtimeModel>> mapMovie, String langFilter,String movieSearch,String locationFilter) throws Exception{
 
 	    List<String> hallsList = new ArrayList<>();
 	    DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern("h:mm a");
@@ -202,7 +208,7 @@ public class SchedulesService {
 	 * @param filter value from <select name="timeFilter">
 	 * @return boolean
 	 */
-	public boolean matchesTimeFilter(LocalTime time, String filter) {
+	private boolean matchesTimeFilter(LocalTime time, String filter) {
 		switch (filter) {
 			case "morning":   
 				return time.isBefore(LocalTime.NOON);

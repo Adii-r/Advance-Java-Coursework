@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.cinosphere.model.UsersModel;
-import com.cinosphere.service.DeleteAccountService;
+import com.cinosphere.service.UserService;
 import com.cinosphere.utils.SessionUtil;
 
 /**
@@ -31,10 +31,10 @@ public class DeleteAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DeleteAccountService service = new DeleteAccountService();
+		UserService service = new UserService();
 		UsersModel customer = (UsersModel) SessionUtil.getAttribute(request, "user");
 		try {
-			service.DeleteAccount(customer.getUserId());
+			service.deactivateUser(customer.getUserId());
 			SessionUtil.invalidateSession(request);
 		} catch (Exception e) {
 			e.printStackTrace();

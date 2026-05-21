@@ -4,6 +4,12 @@ import java.sql.DriverManager;
 
 /**
  * Utility Class responsible for connection with database
+ * 
+ * Class containing BD information to establish connection 
+ * and helper to return established connection
+ * 
+ * @author Raunit Giri
+ * 
  */
 public class DBconfig {
 	//Attributes for COnnection to DB
@@ -13,26 +19,21 @@ public class DBconfig {
 	private static final String PASSWORD ="";
 	/**
 	 * Establish Connection with database
+	 * using configured attributes
 	 * @return Connection Object
 	 */
 	public static Connection getConnection() {
-
         Connection conn = null;
-
         try {
         	// Load MySQL JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Establish connection attempt
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
-            System.out.println("Connected to DB");
-
         } catch (Exception e) {
-        	// Connection failure and print stack trace
+        	// Connection failure
             System.out.println("DB Connection Failed");
             e.printStackTrace(); 
         }
-
         return conn;
     }
 }

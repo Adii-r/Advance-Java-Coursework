@@ -46,15 +46,15 @@
       <div class="row_list">
         <div class="row_item_wrap">
           <span class="row_name">Kathmandu</span>
-          <span class="row_tag soon">Opening Soon</span>
+          <span class="row_tag far">Open</span>
         </div>
         <div class="row_item_wrap">
           <span class="row_name">Pokhara</span>
-          <span class="row_tag far">Q3 2026</span>
+          <span class="row_tag far">Open</span>
         </div>
         <div class="row_item_wrap">
           <span class="row_name">Butwal</span>
-          <span class="row_tag far">2027</span>
+          <span class="row_tag soon">Opening Soon</span>
         </div>
       </div>
 
