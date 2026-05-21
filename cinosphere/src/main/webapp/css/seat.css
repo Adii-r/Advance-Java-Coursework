@@ -12,6 +12,7 @@
   justify-content: center;
   position: relative;
   user-select: none;
+  transition: transform 0.1s ease-out, background 0.15s ease;
 }
 .seat_checkbox {
   position: absolute;
@@ -30,7 +31,7 @@
   border-radius: 2px 2px 0 0;
 }
 
-.seat:hover:not(.seat_reserved) {
+.seat:hover:not(.seat_reserved):not(:active) {
   background: rgba(201,168,76,0.60);
   border-color: rgba(201, 168, 76, 0.5);
   transform: scale(1.08);
