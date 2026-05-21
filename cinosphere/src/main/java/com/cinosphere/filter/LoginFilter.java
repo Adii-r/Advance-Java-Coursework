@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.cinosphere.utils.SessionUtil;
+import com.cinosphere.model.UsersModel;
 
 /**
  * Servlet Filter implementation class LoginFilter
@@ -49,13 +50,20 @@ public class LoginFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
-		boolean isLoggedOut = SessionUtil.getAttribute(httpRequest, "user") == null;
+		UsersModel user =  (UsersModel) SessionUtil.getAttribute(httpRequest, "user");
+		boolean isLoggedOut = user == null;
 		if(isLoggedOut) {
 			chain.doFilter(request, response);
+			return;
 		}else
 		{
+			if(!user.getUserRole().equals("ADMIN")) {
 			httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-			httpResponse.sendRedirect(httpRequest.getContextPath() + "/userpanel");
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/profile");
+			}else {
+				httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admin");
+			}
 		}
 	}
 

@@ -27,7 +27,7 @@ import com.cinosphere.utils.SessionUtil;
  */
 
 /** */
-@WebFilter("/admin")
+@WebFilter({"/admin","/updatemovie","/updatebookingstatus","/archivemovie","/adminactivateaccount","/addmovie"})
 public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
        
     /**
@@ -66,11 +66,9 @@ public class AdminAuthenticationFIlter extends HttpFilter implements Filter {
 			boolean isAdmin = customer.getUserRole().equals("ADMIN");
 			System.out.print(isAdmin);
 		 if(isAdmin) {
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+			 chain.doFilter(request, response);
 		 }else {
-			httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-			httpResponse.sendRedirect(httpRequest.getContextPath() + "/userpanel");
+			 httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 		 }
 		}else {
 			httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
