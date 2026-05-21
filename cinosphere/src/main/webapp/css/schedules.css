@@ -11,7 +11,7 @@
 
 .schedules_date_strip {
     display: flex;
-    gap: 12px;
+    gap: 15px;
     overflow-x: auto;
     scrollbar-width: none;
     padding-top: 2rem;

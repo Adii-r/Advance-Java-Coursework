@@ -46,14 +46,7 @@
 				        <span class="section_eyebrow">Select Your Seats</span>
 				        <h2 class="seat_selection_title"> ${hallName} </h2>
 				    </div>
-			<div class="hall_selector">
-                <span class="hall_pill active">
-                    <span>${screen.screenType} ~ Capacity: ${screen.totalCapacity}</span>
-                </span>
-                <span class="hall_pill">
-                    <span>Base: Rs.${basePrice}</span>
-                </span>
-            </div>
+		
 					<div class="seat_indicator_bar">
 						<div class="indicator_item">
 					        <div class="overlay overlay_available"></div>
@@ -94,7 +87,7 @@
 
                         <c:if test="${stdLabelShown == 'false' and seatNum <= 90}">
                             <div class="section_label_row">
-                                <span class="section_label_text">Standard — Rs.${basePrice}</span>
+                                <span class="section_label_text">Standard</span>
                                 <div class="section_label_line"></div>
                             </div>
                             <c:set var="stdLabelShown" value="true"/>
@@ -103,7 +96,7 @@
                             <c:if test="${prevRow != ''}"></div></c:if>
                             <c:set var="prevRow" value=""/>
                             <div class="section_label_row">
-                                <span class="section_label_text">Premium — Rs.${premPrice}</span>
+                                <span class="section_label_text">Premium</span>
                                 <div class="section_label_line"></div>
                             </div>
                             <c:set var="premLabelShown" value="true"/>
@@ -112,7 +105,7 @@
                             <c:if test="${prevRow != ''}"></div></c:if>
                             <c:set var="prevRow" value=""/>
                             <div class="section_label_row">
-                                <span class="section_label_text">VIP — Rs.${vipPrice}</span>
+                                <span class="section_label_text">VIP</span>
                                 <div class="section_label_line"></div>
                             </div>
                             <c:set var="vipLabelShown" value="true"/>
@@ -165,7 +158,7 @@
                 </div>
             </div>
             <div class="seat_update_bar">
-                <button type="submit" class="seat_update_btn">Update Selection</button>
+                <button type="submit" class="seat_update_button">Update Selection</button>
             </div>
         </form>
 				
