@@ -48,12 +48,13 @@ public class UpdatePasswordServlet extends HttpServlet {
 		UpdatePasswordService update = new UpdatePasswordService();
 		UsersModel user = (UsersModel) SessionUtil.getAttribute(request, "user");
 		String status = update.authenticate(request, user, currentPassword, newPassword, confirmPassword);
+		System.out.print(status);
 		if ("Success".equals(status)) {
 	        	response.sendRedirect(request.getContextPath() + "/profile");
 	        	
+	        	System.out.print(status);
 	        }else {
-	        	request.setAttribute("error", status);
-	            request.getRequestDispatcher("/WEB-INF/pages/updateProfile.jsp").forward(request, response);
+	        	response.sendRedirect(request.getContextPath() + "/updateprofile");
 	        }
 	}
 
