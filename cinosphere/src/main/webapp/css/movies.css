@@ -166,3 +166,49 @@
     gap: 1.5rem;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+
+  .movie_filter_section {
+    padding: 1rem 4%;
+  }
+
+  .movie_filter_container {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .movie_search_wrapper {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .movie_filter_dropdown_group {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .movie_filter_select {
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .movie_main_content_container {
+    padding: 1rem 4%;
+  }
+
+  .movie_on_screen_strip {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .movie_cards_presentation_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+}

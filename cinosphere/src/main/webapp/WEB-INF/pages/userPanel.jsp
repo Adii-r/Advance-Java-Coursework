@@ -19,7 +19,7 @@
 	        <div class="sidebar_nav_container">
 	            <nav class="sidebar_nav_menu">
 	                <span class="sidebar_section_label">Main</span>
-	                <a href="${pageContext.request.contextPath}/userpanel" 
+	                <a href="${pageContext.request.contextPath}/profile" 
                		class="sidebar_nav_item ${(empty param.view or param.view eq 'dashboard') ? 'active' : ''}">
 	                    <div class="sidebar_icon_box">
 	                        <span class="movie_select_arrow">

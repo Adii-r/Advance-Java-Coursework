@@ -66,3 +66,21 @@
     margin-left:0.5rem;
     margin-top: 0.8rem;
 }
+
+@media (max-width: 768px) {
+
+  .hero_section {
+    height: auto;
+    min-height: 120px;
+    padding: 2rem 5%;
+  }
+
+  .hero_primary_title {
+    font-size: clamp(26px, 7vw, 40px);
+  }
+
+  .hero_narrative_subtitle {
+    font-size: 13px;
+  }
+
+}

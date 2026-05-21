@@ -312,3 +312,33 @@
 .authentication_switch_text a:hover{
 	color: var(--gold-light);
 }
+
+@media (max-width: 768px) {
+
+  .authentication_layout_wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .authentication_left_column {
+    display: none;
+  }
+
+  .authentication_right_section {
+    padding: 2rem 1.2rem 3rem;
+    min-height: calc(100vh - var(--header-total));
+  }
+
+  .glass_panel_container {
+    width: 100%;
+  }
+
+  .form_row_double {
+    grid-template-columns: 1fr;
+  }
+
+  .membership_selector_row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+}

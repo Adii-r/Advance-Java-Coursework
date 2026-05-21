@@ -841,3 +841,125 @@ main, .page_content {
   background: var(--obsidian);
   border-top: 1px solid var(--gold-glow);
 }
+
+@media (max-width: 768px) {
+
+  .landing_hero {
+    height: calc(100vh - var(--header-total));
+    min-height: 480px;
+  }
+
+  .hero_content {
+    padding: 0 1.2rem;
+  }
+
+  .hero_title {
+    font-size: clamp(44px, 12vw, 72px);
+  }
+
+  .hero_subtitle {
+    font-size: 14px;
+    margin: 0.8rem 0 1.6rem;
+  }
+
+  .hero_button {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 0;
+  }
+
+  .location_row {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 1.2rem 5%;
+    gap: 1rem;
+  }
+
+  .row_label { display: none; }
+
+  .row_list {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .movie_display_section {
+    padding: 60px 4% 20px;
+  }
+
+  .movie_category_navigation_bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .movie_category_tab_switcher {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .movie_category_tab_button {
+    padding: 0.6rem 0.8rem 0.6rem 0;
+    font-size: 10px;
+    gap: 8px;
+  }
+
+  .movie_tab_vertical_divider { display: none; }
+
+  .movie_navigation_link_all {
+    padding-bottom: 0.6rem;
+  }
+
+  .movie_cards_presentation_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .features_strip {
+    padding: 60px 5%;
+  }
+
+  .strip_title {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .screen_details {
+    padding: 4rem 5%;
+  }
+
+  .details_grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .details_stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat_value {
+    font-size: 36px;
+  }
+
+  .newsletter_subscription_section {
+    padding: 60px 5%;
+  }
+
+  .newsletter_interaction_form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter_input_field_wrapper {
+    flex: unset;
+    width: 100%;
+  }
+
+  .newsletter_submit_button {
+    width: 100%;
+  }
+
+}

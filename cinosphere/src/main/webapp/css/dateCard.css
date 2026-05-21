@@ -55,3 +55,16 @@
 .schedules_date_pill.active .schedules_date_pill_month {
     color: var(--gold);
 }
+
+@media (max-width: 768px) {
+
+  .schedules_date_pill {
+    padding: 8px 16px;
+    min-width: 58px;
+  }
+
+  .schedules_date_pill_num {
+    font-size: 20px;
+  }
+
+}

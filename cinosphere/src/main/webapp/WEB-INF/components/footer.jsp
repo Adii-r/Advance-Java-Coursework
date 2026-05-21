@@ -31,16 +31,16 @@
             <div class="footer_navigation_group">
                 <h4 class="footer_heading">About Us</h4>
                 <ul class="footer_links">
-                    <li><a href="#">IMAX Technology</a></li>
-                    <li><a href="#">Cinema & Screens</a></li>
-                    <li><a href="#">Sound Systems</a></li>
+                    <li><a href="${pageContext.request.contextPath}/aboutus">IMAX Technology</a></li>
+                    <li><a href="${pageContext.request.contextPath}/aboutus">Cinema & Screens</a></li>
+                    <li><a href="${pageContext.request.contextPath}/aboutus">Sound Systems</a></li>
                 </ul>
             </div>
             <div class="footer_navigation_group last_group">
 			    <div class="footer_information_bubble">
 			        <ul class="footer_links">
-			            <li><a href="#">Contact Us</a></li>
-			            <li><a href="#">Corporate Office</a></li>
+			            <li><a href="${pageContext.request.contextPath}/experience">Contact Us</a></li>
+			            <li><a href="${pageContext.request.contextPath}/experience">Corporate Office</a></li>
 			        </ul>
 	        		<div class="bubble_divider"></div>
 			        <div class="footer_social_links">

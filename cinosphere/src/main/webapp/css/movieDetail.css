@@ -218,3 +218,44 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+
+@media (max-width: 768px) {
+
+  .detail_hero {
+    min-height: 400px;
+  }
+
+  .detail_hero_content {
+    padding: 2rem 1.2rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .detail_poster {
+    width: 130px;
+    height: 195px;
+  }
+
+  .detail_title {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .detail_body {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .detail_meta_grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .detail_related_section {
+    padding: 2rem 1.2rem;
+  }
+
+  .detail_related_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+}

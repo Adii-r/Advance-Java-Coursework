@@ -526,3 +526,61 @@
 .admin_background_frame:hover .admin_background_overlay {
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+
+  .admin_movie_content_wrapper {
+    padding: 1rem 4%;
+    margin: 1rem auto;
+  }
+ 
+  .admin_workspace_card {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+ 
+  .admin_form_layout_grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+ 
+  .admin_avatar_poster_wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+ 
+  .form_grid_3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+ 
+  .form_grid_2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+ 
+  .schedule_header_grid,
+  .schedule_add_row {
+    grid-template-columns: 1fr 1fr 44px;
+    gap: 8px;
+  }
+ 
+  .schedule_header_grid .schedule_grid_header_title:nth-child(3),
+  .schedule_add_row .admin_form_select:nth-child(3) {
+    display: none;
+  }
+ 
+  .admin_workspace_form_footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+ 
+  .button_model_primary,
+  .button_model_secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+}

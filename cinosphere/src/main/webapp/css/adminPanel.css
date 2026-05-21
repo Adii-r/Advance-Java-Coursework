@@ -440,6 +440,7 @@ html,body {
     display: flex;
     border-bottom: 1px solid var(--glass-border);
     margin-bottom: 1.5rem;
+    overflow: auto;
 }
 
 .admin_movie_tab {
@@ -733,4 +734,115 @@ html,body {
 .admin_status_toggle input:checked + .admin_toggle_slider::before {
     transform: translateX(18px);
     background: #4ade80;
+}
+
+@media (max-width: 768px) {
+
+  .admin_layout_container {
+    flex-direction: column;
+    margin-top: var(--header-total);
+  }
+
+  .admin_sidebar_panel {
+    width: 100%;
+    min-width: unset;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    margin-top: 0;
+  }
+
+  .admin_navigation_menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    gap: 0;
+    scrollbar-width: none;
+  }
+
+  .admin_navigation_menu::-webkit-scrollbar { display: none; }
+
+  .admin_menu_group {
+    flex-direction: row;
+  }
+
+  .admin_navigation_label { display: none; }
+
+  .admin_navigation_item {
+    padding: 10px 1rem;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    flex-shrink: 0;
+    gap: 8px;
+  }
+
+  .admin_navigation_item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .admin_navigation_text { font-size: 13px; }
+
+  .admin_sidebar_footer { display: none; }
+
+  .admin_dashboard_hero_section {
+    padding: 1.5rem 4%;
+    margin-top: 0;
+  }
+
+  .admin_dashboard_hero_layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .admin_dashboard_action_group {
+    width: 100%;
+  }
+
+  .admin_dashboard_primary_button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin_metrics_section {
+    padding: 1.5rem 4%;
+  }
+
+  .admin_metrics_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .admin_metric_value {
+    font-size: 28px;
+  }
+
+  .admin_movie_management_section,
+  .admin_user_management_section {
+    padding: 0 4% 2rem;
+  }
+
+  .admin_panel_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .admin_panel_actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .admin_search_input {
+    width: 100%;
+  }
+
+  .admin_add_movie_button {
+    flex: 1;
+    justify-content: center;
+  }
+
 }

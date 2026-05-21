@@ -152,3 +152,39 @@
 .button_text {
   display: inline-block;
 }
+
+@media (max-width: 768px) {
+
+  .navigation_container {
+    padding: 0 1.2rem;
+  }
+
+  .navigation_menu {
+    display: none;
+  }
+
+  .navigation_logo {
+    height: 42px;
+  }
+
+  .navigation_actions {
+    gap: 8px;
+  }
+
+  .button {
+    width: auto;
+    padding: 0 14px;
+    height: 38px;
+    font-size: 10px;
+  }
+
+  .button_text {
+    display: none;
+  }
+
+  .navigation_icon {
+    width: 16px;
+    height: 16px;
+  }
+
+}

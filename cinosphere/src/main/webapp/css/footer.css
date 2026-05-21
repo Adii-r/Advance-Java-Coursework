@@ -157,3 +157,23 @@
   text-transform: uppercase;
   color: var(--text-dim);
 }
+ @media (max-width: 768px) {
+
+  .footer_content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 40px 5%;
+  }
+
+  .footer_logo {
+    width: 180px;
+  }
+
+  .footer_navigation_group.last_group {
+    justify-content: flex-start;
+  }
+
+  .footer_social_links {
+    justify-content: flex-start;
+  }
+}

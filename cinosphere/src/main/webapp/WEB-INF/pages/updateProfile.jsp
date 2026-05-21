@@ -240,12 +240,12 @@
 			</section>
 			
 			<div class="update_profile_footer_actions">
-			<a href="${pageContext.request.contextPath}/profile">
-			    <button class="update_profile_btn_ghost_cancel">Cancel</button>
-			 </a>
 			    <button class="update_profile_button_primary save_all_btn" type="submit" formaction="${pageContext.request.contextPath}/updateprofile">
 			        Save All Changes
 			    </button>
+			    <a href="${pageContext.request.contextPath}/profile">
+			    <button class="update_profile_btn_ghost_cancel">Cancel</button>
+			 </a>
 			</div>
 		</form>
 			<section class="update_profile_danger_wrapper">

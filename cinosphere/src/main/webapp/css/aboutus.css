@@ -591,3 +591,106 @@
 .about_statistics_section {
     position: relative;
 }
+
+
+@media (max-width: 768px) {
+
+  .about_hero_section {
+    padding: 2.5rem 5%;
+  }
+
+  .about_hero_primary_title {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .about_hero_subtitle {
+    font-size: 14px;
+  }
+
+  .about_hero_action_group {
+    flex-wrap: wrap;
+  }
+
+  .about_hero_button_primary,
+  .about_hero_button_secondary {
+    width: 100%;
+  }
+
+  .about_story_section {
+    padding: 4rem 5%;
+  }
+
+  .about_story_grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about_story_content {
+    position: static;
+  }
+
+  .about_story_statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .about_story_statistic_value {
+    font-size: 36px;
+  }
+
+  .about_statistics_section {
+    padding: 4rem 5%;
+  }
+
+  .about_statistics_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about_statistics_card {
+    border-right: 1px solid var(--glass-border-md);
+    border-bottom: 1px solid var(--glass-border-md);
+  }
+
+  .about_statistics_card:nth-child(2),
+  .about_statistics_card:nth-child(4) {
+    border-right: none;
+  }
+
+  .about_statistics_card:nth-child(3),
+  .about_statistics_card:nth-child(4) {
+    border-bottom: none;
+  }
+
+  .leadership_team_section {
+    padding: 4rem 5%;
+  }
+
+  .leadership_team_grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+
+  .leadership_team_bottom_row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .leadership_team_bottom_row .leadership_team_card {
+    width: 100%;
+  }
+
+  .locations_showcase_section {
+    padding: 4rem 5%;
+  }
+
+  .locations_showcase_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location_card {
+    min-height: 280px;
+  }
+
+}

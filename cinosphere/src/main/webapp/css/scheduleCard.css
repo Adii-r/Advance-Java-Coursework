@@ -167,3 +167,36 @@
     color: var(--gold-light);
     transition: color 0.5s ease;
 }
+
+@media (max-width: 768px) {
+
+  .schedules_row {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-md);
+  }
+
+  .schedules_row_movie {
+    border-right: none;
+    border-bottom: 2px solid var(--glass-border);
+    flex-wrap: wrap;
+  }
+
+  .schedules_row_poster {
+    width: 90px;
+    height: 140px;
+  }
+
+  .schedules_row_times {
+    padding: 1rem;
+  }
+
+  .times_slots {
+    gap: 8px;
+  }
+
+  .time_slot {
+    padding: 9px 12px;
+    min-width: 76px;
+  }
+
+}

@@ -542,3 +542,58 @@
     padding: 10px 45px;
     margin: 0;
 }
+
+@media (max-width: 768px) {
+
+  .update_profile_form_grid {
+    grid-template-columns: 1fr;
+    padding: 0 4%;
+    gap: 1.5rem;
+  }
+
+  .update_profile_content_wrapper {
+    padding: 1.5rem 4%;
+  }
+
+  .update_profile_overview_card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .update_profile_points_panel {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .update_profile_progress_bar {
+    width: 100%;
+  }
+
+  .update_profile_name_row {
+    grid-template-columns: 1fr;
+  }
+
+  .update_profile_danger_wrapper {
+    padding: 0 4% 1.5rem;
+  }
+
+  .update_profile_danger_row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .update_profile_footer_actions {
+    margin: 1.5rem 4% 3rem;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .update_profile_btn_ghost_cancel,
+  .save_all_btn {
+    width: 100%;
+    text-align: center;
+  }
+
+}

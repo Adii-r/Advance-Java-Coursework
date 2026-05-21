@@ -232,3 +232,30 @@
   margin-top: 10px;
   line-height: 1.6;
 }
+
+@media (max-width: 768px) {
+
+  .contact_content_wrapper {
+    padding: 2rem 4%;
+  }
+
+  .contact_page_grid_container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact_form_panel_card {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .form_grid_two_columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .contact_info_row {
+    grid-template-columns: 1fr;
+  }
+
+}

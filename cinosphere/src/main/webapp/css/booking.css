@@ -739,3 +739,176 @@
     box-shadow: none;
     transform: none;
 }
+
+@media (max-width: 768px) {
+
+  .booking_screen {
+    grid-template-columns: 1fr;
+    padding-top: var(--header-total);
+    overflow-x: hidden;
+  }
+
+  .booking_left_section {
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    gap: 1rem;
+    overflow: hidden;
+  }
+
+  .movie_card {
+    padding: 0.875rem;
+    gap: 0.875rem;
+    align-items: flex-start;
+  }
+
+  .movie_card_poster {
+    width: 50px;
+    height: 72px;
+    flex-shrink: 0;
+  }
+
+  .movie_card_title {
+    font-size: 15px;
+  }
+
+  .movie_card_description {
+    font-size: 11px;
+  }
+
+  .movie_card_button {
+    display: none;
+  }
+
+  .seat_selection_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .seat_selection_title {
+    font-size: 20px;
+  }
+
+  .hall_selector {
+    align-self: auto;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .hall_pill {
+    padding: 5px 10px;
+  }
+
+  .hall_pill span {
+    font-size: 8px;
+  }
+
+  .seat_indicator_bar {
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    scrollbar-width: none;
+  }
+
+  .seat_indicator_bar::-webkit-scrollbar { display: none; }
+
+  .screen_bar     { max-width: 90%; }
+  .screen_bar_glow { max-width: 80%; }
+
+  .seat_form {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .seat_map_wrap {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201,168,76,0.2) transparent;
+  }
+
+  .seat_map {
+    min-width: 420px;
+    gap: 6px;
+  }
+
+  .seat_row {
+    gap: 4px;
+    justify-content: flex-start;
+    padding-left: 4px;
+  }
+
+  .seat_aisle {
+    width: 10px;
+  }
+
+  .seat_update_bar {
+    padding: 1rem 0 0.25rem;
+  }
+
+  .seat_update_btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 11px;
+  }
+
+  .checkout_panel {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    padding: 1rem;
+  }
+
+  .checkout_line,
+  .checkout_footer_line {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+  }
+
+  .checkout_title {
+    font-size: 1.6rem;
+  }
+
+  .selected_seats_area {
+    max-width: 100%;
+  }
+
+  .sphere_row {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .sphere_toggle_form {
+    width: 100%;
+  }
+
+  .sphere_button {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .order_line_label { font-size: 11px; }
+  .order_line_value { font-size: 12px; }
+  .order_line_total .order_line_label { font-size: 13px; }
+  .order_line_total .order_line_value { font-size: 15px; }
+
+  .payment_method {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .payment_name { font-size: 11px; }
+
+  .checkout_button {
+    padding: 14px;
+    font-size: 11px;
+  }
+
+}

@@ -285,3 +285,29 @@
 .gold_link:hover{
 	color: var(--gold-light);
 }
+
+@media (max-width: 768px) {
+
+  .authentication_split_layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .authentication_visual_side {
+    display: none;
+  }
+
+  .authentication_form_side {
+    padding: 2rem 1.2rem;
+    min-height: calc(100vh - var(--header-total));
+  }
+
+  .control_panel {
+    max-width: 100%;
+  }
+
+  .panel_title {
+    font-size: 30px;
+  }
+
+}
