@@ -13,10 +13,13 @@ import java.util.List;
 
 import com.cinosphere.model.FeedbackModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all feedback-related database operations.
+ */
 public class FeedbackDAO {
 	/**
-	 * 
+	 * Inserts a new feedback record into the database.
+	 *
 	 * @param userId
 	 * @param movieId
 	 * @param rating
@@ -24,8 +27,8 @@ public class FeedbackDAO {
 	 * @param feedbackDate
 	 * @param feedbackTime
 	 * @param feedbackStatus
-	 * @return
-	 * @throws SQLException
+	 * @return true if inserted successfully
+	 * @throws SQLException if database operation fails
 	 */
 	public boolean insert(int userId,int movieId,int rating,String description, LocalDate feedbackDate, LocalTime feedbackTime, String feedbackStatus) throws SQLException {
         String sql = "INSERT INTO feedback (user_id, movie_id, rating, "
@@ -43,10 +46,10 @@ public class FeedbackDAO {
         }
 	
 	/**
-	 * 
-	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * Retrieves all feedback records from the database.
+	 *
+	 * @return list of feedback records
+	 * @throws Exception if database operation fails
 	 */
 	public List<FeedbackModel> getAllFeedback() throws Exception{
 		List<FeedbackModel> feedbacks = new ArrayList<>();
@@ -64,10 +67,11 @@ public class FeedbackDAO {
 	}
 	
 	/**
-	 * 
+	 * Retrieves feedback records for a specific user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return list of feedback records
+	 * @throws Exception if database operation fails
 	 */
 	public List<FeedbackModel> findByUserId(int userId) throws Exception{
 		List<FeedbackModel> feedbacks = new ArrayList<>();
@@ -88,10 +92,11 @@ public class FeedbackDAO {
 	
 	
 	/**
-	 * 
+	 * Creates a FeedbackModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws Exception
+	 * @return populated FeedbackModel object
+	 * @throws Exception if result set processing fails
 	 */
 	public FeedbackModel createFeedbackModel(ResultSet rs) throws Exception{
 		FeedbackModel feedback = new FeedbackModel();

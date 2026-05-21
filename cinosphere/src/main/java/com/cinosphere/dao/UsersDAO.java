@@ -13,21 +13,22 @@ import com.cinosphere.model.UsersModel;
 import com.cinosphere.utils.DBconfig;
 
 /**
- *  Class for SQL operation involving user
+ * DAO class responsible for all user-related database operations.
  */
 public class UsersDAO {
 	/**
-	 * Method to insert a new customer into the database
-	 * @param firstName First name of the customer
-	 * @param lastName Last name of the customer
-	 * @param username username of the customer
-	 * @param email email of the customer
-	 * @param dateOfBirth DOB of the customer
-	 * @param gender gender of the customer
-	 * @param hashPassword password after Bcrypt
-	 * @param customerRole
-	 * @return boolean, True if customer saved, False if not
-	 * @throws SQLException
+	 * Inserts a new user record into the database.
+	 *
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param email
+	 * @param dateOfBirth
+	 * @param gender
+	 * @param hashPassword
+	 * @param userRole
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(String firstName, String lastName, String username, String email,LocalDate dateOfBirth, String gender,String hashPassword,String userRole) throws Exception {
 		String sql = "INSERT INTO users (first_name, last_name, username, email, date_of_birth, gender, hash_password, registration_date, is_active, user_role) "
@@ -50,10 +51,11 @@ public class UsersDAO {
 			return ps.executeUpdate() > 0;
 }
 	/**
-	 * Find a user by their username
+	 * Retrieves user details using username.
+	 *
 	 * @param username
-	 * @return user object
-	 * @throws SQLException
+	 * @return user record
+	 * @throws Exception if database operation fails
 	 */
 	public UsersModel findByUsername(String username) throws Exception {
 		UsersModel user = null;
@@ -71,7 +73,13 @@ public class UsersDAO {
             return user;
         }
 	
-	
+	/**
+	 * Retrieves users matching username pattern.
+	 *
+	 * @param username
+	 * @return list of user records
+	 * @throws Exception if database operation fails
+	 */
 	public List<UsersModel> findByUsernames(String username) throws Exception {
 		List<UsersModel> users = new ArrayList<>();
         String sql = "SELECT * FROM users WHERE username LIKE ?";
@@ -90,10 +98,11 @@ public class UsersDAO {
 
 	
 	/**
-	 * Find a user by their email
+	 * Retrieves user details using email.
+	 *
 	 * @param email
-	 * @return user object
-	 * @throws SQLException
+	 * @return user record
+	 * @throws SQLException if database operation fails
 	 */
 	public UsersModel findByEmail(String email) throws SQLException {
 		UsersModel user = null;
@@ -111,10 +120,11 @@ public class UsersDAO {
             return user;
         }
 	/**
-	 * Find a user by their id
-	 * @param email
-	 * @return user object
-	 * @throws SQLException
+	 * Retrieves user details using user ID.
+	 *
+	 * @param userId
+	 * @return user record
+	 * @throws SQLException if database operation fails
 	 */
 	public UsersModel findByUserId(int userId) throws SQLException {
 		UsersModel user = null;
@@ -132,9 +142,10 @@ public class UsersDAO {
             return user;
         }
 	/**
-	 * Create list of all users
-	 * @return list object of user
-	 * @throws Exception
+	 * Retrieves all user records from the database.
+	 *
+	 * @return list of user records
+	 * @throws Exception if database operation fails
 	 */
 	public List<UsersModel> getAllUser() throws Exception {
 		
@@ -154,7 +165,13 @@ public class UsersDAO {
 	    con.close();
 	    return users;
 	}
-	
+	/**
+	 * Retrieves users based on account status.
+	 *
+	 * @param isActive
+	 * @return list of user records
+	 * @throws Exception if database operation fails
+	 */
 	public List<UsersModel> getUserByStatus(boolean isActive) throws Exception{
 		List<UsersModel> users = new ArrayList<>();
 	    Connection con = DBconfig.getConnection();
@@ -174,10 +191,11 @@ public class UsersDAO {
 	    return users;
 	}
 	/**
-	 * Soft delete user record
-	 * @param username
-	 * @return
-	 * @throws Exception
+	 * Soft deletes a user account by setting is_active to false.
+	 *
+	 * @param userId
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean deleteUser(int userId) throws Exception{
         String sql = "UPDATE users SET is_active = ? WHERE user_id = ? ";
@@ -189,10 +207,11 @@ public class UsersDAO {
         return ps.executeUpdate() > 0;
 	}
 	/**
-	 * Set inactive Accounts to true
-	 * @param username
-	 * @return
-	 * @throws Exception
+	 * Activates a user account by setting is_active to true.
+	 *
+	 * @param userId
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean ActivateUser(int userId) throws Exception{
         String sql = "UPDATE users SET is_active = ? WHERE user_id = ? ";
@@ -205,15 +224,15 @@ public class UsersDAO {
 	}
 	
 	/**
-	 * Update user details
+	 * Updates user profile details.
+	 *
 	 * @param userId
 	 * @param firstName
 	 * @param lastName
-	 * @param username
 	 * @param email
-	 * @param hashPassword
-	 * @return
-	 * @throws Exception
+	 * @param dateOfBirth
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean UpdateUser(int userId,String firstName, String lastName, String email,LocalDate dateOfBirth) throws Exception {
 		
@@ -229,15 +248,12 @@ public class UsersDAO {
 		return ps.executeUpdate() > 0;
 	}
 	/**
-	 * Update password
+	 * Updates user password.
+	 *
 	 * @param userId
-	 * @param firstName
-	 * @param lastName
-	 * @param username
-	 * @param email
-	 * @param hashPassword
-	 * @return
-	 * @throws Exception
+	 * @param password
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean UpdateUserPassword(int userId,String password) throws Exception {
 		
@@ -250,8 +266,11 @@ public class UsersDAO {
 		return ps.executeUpdate() > 0;
 	}
 	/**
-	 * 
-	 * @return
+	 * Retrieves total number of users registered on a specific date.
+	 *
+	 * @param date
+	 * @return total new users count
+	 * @throws Exception if database operation fails
 	 */
 	public int getNewUsers(LocalDate date) throws Exception{
 		int total = 0;
@@ -268,10 +287,11 @@ public class UsersDAO {
 	}
 	
 	/**
-	 * Helper method to create user Object
+	 * Creates a UsersModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws SQLException
+	 * @return populated UsersModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public UsersModel createUserModel(ResultSet rs) throws SQLException {
 		UsersModel user = new UsersModel();

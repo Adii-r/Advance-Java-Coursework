@@ -12,10 +12,13 @@ import java.util.List;
 
 import com.cinosphere.model.TicketModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all ticket-related database operations.
+ */
 public class TicketDAO {
 	/**
-	 * 
+	 * Inserts a new ticket record into the database.
+	 *
 	 * @param bookingId
 	 * @param showtimeId
 	 * @param seatId
@@ -23,8 +26,8 @@ public class TicketDAO {
 	 * @param ticketStatus
 	 * @param issueDate
 	 * @param ticketPrice
-	 * @return
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	 public boolean insert(int bookingId, int showtimeId, int seatId, String ticketType, String ticketStatus,LocalDate issueDate, double ticketPrice) throws Exception {
 			String sql = "INSERT INTO ticket (booking_id, showtime_id, seat_id, ticket_type, "
@@ -41,10 +44,11 @@ public class TicketDAO {
 			return ps.executeUpdate() > 0;
 	 }
 	 /**
-	  * 
+	  * Retrieves all tickets associated with a booking ID.
+	  *
 	  * @param bookingId
-	  * @return
-	  * @throws Exception
+	  * @return list of ticket records
+	  * @throws Exception if database operation fails
 	  */
 	 public List<TicketModel> findByBookingId(int bookingId) throws Exception {
 	        List<TicketModel> tickets = new ArrayList<>();
@@ -62,10 +66,11 @@ public class TicketDAO {
 	        return tickets;
 	    }
 	 /**
-	  * 
+	  * Retrieves ticket details using ticket ID.
+	  *
 	  * @param ticketId
-	  * @return
-	  * @throws Exception
+	  * @return ticket record
+	  * @throws Exception if database operation fails
 	  */
 	 public TicketModel findByTicketId(int ticketId) throws Exception {
 	        TicketModel ticket = null;
@@ -83,13 +88,13 @@ public class TicketDAO {
 	        return ticket;
 	    }
 	 /**
-	  * 
-	  * @param userId
+	  * Updates ticket status.
+	  *
+	  * @param ticketId
 	  * @param ticketStatus
-	  * @return
-	  * @throws Exception
+	  * @return true if updated successfully
+	  * @throws Exception if database operation fails
 	  */
-	 
 	 public boolean updateTicketStatus(int ticketId,String ticketStatus) throws Exception {
 		 String sql = "UPDATE ticket SET ticket_status = ? WHERE ticket_id = ?";
 			Connection con = DBconfig.getConnection();
@@ -99,10 +104,11 @@ public class TicketDAO {
 			return ps.executeUpdate() > 0;
 	    }
 	 /**
-	  * 
+	  * Creates a TicketModel object from the result set.
+	  *
 	  * @param rs
-	  * @return
-	  * @throws SQLException
+	  * @return populated TicketModel object
+	  * @throws SQLException if result set processing fails
 	  */
 	 public TicketModel createTicketModel(ResultSet rs) throws SQLException {
 		 TicketModel ticket = new TicketModel();

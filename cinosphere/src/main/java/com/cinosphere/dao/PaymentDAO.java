@@ -14,18 +14,21 @@ import java.sql.Date;
 
 import com.cinosphere.model.PaymentModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all payment-related database operations.
+ */
 public class PaymentDAO {
 	/**
-	 * 
+	 * Inserts a new payment record into the database.
+	 *
 	 * @param bookingId
 	 * @param paymentMethod
 	 * @param paymentAmount
 	 * @param paymentDate
 	 * @param paymentTime
 	 * @param paymentStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(int bookingId, String paymentMethod, double paymentAmount, LocalDate paymentDate, LocalTime paymentTime, String paymentStatus) throws Exception {
 		String sql = "INSERT INTO payment (booking_id, payment_method, payment_amount, payment_date, payment_time, payment_status) "
@@ -44,10 +47,11 @@ public class PaymentDAO {
 		return result;
 	}
 	/**
-	 * 
+	 * Retrieves payment details using payment ID.
+	 *
 	 * @param paymentId
-	 * @return
-	 * @throws Exception
+	 * @return payment record
+	 * @throws Exception if database operation fails
 	 */
 	public PaymentModel findByPaymentId(int paymentId) throws Exception {
 		PaymentModel payment = null;
@@ -65,10 +69,11 @@ public class PaymentDAO {
 		return payment;
 	}
 	/**
-	 * 
+	 * Retrieves payment details using booking ID.
+	 *
 	 * @param bookingId
-	 * @return
-	 * @throws Exception
+	 * @return payment record
+	 * @throws Exception if database operation fails
 	 */
 	public PaymentModel findByBookingId(int bookingId) throws Exception {
 		PaymentModel payment = null;
@@ -86,9 +91,10 @@ public class PaymentDAO {
 		return payment;
 	}
 	/**
-	 * 
-	 * @return
-	 * @throws Exception
+	 * Retrieves all payment records from the database.
+	 *
+	 * @return list of payment records
+	 * @throws Exception if database operation fails
 	 */
 	public List<PaymentModel> getAllPayments() throws Exception {
 		List<PaymentModel> payments = new ArrayList<>();
@@ -105,11 +111,12 @@ public class PaymentDAO {
 		return payments;
 	}
 	/**
-	 * 
+	 * Updates payment status.
+	 *
 	 * @param paymentId
 	 * @param paymentStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updatePaymentStatus(int paymentId, String paymentStatus) throws Exception {
 		String sql = "UPDATE payment SET payment_status = ? WHERE payment_id = ?";
@@ -123,10 +130,11 @@ public class PaymentDAO {
 		return result;
 	}
 	/**
-	 * 
+	 * Creates a PaymentModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws SQLException
+	 * @return populated PaymentModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public PaymentModel createPaymentModel(ResultSet rs) throws SQLException {
 		PaymentModel payment = new PaymentModel();

@@ -18,8 +18,12 @@ import java.util.Set;
 import com.cinosphere.model.BookingModel;
 import com.cinosphere.utils.DBconfig;
 
+/**
+ * DAO class responsible for all booking-related database operations.
+ */
 public class BookingDAO {
 /**
+ * Inserts a new booking record into the database.
  * 
  * @param userId
  * @param bookingDate
@@ -28,8 +32,8 @@ public class BookingDAO {
  * @param totalAmount
  * @param bookingChannel
  * @param loyaltyPointsEarned
- * @return
- * @throws Exception
+ * @return true if inserted successfully
+ * @throws Exception if database operation fails
  */
 	public boolean insert(int userId, LocalDate bookingDate, LocalTime bookingTime,String bookingStatus, double totalAmount,String bookingChannel, int loyaltyPointsEarned) throws Exception {
 		String sql = "INSERT INTO booking  (user_id, booking_date, booking_time, booking_status,total_amount, booking_channel, loyalty_points_earned) "
@@ -46,6 +50,7 @@ public class BookingDAO {
 		return ps.executeUpdate()>0;
 	}
 	/**
+	 * Inserts a new booking and returns the generated booking ID.
 	 * 
 	 * @param userId
 	 * @param bookingDate
@@ -54,8 +59,8 @@ public class BookingDAO {
 	 * @param totalAmount
 	 * @param bookingChannel
 	 * @param loyaltyPointsEarned
-	 * @return
-	 * @throws Exception
+	 * @return generated booking ID, or -1 if insertion fails
+	 * @throws Exception if database operation fails
 	 */
 	public int insertAndGetId(int userId, LocalDate bookingDate, LocalTime bookingTime,String bookingStatus, double totalAmount,String bookingChannel, int loyaltyPointsEarned) throws Exception {
 		String sql = "INSERT INTO booking  (user_id, booking_date, booking_time, booking_status,total_amount, booking_channel, loyalty_points_earned) "
@@ -77,10 +82,11 @@ public class BookingDAO {
 		return newId;
 	}
 	/**
-	 * 
+	 * Retrieves all bookings for a specific user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return list of bookings
+	 * @throws Exception if database operation fails
 	 */
 	public List<BookingModel> findByUserId(int userId) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
@@ -98,10 +104,11 @@ public class BookingDAO {
         return bookings;
     }
 	/**
-	 * 
-	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * Retrieves bookings by booking status.
+	 *
+	 * @param bookingStatus
+	 * @return list of bookings
+	 * @throws Exception if database operation fails
 	 */
 	public List<BookingModel> findByBookingStatus(String bookingStatus) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
@@ -119,9 +126,10 @@ public class BookingDAO {
         return bookings;
     }
 	/**
-	 * 
-	 * @return
-	 * @throws Exception
+	 * Retrieves all bookings from the database.
+	 *
+	 * @return list of all bookings
+	 * @throws Exception if database operation fails
 	 */
 	public List<BookingModel> getAllBookings() throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
@@ -138,10 +146,11 @@ public class BookingDAO {
         return bookings;
     }
 	/**
-	 * 
+	 * Retrieves a booking using booking ID.
+	 *
 	 * @param bookingId
-	 * @return
-	 * @throws Exception
+	 * @return booking object if found, otherwise null
+	 * @throws Exception if database operation fails
 	 */
 	public BookingModel findByBookingId(int bookingId) throws Exception {
        BookingModel booking = null;
@@ -159,11 +168,12 @@ public class BookingDAO {
         return booking;
     }
 	/**
-	 * 
+	 * Retrieves bookings for a user filtered by booking status.
+	 *
 	 * @param userId
 	 * @param bookingStatus
-	 * @return
-	 * @throws Exception
+	 * @return list of matching bookings
+	 * @throws Exception if database operation fails
 	 */
 	public List<BookingModel> findByUserId(int userId, String bookingStatus) throws Exception {
         List<BookingModel> bookings = new ArrayList<>();
@@ -197,9 +207,12 @@ public class BookingDAO {
 		return ps.executeUpdate() > 0;
 	}
 	/**
-	 * \
-	 * @return
-	 * @throws Exception
+	 * Updates booking status.
+	 *
+	 * @param bookingId
+	 * @param bookingStatus
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public int getTotalBookings() throws Exception {
 		int booking = 0;
@@ -216,10 +229,10 @@ public class BookingDAO {
         return booking;
 	}
 	/**
-	 * 
-	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * Retrieves total number of bookings.
+	 *
+	 * @return total booking count
+	 * @throws Exception if database operation fails
 	 */
 	public int findTotalBookingByUserId(int userId) throws Exception{
 		int booking = 0;
@@ -237,10 +250,11 @@ public class BookingDAO {
         return booking;
 	}
 	/**
-	 * 
+	 * Retrieves total bookings made by a specific user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return total booking count
+	 * @throws Exception if database operation fails
 	 */
 	public int findTotalUpcomingByUserId(int userId) throws Exception {
 		int count = 0;
@@ -259,10 +273,11 @@ public class BookingDAO {
 		return count;
 	}
 	/**
-	 * 
+	 * Retrieves total upcoming bookings for a user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return upcoming booking count
+	 * @throws Exception if database operation fails
 	 */
 	public BookingModel findLatestComingByUserId(int userId) throws Exception {
 		BookingModel booking = null;
@@ -282,10 +297,11 @@ public class BookingDAO {
 			return booking;
 	}
 	/**
-	 * 
+	 * Retrieves upcoming bookings for a specific user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return list of upcoming bookings
+	 * @throws Exception if database operation fails
 	 */
 	public List<BookingModel> findUpcomingByUserId(int userId) throws Exception {
 		List<BookingModel> bookings = new ArrayList<>();
@@ -305,10 +321,11 @@ public class BookingDAO {
 		return bookings;
 	}
 	/**
-	 * 
+	 * Retrieves the latest booking made by a user.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return latest booking record
+	 * @throws Exception if database operation fails
 	 */
 	public BookingModel findLatestConfirmedByUserId(int userId) throws Exception {
 		BookingModel booking = null;
@@ -326,10 +343,11 @@ public class BookingDAO {
         return booking;
 	}
 	/**
-	 * 
+	 * Retrieves confirmed seat IDs for a specific showtime.
+	 *
 	 * @param showtimeId
-	 * @return
-	 * @throws Exception
+	 * @return set of confirmed seat IDs
+	 * @throws Exception if database operation fails
 	 */
 	public Set<Integer> getConfirmedSeatIdsByShowtime(int showtimeId) throws Exception {
 		Set<Integer> seatIds = new HashSet<>();
@@ -343,10 +361,11 @@ public class BookingDAO {
 		return seatIds;
 	}
 	/**
-	 * 
+	 * Retrieves total bookings made by a user in the current month.
+	 *
 	 * @param userId
-	 * @return
-	 * @throws Exception
+	 * @return total booking count for current month
+	 * @throws Exception if database operation fails
 	 */
 	public int getCurrentMonthBookings(int userId) throws Exception {
 	    int total = 0;
@@ -364,9 +383,10 @@ public class BookingDAO {
 	    return total;
 	}
 	/**
-	 * 
-	 * @return
-	 * @throws Exception
+	 * Retrieves total bookings made in the current month.
+	 *
+	 * @return total booking count for current month
+	 * @throws Exception if database operation fails
 	 */
 	public int getCurrentMonthBookings() throws Exception {
 	    int total = 0;
@@ -383,8 +403,11 @@ public class BookingDAO {
 	    return total;
 	}
 	/**
-	 * 
-	 * @return
+	 * Retrieves total revenue for a specific date.
+	 *
+	 * @param date
+	 * @return total revenue amount
+	 * @throws Exception if database operation fails
 	 */
 	public double getRevenue(LocalDate date) throws Exception {
 	    double total = 0;
@@ -401,6 +424,13 @@ public class BookingDAO {
 	    con.close();
 	    return total;
 	}
+	/**
+	 * Retrieves total bookings for a specific date.
+	 *
+	 * @param date
+	 * @return total booking count
+	 * @throws Exception if database operation fails
+	 */
 	public int getBookings(LocalDate date) throws Exception {
 	    int total = 0;
 	    String sql = "SELECT COUNT(*) FROM booking WHERE booking_date = ?";
@@ -417,10 +447,11 @@ public class BookingDAO {
 	    return total;
 	}
 	/**
-	 * 
+	 * Creates a BookingModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws SQLException
+	 * @return populated BookingModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public BookingModel createBookingModel(ResultSet rs) throws SQLException {
 		BookingModel booking = new BookingModel();

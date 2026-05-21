@@ -9,17 +9,20 @@ import java.util.List;
 
 import com.cinosphere.model.SeatModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all seat-related database operations.
+ */
 public class SeatDAO {
 	/**
-	 * 
+	 * Inserts a new seat record into the database.
+	 *
 	 * @param screenId
 	 * @param seatNumber
 	 * @param rowNumber
 	 * @param seatType
 	 * @param seatStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(int screenId, int seatNumber, String rowNumber,String seatType, String seatStatus) throws Exception {
 			String sql = "INSERT INTO seat (screen_id, seat_number, row_number, seat_type, seat_status) "
@@ -35,9 +38,11 @@ public class SeatDAO {
 		}
 	
 	/**
-	 * 
-	 * @param screen_id
-	 * @return
+	 * Retrieves all seats for a screen.
+	 *
+	 * @param screenId
+	 * @return list of seat records
+	 * @throws Exception if database operation fails
 	 */
 	public List<SeatModel> findByScreenId(int screenId) throws Exception{
 		List<SeatModel> seats = new ArrayList<>();
@@ -55,10 +60,11 @@ public class SeatDAO {
 		return seats;
 	}
 	/**
-	 * 
+	 * Retrieves seat details using seat ID.
+	 *
 	 * @param seatId
-	 * @return
-	 * @throws Exception
+	 * @return seat record
+	 * @throws Exception if database operation fails
 	 */
 	public SeatModel findBySeatId(int seatId) throws Exception{
 		SeatModel seat = null;
@@ -76,11 +82,12 @@ public class SeatDAO {
 		return seat;
 	}
 	/**
-	 * 
+	 * Updates seat status.
+	 *
 	 * @param seatId
 	 * @param seatStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateSeatStatus(int seatId, String seatStatus) throws Exception {
 		String sql = "UPDATE seat SET seat_status=? WHERE seat_id=?";
@@ -92,10 +99,11 @@ public class SeatDAO {
 	}
 	
 	/**
-	 * 
+	 * Creates a SeatModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws SQLException
+	 * @return populated SeatModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public SeatModel createSeatModel(ResultSet rs) throws SQLException {
 		SeatModel seat = new SeatModel();

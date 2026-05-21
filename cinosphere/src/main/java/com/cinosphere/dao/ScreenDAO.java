@@ -10,18 +10,21 @@ import java.util.List;
 
 import com.cinosphere.model.ScreenModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all screen-related database operations.
+ */
 public class ScreenDAO {
 	/**
-	 * 
+	 * Inserts a new screen record into the database.
+	 *
 	 * @param theatreId
 	 * @param screenName
 	 * @param screenType
 	 * @param screenStatus
 	 * @param capacity
 	 * @param basePrice
-	 * @return
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(int theatreId,String screenName, String screenType,String screenStatus,int capacity,double basePrice) throws Exception {
         String sql = "INSERT INTO screen (theatre_id, screen_name, screen_type, screen_status, total_capacity, base_price) "
@@ -37,11 +40,12 @@ public class ScreenDAO {
             return ps.executeUpdate() > 0;
     }
 	/**
-	 * 
+	 * Updates screen status.
+	 *
 	 * @param screenId
 	 * @param screenStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateScreenStatus(int screenId, String screenStatus) throws Exception {
 		String sql = "UPDATE screen SET screen_status = ? WHERE screen_id = ?";
@@ -52,11 +56,12 @@ public class ScreenDAO {
 		return ps.executeUpdate() > 0;
 	}
 	/**
-	 * 
+	 * Updates screen base price.
+	 *
 	 * @param screenId
 	 * @param basePrice
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateScreenBasePrice(int screenId, double basePrice) throws Exception {
 		String sql = "UPDATE screen SET base_price = ? WHERE screen_id = ?";
@@ -67,11 +72,13 @@ public class ScreenDAO {
 		return ps.executeUpdate() > 0;
 	}
 	/**
-	 * 
+	 * Retrieves all screens for a theatre.
+	 *
 	 * @param theatreId
-	 * @return
-	 * @throws Exception
+	 * @return list of screen records
+	 * @throws Exception if database operation fails
 	 */
+
 	public List<ScreenModel> findBytheatreId(int theatreId) throws Exception{
 		List<ScreenModel> screens = new ArrayList<>();
 		String sql = "SELECT * FROM screen WHERE theatre_id = ?";
@@ -88,10 +95,10 @@ public class ScreenDAO {
         return  screens;
 	}
 	/**
-	 * 
-	 * @param theatreId
-	 * @return
-	 * @throws Exception
+	 * Retrieves all screen records from the database.
+	 *
+	 * @return list of screen records
+	 * @throws Exception if database operation fails
 	 */
 	public List<ScreenModel> getAllScreen() throws Exception{
 		List<ScreenModel> screens = new ArrayList<>();
@@ -108,10 +115,11 @@ public class ScreenDAO {
         return screens;
 	}
 	/**
-	 * 
+	 * Retrieves screen details using screen ID.
+	 *
 	 * @param screenId
-	 * @return
-	 * @throws Exception
+	 * @return screen record
+	 * @throws Exception if database operation fails
 	 */
 	public ScreenModel findByScreenId(int screenId) throws Exception{
 		ScreenModel screen = null;
@@ -129,10 +137,11 @@ public class ScreenDAO {
         return  screen;
 	}
 	/**
-	 * 
+	 * Creates a ScreenModel object from the result set.
+	 *
 	 * @param rs
-	 * @return
-	 * @throws SQLException
+	 * @return populated ScreenModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public ScreenModel createScreenModel(ResultSet rs) throws SQLException{
 		ScreenModel screen = new ScreenModel();

@@ -12,10 +12,13 @@ import java.util.List;
 
 import com.cinosphere.model.MovieModel;
 import com.cinosphere.utils.DBconfig;
-
+/**
+ * DAO class responsible for all movie-related database operations.
+ */
 public class MovieDAO {
 	/**
-	 * Insert new movie to database
+	 * Inserts a new movie record into the database.
+	 *
 	 * @param movieName
 	 * @param duration
 	 * @param director
@@ -25,8 +28,8 @@ public class MovieDAO {
 	 * @param releaseDate
 	 * @param movieStatus
 	 * @param ageRating
-	 * @return boolean
-	 * @throws Exception
+	 * @return true if inserted successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean insert(String movieName, int duration, String director, String genre, String movieLanguage, String description,LocalDate releaseDate ,String movieStatus, String ageRating) throws Exception {
 		String sql = "INSERT INTO movie (movie_name,duration,director,genre,movie_language,description,release_date,movie_status,age_rating)"
@@ -46,7 +49,8 @@ public class MovieDAO {
 		return ps.executeUpdate() >0;
 	}
 	/**
-	 * 
+	 * Inserts a new movie and returns the generated movie ID.
+	 *
 	 * @param movieName
 	 * @param duration
 	 * @param director
@@ -56,8 +60,8 @@ public class MovieDAO {
 	 * @param releaseDate
 	 * @param movieStatus
 	 * @param ageRating
-	 * @return
-	 * @throws Exception
+	 * @return generated movie ID, or -1 if insertion fails
+	 * @throws Exception if database operation fails
 	 */
 	public int insertAndGetId(String movieName, int duration, String director, String genre, String movieLanguage, String description,LocalDate releaseDate ,String movieStatus, String ageRating) throws Exception {
 		String sql = "INSERT INTO movie (movie_name,duration,director,genre,movie_language,description,release_date,movie_status,age_rating)"
@@ -82,7 +86,8 @@ public class MovieDAO {
 		return newId;
 	}
 	/**
-	 * 
+	 * Updates movie details in the database.
+	 *
 	 * @param movieId
 	 * @param movieName
 	 * @param duration
@@ -93,8 +98,8 @@ public class MovieDAO {
 	 * @param releaseDate
 	 * @param movieStatus
 	 * @param ageRating
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateMovie(int movieId, String movieName, int duration, String director, String genre, String movieLanguage, String description, LocalDate releaseDate, String movieStatus, String ageRating) throws Exception {	
 		String sql = "UPDATE movie SET movie_name = ?, duration = ?, director = ?, genre = ?, movie_language = ?,description = ?, release_date = ?, movie_status = ?, age_rating = ? WHERE movie_id = ?";
@@ -114,11 +119,12 @@ public class MovieDAO {
 		}
 	}
 	/**
-	 * 
+	 * Updates movie status.
+	 *
 	 * @param movieId
 	 * @param movieStatus
-	 * @return
-	 * @throws Exception
+	 * @return true if updated successfully
+	 * @throws Exception if database operation fails
 	 */
 	public boolean updateStatus(int movieId,String movieStatus) throws Exception{
 		Connection con = DBconfig.getConnection();
@@ -132,10 +138,11 @@ public class MovieDAO {
 	
 	
 	/**
-	 * find movie data using id
+	 * Retrieves movie details using movie ID.
+	 *
 	 * @param movieId
-	 * @return MovieModel Object
-	 * @throws Exception
+	 * @return movie record
+	 * @throws Exception if database operation fails
 	 */
 	
 	public MovieModel findById(int movieId) throws Exception{
@@ -156,10 +163,11 @@ public class MovieDAO {
 	    return movie;
 	}
 	/**
-	 * find movie data using genre
+	 * Retrieves movies by genre.
+	 *
 	 * @param genre
-	 * @return list of MovieModel Object
-	 * @throws Exception
+	 * @return list of movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByGenre(String genre)throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
@@ -180,10 +188,11 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * find movie data using movie name
+	 * Retrieves movies by movie name.
+	 *
 	 * @param movieName
-	 * @return list of MovieModel Object
-	 * @throws Exception
+	 * @return list of matching movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByMovieName(String movieName)throws Exception {
 		
@@ -206,10 +215,11 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * 
+	 * Retrieves movies by age rating.
+	 *
 	 * @param ageRating
-	 * @return
-	 * @throws Exception
+	 * @return list of movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByAgeRating(String ageRating)throws Exception {
 		
@@ -232,10 +242,11 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * 
-	 * @param movieLanguage
-	 * @return
-	 * @throws Exception
+	 * Retrieves movies by age rating.
+	 *
+	 * @param ageRating
+	 * @return list of movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByMovieLanguage(String movieLanguage)throws Exception {
 			
@@ -258,10 +269,11 @@ public class MovieDAO {
 		    return movies;
 		}
 	/**
-	 * find movie data using movie language
-	 * @param movieLanguage
-	 * @return list of MovieModel Object
-	 * @throws Exception
+	 * Retrieves movies by movie status.
+	 *
+	 * @param status
+	 * @return list of movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByMovieStatus(String status)throws Exception{
 		List<MovieModel> movies = new ArrayList<>();
@@ -282,9 +294,10 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * Get list containing all movies
-	 * @return list of MovieModel Object
-	 * @throws Exception
+	 * Retrieves all active movies.
+	 *
+	 * @return list of active movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> getAllActiveMovie() throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
@@ -303,6 +316,12 @@ public class MovieDAO {
 	    con.close();
 	    return movies;
 	}
+	/**
+	 * Retrieves all movies from the database.
+	 *
+	 * @return list of movies
+	 * @throws Exception if database operation fails
+	 */
 	public List<MovieModel> getAllMovie() throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
 		String sql = "SELECT * FROM movie ORDER BY release_date ASC";
@@ -319,9 +338,10 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * 
-	 * @return
-	 * @throws Exception
+	 * Retrieves four active movies.
+	 *
+	 * @return list of four active movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> get4ActiveMovie() throws Exception{
 		List<MovieModel> movies = new ArrayList<>();
@@ -341,13 +361,14 @@ public class MovieDAO {
 	    return movies;
 	}
 	/**
-	 * 
+	 * Retrieves movies using multiple filter conditions.
+	 *
 	 * @param language
 	 * @param genre
 	 * @param status
 	 * @param keyword
-	 * @return
-	 * @throws Exception
+	 * @return list of filtered movies
+	 * @throws Exception if database operation fails
 	 */
 	public List<MovieModel> findByFilters(String language, String genre,  String status, String keyword) throws Exception {
 		List<MovieModel> movies = new ArrayList<>();
@@ -375,10 +396,11 @@ public class MovieDAO {
 		return movies;
 	}
 	/**
-	 * Helper method to create Movie Object
-	 * @param rs ResultSet
-	 * @return MovieModel Object
-	 * @throws SQLException
+	 * Creates a MovieModel object from the result set.
+	 *
+	 * @param rs
+	 * @return populated MovieModel object
+	 * @throws SQLException if result set processing fails
 	 */
 	public MovieModel createMovieModel(ResultSet rs) throws SQLException  {
 		MovieModel movie = new MovieModel();
@@ -395,9 +417,10 @@ public class MovieDAO {
 		return movie;
 	}
 	/**
-	 * Helper to check values
+	 * Checks whether a string value is valid.
+	 *
 	 * @param value
-	 * @return
+	 * @return true if value is not null or empty
 	 */
 	private boolean valueCheck(String value) {
 		return value!=null && !value.trim().isEmpty();
