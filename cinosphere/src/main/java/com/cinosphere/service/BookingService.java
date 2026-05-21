@@ -49,6 +49,9 @@ public class BookingService {
 	
 	public int getLatestLoyaltyPointsEarned(int userId) throws Exception {
 		BookingModel booking = bookingDAO.findLatestConfirmedByUserId(userId);
+		if(booking==null) {
+			return 0;
+		}
 		return booking.getLoyaltyPointsEarned();
 	}
 	
@@ -56,6 +59,9 @@ public class BookingService {
 	public LocalDate getLatestComingBookingDate(int userId) throws Exception{
 				
 		BookingModel booking = bookingDAO.findLatestComingByUserId(userId);
+		if(booking==null) {
+			return null;
+		}
 		return booking.getBookingDate();
 	}
 	public int getTotalBookings() throws Exception{

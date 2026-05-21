@@ -15,7 +15,7 @@
 
     <jsp:include page="../components/header.jsp" />
     
-    <main class="error_screen" class="error_screen"> 
+    <main class="error_screen"> 
     
     	<div class="error_background"></div> 
         <div class="error_wrapper">
@@ -35,7 +35,7 @@
           <p class="error_subtitle">The page you're looking for doesn't exist, has been moved, or the URL was mistyped!</p>
     
     	  <div class="error_actions">
-            <a href="${pageContext.request.contextPath}/index.jsp" class="button_hero_primary">Back to Home</a>
+            <a href="${pageContext.request.contextPath}/home" class="button_hero_primary">Back to Home</a>
           </div>
           
         </div>

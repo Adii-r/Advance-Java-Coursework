@@ -24,7 +24,7 @@ import com.cinosphere.utils.SessionUtil;
  * 
  * @author Raunit Giri
  */
-@WebFilter({"/logout","/profile","/updateprofile","/admin","/booking" })
+@WebFilter({"/logout","/profile","/updateprofile","/admin","/booking","/updatepassword","/updatemovie","/updatebookingstatus","/deleteaccount","/archivemovie","/adminactivateaccount","/addmovie"})
 public class AuthenticationFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
     /**

@@ -440,7 +440,6 @@ html,body {
     display: flex;
     border-bottom: 1px solid var(--glass-border);
     margin-bottom: 1.5rem;
-    overflow: auto;
 }
 
 .admin_movie_tab {
@@ -843,6 +842,9 @@ html,body {
   .admin_add_movie_button {
     flex: 1;
     justify-content: center;
+  }
+  .admin_movie_tabs{
+  	overflow:auto;
   }
 
 }

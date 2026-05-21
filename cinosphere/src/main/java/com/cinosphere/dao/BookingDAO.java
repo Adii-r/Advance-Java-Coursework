@@ -312,11 +312,10 @@ public class BookingDAO {
 	 */
 	public BookingModel findLatestConfirmedByUserId(int userId) throws Exception {
 		BookingModel booking = null;
-		String sql = "SELECT * FROM booking WHERE user_id=? AND booking_status = ? ORDER BY booking_date DESC LIMIT 1;";
+		String sql = "SELECT * FROM booking WHERE user_id=? ORDER BY booking_date DESC LIMIT 1;";
         Connection con = DBconfig.getConnection();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, userId);
-        ps.setString(2, "confirmed");
         ResultSet rs = ps.executeQuery();
         if(rs.next()) {
         	booking = createBookingModel(rs);
